@@ -1,8 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { socket } from './socket';
 
 export default function Contestant() {
     const [state, setState] = useState(null);
+
+    // Track previous question index to determine direction
+    // Initialize with -1, will update when state is available
+    const prevQIndex = useRef(-1);
+    const prevRoundIndex = useRef(-1);
+    const [animClass, setAnimClass] = useState('');
 
     useEffect(() => {
         const onState = (s) => setState(s);
@@ -17,6 +23,27 @@ export default function Contestant() {
             socket.off('timer_tick', onTimer);
         };
     }, []);
+
+    useEffect(() => {
+        if (!state) return;
+
+        // Reset if round changes
+        if (state.roundIndex !== prevRoundIndex.current) {
+            setAnimClass('pop-in'); // Default for new round
+            prevRoundIndex.current = state.roundIndex;
+            prevQIndex.current = state.questionIndex;
+            return;
+        }
+
+        if (state.questionIndex !== prevQIndex.current) {
+            if (state.questionIndex > prevQIndex.current) {
+                setAnimClass('slide-right');
+            } else {
+                setAnimClass('slide-left');
+            }
+            prevQIndex.current = state.questionIndex;
+        }
+    }, [state?.questionIndex, state?.roundIndex]); // Trigger on index changes
 
     if (!state) return <div>Waiting for server...</div>;
 
@@ -57,7 +84,7 @@ export default function Contestant() {
 
                     <main className="gs-main">
                         {state.question && (
-                            <div className="question-card">
+                            <div key={state.question} className={`question-card ${animClass}`}>
                                 <div className="question-text">
                                     {state.question}
                                 </div>

@@ -281,22 +281,24 @@ export default function Host() {
 
             <div style={{ marginTop: 20 }}>
                 <h3>Scores</h3>
-                <div style={{ display: 'flex', gap: 15, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: '500px' }}>
                     {state.teams.map((t, i) => (
-                        <div key={i} style={{ background: '#333', padding: 8, borderRadius: 4, minWidth: 100 }}>
-                            <div style={{ fontSize: '0.9em', color: '#aaa', marginBottom: 5 }}>{t.name}</div>
+                        <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#333', padding: '10px 15px', borderRadius: 6 }}>
+                            <span style={{ fontSize: '1.1em', fontWeight: '500', color: '#eee' }}>{t.name}</span>
                             <input
                                 type="number"
                                 value={t.score}
                                 onChange={e => updateScore(i, e.target.value)}
                                 style={{
-                                    width: '100%',
-                                    padding: '5px',
+                                    width: '100px',
+                                    padding: '8px',
                                     background: '#222',
                                     color: 'white',
                                     border: '1px solid #555',
+                                    borderRadius: '4px',
                                     fontSize: '1.2em',
-                                    fontWeight: 'bold'
+                                    fontWeight: 'bold',
+                                    textAlign: 'right'
                                 }}
                             />
                         </div>

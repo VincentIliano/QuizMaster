@@ -6,7 +6,7 @@
     },
     {
       "name": "Koen",
-      "score": 0
+      "score": 40
     },
     {
       "name": "Paulien",
@@ -34,11 +34,11 @@
         }
       ],
       "scores": {
-        "Koen": -10,
+        "Koen": 30,
         "Astrid": 10,
         "Paulien": 20
       },
-      "questionsAnswered": 1
+      "questionsAnswered": 3
     },
     {
       "name": "Math Whiz",
@@ -56,25 +56,28 @@
         }
       ],
       "scores": {},
-      "questionsAnswered": 0
+      "questionsAnswered": 1
     }
   ],
-  "currentRoundIndex": 0,
+  "currentRoundIndex": 1,
   "currentQuestionIndex": 0,
-  "currentQuestionData": null,
-  "timerValue": 15,
+  "currentQuestionData": {
+    "text": "What is 15 * 4?",
+    "answer": "60"
+  },
+  "timerValue": 20,
   "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "IDLE",
+  "status": "READING",
   "roundsSummary": [
     {
       "index": 0,
       "name": "General Knowledge",
       "points": 10,
-      "questionsAnswered": 1,
+      "questionsAnswered": 3,
       "totalQuestions": 3,
       "scores": {
-        "Koen": -10,
+        "Koen": 30,
         "Astrid": 10,
         "Paulien": 20
       }
@@ -83,7 +86,7 @@
       "index": 1,
       "name": "Math Whiz",
       "points": 20,
-      "questionsAnswered": 0,
+      "questionsAnswered": 1,
       "totalQuestions": 2,
       "scores": {}
     }
