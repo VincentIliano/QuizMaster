@@ -6,8 +6,9 @@ const setupPanel = dashboardPanel; // Alias for legacy if needed, or just replac
 const controlPanel = document.getElementById('control-panel');
 const teamInputs = document.querySelectorAll('.team-input');
 const btnUpdateTeams = document.getElementById('btn-update-teams');
-const roundSelect = document.getElementById('round-select');
-const btnStartRound = document.getElementById('btn-start-round');
+// const roundSelect = document.getElementById('round-select');
+// const btnStartRound = document.getElementById('btn-start-round');
+const roundTilesContainer = document.getElementById('round-tiles-container');
 const btnStartGame = document.getElementById('btn-start-game'); // Likely removed in HTML replacement
 
 const lblRound = document.getElementById('lbl-round');
@@ -36,6 +37,7 @@ btnUpdateTeams.addEventListener('click', () => {
     alert("Teams updated!");
 });
 
+/*
 btnStartRound.addEventListener('click', () => {
     const roundIndex = parseInt(roundSelect.value);
     if (isNaN(roundIndex)) {
@@ -45,6 +47,11 @@ btnStartRound.addEventListener('click', () => {
     socket.emit('set_round', roundIndex);
     // Control panel switch happens on state update
 });
+*/
+
+function startRound(index) {
+    socket.emit('set_round', index);
+}
 
 // Controls
 btnNext.addEventListener('click', () => socket.emit('next_question'));
@@ -87,6 +94,46 @@ socket.on('state_update', (state) => {
     // Actually, I missed adding "rounds" list to broadcastState.
     // I'll add a separate socket.on('rounds_list') or similar.
 
+    // Populate Round Tiles
+    if (state.roundsSummary) {
+        roundTilesContainer.innerHTML = '';
+        state.roundsSummary.forEach(r => {
+            const tile = document.createElement('div');
+            tile.className = 'round-tile';
+            if (r.questionsAnswered >= r.totalQuestions) {
+                tile.classList.add('round-completed');
+            }
+            if (state.roundIndex === r.index && state.status !== 'DASHBOARD') {
+                tile.classList.add('round-active');
+            }
+
+            const title = document.createElement('h3');
+            title.innerText = r.name;
+            tile.appendChild(title);
+
+            const progress = document.createElement('div');
+            progress.className = 'round-progress';
+            progress.innerText = `${r.questionsAnswered} / ${r.totalQuestions}`;
+            tile.appendChild(progress);
+
+            // Scores mini-table
+            if (r.scores && Object.keys(r.scores).length > 0) {
+                const scoreTable = document.createElement('div');
+                scoreTable.className = 'tile-scores';
+                for (const [team, score] of Object.entries(r.scores)) {
+                    const row = document.createElement('div');
+                    row.innerText = `${team}: ${score}`;
+                    scoreTable.appendChild(row);
+                }
+                tile.appendChild(scoreTable);
+            }
+
+            tile.addEventListener('click', () => startRound(r.index));
+            roundTilesContainer.appendChild(tile);
+        });
+    }
+
+    /*
     if (state.allRoundsNames && roundSelect.options.length <= 1) {
         state.allRoundsNames.forEach((name, index) => {
             const opt = document.createElement('option');
@@ -95,6 +142,7 @@ socket.on('state_update', (state) => {
             roundSelect.appendChild(opt);
         });
     }
+    */
 
     lblRound.innerText = `${state.roundName} (${state.roundPoints} pts)`;
     lblQuestion.innerText = state.question;

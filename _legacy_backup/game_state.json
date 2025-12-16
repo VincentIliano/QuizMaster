@@ -1,16 +1,16 @@
 {
   "teams": [
     {
-      "name": "team 1",
+      "name": "fds",
       "score": 0
     },
     {
-      "name": "Team 2",
+      "name": "fds",
       "score": 0
     },
     {
-      "name": "Team drie",
-      "score": 20
+      "name": "fds",
+      "score": 0
     }
   ],
   "rounds": [
@@ -31,7 +31,9 @@
           "text": "What is the chemical symbol for Gold?",
           "answer": "Au"
         }
-      ]
+      ],
+      "scores": {},
+      "questionsAnswered": 0
     },
     {
       "name": "Math Whiz",
@@ -46,17 +48,19 @@
           "text": "What is the square root of 144?",
           "answer": "12"
         }
-      ]
+      ],
+      "scores": {},
+      "questionsAnswered": 0
     }
   ],
-  "currentRoundIndex": 1,
+  "currentRoundIndex": 0,
   "currentQuestionIndex": -1,
   "currentQuestionData": {
-    "text": "Which planet is known as the Red Planet?",
-    "answer": "Mars"
+    "text": "What is the capital of France?",
+    "answer": "Paris"
   },
-  "timerValue": 13,
+  "timerValue": 14,
   "buzzerLocked": true,
-  "buzzerWinner": 2,
+  "buzzerWinner": 0,
   "status": "DASHBOARD"
 }

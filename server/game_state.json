@@ -1,0 +1,90 @@
+{
+  "teams": [
+    {
+      "name": "rew",
+      "score": 20
+    },
+    {
+      "name": "fds",
+      "score": 0
+    },
+    {
+      "name": "fvcx",
+      "score": 0
+    }
+  ],
+  "rounds": [
+    {
+      "name": "General Knowledge",
+      "time_limit": 15,
+      "points": 10,
+      "questions": [
+        {
+          "text": "What is the capital of France?",
+          "answer": "Paris"
+        },
+        {
+          "text": "Which planet is known as the Red Planet?",
+          "answer": "Mars"
+        },
+        {
+          "text": "What is the chemical symbol for Gold?",
+          "answer": "Au"
+        }
+      ],
+      "scores": {
+        "rew": 20,
+        "fds": 0
+      },
+      "questionsAnswered": 2
+    },
+    {
+      "name": "Math Whiz",
+      "time_limit": 20,
+      "points": 20,
+      "questions": [
+        {
+          "text": "What is 15 * 4?",
+          "answer": "60"
+        },
+        {
+          "text": "What is the square root of 144?",
+          "answer": "12"
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    }
+  ],
+  "currentRoundIndex": 0,
+  "currentQuestionIndex": 2,
+  "currentQuestionData": {
+    "text": "What is the chemical symbol for Gold?",
+    "answer": "Au"
+  },
+  "timerValue": 15,
+  "buzzerLocked": true,
+  "buzzerWinner": 0,
+  "status": "DASHBOARD",
+  "roundsSummary": [
+    {
+      "index": 0,
+      "name": "General Knowledge",
+      "points": 10,
+      "questionsAnswered": 2,
+      "totalQuestions": 3,
+      "scores": {
+        "rew": 20,
+        "fds": 0
+      }
+    },
+    {
+      "index": 1,
+      "name": "Math Whiz",
+      "points": 20,
+      "questionsAnswered": 0,
+      "totalQuestions": 2,
+      "scores": {}
+    }
+  ]
+}

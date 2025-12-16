@@ -1,0 +1,425 @@
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: #1a1a1a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animations */
+@keyframes pulse-red {
+  0% {
+    text-shadow: 0 0 10px #ff0000;
+    transform: scale(1);
+  }
+
+  50% {
+    text-shadow: 0 0 30px #ff0000, 0 0 10px #ff0000;
+    transform: scale(1.1);
+  }
+
+  100% {
+    text-shadow: 0 0 10px #ff0000;
+    transform: scale(1);
+  }
+}
+
+@keyframes flash-gold {
+
+  0%,
+  100% {
+    background-color: rgba(255, 215, 0, 0.1);
+    box-shadow: 0 0 20px gold;
+    border-color: gold;
+  }
+
+  50% {
+    background-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 50px gold;
+    border-color: #fff;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  80% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Game Show Layout */
+.game-show-container {
+  background: radial-gradient(circle at center, #1e3c72 0%, #2a5298 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* Context for lights */
+  color: white;
+}
+
+.gs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gs-round-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #64d2ff;
+}
+
+.gs-timer {
+  font-size: 2.5em;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.gs-timer.low {
+  color: #ff4d4d;
+  border-color: #ff4d4d;
+  animation: pulse-red 1s infinite;
+}
+
+.gs-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+  /* Keep content above lights */
+}
+
+.question-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  padding: 40px 60px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  max-width: 80%;
+  text-align: center;
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.question-text {
+  font-size: 2.5em;
+  font-weight: 600;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.gs-answer {
+  margin-top: 40px;
+  font-size: 3em;
+  font-weight: 800;
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  animation: slide-up 0.5s ease-out;
+}
+
+.buzzer-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5em;
+  font-weight: 900;
+  color: white;
+  text-transform: uppercase;
+  background: rgba(220, 53, 69, 0.9);
+  padding: 40px 80px;
+  border-radius: 20px;
+  box-shadow: 0 0 50px rgba(220, 53, 69, 0.8);
+  animation: pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 100;
+  border: 5px solid white;
+}
+
+.gs-footer {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.score-pod {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 15px 25px;
+  min-width: 120px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.score-pod.leader {
+  border-color: gold;
+  background: rgba(255, 215, 0, 0.1);
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.score-pod .team-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #ccc;
+  margin-bottom: 5px;
+}
+
+.score-pod .team-score {
+  font-size: 2em;
+  font-weight: 900;
+  color: white;
+}
+
+/* Screensaver */
+.screensaver-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #2b5876, #4e4376);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  color: white;
+  text-align: center;
+}
+
+.screensaver-content h1 {
+  font-size: 6em;
+  font-weight: 900;
+  letter-spacing: 10px;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  animation: bounce 2s infinite;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  /* -webkit-text-fill-color: transparent; */
+}
+
+.screensaver-content p {
+  font-size: 2em;
+  opacity: 0.8;
+}
+
+/* Shared Buttons */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Host Dashboard (Keep minimal functional styles for Host) */
+.panel {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #2a2a2a;
+  border-radius: 10px;
+  color: white;
+}
+
+/* Host Dashboard Grid */
+.round-tiles-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.round-tile {
+  background-color: #333;
+  color: white;
+  border: 2px solid #555;
+  border-radius: 8px;
+  padding: 15px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.round-tile:hover {
+  transform: translateY(-5px);
+  border-color: #646cff;
+}
+
+.round-tile.completed {
+  opacity: 0.5;
+}
+
+.round-tile.active {
+  border-color: #28a745;
+  background-color: #1e3a23;
+}
+
+.tile-scores {
+  margin-top: 10px;
+  font-size: 0.8em;
+  text-align: left;
+  border-top: 1px solid #555;
+  padding-top: 5px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+
+/* Stage Lights */
+.stage-lights-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  /* Lights above background */
+}
+
+.light-beam {
+  position: absolute;
+  top: -50px;
+  width: 150px;
+  /* Wider */
+  height: 120vh;
+  /* Longer */
+  /* Much brighter for visibility */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, transparent 80%);
+  transform-origin: top center;
+  filter: blur(15px);
+  mix-blend-mode: overlay;
+  /* Better blending */
+}
+
+.beam-1 {
+  left: 20%;
+  animation: sway-1 8s infinite ease-in-out alternate;
+}
+
+.beam-2 {
+  left: 50%;
+  animation: sway-2 10s infinite ease-in-out alternate;
+  width: 150px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, transparent 90%);
+}
+
+.beam-3 {
+  left: 80%;
+  animation: sway-3 7s infinite ease-in-out alternate;
+}
+
+@keyframes sway-1 {
+  0% {
+    transform: rotate(-15deg);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: rotate(5deg);
+    opacity: 0.7;
+  }
+}
+
+@keyframes sway-2 {
+  0% {
+    transform: rotate(5deg);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: rotate(-5deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes sway-3 {
+  0% {
+    transform: rotate(10deg);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: rotate(-10deg);
+    opacity: 0.7;
+  }
+}

@@ -1,19 +1,12 @@
 {
-  "name": "js-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "express": "^4.21.2",
-    "socket.io": "^4.8.1",
-    "socket.io-client": "^4.8.1"
-  }
+    "name": "quizmaster-root",
+    "version": "1.0.0",
+    "description": "QuizMaster Monorepo Root",
+    "scripts": {
+        "start": "concurrently \"npm start --prefix server\" \"npm run dev --prefix client\"",
+        "install:all": "npm install && npm install --prefix server && npm install --prefix client"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
 }

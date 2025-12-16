@@ -33,6 +33,10 @@ function loadData() {
         const rawData = fs.readFileSync(dataPath);
         const jsonData = JSON.parse(rawData);
         gameState.rounds = jsonData.rounds || [];
+        gameState.rounds.forEach(r => {
+            r.scores = r.scores || {};
+            r.questionsAnswered = r.questionsAnswered || 0;
+        });
         console.log("Loaded rounds:", gameState.rounds.length);
     } catch (e) {
         console.error("Error loading quiz_data.json:", e);
@@ -62,6 +66,15 @@ function loadSavedGame() {
             const raw = fs.readFileSync(statePath);
             const saved = JSON.parse(raw);
             Object.assign(gameState, saved);
+
+            // Re-initialize dynamic fields if missing from save (e.g. old save file or filtered save)
+            if (gameState.rounds) {
+                gameState.rounds.forEach(r => {
+                    r.scores = r.scores || {};
+                    r.questionsAnswered = r.questionsAnswered || 0;
+                });
+            }
+
             // Force status to Dashboard on startup, so Host sees the options
             gameState.status = "DASHBOARD";
             console.log("Game state restored from disk.");
@@ -89,7 +102,15 @@ function broadcastState() {
         buzzerWinner: gameState.buzzerWinner, // Index
         currentAnswer: (gameState.currentQuestionData && (gameState.status === 'ANSWER_REVEALED' || gameState.status === 'GAME_OVER')) ? gameState.currentQuestionData.answer : null,
         answer: gameState.currentQuestionData ? gameState.currentQuestionData.answer : null, // Always sending answer for Host visibility
-        allRoundsNames: gameState.rounds.map(r => r.name)
+        // allRoundsNames: gameState.rounds.map(r => r.name) // Deprecated in favor of full summary
+        roundsSummary: gameState.rounds.map((r, i) => ({
+            index: i,
+            name: r.name,
+            points: r.points,
+            questionsAnswered: r.questionsAnswered,
+            totalQuestions: r.questions ? r.questions.length : 0,
+            scores: r.scores
+        }))
     });
 }
 
@@ -106,9 +127,23 @@ function nextQuestion() {
     } else {
         gameState.currentQuestionIndex++;
         const currentRound = gameState.rounds[gameState.currentRoundIndex];
+        // Mark progress
+        // Actually, questionsAnswered should track "completed" questions.
+        // If we are at index 0, 0 answered. If we finish index 0, 1 answered.
+        // Let's update questionsAnswered when we finish a question/move to next? 
+        // Or just map it to currentQuestionIndex if active?
+        // Simpler: questionsAnswered = max(currentQuestionIndex, recorded).
+        // Let's update it when we successfully complete a question or just set it to currentQuestionIndex at start of reading.
+
         if (gameState.currentQuestionIndex >= currentRound.questions.length) {
+            // Round finished
+            currentRound.questionsAnswered = currentRound.questions.length;
             gameState.currentRoundIndex++;
             gameState.currentQuestionIndex = 0;
+        } else {
+            // currentQuestionIndex is now X. So we are initiating Question X+1.
+            // questionsAnswered is X.
+            currentRound.questionsAnswered = gameState.currentQuestionIndex;
         }
     }
 
@@ -175,8 +210,20 @@ function handleAnswer(correct) {
         const points = gameState.rounds[gameState.currentRoundIndex].points || 0;
         if (correct) {
             gameState.teams[gameState.buzzerWinner].score += points;
+
+            // Round Score
+            const teamName = gameState.teams[gameState.buzzerWinner].name;
+            const currentRound = gameState.rounds[gameState.currentRoundIndex];
+            currentRound.scores = currentRound.scores || {};
+            currentRound.scores[teamName] = (currentRound.scores[teamName] || 0) + points;
+
         } else {
             gameState.teams[gameState.buzzerWinner].score -= points;
+            // Round Score deduc? Usually yes.
+            const teamName = gameState.teams[gameState.buzzerWinner].name;
+            const currentRound = gameState.rounds[gameState.currentRoundIndex];
+            currentRound.scores = currentRound.scores || {};
+            currentRound.scores[teamName] = (currentRound.scores[teamName] || 0) - points;
         }
     }
 
@@ -235,7 +282,17 @@ io.on('connection', (socket) => {
         console.log('Setting round:', roundIndex);
         if (roundIndex >= 0 && roundIndex < gameState.rounds.length) {
             gameState.currentRoundIndex = roundIndex;
-            gameState.currentQuestionIndex = -1; // Ready to start round
+            // Resume from questionsAnswered?
+            // If we have answered 2, we should start at index 2 (which is the 3rd question).
+            const r = gameState.rounds[roundIndex];
+            gameState.currentQuestionIndex = (r.questionsAnswered !== undefined) ? r.questionsAnswered - 1 : -1;
+            // The nextQuestion() call in client usually triggers 'next_question' event? 
+            // Wait, standard flow is: set_round -> IDLE -> Host clicks "Next Question" -> nextQuestion() -> increments index -> READING.
+            // So if we have answered 2 (index 0, 1 done), we want nextQuestion to bump to 2.
+            // So current should be 1.
+            // If questionsAnswered is 0, current should be -1.
+            gameState.currentQuestionIndex = (r.questionsAnswered || 0) - 1;
+
             gameState.status = "IDLE"; // Ready to read first question of round
             broadcastState();
             saveGame();
