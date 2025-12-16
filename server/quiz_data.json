@@ -4,6 +4,7 @@
       "name": "General Knowledge",
       "time_limit": 15,
       "points": 10,
+      "description": "Test your broad knowledge of the world!",
       "questions": [
         {
           "text": "What is the capital of France?",
@@ -23,6 +24,7 @@
       "name": "Math Whiz",
       "time_limit": 20,
       "points": 20,
+      "description": "Calculate fast or get left behind!",
       "questions": [
         {
           "text": "What is 15 * 4?",

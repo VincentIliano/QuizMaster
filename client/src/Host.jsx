@@ -33,6 +33,22 @@ export default function Host() {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
 
+    // Sync inputs with current state teams
+    useEffect(() => {
+        if (state && state.teams) {
+            const newInputs = Array(5).fill('');
+            state.teams.forEach((t, i) => {
+                if (i < 5) newInputs[i] = t.name;
+            });
+            // Only update if different to avoid cursor jumps if possible, 
+            // though with React state replacement it might be okay for this use case.
+            // A simple comparison to avoid unnecessary renders/state updates:
+            if (JSON.stringify(newInputs) !== JSON.stringify(teamInputs)) {
+                setTeamInputs(newInputs);
+            }
+        }
+    }, [state]);
+
     const updateTeams = () => {
         const validTeams = teamInputs.filter(t => t.trim());
         if (validTeams.length > 0) socket.emit('set_teams', validTeams);
@@ -68,7 +84,7 @@ export default function Host() {
                         />
                     ))}
                     <button onClick={updateTeams}>Update Teams</button>
-                    <div style={{ marginTop: 10, fontSize: '0.8em' }}>Current: {state.teams.map(t => t.name).join(', ')}</div>
+                    {/* Removed redundant "Current:" label */}
                 </div>
 
                 <div>
@@ -98,6 +114,33 @@ export default function Host() {
     }
 
     // --- Control Panel View ---
+
+    if (state.status === 'ROUND_READY') {
+        return (
+            <div className="panel">
+                <h1>Round: {state.roundName}</h1>
+                <p>{state.roundDescription}</p>
+                <div style={{ marginTop: 40, textAlign: 'center' }}>
+                    {state.upcomingQuestion && (
+                        <div style={{ marginBottom: 20, padding: 15, background: '#444', borderRadius: 8 }}>
+                            <strong>Next Up:</strong><br />
+                            {state.upcomingQuestion}<br />
+                            <em style={{ color: '#aaa' }}>({state.upcomingAnswer})</em>
+                        </div>
+                    )}
+                    <button
+                        onClick={nextQuestion}
+                        style={{ fontSize: '2em', padding: '20px 40px', backgroundColor: '#28a745', color: 'white' }}
+                    >
+                        START ROUND
+                    </button>
+                    <br /><br />
+                    <button onClick={returnDashboard} style={{ backgroundColor: '#555' }}>Cancel</button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="panel">
             <div className="game-header">
@@ -106,6 +149,13 @@ export default function Host() {
             </div>
 
             <div className="status-bar">Status: {state.status}</div>
+
+            {state.status === 'IDLE' && state.upcomingQuestion && (
+                <div style={{ margin: '10px 0', padding: 10, border: '1px dashed #666', background: 'rgba(0,0,0,0.2)' }}>
+                    <strong>Next Question:</strong> {state.upcomingQuestion}
+                    <div style={{ color: '#aaa', fontSize: '0.9em' }}>Answer: {state.upcomingAnswer}</div>
+                </div>
+            )}
 
             <div className="buzzer-status">
                 {state.status === 'BUZZED' ? `${state.teams[state.buzzerWinner].name} BUZZED!` :

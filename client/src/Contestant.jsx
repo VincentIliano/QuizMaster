@@ -38,6 +38,14 @@ export default function Contestant() {
                         <p>Get Ready!</p>
                     </div>
                 </div>
+            ) : state.status === 'ROUND_READY' ? (
+                <div className="screensaver-overlay" style={{ background: 'transparent', backdropFilter: 'none' }}>
+                    <div className="screensaver-content">
+                        <h1>{state.roundName}</h1>
+                        <p style={{ fontSize: '1.5em', marginTop: '20px', color: '#64d2ff' }}>{state.roundDescription}</p>
+                        <p style={{ marginTop: '40px', fontWeight: 'bold' }}>GET READY!</p>
+                    </div>
+                </div>
             ) : (
                 <>
                     <header className="gs-header">
@@ -48,17 +56,19 @@ export default function Contestant() {
                     </header>
 
                     <main className="gs-main">
-                        <div className="question-card">
-                            <div className="question-text">
-                                {state.question || "Waiting for question..."}
-                            </div>
-
-                            {state.currentAnswer && (
-                                <div className="gs-answer">
-                                    {state.currentAnswer}
+                        {state.question && (
+                            <div className="question-card">
+                                <div className="question-text">
+                                    {state.question}
                                 </div>
-                            )}
-                        </div>
+
+                                {state.currentAnswer && (
+                                    <div className="gs-answer">
+                                        {state.currentAnswer}
+                                    </div>
+                                )}
+                            </div>
+                        )}
 
                         {(state.status === 'BUZZED' || state.status === 'TIMEOUT') && (
                             <div className="buzzer-overlay">

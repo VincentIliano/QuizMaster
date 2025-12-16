@@ -65,11 +65,21 @@ class GameEngine {
 
     getPublicState() {
         const s = this.state;
+
+        let upcomingQ = null;
+        if (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) {
+            const r = s.rounds[s.currentRoundIndex];
+            if (r.questions && r.questionsAnswered < r.questions.length) {
+                upcomingQ = r.questions[r.questionsAnswered];
+            }
+        }
+
         return {
             roundIndex: s.currentRoundIndex,
             questionIndex: s.currentQuestionIndex,
             question: s.currentQuestionData ? s.currentQuestionData.text : "",
             roundName: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].name : "",
+            roundDescription: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].description : "",
             roundPoints: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].points : 0,
             timeLimit: s.timerValue,
             status: s.status,
@@ -77,7 +87,9 @@ class GameEngine {
             buzzerWinner: s.buzzerWinner,
             currentAnswer: (s.currentQuestionData && (s.status === 'ANSWER_REVEALED' || s.status === 'GAME_OVER')) ? s.currentQuestionData.answer : null,
             answer: s.currentQuestionData ? s.currentQuestionData.answer : null,
-            roundsSummary: s.roundsSummary
+            roundsSummary: s.roundsSummary,
+            upcomingQuestion: upcomingQ ? upcomingQ.text : null,
+            upcomingAnswer: upcomingQ ? upcomingQ.answer : null
         };
     }
 
@@ -95,8 +107,17 @@ class GameEngine {
         if (roundIndex >= 0 && roundIndex < this.state.rounds.length) {
             this.state.currentRoundIndex = roundIndex;
             const r = this.state.rounds[roundIndex];
+
+            // If checking resume, maybe check if finished? 
+            // Simplified: Always go to READY first, then nextQuestion figures out index.
+            // But if resuming mid-round, we might want to skip ready? 
+            // Requirement says "everytime you enter a round".
+
             this.state.currentQuestionIndex = (r.questionsAnswered || 0) - 1;
-            this.state.status = "IDLE";
+            // logic in nextQuestion handles increment. 
+            // To start at the right place, we stay at "answered - 1" so nextQuestion moves to "answered".
+
+            this.state.status = "ROUND_READY";
             this.save();
         }
     }
@@ -106,25 +127,45 @@ class GameEngine {
         this.state.buzzerWinner = null;
         this.state.buzzerLocked = true;
 
-        if (this.state.currentRoundIndex === -1) {
-            this.state.currentRoundIndex = 0;
-            this.state.currentQuestionIndex = 0;
-        } else {
-            this.state.currentQuestionIndex++;
-            const currentRound = this.state.rounds[this.state.currentRoundIndex];
+        // Logic split:
+        if (this.state.status === 'ROUND_READY') {
+            // Transition to IDLE state (Round Active, no question yet)
+            this.state.status = "IDLE";
+            this.state.currentQuestionData = null;
 
-            if (this.state.currentQuestionIndex >= currentRound.questions.length) {
-                // Round Finished
-                currentRound.questionsAnswered = currentRound.questions.length;
-                this.state.currentRoundIndex++;
+            // Ensure index is set correctly so next "nextQuestion" call increments to the correct question
+            // We want currentQuestionIndex to be (questionsAnswered - 1)
+            const currentRound = this.state.rounds[this.state.currentRoundIndex];
+            this.state.currentQuestionIndex = (currentRound.questionsAnswered || 0) - 1;
+
+            this.save();
+            return;
+        } else {
+            // Normal progression
+            if (this.state.currentRoundIndex === -1) {
+                this.state.currentRoundIndex = 0;
                 this.state.currentQuestionIndex = 0;
             } else {
-                currentRound.questionsAnswered = this.state.currentQuestionIndex;
+                this.state.currentQuestionIndex++;
+                const currentRound = this.state.rounds[this.state.currentRoundIndex];
+
+                if (this.state.currentQuestionIndex >= currentRound.questions.length) {
+                    // Round Finished
+                    currentRound.questionsAnswered = currentRound.questions.length;
+                    this.state.currentRoundIndex++; // Auto advance round? Or back to dashboard?
+                    // Let's go back to dashboard to select next round manually
+                    this.state.currentRoundIndex = -1;
+                    this.state.status = "DASHBOARD";
+                    this.save();
+                    return;
+                } else {
+                    currentRound.questionsAnswered = this.state.currentQuestionIndex;
+                }
             }
         }
 
-        if (this.state.currentRoundIndex >= this.state.rounds.length) {
-            this.state.status = "GAME_OVER";
+        if (this.state.currentRoundIndex >= this.state.rounds.length || this.state.currentRoundIndex === -1) {
+            this.state.status = "DASHBOARD";
             this.state.currentQuestionData = null;
             this.save();
             return;
