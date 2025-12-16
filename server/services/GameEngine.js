@@ -122,7 +122,7 @@ class GameEngine {
         }
     }
 
-    nextQuestion() {
+    nextQuestion(autoStart = false, onTick = null) {
         this.stopTimer();
         this.state.buzzerWinner = null;
         this.state.buzzerLocked = true;
@@ -175,6 +175,36 @@ class GameEngine {
         this.state.currentQuestionData = currentRound.questions[this.state.currentQuestionIndex];
         this.state.timerValue = currentRound.time_limit || 30;
         this.state.status = "READING";
+        this.save();
+
+        // Auto-Start Timer if requested
+        if (autoStart) {
+            this.startTimer(onTick);
+        }
+    }
+
+    previousQuestion() {
+        if (this.state.currentRoundIndex === -1) return;
+
+        this.stopTimer();
+        this.state.buzzerWinner = null;
+        this.state.buzzerLocked = true;
+
+        this.state.currentQuestionIndex--;
+
+        if (this.state.currentQuestionIndex < 0) {
+            // Go back to Ready
+            this.state.status = "ROUND_READY";
+            this.state.currentQuestionData = null;
+        } else {
+            // Show previous question
+            const currentRound = this.state.rounds[this.state.currentRoundIndex];
+            this.state.currentQuestionData = currentRound.questions[this.state.currentQuestionIndex];
+            this.state.timerValue = currentRound.time_limit || 30;
+            this.state.status = "READING";
+            // We don't update questionsAnswered or scores when going back, usually. 
+            // Just navigation.
+        }
         this.save();
     }
 
@@ -241,6 +271,13 @@ class GameEngine {
     revealAnswer() {
         this.state.status = "ANSWER_REVEALED";
         this.save();
+    }
+
+    setTeamScore(index, score) {
+        if (index >= 0 && index < this.state.teams.length) {
+            this.state.teams[index].score = score;
+            this.save();
+        }
     }
 
     returnToDashboard() {

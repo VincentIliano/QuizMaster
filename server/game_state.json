@@ -1,16 +1,16 @@
 {
   "teams": [
     {
-      "name": "Atrid",
-      "score": 0
+      "name": "Astrid",
+      "score": 10
     },
     {
       "name": "Koen",
-      "score": -10
+      "score": 0
     },
     {
       "name": "Paulien",
-      "score": 0
+      "score": 20
     }
   ],
   "rounds": [
@@ -34,7 +34,9 @@
         }
       ],
       "scores": {
-        "Koen": -10
+        "Koen": -10,
+        "Astrid": 10,
+        "Paulien": 20
       },
       "questionsAnswered": 1
     },
@@ -60,10 +62,10 @@
   "currentRoundIndex": 0,
   "currentQuestionIndex": 0,
   "currentQuestionData": null,
-  "timerValue": 11,
+  "timerValue": 15,
   "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "IDLE",
+  "status": "DASHBOARD",
   "roundsSummary": [
     {
       "index": 0,
@@ -72,7 +74,9 @@
       "questionsAnswered": 1,
       "totalQuestions": 3,
       "scores": {
-        "Koen": -10
+        "Koen": -10,
+        "Astrid": 10,
+        "Paulien": 20
       }
     },
     {

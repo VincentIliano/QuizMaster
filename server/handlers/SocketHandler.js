@@ -19,7 +19,8 @@ module.exports = (io, gameEngine) => {
 
         socket.on('set_round', (index) => gameEngine.setRound(index));
 
-        socket.on('next_question', () => gameEngine.nextQuestion());
+        socket.on('next_question', (autoStart) => gameEngine.nextQuestion(autoStart, (val) => io.emit('timer_tick', val)));
+        socket.on('previous_question', () => gameEngine.previousQuestion());
 
         socket.on('start_timer', () => {
             gameEngine.startTimer((val) => io.emit('timer_tick', val));
@@ -31,6 +32,8 @@ module.exports = (io, gameEngine) => {
                 // io.emit('buzzed', buzzedName); // Optional
             }
         });
+
+        socket.on('update_score', (index, score) => gameEngine.setTeamScore(index, score));
 
         socket.on('judge_answer', (correct) => gameEngine.handleAnswer(correct));
 

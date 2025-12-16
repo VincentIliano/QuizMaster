@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { socket } from './socket';
 
 export default function Host() {
     const [state, setState] = useState(null);
     const [teamInputs, setTeamInputs] = useState(['', '', '', '', '']);
+
+    const [autoStart, setAutoStart] = useState(true);
 
     useEffect(() => {
         const onState = (s) => setState(s);
@@ -21,9 +23,36 @@ export default function Host() {
         };
     }, []);
 
-    // Buzzer Keys (Global)
+    const previousQuestion = () => socket.emit('previous_question');
+
+    // Keyboard Shortcuts
+    // We use a ref for autoStart to avoid stale closures in the event listener
+    const autoStartRef = useRef(autoStart);
+    useEffect(() => { autoStartRef.current = autoStart; }, [autoStart]);
+
+    // Re-bind listener with ref access
     useEffect(() => {
         const handleKeyDown = (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            switch (e.key.toLowerCase()) {
+                case ' ':
+                    e.preventDefault();
+                    socket.emit('start_timer');
+                    break;
+                case 'w':
+                    socket.emit('judge_answer', true);
+                    break;
+                case 's':
+                    socket.emit('judge_answer', false);
+                    break;
+                case 'd':
+                    socket.emit('next_question', autoStartRef.current);
+                    break;
+                case 'a':
+                    socket.emit('previous_question');
+                    break;
+            }
             if (e.key >= '1' && e.key <= '5') {
                 const teamIndex = parseInt(e.key) - 1;
                 socket.emit('host_buzz', teamIndex);
@@ -31,7 +60,8 @@ export default function Host() {
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
+    }, []); // Empty dependency, using ref for fresh state
+
 
     // Sync inputs with current state teams
     useEffect(() => {
@@ -55,36 +85,60 @@ export default function Host() {
     };
 
     const startRound = (index) => socket.emit('set_round', index);
-    const nextQuestion = () => socket.emit('next_question');
+    const nextQuestion = () => socket.emit('next_question', autoStart);
     const startTimer = () => socket.emit('start_timer');
     const judge = (correct) => socket.emit('judge_answer', correct);
     const reveal = () => socket.emit('reveal_answer');
-    const returnDashboard = () => socket.emit('return_to_dashboard');
+    const returnDashboard = () => {
+        // No confirm needed per quick iteration, or add back if risky?
+        // Let's keep it quick.
+        socket.emit('return_to_dashboard');
+    };
+    const updateScore = (index, val) => {
+        socket.emit('update_score', index, parseInt(val) || 0);
+    };
 
-    if (!state) return <div className="panel">Loading...</div>;
+    if (!state) return <div>Connecting to Host Console...</div>;
 
     // --- Dashboard View ---
     if (state.status === 'DASHBOARD') {
-        return (
-            <div className="panel">
-                <h1>Host Dashboard</h1>
+        const roundData = state.roundsSummary || [];
 
-                <div className="input-group">
+        return (
+            <div className="panel dashboard-grid">
+                <div className="card">
                     <h2>Teams</h2>
-                    {teamInputs.map((name, i) => (
-                        <input
-                            key={i}
-                            value={name}
-                            placeholder={`Team ${i + 1}`}
-                            onChange={e => {
-                                const newTeams = [...teamInputs];
-                                newTeams[i] = e.target.value;
-                                setTeamInputs(newTeams);
-                            }}
-                        />
-                    ))}
-                    <button onClick={updateTeams}>Update Teams</button>
-                    {/* Removed redundant "Current:" label */}
+                    <div className="team-inputs">
+                        {teamInputs.map((name, i) => (
+                            <input
+                                key={i}
+                                type="text"
+                                placeholder={`Team ${i + 1}`}
+                                value={name}
+                                onChange={e => {
+                                    const newInputs = [...teamInputs];
+                                    newInputs[i] = e.target.value;
+                                    setTeamInputs(newInputs);
+                                }}
+                            />
+                        ))}
+                    </div>
+                    <button onClick={updateTeams} className="btn-primary" style={{ marginTop: 10 }}>Update Teams</button>
+
+                    <h3 style={{ marginTop: 20 }}>Score Adjustments</h3>
+                    <div className="team-inputs">
+                        {state.teams.map((t, i) => (
+                            <div key={i} style={{ marginBottom: 5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ marginRight: 10 }}>{t.name || `Team ${i + 1}`}</span>
+                                <input
+                                    type="number"
+                                    value={t.score}
+                                    onChange={e => updateScore(i, e.target.value)}
+                                    style={{ width: 80, padding: 5 }}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 <div>
@@ -128,6 +182,13 @@ export default function Host() {
                             <em style={{ color: '#aaa' }}>({state.upcomingAnswer})</em>
                         </div>
                     )}
+                    <label style={{ display: 'block', marginBottom: 20 }}>
+                        <input
+                            type="checkbox"
+                            checked={autoStart}
+                            onChange={e => setAutoStart(e.target.checked)}
+                        /> Auto-Start Timer
+                    </label>
                     <button
                         onClick={nextQuestion}
                         style={{ fontSize: '2em', padding: '20px 40px', backgroundColor: '#28a745', color: 'white' }}
@@ -162,6 +223,23 @@ export default function Host() {
                     state.status === 'TIMEOUT' ? "TIME UP!" : ""}
             </div>
 
+            <div style={{ marginTop: 20, borderTop: '1px solid #444', paddingTop: 10 }}>
+                <h3>Live Scores</h3>
+                <div style={{ display: 'flex', gap: 15, flexWrap: 'wrap' }}>
+                    {state.teams.map((t, i) => (
+                        <div key={i} style={{ background: '#333', padding: 8, borderRadius: 4 }}>
+                            <div style={{ fontSize: '0.9em', color: '#aaa' }}>{t.name}</div>
+                            <input
+                                type="number"
+                                value={t.score}
+                                onChange={e => updateScore(i, e.target.value)}
+                                style={{ width: 60, marginTop: 4, background: '#222', color: 'white', border: '1px solid #555' }}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
             <div className="question-text">
                 Q: {state.question}
             </div>
@@ -170,7 +248,15 @@ export default function Host() {
                 Answer: {state.answer}
             </div>
 
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+                <label style={{ marginRight: 10 }}>
+                    <input
+                        type="checkbox"
+                        checked={autoStart}
+                        onChange={e => setAutoStart(e.target.checked)}
+                    /> Auto-Start
+                </label>
+
                 <button
                     onClick={nextQuestion}
                     disabled={state.status === 'READING' || state.status === 'LISTENING'}

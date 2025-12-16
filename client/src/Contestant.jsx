@@ -79,19 +79,22 @@ export default function Contestant() {
                         )}
                     </main>
 
-                    <footer className="gs-footer">
-                        {state.teams.map(t => (
-                            <div
-                                key={t.name}
-                                className={`score-pod ${t.score === maxScore && t.score > 0 ? 'leader' : ''}`}
-                            >
-                                <div className="team-name">{t.name}</div>
-                                <div className="team-score">{t.score}</div>
-                            </div>
-                        ))}
-                    </footer>
                 </>
             )}
+
+            <div style={{ flex: 1 }}></div>
+
+            <footer className="gs-footer">
+                {state.teams.map(t => (
+                    <div
+                        key={t.name}
+                        className={`score-pod ${t.score === maxScore && t.score > 0 ? 'leader' : ''}`}
+                    >
+                        <div className="team-name">{t.name}</div>
+                        <div className="team-score">{t.score}</div>
+                    </div>
+                ))}
+            </footer>
         </div>
     );
 }
