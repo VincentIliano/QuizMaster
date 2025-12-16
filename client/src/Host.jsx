@@ -223,22 +223,7 @@ export default function Host() {
                     state.status === 'TIMEOUT' ? "TIME UP!" : ""}
             </div>
 
-            <div style={{ marginTop: 20, borderTop: '1px solid #444', paddingTop: 10 }}>
-                <h3>Live Scores</h3>
-                <div style={{ display: 'flex', gap: 15, flexWrap: 'wrap' }}>
-                    {state.teams.map((t, i) => (
-                        <div key={i} style={{ background: '#333', padding: 8, borderRadius: 4 }}>
-                            <div style={{ fontSize: '0.9em', color: '#aaa' }}>{t.name}</div>
-                            <input
-                                type="number"
-                                value={t.score}
-                                onChange={e => updateScore(i, e.target.value)}
-                                style={{ width: 60, marginTop: 4, background: '#222', color: 'white', border: '1px solid #555' }}
-                            />
-                        </div>
-                    ))}
-                </div>
-            </div>
+
 
             <div className="question-text">
                 Q: {state.question}
@@ -296,11 +281,27 @@ export default function Host() {
 
             <div style={{ marginTop: 20 }}>
                 <h3>Scores</h3>
-                <ul>
-                    {state.teams.map(t => (
-                        <li key={t.name}>{t.name}: {t.score}</li>
+                <div style={{ display: 'flex', gap: 15, flexWrap: 'wrap' }}>
+                    {state.teams.map((t, i) => (
+                        <div key={i} style={{ background: '#333', padding: 8, borderRadius: 4, minWidth: 100 }}>
+                            <div style={{ fontSize: '0.9em', color: '#aaa', marginBottom: 5 }}>{t.name}</div>
+                            <input
+                                type="number"
+                                value={t.score}
+                                onChange={e => updateScore(i, e.target.value)}
+                                style={{
+                                    width: '100%',
+                                    padding: '5px',
+                                    background: '#222',
+                                    color: 'white',
+                                    border: '1px solid #555',
+                                    fontSize: '1.2em',
+                                    fontWeight: 'bold'
+                                }}
+                            />
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         </div>
     );

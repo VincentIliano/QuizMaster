@@ -344,6 +344,13 @@ button:disabled {
   border: 1px solid #555;
 }
 
+.team-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
 
 /* Stage Lights */
 .stage-lights-container {

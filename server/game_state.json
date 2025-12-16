@@ -65,7 +65,7 @@
   "timerValue": 15,
   "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "DASHBOARD",
+  "status": "IDLE",
   "roundsSummary": [
     {
       "index": 0,
