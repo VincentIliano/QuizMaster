@@ -1,10 +1,14 @@
 const socket = io();
 
 // Elements
-const setupPanel = document.getElementById('setup-panel');
+const dashboardPanel = document.getElementById('dashboard-panel');
+const setupPanel = dashboardPanel; // Alias for legacy if needed, or just replace
 const controlPanel = document.getElementById('control-panel');
 const teamInputs = document.querySelectorAll('.team-input');
-const btnStartGame = document.getElementById('btn-start-game');
+const btnUpdateTeams = document.getElementById('btn-update-teams');
+const roundSelect = document.getElementById('round-select');
+const btnStartRound = document.getElementById('btn-start-round');
+const btnStartGame = document.getElementById('btn-start-game'); // Likely removed in HTML replacement
 
 const lblRound = document.getElementById('lbl-round');
 const lblQuestion = document.getElementById('lbl-question');
@@ -19,18 +23,27 @@ const btnTimer = document.getElementById('btn-timer');
 const btnCorrect = document.getElementById('btn-correct');
 const btnWrong = document.getElementById('btn-wrong');
 const btnReveal = document.getElementById('btn-reveal');
+const btnDashboard = document.getElementById('btn-dashboard');
 
 // Setup
-btnStartGame.addEventListener('click', () => {
+btnUpdateTeams.addEventListener('click', () => {
     const names = Array.from(teamInputs).map(input => input.value.trim()).filter(n => n);
     if (names.length === 0) {
         alert("Enter at least one team name");
         return;
     }
     socket.emit('set_teams', names);
-    socket.emit('start_game');
-    setupPanel.style.display = 'none';
-    controlPanel.style.display = 'block';
+    alert("Teams updated!");
+});
+
+btnStartRound.addEventListener('click', () => {
+    const roundIndex = parseInt(roundSelect.value);
+    if (isNaN(roundIndex)) {
+        alert("Select a round first");
+        return;
+    }
+    socket.emit('set_round', roundIndex);
+    // Control panel switch happens on state update
 });
 
 // Controls
@@ -39,6 +52,9 @@ btnTimer.addEventListener('click', () => socket.emit('start_timer'));
 btnCorrect.addEventListener('click', () => socket.emit('judge_answer', true));
 btnWrong.addEventListener('click', () => socket.emit('judge_answer', false));
 btnReveal.addEventListener('click', () => socket.emit('reveal_answer'));
+btnDashboard.addEventListener('click', () => {
+    socket.emit('return_to_dashboard');
+});
 
 // Keyboard Capture (Global within browser tab)
 window.addEventListener('keydown', (e) => {
@@ -52,9 +68,32 @@ window.addEventListener('keydown', (e) => {
 // State Updates
 socket.on('state_update', (state) => {
     // If we receive state and are in setup mode but teams are set, switch view (reconnection handling logic)
-    if (setupPanel.style.display !== 'none' && state.teams.length > 0 && state.roundIndex >= 0) {
-        setupPanel.style.display = 'none';
+    // Dashboard / Control Panel Switching
+    if (state.status === 'DASHBOARD') {
+        dashboardPanel.style.display = 'block';
+        controlPanel.style.display = 'none';
+    } else {
+        dashboardPanel.style.display = 'none';
         controlPanel.style.display = 'block';
+    }
+
+    // Populate Round Select if empty (and we have rounds)
+    // We need rounds info. Ideally server sends it in state or separate Init.
+    // Let's assume state has rounds meta or we ask for it?
+    // Current state only has current round info.
+    // We should patch server to send "allRounds" summary in the state or separate event.
+    // For now, let's assume we might need to add that to server, OR we use the fact that
+    // we might have received it.
+    // Actually, I missed adding "rounds" list to broadcastState.
+    // I'll add a separate socket.on('rounds_list') or similar.
+
+    if (state.allRoundsNames && roundSelect.options.length <= 1) {
+        state.allRoundsNames.forEach((name, index) => {
+            const opt = document.createElement('option');
+            opt.value = index;
+            opt.innerText = name;
+            roundSelect.appendChild(opt);
+        });
     }
 
     lblRound.innerText = `${state.roundName} (${state.roundPoints} pts)`;
@@ -83,12 +122,12 @@ socket.on('state_update', (state) => {
         btnCorrect.disabled = true;
         btnWrong.disabled = true;
     } else if (state.status === 'ANSWER_REVEALED') {
-         lblBuzzer.innerText = "Answer Revealed";
-         lblBuzzer.style.color = 'black';
-         btnCorrect.disabled = true;
-         btnWrong.disabled = true;
-         btnNext.disabled = false;
-         btnReveal.disabled = true;
+        lblBuzzer.innerText = "Answer Revealed";
+        lblBuzzer.style.color = 'black';
+        btnCorrect.disabled = true;
+        btnWrong.disabled = true;
+        btnNext.disabled = false;
+        btnReveal.disabled = true;
     } else {
         lblBuzzer.innerText = "Waiting...";
         lblBuzzer.style.color = 'black';

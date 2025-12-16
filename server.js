@@ -21,7 +21,7 @@ const gameState = {
     timerValue: 0,
     buzzerLocked: true,
     buzzerWinner: null,
-    status: "IDLE" // "IDLE", "READING", "LISTENING", "BUZZED", "TIMEOUT", "ANSWER_REVEALED", "GAME_OVER"
+    status: "DASHBOARD" // "DASHBOARD", "IDLE", "READING", "LISTENING", "BUZZED", "TIMEOUT", "ANSWER_REVEALED", "GAME_OVER"
 };
 
 let gameTimer = null;
@@ -29,7 +29,7 @@ let gameTimer = null;
 // Load Data
 function loadData() {
     try {
-        const dataPath = path.join(__dirname, '..', 'quiz_data.json');
+        const dataPath = path.join(__dirname, 'quiz_data.json');
         const rawData = fs.readFileSync(dataPath);
         const jsonData = JSON.parse(rawData);
         gameState.rounds = jsonData.rounds || [];
@@ -41,6 +41,37 @@ function loadData() {
 }
 
 loadData();
+
+// Persistence
+function saveGame() {
+    try {
+        const statePath = path.join(__dirname, 'game_state.json');
+        // Only save what's needed, or everything? Everything is easier but "rounds" is static.
+        // However, restoring everything allows seamless continue.
+        // For safety, let's persist everything.
+        fs.writeFileSync(statePath, JSON.stringify(gameState, null, 2));
+    } catch (e) {
+        console.error("Error saving game state:", e);
+    }
+}
+
+function loadSavedGame() {
+    try {
+        const statePath = path.join(__dirname, 'game_state.json');
+        if (fs.existsSync(statePath)) {
+            const raw = fs.readFileSync(statePath);
+            const saved = JSON.parse(raw);
+            Object.assign(gameState, saved);
+            // Force status to Dashboard on startup, so Host sees the options
+            gameState.status = "DASHBOARD";
+            console.log("Game state restored from disk.");
+        }
+    } catch (e) {
+        console.error("Error loading saved game:", e);
+    }
+}
+
+loadSavedGame();
 
 // Logic Functions
 function broadcastState() {
@@ -57,7 +88,8 @@ function broadcastState() {
         teams: gameState.teams,
         buzzerWinner: gameState.buzzerWinner, // Index
         currentAnswer: (gameState.currentQuestionData && (gameState.status === 'ANSWER_REVEALED' || gameState.status === 'GAME_OVER')) ? gameState.currentQuestionData.answer : null,
-        answer: gameState.currentQuestionData ? gameState.currentQuestionData.answer : null // Always sending answer for Host visibility
+        answer: gameState.currentQuestionData ? gameState.currentQuestionData.answer : null, // Always sending answer for Host visibility
+        allRoundsNames: gameState.rounds.map(r => r.name)
     });
 }
 
@@ -91,7 +123,9 @@ function nextQuestion() {
     gameState.currentQuestionData = currentRound.questions[gameState.currentQuestionIndex];
     gameState.timerValue = currentRound.time_limit || 30;
     gameState.status = "READING";
+    gameState.status = "READING";
     broadcastState();
+    saveGame();
 
     // Send specific event for question change if needed, but state_update covers it
 }
@@ -100,7 +134,9 @@ function startTimer() {
     if (gameState.timerValue > 0 && gameState.buzzerWinner === null && gameState.status !== 'TIMEOUT') {
         gameState.buzzerLocked = false;
         gameState.status = "LISTENING";
+        gameState.status = "LISTENING";
         broadcastState();
+        saveGame();
 
         clearInterval(gameTimer);
         gameTimer = setInterval(() => {
@@ -111,7 +147,9 @@ function startTimer() {
                 clearInterval(gameTimer);
                 gameState.buzzerLocked = true;
                 gameState.status = "TIMEOUT";
+                gameState.status = "TIMEOUT";
                 broadcastState();
+                saveGame();
             }
         }, 1000);
     }
@@ -125,7 +163,9 @@ function handleBuzz(teamIndex) {
         clearInterval(gameTimer);
         gameState.buzzerWinner = teamIndex;
         gameState.status = "BUZZED";
+        gameState.status = "BUZZED";
         broadcastState();
+        saveGame();
         io.emit('buzzed', gameState.teams[teamIndex].name); // Optional specific event
     }
 }
@@ -142,12 +182,16 @@ function handleAnswer(correct) {
 
     // Reveal Answer
     gameState.status = "ANSWER_REVEALED";
+    gameState.status = "ANSWER_REVEALED";
     broadcastState();
+    saveGame();
 }
 
 function revealAnswer() {
     gameState.status = "ANSWER_REVEALED";
+    gameState.status = "ANSWER_REVEALED";
     broadcastState();
+    saveGame();
 }
 
 
@@ -167,26 +211,52 @@ io.on('connection', (socket) => {
         teams: gameState.teams,
         buzzerWinner: gameState.buzzerWinner,
         currentAnswer: (gameState.currentQuestionData && (gameState.status === 'ANSWER_REVEALED' || gameState.status === 'GAME_OVER')) ? gameState.currentQuestionData.answer : null,
-        answer: gameState.currentQuestionData ? gameState.currentQuestionData.answer : null
+        answer: gameState.currentQuestionData ? gameState.currentQuestionData.answer : null,
+        allRoundsNames: gameState.rounds.map(r => r.name)
     });
 
     // Host Actions
     socket.on('set_teams', (teamNames) => {
+        console.log('Setting teams:', teamNames);
         gameState.teams = teamNames.map(name => ({ name, score: 0 }));
         // Reset game indices if setting teams implies new game
         gameState.currentRoundIndex = -1;
         gameState.currentQuestionIndex = -1;
         gameState.status = "IDLE";
+        // If teams are set, remain in Dashboard or move to IDLE? Dashboard is better.
+        // But if we want to "Start Game" from Dashboard, we might not need to force IDLE here.
+        // Let's keep current status or force DASHBOARD.
+        gameState.status = "DASHBOARD";
         broadcastState();
+        saveGame();
+    });
+
+    socket.on('set_round', (roundIndex) => {
+        console.log('Setting round:', roundIndex);
+        if (roundIndex >= 0 && roundIndex < gameState.rounds.length) {
+            gameState.currentRoundIndex = roundIndex;
+            gameState.currentQuestionIndex = -1; // Ready to start round
+            gameState.status = "IDLE"; // Ready to read first question of round
+            broadcastState();
+            saveGame();
+        }
     });
 
     socket.on('start_game', () => {
+        console.log('Starting game');
         if (gameState.rounds.length > 0) {
-             // Reset to first question
-             gameState.currentRoundIndex = -1; // nextQuestion will bump to 0
-             gameState.currentQuestionIndex = -1;
-             nextQuestion();
+            // Reset to first question
+            gameState.currentRoundIndex = -1; // nextQuestion will bump to 0
+            gameState.currentQuestionIndex = -1;
+            nextQuestion();
         }
+    });
+
+    socket.on('return_to_dashboard', () => {
+        console.log('Return to dashboard requested');
+        gameState.status = "DASHBOARD";
+        broadcastState();
+        saveGame();
     });
 
     socket.on('next_question', () => {

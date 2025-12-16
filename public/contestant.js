@@ -7,11 +7,25 @@ const questionText = document.getElementById('question-text');
 const statusMessage = document.getElementById('status-message');
 const scoresContainer = document.getElementById('scores-container');
 
+const screensaver = document.getElementById('screensaver');
+const gameContainer = document.getElementById('game-container');
+
 // State tracking for animations
 let currentTeams = [];
 
 socket.on('state_update', (state) => {
     // Basic Info
+
+    // Screensaver Toggle
+    if (state.status === 'DASHBOARD') {
+        screensaver.style.display = 'flex';
+        gameContainer.style.display = 'none';
+        return; // Don't process other updates if in dashboard
+    } else {
+        screensaver.style.display = 'none';
+        gameContainer.style.display = 'block';
+    }
+
     if (state.roundName) {
         roundName.innerText = `${state.roundName} (${state.roundPoints} pts)`;
     } else {
@@ -23,7 +37,7 @@ socket.on('state_update', (state) => {
 
     // Question - Handle reveal
     if (state.status === 'ANSWER_REVEALED') {
-         questionText.innerHTML = `${state.question}<br><br><span style="color:#a6e3a1">Answer: ${state.currentAnswer}</span>`;
+        questionText.innerHTML = `${state.question}<br><br><span style="color:#a6e3a1">Answer: ${state.currentAnswer}</span>`;
     } else if (state.status === 'GAME_OVER') {
         questionText.innerText = "GAME OVER";
     } else {

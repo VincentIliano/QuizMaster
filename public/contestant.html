@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Contestant</title>
     <link rel="stylesheet" href="contestant.css">
+    <link rel="stylesheet" href="screensaver.css">
 </head>
+
 <body>
-    <div class="container">
+    <!-- Screensaver Overlay -->
+    <div id="screensaver" style="display: none;">
+        <div class="screensaver-content">
+            <h1>QUIZ MASTER</h1>
+            <p>Get Ready!</p>
+        </div>
+    </div>
+
+    <!-- Main Game Interface -->
+    <div id="game-container">
         <header>
-            <div id="round-name">Round 1</div>
-            <div id="timer">30</div>
+            <div id="round-name">Waiting...</div>
+            <div id="timer">--</div>
         </header>
 
         <main>
@@ -28,4 +40,5 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="contestant.js"></script>
 </body>
+
 </html>
