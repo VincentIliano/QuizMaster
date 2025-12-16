@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1e1e2e 0%, #181825 100%);
+    color: #cdd6f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+#round-name {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fab387;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#timer {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #f38ba8;
+    background: rgba(0,0,0,0.2);
+    padding: 0 20px;
+    border-radius: 10px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#question-text {
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    transition: opacity 0.5s;
+}
+
+#status-message {
+    font-size: 4rem;
+    font-weight: bold;
+    min-height: 100px;
+    margin-top: 20px;
+}
+
+footer {
+    margin-top: 2rem;
+}
+
+#scores-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.score-card {
+    background-color: #313244;
+    padding: 1.5rem;
+    border-radius: 15px;
+    min-width: 150px;
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.score-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    color: #cdd6f4;
+}
+
+.score-card span {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #89b4fa;
+}
+
+/* Animations / States */
+.buzzed-card {
+    background-color: #45475a;
+    border-color: #cba6f7;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(203, 166, 247, 0.5);
+}
+
+.status-correct {
+    color: #a6e3a1;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.status-wrong {
+    color: #f38ba8;
+    animation: shake 0.5s;
+}
+
+.status-buzzed {
+    color: #f9e2af;
+    animation: pulse 1s infinite;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
