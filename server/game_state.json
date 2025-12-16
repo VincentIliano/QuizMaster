@@ -2,14 +2,14 @@
   "teams": [
     {
       "name": "Astrid",
-      "score": 30
+      "score": 20
     },
     {
-      "name": "Paulien",
-      "score": -20
+      "name": "pol",
+      "score": 0
     },
     {
-      "name": "Koen",
+      "name": "jeanine",
       "score": 0
     }
   ],
@@ -102,10 +102,12 @@
         }
       ],
       "scores": {
-        "Astrid": 30,
-        "Paulien": -20
+        "Astrid": 70,
+        "Paulien": -20,
+        "jos": 10,
+        "pol": 10
       },
-      "questionsAnswered": 5
+      "questionsAnswered": 11
     },
     {
       "name": "Math Whiz",
@@ -195,36 +197,39 @@
         }
       ],
       "scores": {},
-      "questionsAnswered": 0
+      "questionsAnswered": 2
     }
   ],
   "currentRoundIndex": 0,
-  "currentQuestionIndex": 5,
+  "currentQuestionIndex": 11,
   "currentQuestionData": {
-    "text": "What is the hardest natural substance?",
-    "answer": "Diamond"
+    "text": "How many continents are there?",
+    "answer": "7"
   },
-  "timerValue": 0,
-  "buzzerLocked": true,
+  "timerValue": 15,
+  "buzzerLocked": false,
   "buzzerWinner": null,
-  "status": "ANSWER_REVEALED",
+  "status": "READING",
+  "lastJudgement": null,
   "roundsSummary": [
     {
       "index": 0,
       "name": "General Knowledge",
       "points": 10,
-      "questionsAnswered": 5,
+      "questionsAnswered": 11,
       "totalQuestions": 20,
       "scores": {
-        "Astrid": 30,
-        "Paulien": -20
+        "Astrid": 70,
+        "Paulien": -20,
+        "jos": 10,
+        "pol": 10
       }
     },
     {
       "index": 1,
       "name": "Math Whiz",
       "points": 20,
-      "questionsAnswered": 0,
+      "questionsAnswered": 2,
       "totalQuestions": 20,
       "scores": {}
     }

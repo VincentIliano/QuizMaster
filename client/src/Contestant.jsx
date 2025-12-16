@@ -47,11 +47,21 @@ export default function Contestant() {
 
     if (!state) return <div>Waiting for server...</div>;
 
-    // Determine high score for "Leader" highlight
+    // Determine High Score
     const maxScore = state.teams && state.teams.length ? Math.max(...state.teams.map(t => t.score)) : 0;
 
+    // Dynamic Container Classes for Atmosphere
+    let containerClass = '';
+    if (state.status === 'LISTENING') containerClass = 'container-listening';
+    else if (state.status === 'BUZZED') containerClass = 'container-buzzed';
+    else if (state.status === 'TIMEOUT') containerClass = 'container-timeout';
+    else if (state.status === 'ANSWER_REVEALED') {
+        if (state.lastJudgement === true) containerClass = 'container-correct';
+        else if (state.lastJudgement === false) containerClass = 'container-wrong';
+    }
+
     return (
-        <div className="game-show-container">
+        <div className={`game-show-container ${containerClass}`}>
             <div className="stage-lights-container">
                 <div className="light-beam beam-1"></div>
                 <div className="light-beam beam-2"></div>
@@ -83,26 +93,42 @@ export default function Contestant() {
                     </header>
 
                     <main className="gs-main">
-                        {state.question && (
-                            <div key={state.question} className={`question-card ${animClass}`}>
+                        {/* Show Question only if not IDLE */}
+                        {state.status !== 'IDLE' && state.question && (
+                            <div key={state.question} className={`question-card ${animClass} ${state.status === 'LISTENING' ? 'listening-active' : ''}`}>
                                 <div className="question-text">
                                     {state.question}
                                 </div>
 
                                 {state.currentAnswer && (
-                                    <div className="gs-answer">
+                                    <div className="gs-answer pop-in">
                                         {state.currentAnswer}
                                     </div>
                                 )}
                             </div>
                         )}
 
-                        {(state.status === 'BUZZED' || state.status === 'TIMEOUT') && (
-                            <div className="buzzer-overlay">
-                                {state.status === 'BUZZED' && state.buzzerWinner !== null
-                                    ? state.teams[state.buzzerWinner].name
-                                    : "TIME'S UP!"}
-                            </div>
+                        {/* Overlays for buzz, timeout, and judgement */}
+                        {(state.status === 'BUZZED' || state.status === 'TIMEOUT' || state.status === 'ANSWER_REVEALED') && (
+                            <>
+                                {state.status === 'BUZZED' && state.buzzerWinner !== null && (
+                                    <div className="buzzer-overlay state-buzzed">
+                                        {state.teams[state.buzzerWinner].name}
+                                    </div>
+                                )}
+
+                                {state.status === 'TIMEOUT' && (
+                                    <div className="buzzer-overlay state-timeout">
+                                        TIME'S UP!
+                                    </div>
+                                )}
+
+                                {state.status === 'ANSWER_REVEALED' && state.lastJudgement !== null && (
+                                    <div className={`buzzer-overlay ${state.lastJudgement ? 'state-correct' : 'state-wrong'}`}>
+                                        {state.lastJudgement ? 'CORRECT!' : 'WRONG!'}
+                                    </div>
+                                )}
+                            </>
                         )}
                     </main>
 

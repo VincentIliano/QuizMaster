@@ -14,6 +14,7 @@ class GameEngine {
             buzzerLocked: true,
             buzzerWinner: null, // Index
             status: "DASHBOARD",
+            lastJudgement: null, // true (correct), false (wrong), or null
             roundsSummary: []
         };
 
@@ -89,7 +90,8 @@ class GameEngine {
             answer: s.currentQuestionData ? s.currentQuestionData.answer : null,
             roundsSummary: s.roundsSummary,
             upcomingQuestion: upcomingQ ? upcomingQ.text : null,
-            upcomingAnswer: upcomingQ ? upcomingQ.answer : null
+            upcomingAnswer: upcomingQ ? upcomingQ.answer : null,
+            lastJudgement: s.lastJudgement
         };
     }
 
@@ -126,6 +128,7 @@ class GameEngine {
         this.stopTimer();
         this.state.buzzerWinner = null;
         this.state.buzzerLocked = true;
+        this.state.lastJudgement = null;
 
         // Logic split:
         if (this.state.status === 'ROUND_READY') {
@@ -190,6 +193,7 @@ class GameEngine {
         this.stopTimer();
         this.state.buzzerWinner = null;
         this.state.buzzerLocked = true;
+        this.state.lastJudgement = null;
 
         this.state.currentQuestionIndex--;
 
@@ -211,6 +215,12 @@ class GameEngine {
     }
 
     startTimer(onTick) {
+        // Allow resuming if answer was revealed (e.g. Wrong answer -> Resume)
+        if (this.state.status === 'ANSWER_REVEALED') {
+            this.state.buzzerWinner = null;
+            this.state.lastJudgement = null;
+        }
+
         if (this.state.timerValue > 0 && this.state.buzzerWinner === null && this.state.status !== 'TIMEOUT') {
             this.state.buzzerLocked = false;
             this.state.status = "LISTENING";
@@ -266,6 +276,7 @@ class GameEngine {
                 round.scores[team.name] = (round.scores[team.name] || 0) - points;
             }
         }
+        this.state.lastJudgement = correct;
         this.state.status = "ANSWER_REVEALED";
         this.save();
     }
