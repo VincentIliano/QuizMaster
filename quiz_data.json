@@ -1,0 +1,38 @@
+{
+  "rounds": [
+    {
+      "name": "General Knowledge",
+      "time_limit": 15,
+      "points": 10,
+      "questions": [
+        {
+          "text": "What is the capital of France?",
+          "answer": "Paris"
+        },
+        {
+          "text": "Which planet is known as the Red Planet?",
+          "answer": "Mars"
+        },
+        {
+          "text": "What is the chemical symbol for Gold?",
+          "answer": "Au"
+        }
+      ]
+    },
+    {
+      "name": "Math Whiz",
+      "time_limit": 20,
+      "points": 20,
+      "questions": [
+        {
+          "text": "What is 15 * 4?",
+          "answer": "60"
+        },
+        {
+          "text": "What is the square root of 144?",
+          "answer": "12"
+        }
+      ]
+    }
+  ]
+}
