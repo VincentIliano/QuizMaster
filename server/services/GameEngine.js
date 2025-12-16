@@ -175,6 +175,7 @@ class GameEngine {
         this.state.currentQuestionData = currentRound.questions[this.state.currentQuestionIndex];
         this.state.timerValue = currentRound.time_limit || 30;
         this.state.status = "READING";
+        this.state.buzzerLocked = false; // Unlock immediately for early buzzing
         this.save();
 
         // Auto-Start Timer if requested
@@ -202,6 +203,7 @@ class GameEngine {
             this.state.currentQuestionData = currentRound.questions[this.state.currentQuestionIndex];
             this.state.timerValue = currentRound.time_limit || 30;
             this.state.status = "READING";
+            this.state.buzzerLocked = false; // Unlock immediately
             // We don't update questionsAnswered or scores when going back, usually. 
             // Just navigation.
         }

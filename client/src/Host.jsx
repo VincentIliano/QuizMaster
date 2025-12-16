@@ -5,8 +5,6 @@ export default function Host() {
     const [state, setState] = useState(null);
     const [teamInputs, setTeamInputs] = useState(['', '', '', '', '']);
 
-    const [autoStart, setAutoStart] = useState(true);
-
     useEffect(() => {
         const onState = (s) => setState(s);
         const onTimer = (val) => setState(prev => ({ ...prev, timeLimit: val }));
@@ -26,9 +24,7 @@ export default function Host() {
     const previousQuestion = () => socket.emit('previous_question');
 
     // Keyboard Shortcuts
-    // We use a ref for autoStart to avoid stale closures in the event listener
-    const autoStartRef = useRef(autoStart);
-    useEffect(() => { autoStartRef.current = autoStart; }, [autoStart]);
+
 
     // Re-bind listener with ref access
     useEffect(() => {
@@ -47,7 +43,7 @@ export default function Host() {
                     socket.emit('judge_answer', false);
                     break;
                 case 'd':
-                    socket.emit('next_question', autoStartRef.current);
+                    socket.emit('next_question');
                     break;
                 case 'a':
                     socket.emit('previous_question');
@@ -85,7 +81,7 @@ export default function Host() {
     };
 
     const startRound = (index) => socket.emit('set_round', index);
-    const nextQuestion = () => socket.emit('next_question', autoStart);
+    const nextQuestion = () => socket.emit('next_question');
     const startTimer = () => socket.emit('start_timer');
     const judge = (correct) => socket.emit('judge_answer', correct);
     const reveal = () => socket.emit('reveal_answer');
@@ -182,13 +178,6 @@ export default function Host() {
                             <em style={{ color: '#aaa' }}>({state.upcomingAnswer})</em>
                         </div>
                     )}
-                    <label style={{ display: 'block', marginBottom: 20 }}>
-                        <input
-                            type="checkbox"
-                            checked={autoStart}
-                            onChange={e => setAutoStart(e.target.checked)}
-                        /> Auto-Start Timer
-                    </label>
                     <button
                         onClick={nextQuestion}
                         style={{ fontSize: '2em', padding: '20px 40px', backgroundColor: '#28a745', color: 'white' }}
@@ -234,14 +223,6 @@ export default function Host() {
             </div>
 
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-                <label style={{ marginRight: 10 }}>
-                    <input
-                        type="checkbox"
-                        checked={autoStart}
-                        onChange={e => setAutoStart(e.target.checked)}
-                    /> Auto-Start
-                </label>
-
                 <button
                     onClick={nextQuestion}
                     disabled={state.status === 'READING' || state.status === 'LISTENING'}
