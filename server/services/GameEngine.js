@@ -262,6 +262,7 @@ class GameEngine {
     }
 
     handleAnswer(correct) {
+        this.stopTimer();
         if (this.state.buzzerWinner !== null) {
             const points = this.state.rounds[this.state.currentRoundIndex].points || 0;
             const team = this.state.teams[this.state.buzzerWinner];

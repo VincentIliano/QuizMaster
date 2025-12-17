@@ -2,7 +2,7 @@
   "teams": [
     {
       "name": "Astrid",
-      "score": 20
+      "score": 40
     },
     {
       "name": "pol",
@@ -10,7 +10,7 @@
     },
     {
       "name": "jeanine",
-      "score": 0
+      "score": -10
     }
   ],
   "rounds": [
@@ -102,12 +102,13 @@
         }
       ],
       "scores": {
-        "Astrid": 70,
+        "Astrid": 90,
         "Paulien": -20,
         "jos": 10,
-        "pol": 10
+        "pol": 10,
+        "jeanine": -10
       },
-      "questionsAnswered": 11
+      "questionsAnswered": 13
     },
     {
       "name": "Math Whiz",
@@ -201,28 +202,29 @@
     }
   ],
   "currentRoundIndex": 0,
-  "currentQuestionIndex": 11,
+  "currentQuestionIndex": 13,
   "currentQuestionData": {
-    "text": "How many continents are there?",
-    "answer": "7"
+    "text": "At what temperature (Celsius) does water freeze?",
+    "answer": "0"
   },
-  "timerValue": 15,
-  "buzzerLocked": false,
-  "buzzerWinner": null,
-  "status": "READING",
+  "timerValue": 12,
+  "buzzerLocked": true,
+  "buzzerWinner": 2,
+  "status": "BUZZED",
   "lastJudgement": null,
   "roundsSummary": [
     {
       "index": 0,
       "name": "General Knowledge",
       "points": 10,
-      "questionsAnswered": 11,
+      "questionsAnswered": 13,
       "totalQuestions": 20,
       "scores": {
-        "Astrid": 70,
+        "Astrid": 90,
         "Paulien": -20,
         "jos": 10,
-        "pol": 10
+        "pol": 10,
+        "jeanine": -10
       }
     },
     {
