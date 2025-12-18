@@ -28,13 +28,17 @@ class Storage {
             }
         } catch (e) {
             console.error("Error loading game state:", e);
+            // Return empty object on failure to allow server to start and overwrite corrupt file eventually
+            return {};
         }
         return null;
     }
 
     saveGameState(state) {
         try {
-            fs.writeFileSync(this.gameStatePath, JSON.stringify(state, null, 2));
+            const tempPath = this.gameStatePath + '.tmp';
+            fs.writeFileSync(tempPath, JSON.stringify(state, null, 2));
+            fs.renameSync(tempPath, this.gameStatePath);
         } catch (e) {
             console.error("Error saving game state:", e);
         }

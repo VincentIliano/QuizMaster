@@ -1,0 +1,282 @@
+{
+  "teams": [
+    {
+      "name": "rtew",
+      "score": 0
+    },
+    {
+      "name": "trew",
+      "score": 10
+    },
+    {
+      "name": "trew",
+      "score": 19
+    }
+  ],
+  "rounds": [
+    {
+      "name": "General Knowledge",
+      "time_limit": 15,
+      "points": 10,
+      "description": "Test your broad knowledge of the world!",
+      "questions": [
+        {
+          "text": "What is the capital of France?",
+          "answer": "Paris"
+        },
+        {
+          "text": "Which planet is known as the Red Planet?",
+          "answer": "Mars"
+        },
+        {
+          "text": "What is the chemical symbol for Gold?",
+          "answer": "Au"
+        },
+        {
+          "text": "What is the chemical formula for water?",
+          "answer": "H2O"
+        },
+        {
+          "text": "What is the largest ocean on Earth?",
+          "answer": "Pacific Ocean"
+        },
+        {
+          "text": "What is the hardest natural substance?",
+          "answer": "Diamond"
+        },
+        {
+          "text": "Who was the first person to walk on the moon?",
+          "answer": "Neil Armstrong"
+        },
+        {
+          "text": "Who painted the Mona Lisa?",
+          "answer": "Leonardo da Vinci"
+        },
+        {
+          "text": "What is the capital of Japan?",
+          "answer": "Tokyo"
+        },
+        {
+          "text": "What is the symbol for Oxygen?",
+          "answer": "O"
+        },
+        {
+          "text": "What is the largest mammal in the world?",
+          "answer": "Blue Whale"
+        },
+        {
+          "text": "How many continents are there?",
+          "answer": "7"
+        },
+        {
+          "text": "What is the opposite of nocturnal?",
+          "answer": "Diurnal"
+        },
+        {
+          "text": "At what temperature (Celsius) does water freeze?",
+          "answer": "0"
+        },
+        {
+          "text": "How many colors are in a rainbow?",
+          "answer": "7"
+        },
+        {
+          "text": "What year is it currently?",
+          "answer": "2025"
+        },
+        {
+          "text": "What is the capital of the United States?",
+          "answer": "Washington D.C."
+        },
+        {
+          "text": "Who is the alter ego of Batman?",
+          "answer": "Bruce Wayne"
+        },
+        {
+          "text": "What is the fastest land animal?",
+          "answer": "Cheetah"
+        },
+        {
+          "text": "Which country invented pizza?",
+          "answer": "Italy"
+        }
+      ],
+      "scores": {
+        "trew": 10
+      },
+      "questionsAnswered": 1
+    },
+    {
+      "name": "Math Whiz",
+      "time_limit": 20,
+      "points": 20,
+      "description": "Calculate fast or get left behind!",
+      "questions": [
+        {
+          "text": "What is 15 * 4?",
+          "answer": "60"
+        },
+        {
+          "text": "What is the square root of 144?",
+          "answer": "12"
+        },
+        {
+          "text": "What is 7 * 8?",
+          "answer": "56"
+        },
+        {
+          "text": "What is 100 divided by 4?",
+          "answer": "25"
+        },
+        {
+          "text": "What is 50 minus 18?",
+          "answer": "32"
+        },
+        {
+          "text": "What is 12 squared?",
+          "answer": "144"
+        },
+        {
+          "text": "What is 9 plus 10?",
+          "answer": "19"
+        },
+        {
+          "text": "What is 33 divided by 3?",
+          "answer": "11"
+        },
+        {
+          "text": "What is 5 * 5 * 5?",
+          "answer": "125"
+        },
+        {
+          "text": "What is the square root of 64?",
+          "answer": "8"
+        },
+        {
+          "text": "What is 20% of 100?",
+          "answer": "20"
+        },
+        {
+          "text": "What is 1000 minus 1?",
+          "answer": "999"
+        },
+        {
+          "text": "What is 45 plus 55?",
+          "answer": "100"
+        },
+        {
+          "text": "What is 8 * 9?",
+          "answer": "72"
+        },
+        {
+          "text": "How many degrees in a right angle?",
+          "answer": "90"
+        },
+        {
+          "text": "How many sides does a hexagon have?",
+          "answer": "6"
+        },
+        {
+          "text": "What is 2 to the power of 3?",
+          "answer": "8"
+        },
+        {
+          "text": "What is 0 multiplied by 100?",
+          "answer": "0"
+        },
+        {
+          "text": "What is 1 + 2 + 3?",
+          "answer": "6"
+        },
+        {
+          "text": "What number does the Roman numeral V represent?",
+          "answer": "5"
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    },
+    {
+      "name": "Countdown",
+      "type": "freezeout",
+      "time_limit": 20,
+      "points": 0,
+      "description": "Push your luck! Points = Seconds Remaining. Wrong answers freeze you out!",
+      "questions": [
+        {
+          "text": "What film is this scene from?",
+          "answer": "The Matrix",
+          "mediaUrl": "https://media.giphy.com/media/emGXB2eE3GhoXMNFHH/giphy.gif",
+          "mediaType": "image"
+        },
+        {
+          "text": "Identify this sound.",
+          "answer": "R2-D2",
+          "mediaUrl": "https://www.myinstants.com/media/sounds/r2d2.mp3",
+          "mediaType": "audio"
+        },
+        {
+          "text": "Who is this historical figure?",
+          "answer": "Albert Einstein",
+          "mediaUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Albert_Einstein_Head.jpg",
+          "mediaType": "image"
+        },
+        {
+          "text": "What art piece is this video referencing?",
+          "answer": "Ophelia",
+          "mediaUrl": "/assets/Ophelia.mp4",
+          "mediaType": "video"
+        }
+      ],
+      "scores": {
+        "trew": 19
+      },
+      "questionsAnswered": 1
+    }
+  ],
+  "currentRoundIndex": 2,
+  "currentQuestionIndex": 1,
+  "currentQuestionData": {
+    "text": "Identify this sound.",
+    "answer": "R2-D2",
+    "mediaUrl": "https://www.myinstants.com/media/sounds/r2d2.mp3",
+    "mediaType": "audio"
+  },
+  "timerValue": 20,
+  "buzzerLocked": false,
+  "buzzerWinner": null,
+  "status": "READING",
+  "lastJudgement": null,
+  "roundsSummary": [
+    {
+      "index": 0,
+      "name": "General Knowledge",
+      "points": 10,
+      "questionsAnswered": 1,
+      "totalQuestions": 20,
+      "scores": {
+        "trew": 10
+      }
+    },
+    {
+      "index": 1,
+      "name": "Math Whiz",
+      "points": 20,
+      "questionsAnswered": 0,
+      "totalQuestions": 20,
+      "scores": {}
+    },
+    {
+      "index": 2,
+      "name": "Countdown",
+      "points": 0,
+      "questionsAnswered": 1,
+      "totalQuestions": 4,
+      "scores": {
+        "trew": 19
+      }
+    }
+  ],
+  "lockedOutTeams": [],
+  "mediaPlaying": false
+}

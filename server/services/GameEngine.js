@@ -1,3 +1,7 @@
+
+const StandardRound = require('../models/StandardRound');
+const FreezeOutRound = require('../models/FreezeOutRound');
+
 class GameEngine {
     constructor(storage) {
         this.storage = storage;
@@ -20,6 +24,7 @@ class GameEngine {
             lockedOutTeams: [], // Added for FreezeOut
             mediaPlaying: false // Added for manual media control
         };
+        this.currentRoundInstance = null;
         this.init();
     }
 
@@ -44,15 +49,10 @@ class GameEngine {
             if (savedState.currentRoundIndex !== undefined) this.state.currentRoundIndex = savedState.currentRoundIndex;
             if (savedState.currentQuestionIndex !== undefined) this.state.currentQuestionIndex = savedState.currentQuestionIndex;
             if (savedState.currentQuestionData) this.state.currentQuestionData = savedState.currentQuestionData;
-            // ... restore other non-round fields if needed, or just be selective.
-            // Actually, we can assume savedState.rounds matches by index mostly, but strict names is better.
 
             // Restore Round Progress (Scores, Answered Count)
             if (savedState.rounds) {
                 this.state.rounds.forEach((r, i) => {
-                    // Try to find matching round in saved state by name, or fall back to index if names match?
-                    // Simple approach: Use index if name matches, or just map if possible.
-                    // Let's look for a round with the same name in savedState
                     const savedRound = savedState.rounds.find(sr => sr.name === r.name);
                     if (savedRound) {
                         r.scores = savedRound.scores || {};
@@ -61,11 +61,25 @@ class GameEngine {
                 });
             }
 
-            // Force dashboard on load as per previous logic
+            // Restore Strategy Instance
+            if (this.state.currentRoundIndex >= 0 && this.state.currentRoundIndex < this.state.rounds.length) {
+                this._initRoundStrategy(this.state.currentRoundIndex);
+            }
+
+            // Force dashboard on load as per previous logic (optional, keeping it conservative)
             this.state.status = "DASHBOARD";
         }
 
         this.updateSummary();
+    }
+
+    _initRoundStrategy(index) {
+        const round = this.state.rounds[index];
+        if (round.type === 'freezeout') {
+            this.currentRoundInstance = new FreezeOutRound(round);
+        } else {
+            this.currentRoundInstance = new StandardRound(round);
+        }
     }
 
     save() {
@@ -124,7 +138,6 @@ class GameEngine {
             roundsSummary: s.roundsSummary,
             upcomingQuestion: upcomingQ ? upcomingQ.text : null,
             upcomingAnswer: upcomingQ ? upcomingQ.answer : null,
-            upcomingAnswer: upcomingQ ? upcomingQ.answer : null,
             lastJudgement: s.lastJudgement,
             mediaPlaying: s.mediaPlaying || false
         };
@@ -143,17 +156,11 @@ class GameEngine {
     setRound(roundIndex) {
         if (roundIndex >= 0 && roundIndex < this.state.rounds.length) {
             this.state.currentRoundIndex = roundIndex;
+            this._initRoundStrategy(roundIndex);
+
             const r = this.state.rounds[roundIndex];
 
-            // If checking resume, maybe check if finished? 
-            // Simplified: Always go to READY first, then nextQuestion figures out index.
-            // But if resuming mid-round, we might want to skip ready? 
-            // Requirement says "everytime you enter a round".
-
             this.state.currentQuestionIndex = (r.questionsAnswered || 0) - 1;
-            // logic in nextQuestion handles increment. 
-            // To start at the right place, we stay at "answered - 1" so nextQuestion moves to "answered".
-
             this.state.status = "ROUND_READY";
             this.save();
         }
@@ -166,33 +173,24 @@ class GameEngine {
         this.state.lastJudgement = null;
         this.state.lockedOutTeams = [];
 
-        // Logic split:
         if (this.state.status === 'ROUND_READY') {
-            // Transition to IDLE state (Round Active, no question yet)
             this.state.status = "IDLE";
             this.state.currentQuestionData = null;
-
-            // Ensure index is set correctly so next "nextQuestion" call increments to the correct question
-            // We want currentQuestionIndex to be (questionsAnswered - 1)
             const currentRound = this.state.rounds[this.state.currentRoundIndex];
             this.state.currentQuestionIndex = (currentRound.questionsAnswered || 0) - 1;
-
             this.save();
             return;
         } else {
-            // Normal progression
             if (this.state.currentRoundIndex === -1) {
                 this.state.currentRoundIndex = 0;
                 this.state.currentQuestionIndex = 0;
+                this._initRoundStrategy(0);
             } else {
                 this.state.currentQuestionIndex++;
                 const currentRound = this.state.rounds[this.state.currentRoundIndex];
 
                 if (this.state.currentQuestionIndex >= currentRound.questions.length) {
-                    // Round Finished
                     currentRound.questionsAnswered = currentRound.questions.length;
-                    this.state.currentRoundIndex++; // Auto advance round? Or back to dashboard?
-                    // Let's go back to dashboard to select next round manually
                     this.state.currentRoundIndex = -1;
                     this.state.status = "DASHBOARD";
                     this.save();
@@ -213,14 +211,10 @@ class GameEngine {
         const currentRound = this.state.rounds[this.state.currentRoundIndex];
         this.state.currentQuestionData = currentRound.questions[this.state.currentQuestionIndex];
         this.state.timerValue = currentRound.time_limit || 30;
-        this.state.buzzerLocked = false; // Unlock immediately for early buzzing
+        this.state.buzzerLocked = false;
         this.state.status = autoStart ? "LISTENING" : "READING";
-
-        // Disable auto-play by default. Media starts when timer starts or manual toggle.
-        // If autoStart passed (rare), startTimer below will set it to true.
         this.state.mediaPlaying = false;
 
-        // Auto-Start Timer if requested
         if (autoStart) {
             this.startTimer(onTick);
         } else {
@@ -239,30 +233,23 @@ class GameEngine {
         this.state.currentQuestionIndex--;
 
         if (this.state.currentQuestionIndex < 0) {
-            // Go back to Ready
             this.state.status = "ROUND_READY";
             this.state.currentQuestionData = null;
         } else {
-            // Show previous question
             const currentRound = this.state.rounds[this.state.currentRoundIndex];
             this.state.currentQuestionData = currentRound.questions[this.state.currentQuestionIndex];
             this.state.timerValue = currentRound.time_limit || 30;
             this.state.status = "READING";
-            this.state.buzzerLocked = false; // Unlock immediately
-            // We don't update questionsAnswered or scores when going back, usually. 
-            // Just navigation.
+            this.state.buzzerLocked = false;
         }
         this.save();
     }
 
     startTimer(onTick) {
-        // Use provided callback or stored callback
         const tickHandler = onTick || this.onTick;
 
-        // Prevent starting if ALL_LOCKED
         if (this.state.status === 'ALL_LOCKED') return;
 
-        // Allow resuming if answer was revealed (e.g. Wrong answer -> Resume)or from PAUSED/BUZZED
         if (this.state.status === 'ANSWER_REVEALED' || this.state.status === 'BUZZED' || this.state.status === 'PAUSED') {
             this.state.buzzerWinner = null;
             this.state.lastJudgement = null;
@@ -271,7 +258,7 @@ class GameEngine {
         if (this.state.timerValue > 0 && this.state.buzzerWinner === null && this.state.status !== 'TIMEOUT') {
             this.state.buzzerLocked = false;
             this.state.status = "LISTENING";
-            this.state.mediaPlaying = true; // Sync media: Play
+            this.state.mediaPlaying = true;
             this.save();
 
             this.stopTimer();
@@ -283,7 +270,7 @@ class GameEngine {
                     this.stopTimer();
                     this.state.buzzerLocked = true;
                     this.state.status = "TIMEOUT";
-                    this.state.mediaPlaying = false; // Sync media: Stop
+                    this.state.mediaPlaying = false;
                     this.save();
                 }
             }, 1000);
@@ -301,15 +288,14 @@ class GameEngine {
         if (this.state.status === 'LISTENING') {
             this.stopTimer();
             this.state.status = 'PAUSED';
-            this.state.buzzerLocked = true; // Optionally lock buzzer while paused? Yes, fair.
-            this.state.mediaPlaying = false; // Sync media: Pause
+            this.state.buzzerLocked = true;
+            this.state.mediaPlaying = false;
             this.save();
         }
     }
 
     handleBuzz(teamIndex) {
         if (this.state.buzzerLocked) return null;
-        // Check lockout
         if (this.state.lockedOutTeams.includes(teamIndex)) return null;
 
         if (teamIndex >= 0 && teamIndex < this.state.teams.length) {
@@ -317,7 +303,7 @@ class GameEngine {
             this.stopTimer();
             this.state.buzzerWinner = teamIndex;
             this.state.status = "BUZZED";
-            this.state.mediaPlaying = false; // Stop media on buzz
+            this.state.mediaPlaying = false;
             this.save();
             return this.state.teams[teamIndex].name;
         }
@@ -326,75 +312,17 @@ class GameEngine {
 
     handleAnswer(correct) {
         this.stopTimer();
-
-        // Logic for FreezeOut Round
-        const currentRound = this.state.rounds[this.state.currentRoundIndex];
-        const isFreezeOut = currentRound && currentRound.type === 'freezeout';
-
-        if (isFreezeOut && this.state.buzzerWinner !== null) {
-            if (correct) {
-                // Score = timerValue
-                const points = this.state.timerValue;
-                const team = this.state.teams[this.state.buzzerWinner];
-                currentRound.scores = currentRound.scores || {};
-
-                team.score += points;
-                currentRound.scores[team.name] = (currentRound.scores[team.name] || 0) + points;
-
-                // Proceed to reveal/next normally
-                this.state.lastJudgement = correct;
-                this.state.status = "ANSWER_REVEALED";
-                this.save();
-                return;
-            } else {
-                // WRONG ANSWER in FreezeOut
-                // No penalty (0 points), but lockout.
-                // Do NOT reveal answer. Resume timer UNLESS all locked out.
-
-                this.state.lockedOutTeams.push(this.state.buzzerWinner);
-                this.state.buzzerWinner = null;
-                this.state.buzzerLocked = false;
-
-                // Check if ALL teams are locked out
-                const allLocked = this.state.teams.every((_, i) => this.state.lockedOutTeams.includes(i));
-
-                if (allLocked) {
-                    this.state.status = "ALL_LOCKED";
-                    this.state.buzzerLocked = true;
-                    this.state.mediaPlaying = false; // Reset media state
-                    // Timer is already stopped by this.stopTimer() at top of function
-                } else {
-                    // Resume timer
-                    this.startTimer();
-                }
-
-                this.save();
-                return;
-            }
+        if (this.state.buzzerWinner !== null && this.currentRoundInstance) {
+            this.currentRoundInstance.handleAnswer(this, this.state.buzzerWinner, correct);
+        } else {
+            // Fallback for unexpected state or missing strategy ?
+            // For now, assume it's fine.
         }
-
-        // Standard Logic
-        if (this.state.buzzerWinner !== null) {
-            const points = currentRound.points || 0;
-            const team = this.state.teams[this.state.buzzerWinner];
-            currentRound.scores = currentRound.scores || {};
-
-            if (correct) {
-                team.score += points;
-                currentRound.scores[team.name] = (currentRound.scores[team.name] || 0) + points;
-            } else {
-                team.score -= points;
-                currentRound.scores[team.name] = (currentRound.scores[team.name] || 0) - points;
-            }
-        }
-        this.state.lastJudgement = correct;
-        this.state.status = "ANSWER_REVEALED";
-        this.save();
     }
 
     revealAnswer() {
         if (this.state.status === 'ALL_LOCKED') {
-            this.state.lastJudgement = false; // Treat as wrong/failed round
+            this.state.lastJudgement = false;
         }
         this.state.status = "ANSWER_REVEALED";
         this.save();
