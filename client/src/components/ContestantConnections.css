@@ -1,0 +1,98 @@
+.connections-container {
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.solved-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.group-banner {
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.5s ease-out;
+}
+
+.group-banner h2 {
+    margin: 0;
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+.group-items {
+    font-size: 1.5em;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+/* Specific Group Colors */
+.group-color-0 {
+    background-color: #f9ca24;
+    color: #000;
+}
+
+/* Yellow */
+.group-color-1 {
+    background-color: #6ab04c;
+}
+
+/* Green */
+.group-color-2 {
+    background-color: #22a6b3;
+}
+
+/* Blue */
+.group-color-3 {
+    background-color: #be2edd;
+}
+
+/* Purple */
+
+.grid-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    flex-grow: 1;
+    /* Fill remaining space */
+    align-content: start;
+}
+
+.grid-card {
+    background-color: #dfe6e9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: #2d3436;
+    text-transform: uppercase;
+    aspect-ratio: 16/9;
+    /* Or standard card ratio */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.2s;
+    height: 150px;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

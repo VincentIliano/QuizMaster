@@ -2,15 +2,15 @@
   "teams": [
     {
       "name": "1",
-      "score": 110
+      "score": 0
     },
     {
       "name": "2",
-      "score": 80
+      "score": 0
     },
     {
       "name": "3",
-      "score": -40
+      "score": 0
     }
   ],
   "rounds": [
@@ -119,12 +119,8 @@
           "mediaType": "video"
         }
       ],
-      "scores": {
-        "0": 130,
-        "1": 110,
-        "2": -40
-      },
-      "questionsAnswered": 23
+      "scores": {},
+      "questionsAnswered": 0
     },
     {
       "name": "Math Whiz",
@@ -250,33 +246,223 @@
       ],
       "scores": {},
       "questionsAnswered": 0
+    },
+    {
+      "name": "Connections",
+      "type": "connections",
+      "description": "Find the groups of 4!",
+      "points": 10,
+      "groups": [
+        {
+          "name": "Gen Z Slang",
+          "items": [
+            "Rizz",
+            "Cap",
+            "Bet",
+            "Simp"
+          ]
+        },
+        {
+          "name": "Fruits",
+          "items": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Grape"
+          ]
+        },
+        {
+          "name": "Planets",
+          "items": [
+            "Mars",
+            "Venus",
+            "Jupiter",
+            "Saturn"
+          ]
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0,
+      "gridItems": [
+        {
+          "text": "Venus",
+          "groupIndex": 2,
+          "id": "xbxn565y4",
+          "solved": true
+        },
+        {
+          "text": "Rizz",
+          "groupIndex": 0,
+          "id": "xees40wya",
+          "solved": true
+        },
+        {
+          "text": "Grape",
+          "groupIndex": 1,
+          "id": "pz2j0e16l",
+          "solved": true
+        },
+        {
+          "text": "Apple",
+          "groupIndex": 1,
+          "id": "7u1atckop",
+          "solved": true
+        },
+        {
+          "text": "Jupiter",
+          "groupIndex": 2,
+          "id": "gdntqzuoa",
+          "solved": true
+        },
+        {
+          "text": "Banana",
+          "groupIndex": 1,
+          "id": "gw7f1vb7b",
+          "solved": true
+        },
+        {
+          "text": "Saturn",
+          "groupIndex": 2,
+          "id": "ith942j7a",
+          "solved": true
+        },
+        {
+          "text": "Simp",
+          "groupIndex": 0,
+          "id": "c8bezz3lr",
+          "solved": true
+        },
+        {
+          "text": "Orange",
+          "groupIndex": 1,
+          "id": "7irg2ryqg",
+          "solved": true
+        },
+        {
+          "text": "Mars",
+          "groupIndex": 2,
+          "id": "ivkjr9f9n",
+          "solved": true
+        },
+        {
+          "text": "Cap",
+          "groupIndex": 0,
+          "id": "2gwsd9mne",
+          "solved": true
+        },
+        {
+          "text": "Bet",
+          "groupIndex": 0,
+          "id": "nil3y7xvt",
+          "solved": true
+        }
+      ],
+      "solvedGroups": [
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "name": "Connections: Tech & Biz",
+      "type": "connections",
+      "description": "Group the tech terms!",
+      "points": 10,
+      "groups": [
+        {
+          "name": "Social Media",
+          "items": [
+            "TikTok",
+            "Insta",
+            "X",
+            "Snap"
+          ]
+        },
+        {
+          "name": "Streaming",
+          "items": [
+            "Netflix",
+            "Hulu",
+            "Max",
+            "Prime"
+          ]
+        },
+        {
+          "name": "Cryptocurrencies",
+          "items": [
+            "Bitcoin",
+            "Ether",
+            "Doge",
+            "Solana"
+          ]
+        },
+        {
+          "name": "Programming Languages",
+          "items": [
+            "Python",
+            "Java",
+            "C++",
+            "Rust"
+          ]
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    },
+    {
+      "name": "Connections: Wordplay",
+      "type": "connections",
+      "description": "Watch out for tricky words!",
+      "points": 10,
+      "groups": [
+        {
+          "name": "Palindromes",
+          "items": [
+            "Kayak",
+            "Radar",
+            "Level",
+            "Madam"
+          ]
+        },
+        {
+          "name": "Start with 'Sun'",
+          "items": [
+            "Sunday",
+            "Sunset",
+            "Sunny",
+            "Sundae"
+          ]
+        },
+        {
+          "name": "Rhymes with 'Blue'",
+          "items": [
+            "Shoe",
+            "Glue",
+            "True",
+            "Stew"
+          ]
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
     }
   ],
-  "currentRoundIndex": 0,
-  "currentQuestionIndex": 23,
-  "currentQuestionData": {
-    "text": "What art piece is this video referencing?",
-    "answer": "Ophelia",
-    "mediaUrl": "/assets/Ophelia.mp4",
-    "mediaType": "video"
-  },
-  "timerValue": 14,
+  "currentRoundIndex": 3,
+  "currentQuestionIndex": -1,
+  "currentQuestionData": null,
+  "timerValue": 0,
   "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "ROUND_SUMMARY",
+  "status": "IDLE",
   "lastJudgement": null,
   "roundsSummary": [
     {
       "index": 0,
       "name": "General Knowledge",
       "points": 10,
-      "questionsAnswered": 23,
+      "questionsAnswered": 0,
       "totalQuestions": 23,
-      "scores": {
-        "0": 130,
-        "1": 110,
-        "2": -40
-      }
+      "scores": {}
     },
     {
       "index": 1,
@@ -293,13 +479,37 @@
       "questionsAnswered": 0,
       "totalQuestions": 4,
       "scores": {}
+    },
+    {
+      "index": 3,
+      "name": "Connections",
+      "points": 10,
+      "questionsAnswered": 0,
+      "totalQuestions": 3,
+      "scores": {}
+    },
+    {
+      "index": 4,
+      "name": "Connections: Tech & Biz",
+      "points": 10,
+      "questionsAnswered": 0,
+      "totalQuestions": 4,
+      "scores": {}
+    },
+    {
+      "index": 5,
+      "name": "Connections: Wordplay",
+      "points": 10,
+      "questionsAnswered": 0,
+      "totalQuestions": 3,
+      "scores": {}
     }
   ],
   "lockedOutTeams": [],
   "mediaPlaying": false,
   "roundStartScores": [
-    80,
-    60,
-    -20
+    0,
+    0,
+    0
   ]
 }

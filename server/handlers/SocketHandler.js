@@ -56,6 +56,8 @@ module.exports = (io, gameEngine) => {
 
         socket.on('finish_round', () => gameEngine.finishRound());
 
+        socket.on('reveal_connection', (groupIndex) => gameEngine.revealConnectionGroup(groupIndex));
+
         socket.on('return_to_dashboard', () => gameEngine.returnToDashboard());
     });
 };

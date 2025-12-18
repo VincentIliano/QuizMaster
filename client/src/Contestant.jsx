@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { socket } from './socket';
 import ContestantRoundSummary from './components/ContestantRoundSummary';
+import ContestantConnections from './components/ContestantConnections';
 
 export default function Contestant() {
     const [state, setState] = useState(null);
@@ -85,6 +86,8 @@ export default function Contestant() {
 
             {state.status === 'ROUND_SUMMARY' ? (
                 <ContestantRoundSummary state={state} />
+            ) : state.roundType === 'connections' ? (
+                <ContestantConnections state={state} />
             ) : state.status === 'DASHBOARD' ? (
                 <div className="screensaver-overlay" style={{ background: 'transparent', backdropFilter: 'none' }}>
                     <div className="screensaver-content">

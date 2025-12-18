@@ -226,6 +226,120 @@
           "mediaType": "video"
         }
       ]
+    },
+    {
+      "name": "Connections",
+      "type": "connections",
+      "description": "Find the groups of 4!",
+      "points": 10,
+      "groups": [
+        {
+          "name": "Gen Z Slang",
+          "items": [
+            "Rizz",
+            "Cap",
+            "Bet",
+            "Simp"
+          ]
+        },
+        {
+          "name": "Fruits",
+          "items": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Grape"
+          ]
+        },
+        {
+          "name": "Planets",
+          "items": [
+            "Mars",
+            "Venus",
+            "Jupiter",
+            "Saturn"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Connections: Tech & Biz",
+      "type": "connections",
+      "description": "Group the tech terms!",
+      "points": 10,
+      "groups": [
+        {
+          "name": "Social Media",
+          "items": [
+            "TikTok",
+            "Insta",
+            "X",
+            "Snap"
+          ]
+        },
+        {
+          "name": "Streaming",
+          "items": [
+            "Netflix",
+            "Hulu",
+            "Max",
+            "Prime"
+          ]
+        },
+        {
+          "name": "Cryptocurrencies",
+          "items": [
+            "Bitcoin",
+            "Ether",
+            "Doge",
+            "Solana"
+          ]
+        },
+        {
+          "name": "Programming Languages",
+          "items": [
+            "Python",
+            "Java",
+            "C++",
+            "Rust"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Connections: Wordplay",
+      "type": "connections",
+      "description": "Watch out for tricky words!",
+      "points": 10,
+      "groups": [
+        {
+          "name": "Palindromes",
+          "items": [
+            "Kayak",
+            "Radar",
+            "Level",
+            "Madam"
+          ]
+        },
+        {
+          "name": "Start with 'Sun'",
+          "items": [
+            "Sunday",
+            "Sunset",
+            "Sunny",
+            "Sundae"
+          ]
+        },
+        {
+          "name": "Rhymes with 'Blue'",
+          "items": [
+            "Shoe",
+            "Glue",
+            "True",
+            "Stew"
+          ]
+        }
+      ]
     }
   ]
 }

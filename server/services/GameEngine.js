@@ -1,6 +1,7 @@
 
 const StandardRound = require('../models/StandardRound');
 const FreezeOutRound = require('../models/FreezeOutRound');
+const ConnectionsRound = require('../models/ConnectionsRound');
 
 class GameEngine {
     constructor(storage) {
@@ -80,6 +81,9 @@ class GameEngine {
         const round = this.state.rounds[index];
         if (round.type === 'freezeout') {
             this.currentRoundInstance = new FreezeOutRound(round);
+        } else if (round.type === 'connections') {
+            this.currentRoundInstance = new ConnectionsRound(round);
+            this.currentRoundInstance.init(this); // Initialize grid
         } else {
             this.currentRoundInstance = new StandardRound(round);
         }
@@ -97,7 +101,7 @@ class GameEngine {
             name: r.name,
             points: r.points,
             questionsAnswered: r.questionsAnswered,
-            totalQuestions: r.questions ? r.questions.length : 0,
+            totalQuestions: r.questions ? r.questions.length : (r.groups ? r.groups.length : 0),
             scores: r.scores
         }));
     }
@@ -116,7 +120,8 @@ class GameEngine {
         // Calculate totalQuestions for current round if valid
         let totalQuestions = 0;
         if (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) {
-            totalQuestions = s.rounds[s.currentRoundIndex].questions.length;
+            const r = s.rounds[s.currentRoundIndex];
+            totalQuestions = r.questions ? r.questions.length : (r.groups ? r.groups.length : 0);
         }
 
         return {
@@ -144,7 +149,10 @@ class GameEngine {
             lastJudgement: s.lastJudgement,
             lastJudgement: s.lastJudgement,
             mediaPlaying: s.mediaPlaying || false,
-            roundStartScores: s.roundStartScores || []
+            roundStartScores: s.roundStartScores || [],
+            gridItems: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].gridItems : [],
+            solvedGroups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].solvedGroups : [],
+            groups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].groups : []
         };
     }
 
@@ -370,6 +378,12 @@ class GameEngine {
     returnToDashboard() {
         this.state.status = "DASHBOARD";
         this.save();
+    }
+
+    revealConnectionGroup(groupIndex) {
+        if (this.currentRoundInstance instanceof ConnectionsRound) {
+            this.currentRoundInstance.revealGroup(this, groupIndex);
+        }
     }
 }
 
