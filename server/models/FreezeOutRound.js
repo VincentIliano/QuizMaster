@@ -12,7 +12,7 @@ class FreezeOutRound extends Round {
             round.scores = round.scores || {};
 
             team.score += points;
-            round.scores[team.name] = (round.scores[team.name] || 0) + points;
+            round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
 
             engine.state.lastJudgement = correct;
             engine.state.status = "ANSWER_REVEALED";

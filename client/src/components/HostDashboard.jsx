@@ -81,9 +81,14 @@ export default function HostDashboard({ state }) {
                             <div>{r.questionsAnswered} / {r.totalQuestions}</div>
                             {r.scores && (
                                 <div className="tile-scores">
-                                    {Object.entries(r.scores).map(([k, v]) => (
-                                        <div key={k}>{k}: {v}</div>
-                                    ))}
+                                    {Object.entries(r.scores).map(([k, v]) => {
+                                        // k might be index (new) or name (old)
+                                        let teamName = k;
+                                        if (!isNaN(parseInt(k)) && state.teams[parseInt(k)]) {
+                                            teamName = state.teams[parseInt(k)].name;
+                                        }
+                                        return <div key={k}>{teamName}: {v}</div>;
+                                    })}
                                 </div>
                             )}
                         </div>

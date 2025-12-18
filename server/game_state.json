@@ -1,16 +1,16 @@
 {
   "teams": [
     {
-      "name": "rtew",
-      "score": 0
+      "name": "1",
+      "score": 110
     },
     {
-      "name": "trew",
-      "score": 10
+      "name": "2",
+      "score": 80
     },
     {
-      "name": "trew",
-      "score": 19
+      "name": "3",
+      "score": -40
     }
   ],
   "rounds": [
@@ -120,9 +120,11 @@
         }
       ],
       "scores": {
-        "trew": 10
+        "0": 130,
+        "1": 110,
+        "2": -40
       },
-      "questionsAnswered": 22
+      "questionsAnswered": 23
     },
     {
       "name": "Math Whiz",
@@ -246,34 +248,34 @@
           "mediaType": "video"
         }
       ],
-      "scores": {
-        "trew": 19
-      },
-      "questionsAnswered": 1
+      "scores": {},
+      "questionsAnswered": 0
     }
   ],
   "currentRoundIndex": 0,
-  "currentQuestionIndex": 22,
+  "currentQuestionIndex": 23,
   "currentQuestionData": {
     "text": "What art piece is this video referencing?",
     "answer": "Ophelia",
     "mediaUrl": "/assets/Ophelia.mp4",
     "mediaType": "video"
   },
-  "timerValue": 10,
+  "timerValue": 14,
   "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "PAUSED",
+  "status": "ROUND_SUMMARY",
   "lastJudgement": null,
   "roundsSummary": [
     {
       "index": 0,
       "name": "General Knowledge",
       "points": 10,
-      "questionsAnswered": 22,
+      "questionsAnswered": 23,
       "totalQuestions": 23,
       "scores": {
-        "trew": 10
+        "0": 130,
+        "1": 110,
+        "2": -40
       }
     },
     {
@@ -288,13 +290,16 @@
       "index": 2,
       "name": "Countdown",
       "points": 0,
-      "questionsAnswered": 1,
+      "questionsAnswered": 0,
       "totalQuestions": 4,
-      "scores": {
-        "trew": 19
-      }
+      "scores": {}
     }
   ],
   "lockedOutTeams": [],
-  "mediaPlaying": false
+  "mediaPlaying": false,
+  "roundStartScores": [
+    80,
+    60,
+    -20
+  ]
 }

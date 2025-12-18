@@ -135,10 +135,17 @@ export default function HostControlPanel({ state }) {
 
             <hr style={{ margin: '20px 0', borderColor: '#444' }} />
 
-            <button
-                onClick={returnDashboard}
-                style={{ backgroundColor: '#555' }}
-            >Back to Dashboard</button>
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+                <button
+                    onClick={returnDashboard}
+                    style={{ backgroundColor: '#555' }}
+                >Back to Dashboard</button>
+
+                <button
+                    onClick={() => socket.emit('end_round_early')}
+                    style={{ backgroundColor: '#e65100', color: 'white' }}
+                >Stop Round & Go to Summary</button>
+            </div>
 
             <div style={{ marginTop: 20 }}>
                 <h3>Scores</h3>

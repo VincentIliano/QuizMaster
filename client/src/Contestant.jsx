@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { socket } from './socket';
+import ContestantRoundSummary from './components/ContestantRoundSummary';
 
 export default function Contestant() {
     const [state, setState] = useState(null);
@@ -82,7 +83,9 @@ export default function Contestant() {
                 <div className="light-beam beam-3"></div>
             </div>
 
-            {state.status === 'DASHBOARD' ? (
+            {state.status === 'ROUND_SUMMARY' ? (
+                <ContestantRoundSummary state={state} />
+            ) : state.status === 'DASHBOARD' ? (
                 <div className="screensaver-overlay" style={{ background: 'transparent', backdropFilter: 'none' }}>
                     <div className="screensaver-content">
                         <h1>QUIZ MASTER</h1>

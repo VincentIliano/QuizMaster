@@ -5,6 +5,8 @@ import HostDashboard from './components/HostDashboard';
 import RoundReady from './components/RoundReady';
 import HostControlPanel from './components/HostControlPanel';
 
+import HostRoundSummary from './components/HostRoundSummary';
+
 export default function Host() {
     const [state, setState] = useState(null);
 
@@ -32,6 +34,10 @@ export default function Host() {
 
     if (state.status === 'ROUND_READY') {
         return <RoundReady state={state} />;
+    }
+
+    if (state.status === 'ROUND_SUMMARY') {
+        return <HostRoundSummary state={state} />;
     }
 
     return <HostControlPanel state={state} />;

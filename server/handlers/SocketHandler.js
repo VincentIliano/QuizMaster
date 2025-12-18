@@ -52,6 +52,10 @@ module.exports = (io, gameEngine) => {
 
         socket.on('reveal_answer', () => gameEngine.revealAnswer());
 
+        socket.on('end_round_early', () => gameEngine.endRoundEarly());
+
+        socket.on('finish_round', () => gameEngine.finishRound());
+
         socket.on('return_to_dashboard', () => gameEngine.returnToDashboard());
     });
 };

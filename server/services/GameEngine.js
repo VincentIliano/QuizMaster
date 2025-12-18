@@ -22,7 +22,8 @@ class GameEngine {
             lastJudgement: null, // true (correct), false (wrong), or null
             roundsSummary: [],
             lockedOutTeams: [], // Added for FreezeOut
-            mediaPlaying: false // Added for manual media control
+            mediaPlaying: false, // Added for manual media control
+            roundStartScores: [] // Snapshot of scores at round start
         };
         this.currentRoundInstance = null;
         this.init();
@@ -47,8 +48,10 @@ class GameEngine {
             if (savedState.status) this.state.status = savedState.status;
             if (savedState.lockedOutTeams) this.state.lockedOutTeams = savedState.lockedOutTeams;
             if (savedState.currentRoundIndex !== undefined) this.state.currentRoundIndex = savedState.currentRoundIndex;
+            if (savedState.runningRoundIndex !== undefined) this.state.currentRoundIndex = savedState.currentRoundIndex;
             if (savedState.currentQuestionIndex !== undefined) this.state.currentQuestionIndex = savedState.currentQuestionIndex;
             if (savedState.currentQuestionData) this.state.currentQuestionData = savedState.currentQuestionData;
+            if (savedState.roundStartScores) this.state.roundStartScores = savedState.roundStartScores;
 
             // Restore Round Progress (Scores, Answered Count)
             if (savedState.rounds) {
@@ -139,7 +142,9 @@ class GameEngine {
             upcomingQuestion: upcomingQ ? upcomingQ.text : null,
             upcomingAnswer: upcomingQ ? upcomingQ.answer : null,
             lastJudgement: s.lastJudgement,
-            mediaPlaying: s.mediaPlaying || false
+            lastJudgement: s.lastJudgement,
+            mediaPlaying: s.mediaPlaying || false,
+            roundStartScores: s.roundStartScores || []
         };
     }
 
@@ -162,6 +167,10 @@ class GameEngine {
 
             this.state.currentQuestionIndex = (r.questionsAnswered || 0) - 1;
             this.state.status = "ROUND_READY";
+
+            // Snapshot scores for summary calculation
+            this.state.roundStartScores = this.state.teams.map(t => t.score);
+
             this.save();
         }
     }
@@ -191,8 +200,8 @@ class GameEngine {
 
                 if (this.state.currentQuestionIndex >= currentRound.questions.length) {
                     currentRound.questionsAnswered = currentRound.questions.length;
-                    this.state.currentRoundIndex = -1;
-                    this.state.status = "DASHBOARD";
+                    // Stay on this round index for summary
+                    this.state.status = "ROUND_SUMMARY";
                     this.save();
                     return;
                 } else {
@@ -338,6 +347,24 @@ class GameEngine {
     toggleMedia() {
         this.state.mediaPlaying = !this.state.mediaPlaying;
         this.save();
+    }
+
+    endRoundEarly() {
+        if (this.state.currentRoundIndex !== -1) {
+            this.stopTimer();
+            this.state.buzzerWinner = null;
+            this.state.buzzerLocked = true;
+            this.state.lastJudgement = null;
+            this.state.mediaPlaying = false;
+
+            this.state.status = "ROUND_SUMMARY";
+            this.save();
+        }
+    }
+
+    finishRound() {
+        this.state.currentRoundIndex = -1;
+        this.returnToDashboard();
     }
 
     returnToDashboard() {
