@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { socket } from '../socket';
 
 export default function HostConnections({ state }) {
@@ -9,25 +9,37 @@ export default function HostConnections({ state }) {
         ? state.teams[state.buzzerWinner].name
         : null;
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            // Ignore if typing in an input (though none exist here yet)
+            if (e.target.tagName === 'INPUT') return;
+
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (state.status === 'IDLE' || state.status === 'READING' || state.status === 'PAUSED' || state.status === 'BUZZED') {
+                    socket.emit('start_timer');
+                }
+            }
+            if (e.code === 'KeyD') {
+                socket.emit('next_question');
+            }
+            if (e.code === 'KeyA') {
+                socket.emit('previous_question');
+            }
+            // Buzzer emulation (Keys 1-5)
+            if (e.key >= '1' && e.key <= '5') {
+                const teamIndex = parseInt(e.key) - 1;
+                socket.emit('host_buzz', teamIndex);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [state.status, state.buzzerWinner]);
+
     const revealGroup = (index) => {
         socket.emit('reveal_connection', index);
-        // Also award points if someone has buzzed? 
-        // Logic says Host presses button corresponding to named category.
-        // If we want to support scoring, we might also need to mark "Correct" on the control panel 
-        // separately or integrate it. 
-        // For now, let's assume the host handles scoring via the manual "+/-" buttons or the `W` key 
-        // if the standard control panel is visible, BUT this view might replace it.
-        // Let's add simple "Correct/Wrong" buttons here if a team has buzzed.
     };
-
-    const markCorrect = () => socket.emit('judge_answer', true);
-    const markWrong = () => socket.emit('judge_answer', false);
-    const clearBuzzer = () => socket.emit('s_next_question'); // Resets buzzer state (hacky reused event?) 
-    // actually nextQuestion might effectively reset buzzer. 
-    // We might need a dedicated "Clear Buzzer" or just use "Wrong" which usually re-opens format?
-    // In standard round, Wrong re-opens buzzer or locks out team. 
-
-    // For Connections, it's usually "Team Guesses -> Wrong -> Next Team can guess".
 
     return (
         <div className="host-dashboard">
@@ -45,13 +57,19 @@ export default function HostConnections({ state }) {
                 )}
 
                 <div className="controls">
-                    <button onClick={() => socket.emit('host_action', 'start_timer')} disabled={state.status !== 'READING' && state.status !== 'PAUSED'}>Start Timer (Space)</button>
-                    <button onClick={() => socket.emit('host_action', 'stop_timer')}>Pause Timer</button>
-                    <button onClick={markCorrect} disabled={state.buzzerWinner === null} style={{ backgroundColor: '#4caf50' }}>Correct (W)</button>
-                    <button onClick={markWrong} disabled={state.buzzerWinner === null} style={{ backgroundColor: '#f44336' }}>Wrong (S)</button>
+                    <button onClick={() => socket.emit('previous_question')}>&lt; Prev (A)</button>
+                    <button onClick={() => socket.emit('start_timer')} disabled={state.status !== 'READING' && state.status !== 'PAUSED' && state.status !== 'IDLE' && state.status !== 'BUZZED'}>Start Timer (Space)</button>
+                    <button onClick={() => socket.emit('pause_timer')} disabled={state.status !== 'READING' && state.status !== 'LISTENING'}>Pause Timer</button>
+                    <button onClick={() => socket.emit('next_question')}>Next &gt; (D)</button>
                     {/* Reuse generic control panel logic if possible, but custom view requested */}
                 </div>
             </div>
+
+            {state.upcomingQuestion && (
+                <div style={{ margin: '10px 0', padding: '10px', background: '#333', border: '1px solid #555', borderRadius: '4px' }}>
+                    <strong>Next:</strong> {state.upcomingQuestion}
+                </div>
+            )}
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '20px' }}>
                 {groups.map((g, i) => (
@@ -76,6 +94,7 @@ export default function HostConnections({ state }) {
 
             <div style={{ marginTop: '20px' }}>
                 <button className="nav-btn quit-btn" onClick={() => socket.emit('end_round_early')}>End Round & Summary</button>
+                <button className="nav-btn" onClick={() => socket.emit('return_to_dashboard')} style={{ marginLeft: '10px', background: '#555' }}>Dashboard</button>
             </div>
         </div>
     );

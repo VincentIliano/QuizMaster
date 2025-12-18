@@ -36,28 +36,37 @@
     opacity: 0.9;
 }
 
-/* Specific Group Colors */
-.group-color-0 {
-    background-color: #f9ca24;
-    color: #000;
+/* Specific Group Colors - Use specific selectors to override default card bg */
+.grid-card.group-color-0,
+.group-banner.group-color-0 {
+    background-color: #f39c12;
+    color: #fff;
 }
 
-/* Yellow */
-.group-color-1 {
-    background-color: #6ab04c;
+/* Dark Yellow/Orange (White Text) */
+
+/* Yellow (White Text) */
+.grid-card.group-color-1,
+.group-banner.group-color-1 {
+    background-color: #27ae60;
+    color: #fff;
 }
 
-/* Green */
-.group-color-2 {
-    background-color: #22a6b3;
+/* Green (White Text) */
+.grid-card.group-color-2,
+.group-banner.group-color-2 {
+    background-color: #2980b9;
+    color: #fff;
 }
 
-/* Blue */
-.group-color-3 {
-    background-color: #be2edd;
+/* Blue (White Text) */
+.grid-card.group-color-3,
+.group-banner.group-color-3 {
+    background-color: #8e44ad;
+    color: #fff;
 }
 
-/* Purple */
+/* Purple (White Text) */
 
 .grid-section {
     display: grid;

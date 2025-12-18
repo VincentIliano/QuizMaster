@@ -91,6 +91,26 @@ export default function HostDashboard({ state }) {
                                     })}
                                 </div>
                             )}
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation(); // Prevent clicking tile
+                                    if (confirm('Are you sure you want to reset this round?')) {
+                                        socket.emit('reset_round', r.index);
+                                    }
+                                }}
+                                style={{
+                                    marginTop: '10px',
+                                    padding: '5px 10px',
+                                    background: '#e74c3c',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    fontSize: '0.8em',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                Reset Round
+                            </button>
                         </div>
                     ))}
                 </div>

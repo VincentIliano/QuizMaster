@@ -14,7 +14,7 @@ export default function RoundReady({ state }) {
                     <div style={{ marginBottom: 20, padding: 15, background: '#444', borderRadius: 8 }}>
                         <strong>Next Up:</strong><br />
                         {state.upcomingQuestion}<br />
-                        <em style={{ color: '#aaa' }}>({state.upcomingAnswer})</em>
+                        {state.upcomingAnswer && <em style={{ color: '#aaa' }}>({state.upcomingAnswer})</em>}
                     </div>
                 )}
                 <button

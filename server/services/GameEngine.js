@@ -128,7 +128,7 @@ class GameEngine {
             roundIndex: s.currentRoundIndex,
             questionIndex: s.currentQuestionIndex,
             totalQuestions: totalQuestions,
-            question: s.currentQuestionData ? s.currentQuestionData.text : "",
+            question: s.currentQuestionData ? (s.currentQuestionData.text || ((s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].type === 'connections' && s.currentQuestionData.groups) ? s.currentQuestionData.groups.map(g => g.name).join(', ') : "")) : "",
             mediaUrl: s.currentQuestionData ? s.currentQuestionData.mediaUrl : null,
             mediaType: s.currentQuestionData ? s.currentQuestionData.mediaType : null,
             roundType: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].type : null,
@@ -144,15 +144,16 @@ class GameEngine {
             currentAnswer: (s.currentQuestionData && (s.status === 'ANSWER_REVEALED' || s.status === 'GAME_OVER')) ? s.currentQuestionData.answer : null,
             answer: s.currentQuestionData ? s.currentQuestionData.answer : null,
             roundsSummary: s.roundsSummary,
-            upcomingQuestion: upcomingQ ? upcomingQ.text : null,
+            upcomingQuestion: upcomingQ ? (upcomingQ.text || ((s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].type === 'connections' && upcomingQ.groups) ? upcomingQ.groups.map(g => g.name).join(', ') : null)) : null,
             upcomingAnswer: upcomingQ ? upcomingQ.answer : null,
             lastJudgement: s.lastJudgement,
             lastJudgement: s.lastJudgement,
             mediaPlaying: s.mediaPlaying || false,
             roundStartScores: s.roundStartScores || [],
-            gridItems: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].gridItems : [],
-            solvedGroups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].solvedGroups : [],
-            groups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].groups : []
+            gridItems: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].gridItems : [],
+            solvedGroups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].solvedGroups : [],
+            groups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].groups : []
+
         };
     }
 
@@ -194,9 +195,17 @@ class GameEngine {
             this.state.status = "IDLE";
             this.state.currentQuestionData = null;
             const currentRound = this.state.rounds[this.state.currentRoundIndex];
-            this.state.currentQuestionIndex = (currentRound.questionsAnswered || 0) - 1;
-            this.save();
-            return;
+
+            // For Connections, initialize timer immediately and fall through to load logic
+            if (currentRound.type === 'connections') {
+                // Initialize for first question (index 0)
+                this.state.currentQuestionIndex = currentRound.questionsAnswered || 0;
+                // Fall through to allow setupQuestion to run below
+            } else {
+                this.state.currentQuestionIndex = (currentRound.questionsAnswered || 0) - 1;
+                this.save();
+                return;
+            }
         } else {
             if (this.state.currentRoundIndex === -1) {
                 this.state.currentRoundIndex = 0;
@@ -229,6 +238,20 @@ class GameEngine {
         this.state.currentQuestionData = currentRound.questions[this.state.currentQuestionIndex];
         this.state.timerValue = currentRound.time_limit || 30;
         this.state.buzzerLocked = false;
+
+        // Setup Grid for Connections
+        if (this.currentRoundInstance instanceof ConnectionsRound) {
+            this.currentRoundInstance.setupQuestion(this, this.state.currentQuestionIndex);
+            // Override timer 
+            this.state.timerValue = currentRound.time_limit || 60;
+
+            // Auto-start timer when grid is revealed (per user request)
+            this.startTimer(onTick);
+            this.state.status = "LISTENING";
+            this.save();
+            return;
+        }
+
         this.state.status = autoStart ? "LISTENING" : "READING";
         this.state.mediaPlaying = false;
 
@@ -270,6 +293,7 @@ class GameEngine {
         if (this.state.status === 'ANSWER_REVEALED' || this.state.status === 'BUZZED' || this.state.status === 'PAUSED') {
             this.state.buzzerWinner = null;
             this.state.lastJudgement = null;
+            this.state.connectionStreak = 0;
         }
 
         if (this.state.timerValue > 0 && this.state.buzzerWinner === null && this.state.status !== 'TIMEOUT') {
@@ -321,6 +345,8 @@ class GameEngine {
             this.state.buzzerWinner = teamIndex;
             this.state.status = "BUZZED";
             this.state.mediaPlaying = false;
+            // Initialize connection streak for new buzzer winner
+            this.state.connectionStreak = 0;
             this.save();
             return this.state.teams[teamIndex].name;
         }
@@ -383,6 +409,40 @@ class GameEngine {
     revealConnectionGroup(groupIndex) {
         if (this.currentRoundInstance instanceof ConnectionsRound) {
             this.currentRoundInstance.revealGroup(this, groupIndex);
+        }
+    }
+
+    resetRound(roundIndex) {
+        if (roundIndex >= 0 && roundIndex < this.state.rounds.length) {
+            const round = this.state.rounds[roundIndex];
+
+            // Deduct scores earned in this round from global team scores
+            if (round.scores) {
+                Object.entries(round.scores).forEach(([teamIndex, score]) => {
+                    const idx = parseInt(teamIndex);
+                    if (!isNaN(idx) && this.state.teams[idx]) {
+                        this.state.teams[idx].score -= score;
+                    }
+                });
+            }
+
+            round.questionsAnswered = 0;
+            round.scores = {};
+
+            // Clear connections formatting if needed
+            if (round.type === 'connections' && round.questions) {
+                // Clear gridItems so they are regenerated fresh
+                round.questions.forEach(q => {
+                    q.gridItems = null;
+                    q.solvedGroups = [];
+                });
+            } else if (round.type === 'connections' && round.gridItems) {
+                // Legacy single-question format
+                round.gridItems = null;
+                round.solvedGroups = [];
+            }
+
+            this.save();
         }
     }
 }

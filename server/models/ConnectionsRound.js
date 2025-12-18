@@ -11,44 +11,42 @@ class ConnectionsRound extends Round {
      * @param {GameEngine} engine 
      */
     init(engine) {
-        const round = engine.state.rounds[engine.state.currentRoundIndex];
+        // No global init needed, done per question
+    }
 
-        // Initialize Grid if missing
-        if (!round.gridItems) {
+    setupQuestion(engine, questionIndex) {
+        const round = engine.state.rounds[engine.state.currentRoundIndex];
+        const question = round.questions[questionIndex];
+
+        if (!question.gridItems) {
             const allItems = [];
-            this.data.groups.forEach((group, groupIndex) => {
+            question.groups.forEach((group, groupIndex) => {
                 group.items.forEach(text => {
                     allItems.push({
                         text,
                         groupIndex,
-                        id: Math.random().toString(36).substr(2, 9), // Unique ID for React keys
+                        id: Math.random().toString(36).substr(2, 9),
                         solved: false
                     });
                 });
             });
 
-            // Shuffle
+
+
+            // Fix shuffle
             for (let i = allItems.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [allItems[i], allItems[j]] = [allItems[j], allItems[i]];
+                const temp = allItems[i];
+                allItems[i] = allItems[j];
+                allItems[j] = temp;
             }
 
-            round.gridItems = allItems;
-            round.solvedGroups = []; // Indices of solved groups
+            question.gridItems = allItems;
+            question.solvedGroups = [];
         }
     }
 
     handleAnswer(engine, teamIndex, correct) {
-        // Standard points logic for getting a group right? 
-        // Or just unlocking?
-        // User spec says: "The Contestant buzzes in... Host presses button... items marked 'Solved'"
-        // implies the "Host Reveal" IS the confirmation of a correct answer.
-        // So we might award points when the Host reveals a group IF a team is currently the "Buzzer Winner".
-
-        // This method might strictly be "Host judged the SHOUTED answer correct/wrong"
-        // If Correct -> Host will THEN press "Reveal Group".
-        // Use StandardRound scoring logic for simplicity if they buzz and answer.
-
         const points = this.data.points || 0;
         const team = engine.state.teams[teamIndex];
         const round = engine.state.rounds[engine.state.currentRoundIndex];
@@ -63,26 +61,50 @@ class ConnectionsRound extends Round {
         }
 
         engine.state.lastJudgement = correct;
+
+        // Reset buzzer state so game can continue
+        engine.state.buzzerWinner = null;
+        engine.state.buzzerLocked = false;
+        engine.state.status = 'IDLE';
+
         engine.save();
     }
 
     revealGroup(engine, groupIndex) {
         const round = engine.state.rounds[engine.state.currentRoundIndex];
-        if (!round.solvedGroups) round.solvedGroups = [];
+        const question = round.questions[engine.state.currentQuestionIndex];
 
-        if (!round.solvedGroups.includes(groupIndex)) {
-            round.solvedGroups.push(groupIndex);
+        if (!question) return;
+        if (!question.solvedGroups) question.solvedGroups = [];
+
+        if (!question.solvedGroups.includes(groupIndex)) {
+            question.solvedGroups.push(groupIndex);
 
             // Mark items as solved
-            round.gridItems.forEach(item => {
+            question.gridItems.forEach(item => {
                 if (item.groupIndex === groupIndex) {
                     item.solved = true;
                 }
             });
 
+            // Award points if a team has buzzed
+            if (engine.state.buzzerWinner !== null) {
+                const teamIndex = engine.state.buzzerWinner;
+
+                // Exponential scoring: 10 * (streak + 1)
+                const currentStreak = engine.state.connectionStreak || 0;
+                const points = 10 * (currentStreak + 1);
+
+                // Increment streak
+                engine.state.connectionStreak = currentStreak + 1;
+
+                round.scores = round.scores || {};
+                engine.state.teams[teamIndex].score += points;
+                round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
+            }
+
             engine.save();
         }
     }
 }
-
 module.exports = ConnectionsRound;

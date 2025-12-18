@@ -86,8 +86,6 @@ export default function Contestant() {
 
             {state.status === 'ROUND_SUMMARY' ? (
                 <ContestantRoundSummary state={state} />
-            ) : state.roundType === 'connections' ? (
-                <ContestantConnections state={state} />
             ) : state.status === 'DASHBOARD' ? (
                 <div className="screensaver-overlay" style={{ background: 'transparent', backdropFilter: 'none' }}>
                     <div className="screensaver-content">
@@ -103,6 +101,8 @@ export default function Contestant() {
                         <p style={{ marginTop: '40px', fontWeight: 'bold' }}>GET READY!</p>
                     </div>
                 </div>
+            ) : state.roundType === 'connections' ? (
+                <ContestantConnections state={state} />
             ) : (
                 <>
                     <header className="gs-header">
@@ -208,11 +208,7 @@ export default function Contestant() {
                         {/* Overlays for buzz, timeout, and judgement */}
                         {(state.status === 'BUZZED' || state.status === 'TIMEOUT' || state.status === 'ANSWER_REVEALED') && (
                             <>
-                                {state.status === 'BUZZED' && state.buzzerWinner !== null && (
-                                    <div className="buzzer-overlay state-buzzed">
-                                        {state.teams[state.buzzerWinner].name}
-                                    </div>
-                                )}
+
 
                                 {state.status === 'TIMEOUT' && (
                                     <div className="buzzer-overlay state-timeout">
@@ -238,10 +234,11 @@ export default function Contestant() {
             <footer className="gs-footer">
                 {state.teams.map((t, i) => {
                     const isLocked = state.lockedOutTeams && state.lockedOutTeams.includes(i);
+                    const isBuzzed = state.status === 'BUZZED' && state.buzzerWinner === i;
                     return (
                         <div
                             key={t.name}
-                            className={`score-pod ${t.score === maxScore && t.score > 0 ? 'leader' : ''} ${isLocked ? 'locked-out' : ''}`}
+                            className={`score-pod ${t.score === maxScore && t.score > 0 ? 'leader' : ''} ${isLocked ? 'locked-out' : ''} ${isBuzzed ? 'active-buzzer' : ''}`}
                             style={isLocked ? { filter: 'grayscale(1)', opacity: 0.5, transform: 'scale(0.9)' } : {}}
                         >
                             <div className="team-name">{t.name}</div>

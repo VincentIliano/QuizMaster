@@ -230,113 +230,69 @@
     {
       "name": "Connections",
       "type": "connections",
-      "description": "Find the groups of 4!",
+      "description": "Find the connecting groups.",
       "points": 10,
-      "groups": [
+      "questions": [
         {
-          "name": "Gen Z Slang",
-          "items": [
-            "Rizz",
-            "Cap",
-            "Bet",
-            "Simp"
+          "groups": [
+            {
+              "name": "Fruits",
+              "items": [
+                "Apple",
+                "Banana",
+                "Orange",
+                "Grape"
+              ]
+            },
+            {
+              "name": "Gen Z Slang",
+              "items": [
+                "Rizz",
+                "Simp",
+                "Bet",
+                "Cap"
+              ]
+            },
+            {
+              "name": "Planets",
+              "items": [
+                "Mars",
+                "Venus",
+                "Jupiter",
+                "Saturn"
+              ]
+            }
           ]
         },
         {
-          "name": "Fruits",
-          "items": [
-            "Apple",
-            "Banana",
-            "Orange",
-            "Grape"
-          ]
-        },
-        {
-          "name": "Planets",
-          "items": [
-            "Mars",
-            "Venus",
-            "Jupiter",
-            "Saturn"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Connections: Tech & Biz",
-      "type": "connections",
-      "description": "Group the tech terms!",
-      "points": 10,
-      "groups": [
-        {
-          "name": "Social Media",
-          "items": [
-            "TikTok",
-            "Insta",
-            "X",
-            "Snap"
-          ]
-        },
-        {
-          "name": "Streaming",
-          "items": [
-            "Netflix",
-            "Hulu",
-            "Max",
-            "Prime"
-          ]
-        },
-        {
-          "name": "Cryptocurrencies",
-          "items": [
-            "Bitcoin",
-            "Ether",
-            "Doge",
-            "Solana"
-          ]
-        },
-        {
-          "name": "Programming Languages",
-          "items": [
-            "Python",
-            "Java",
-            "C++",
-            "Rust"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Connections: Wordplay",
-      "type": "connections",
-      "description": "Watch out for tricky words!",
-      "points": 10,
-      "groups": [
-        {
-          "name": "Palindromes",
-          "items": [
-            "Kayak",
-            "Radar",
-            "Level",
-            "Madam"
-          ]
-        },
-        {
-          "name": "Start with 'Sun'",
-          "items": [
-            "Sunday",
-            "Sunset",
-            "Sunny",
-            "Sundae"
-          ]
-        },
-        {
-          "name": "Rhymes with 'Blue'",
-          "items": [
-            "Shoe",
-            "Glue",
-            "True",
-            "Stew"
+          "groups": [
+            {
+              "name": "Social Apps",
+              "items": [
+                "Insta",
+                "TikTok",
+                "Snap",
+                "X"
+              ]
+            },
+            {
+              "name": "Streaming",
+              "items": [
+                "Netflix",
+                "Hulu",
+                "Prime",
+                "Max"
+              ]
+            },
+            {
+              "name": "Crypto",
+              "items": [
+                "Bitcoin",
+                "Ether",
+                "Doge",
+                "Solana"
+              ]
+            }
           ]
         }
       ]
