@@ -1,20 +1,16 @@
 {
   "teams": [
     {
-      "name": "rewqg",
-      "score": 0
+      "name": "ewq",
+      "score": 35
     },
     {
-      "name": "rewqf",
-      "score": 30
+      "name": "fdsa",
+      "score": 68
     },
     {
-      "name": "rewqsd",
-      "score": 15
-    },
-    {
-      "name": "rewqe",
-      "score": 18
+      "name": "gfds",
+      "score": 23
     }
   ],
   "rounds": [
@@ -123,10 +119,8 @@
           "mediaType": "video"
         }
       ],
-      "scores": {
-        "1": 30
-      },
-      "questionsAnswered": 3
+      "scores": {},
+      "questionsAnswered": 0
     },
     {
       "name": "Math Whiz",
@@ -250,11 +244,8 @@
           "mediaType": "video"
         }
       ],
-      "scores": {
-        "2": 15,
-        "3": 18
-      },
-      "questionsAnswered": 1
+      "scores": {},
+      "questionsAnswered": 0
     },
     {
       "name": "Connections",
@@ -330,14 +321,9 @@
     }
   ],
   "currentRoundIndex": -1,
-  "currentQuestionIndex": 1,
-  "currentQuestionData": {
-    "text": "Identify this sound.",
-    "answer": "R2-D2",
-    "mediaUrl": "https://www.myinstants.com/media/sounds/r2d2.mp3",
-    "mediaType": "audio"
-  },
-  "timerValue": 18,
+  "currentQuestionIndex": -1,
+  "currentQuestionData": null,
+  "timerValue": 0,
   "buzzerLocked": true,
   "buzzerWinner": null,
   "status": "DASHBOARD",
@@ -347,11 +333,9 @@
       "index": 0,
       "name": "General Knowledge",
       "points": 10,
-      "questionsAnswered": 3,
+      "questionsAnswered": 0,
       "totalQuestions": 23,
-      "scores": {
-        "1": 30
-      }
+      "scores": {}
     },
     {
       "index": 1,
@@ -365,12 +349,9 @@
       "index": 2,
       "name": "Countdown",
       "points": 0,
-      "questionsAnswered": 1,
+      "questionsAnswered": 0,
       "totalQuestions": 4,
-      "scores": {
-        "2": 15,
-        "3": 18
-      }
+      "scores": {}
     },
     {
       "index": 3,
@@ -383,11 +364,24 @@
   ],
   "lockedOutTeams": [],
   "mediaPlaying": false,
-  "roundStartScores": [
-    0,
-    30,
-    0,
-    0
+  "roundStartScores": [],
+  "finalStandings": [
+    {
+      "name": "gfds",
+      "score": 23,
+      "originalIndex": 2
+    },
+    {
+      "name": "ewq",
+      "score": 35,
+      "originalIndex": 0
+    },
+    {
+      "name": "fdsa",
+      "score": 68,
+      "originalIndex": 1
+    }
   ],
-  "connectionStreak": 0
+  "finalistRevealIndex": 0,
+  "finalistRevealCount": 3
 }

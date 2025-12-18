@@ -6,6 +6,7 @@ import HostControlPanel from './components/HostControlPanel';
 
 import HostRoundSummary from './components/HostRoundSummary';
 import HostConnections from './components/HostConnections';
+import HostFinalResults from './components/HostFinalResults';
 
 export default function Host() {
     const [state, setState] = useState(null);
@@ -38,6 +39,10 @@ export default function Host() {
 
     if (state.status === 'ROUND_SUMMARY') {
         return <HostRoundSummary state={state} />;
+    }
+
+    if (state.status === 'FINAL_RESULTS') {
+        return <HostFinalResults state={state} />;
     }
 
     if (state.roundType === 'connections') {

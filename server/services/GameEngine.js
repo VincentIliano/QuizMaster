@@ -152,8 +152,9 @@ class GameEngine {
             roundStartScores: s.roundStartScores || [],
             gridItems: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].gridItems : [],
             solvedGroups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].solvedGroups : [],
-            groups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].groups : []
-
+            groups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].groups : [],
+            finalStandings: s.finalStandings || [],
+            finalistRevealCount: s.finalistRevealCount || 0
         };
     }
 
@@ -407,6 +408,33 @@ class GameEngine {
     revealConnectionGroup(groupIndex) {
         if (this.currentRoundInstance instanceof ConnectionsRound) {
             this.currentRoundInstance.revealGroup(this, groupIndex);
+        }
+    }
+
+    goToFinalResults() {
+        // Sort teams by score ascending (lowest first) for the "reveal default"
+        // But actually typical podium is 3rd, 2nd, 1st?
+        // User said: "last player first... until all players are on screen" based on REVEAL ORDER.
+        // So we want the LOWEST score to be revealed FIRST.
+        // Let's store them sorted by Score ASCENDING.
+        this.state.finalStandings = [...this.state.teams]
+            .map((t, i) => ({ ...t, originalIndex: i }))
+            .sort((a, b) => a.score - b.score);
+
+        this.state.finalistRevealIndex = 0; // -1? No, 0 means show 0 teams? Or index of next to reveal?
+        // Let's say revealCount. 0 = none shown.
+        this.state.finalistRevealCount = 0;
+
+        this.state.status = "FINAL_RESULTS";
+        this.save();
+    }
+
+    revealNextFinalist() {
+        if (this.state.status === 'FINAL_RESULTS') {
+            if (this.state.finalistRevealCount < this.state.teams.length) {
+                this.state.finalistRevealCount++;
+                this.save();
+            }
         }
     }
 

@@ -115,6 +115,20 @@ export default function HostDashboard({ state }) {
                     ))}
                 </div>
             </div>
+
+            <div style={{ marginTop: '40px', padding: '20px', borderTop: '1px solid #444', textAlign: 'center', gridColumn: '1 / -1' }}>
+                <button
+                    className="btn "
+                    style={{ background: '#ffd700', color: '#000', padding: '15px 30px', fontSize: '1.2em', fontWeight: 'bold' }}
+                    onClick={() => {
+                        if (confirm('Are you sure you want to go to the Final Results screen?')) {
+                            socket.emit('go_to_final_results');
+                        }
+                    }}
+                >
+                    GO TO FINAL RESULTS
+                </button>
+            </div>
         </div>
     );
 }

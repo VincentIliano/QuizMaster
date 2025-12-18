@@ -83,20 +83,20 @@ export default function ContestantRoundSummary({ state }) {
                                     <CountUp start={t.start} end={t.end} duration={2} delay={1.5} />
                                 </div>
 
-                                {/* Points Earned Indicator */}
-                                {t.earned !== 0 && (
-                                    <div
-                                        className="earned-badge slide-up"
-                                        style={{
-                                            animationDelay: `${1.5 + i * 0.2}s`,
-                                            color: t.earned > 0 ? '#4caf50' : '#f44336',
-                                            fontWeight: 'bold',
-                                            marginBottom: '10px'
-                                        }}
-                                    >
-                                        {t.earned > 0 ? '+' : ''}{t.earned}
-                                    </div>
-                                )}
+                                {/* Points Earned Indicator (Reserved space) */}
+                                <div
+                                    className="earned-badge slide-up"
+                                    style={{
+                                        animationDelay: `${1.5 + i * 0.2}s`,
+                                        color: t.earned > 0 ? '#4caf50' : '#f44336',
+                                        fontWeight: 'bold',
+                                        marginBottom: '10px',
+                                        visibility: t.earned !== 0 ? 'visible' : 'hidden',
+                                        minHeight: '1.5em' // Ensure fixed height reservation
+                                    }}
+                                >
+                                    {t.earned !== 0 ? (t.earned > 0 ? `+${t.earned}` : t.earned) : '0'}
+                                </div>
 
                                 {/* Positive Bar Section (Fixed Height baseline) */}
                                 <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', borderBottom: '2px solid rgba(255,255,255,0.3)' }}>

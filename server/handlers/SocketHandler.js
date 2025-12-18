@@ -60,6 +60,9 @@ module.exports = (io, gameEngine) => {
 
         socket.on('reset_round', (index) => gameEngine.resetRound(index));
 
+        socket.on('go_to_final_results', () => gameEngine.goToFinalResults());
+        socket.on('reveal_next_finalist', () => gameEngine.revealNextFinalist());
+
         socket.on('return_to_dashboard', () => gameEngine.returnToDashboard());
     });
 };
