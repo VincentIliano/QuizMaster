@@ -5,9 +5,20 @@ export default function Host() {
     const [state, setState] = useState(null);
     const [teamInputs, setTeamInputs] = useState(['', '', '', '', '']);
 
+    const stateRef = useRef(null);
+
     useEffect(() => {
-        const onState = (s) => setState(s);
-        const onTimer = (val) => setState(prev => ({ ...prev, timeLimit: val }));
+        const onState = (s) => {
+            setState(s);
+            stateRef.current = s;
+        };
+        const onTimer = (val) => {
+            setState(prev => {
+                const newState = { ...prev, timeLimit: val };
+                stateRef.current = newState;
+                return newState;
+            });
+        };
 
         socket.on('state_update', onState);
         socket.on('timer_tick', onTimer);
@@ -34,7 +45,24 @@ export default function Host() {
             switch (e.key.toLowerCase()) {
                 case ' ':
                     e.preventDefault();
-                    socket.emit('start_timer');
+                    // Toggle Timer
+                    // Access fresh state via ref if possible, but here we depend on `state`
+                    // However, effect dependency is empty [], so `state` is stale inside closure!
+                    // Fix: Use socket.emit blindly? No, need state.
+                    // Accessing state inside listener requires ref or dependency.
+
+                    // We need to use validState from ref or update effect dependencies.
+                    // Updating dependencies causes re-binding, which is fine.
+                    // Or maintain a ref for state.
+                    if (stateRef.current) {
+                        if (stateRef.current.status === 'ALL_LOCKED') {
+                            socket.emit('toggle_media');
+                        } else if (stateRef.current.status === 'LISTENING') {
+                            socket.emit('pause_timer');
+                        } else {
+                            socket.emit('start_timer');
+                        }
+                    }
                     break;
                 case 'w':
                     socket.emit('judge_answer', true);
@@ -218,6 +246,14 @@ export default function Host() {
                 Q: {state.question}
             </div>
 
+            {state.mediaUrl && (
+                <div style={{ margin: '10px 0', padding: 10, background: '#222', borderRadius: 4, display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <div style={{ fontWeight: 'bold', color: '#aaa' }}>MEDIA:</div>
+                    {state.mediaType === 'image' && <img src={state.mediaUrl} alt="media" style={{ height: 40, borderRadius: 2 }} />}
+                    <div style={{ fontSize: '0.8em', color: '#888', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{state.mediaUrl}</div>
+                </div>
+            )}
+
             <div style={{ marginBottom: 20, color: '#64d2ff' }}>
                 Answer: {state.answer}
             </div>
@@ -233,6 +269,15 @@ export default function Host() {
                     disabled={state.status !== 'READING'}
                 >Start Timer</button>
 
+                {state.mediaUrl && (state.mediaType === 'video' || state.mediaType === 'audio') && (
+                    <button
+                        onClick={() => socket.emit('toggle_media')}
+                        style={{ backgroundColor: state.mediaPlaying ? '#ffc107' : '#17a2b8', color: '#000' }}
+                    >
+                        {state.mediaPlaying ? "Pause Media" : "Play Media"}
+                    </button>
+                )}
+
                 <button
                     id="btn-correct"
                     onClick={() => judge(true)}
@@ -245,11 +290,13 @@ export default function Host() {
                     onClick={() => judge(false)}
                     disabled={state.status !== 'BUZZED'}
                     style={{ backgroundColor: '#dc3545', color: 'white' }}
-                >Wrong</button>
+                >
+                    {state.roundDescription && state.roundDescription.includes("Push your luck") ? "Freeze & Resume" : "Wrong"}
+                </button>
 
                 <button
                     onClick={reveal}
-                    disabled={state.status !== 'TIMEOUT'}
+                    disabled={state.status !== 'TIMEOUT' && state.status !== 'ALL_LOCKED'}
                 >Reveal</button>
             </div>
 
@@ -263,27 +310,32 @@ export default function Host() {
             <div style={{ marginTop: 20 }}>
                 <h3>Scores</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: '500px' }}>
-                    {state.teams.map((t, i) => (
-                        <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#333', padding: '10px 15px', borderRadius: 6 }}>
-                            <span style={{ fontSize: '1.1em', fontWeight: '500', color: '#eee' }}>{t.name}</span>
-                            <input
-                                type="number"
-                                value={t.score}
-                                onChange={e => updateScore(i, e.target.value)}
-                                style={{
-                                    width: '100px',
-                                    padding: '8px',
-                                    background: '#222',
-                                    color: 'white',
-                                    border: '1px solid #555',
-                                    borderRadius: '4px',
-                                    fontSize: '1.2em',
-                                    fontWeight: 'bold',
-                                    textAlign: 'right'
-                                }}
-                            />
-                        </div>
-                    ))}
+                    {state.teams.map((t, i) => {
+                        const isLocked = state.lockedOutTeams && state.lockedOutTeams.includes(i);
+                        return (
+                            <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: isLocked ? '#2a1a1a' : '#333', padding: '10px 15px', borderRadius: 6, border: isLocked ? '1px solid #d00' : 'none' }}>
+                                <span style={{ fontSize: '1.1em', fontWeight: '500', color: isLocked ? '#aaa' : '#eee' }}>
+                                    {t.name} {isLocked && <span style={{ color: '#ff4d4d', fontSize: '0.8em' }}>(FROZEN)</span>}
+                                </span>
+                                <input
+                                    type="number"
+                                    value={t.score}
+                                    onChange={e => updateScore(i, e.target.value)}
+                                    style={{
+                                        width: '100px',
+                                        padding: '8px',
+                                        background: '#222',
+                                        color: 'white',
+                                        border: '1px solid #555',
+                                        borderRadius: '4px',
+                                        fontSize: '1.2em',
+                                        fontWeight: 'bold',
+                                        textAlign: 'right'
+                                    }}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>

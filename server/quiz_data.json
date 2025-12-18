@@ -175,6 +175,39 @@
           "answer": "5"
         }
       ]
+    },
+    {
+      "name": "Countdown",
+      "type": "freezeout",
+      "time_limit": 20,
+      "points": 0,
+      "description": "Push your luck! Points = Seconds Remaining. Wrong answers freeze you out!",
+      "questions": [
+        {
+          "text": "What film is this scene from?",
+          "answer": "The Matrix",
+          "mediaUrl": "https://media.giphy.com/media/emGXB2eE3GhoXMNFHH/giphy.gif",
+          "mediaType": "image"
+        },
+        {
+          "text": "Identify this sound.",
+          "answer": "R2-D2",
+          "mediaUrl": "https://www.myinstants.com/media/sounds/r2d2.mp3",
+          "mediaType": "audio"
+        },
+        {
+          "text": "Who is this historical figure?",
+          "answer": "Albert Einstein",
+          "mediaUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Albert_Einstein_Head.jpg",
+          "mediaType": "image"
+        },
+        {
+          "text": "What art piece is this video referencing?",
+          "answer": "Ophelia",
+          "mediaUrl": "/assets/Ophelia.mp4",
+          "mediaType": "video"
+        }
+      ]
     }
   ]
 }

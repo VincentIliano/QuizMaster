@@ -4,6 +4,11 @@ module.exports = (io, gameEngine) => {
         io.emit('state_update', state);
     };
 
+    // Setup Timer Tick listener
+    gameEngine.onTick = (val) => {
+        io.emit('timer_tick', val);
+    };
+
     io.on('connection', (socket) => {
         console.log('Client connected');
 
@@ -24,6 +29,14 @@ module.exports = (io, gameEngine) => {
 
         socket.on('start_timer', () => {
             gameEngine.startTimer((val) => io.emit('timer_tick', val));
+        });
+
+        socket.on('pause_timer', () => {
+            gameEngine.pauseTimer();
+        });
+
+        socket.on('toggle_media', () => {
+            gameEngine.toggleMedia();
         });
 
         socket.on('host_buzz', (teamIndex) => {
