@@ -364,9 +364,7 @@ class GameEngine {
     }
 
     revealAnswer() {
-        if (this.state.status === 'ALL_LOCKED') {
-            this.state.lastJudgement = false;
-        }
+        this.state.lastJudgement = false;
         this.state.status = "ANSWER_REVEALED";
         this.save();
     }

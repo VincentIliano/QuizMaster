@@ -76,8 +76,10 @@ export default function Contestant() {
         else if (state.lastJudgement === false) containerClass = 'container-wrong';
     }
 
+    // Flash Red Effect
     return (
-        <div className={`game-show-container ${containerClass}`}>
+        <div className={`game-show-container ${containerClass} ${(state.status === 'PAUSED' && state.lastJudgement === false) ? 'flash-red' : ''}`}>
+            {/* ... rest of the code ... */}
             <div className="stage-lights-container">
                 <div className="light-beam beam-1"></div>
                 <div className="light-beam beam-2"></div>
@@ -216,10 +218,10 @@ export default function Contestant() {
                                     </div>
                                 )}
 
-                                {state.status === 'ANSWER_REVEALED' && state.lastJudgement !== null &&
+                                {state.status === 'ANSWER_REVEALED' && state.lastJudgement === true &&
                                     !(state.roundType === 'freezeout' && state.lockedOutTeams && state.teams && state.lockedOutTeams.length === state.teams.length) && (
-                                        <div className={`buzzer-overlay ${state.lastJudgement ? 'state-correct' : 'state-wrong'}`}>
-                                            {state.lastJudgement ? 'CORRECT!' : 'WRONG!'}
+                                        <div className={`buzzer-overlay state-correct`}>
+                                            CORRECT!
                                         </div>
                                     )}
                             </>
