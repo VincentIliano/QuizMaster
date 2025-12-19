@@ -2,16 +2,49 @@
 const Round = require('./Round');
 
 class StandardRound extends Round {
+
+    nextQuestion(engine) {
+        if (engine.state.status === 'ROUND_READY') {
+            engine.state.status = "IDLE";
+            engine.state.currentQuestionData = null;
+            engine.state.currentQuestionIndex = (this.data.questionsAnswered || 0) - 1;
+            engine.save();
+            return;
+        }
+
+        // Increment index
+        engine.state.currentQuestionIndex++;
+
+        // Check if round is over
+        if (engine.state.currentQuestionIndex >= this.data.questions.length) {
+            this.data.questionsAnswered = this.data.questions.length;
+            engine.state.status = "ROUND_SUMMARY";
+            engine.save();
+            return;
+        }
+
+        // Update progress
+        this.data.questionsAnswered = engine.state.currentQuestionIndex;
+
+        // Load Question Data
+        engine.state.currentQuestionData = this.data.questions[engine.state.currentQuestionIndex];
+        engine.state.timerValue = this.data.time_limit || 30;
+        engine.state.buzzerLocked = false;
+        engine.state.status = "READING"; // Standard starts in READING
+        engine.state.mediaPlaying = false;
+
+        engine.save();
+    }
+
     handleAnswer(engine, teamIndex, correct) {
         const points = this.data.points || 0;
         const team = engine.state.teams[teamIndex];
-        const round = engine.state.rounds[engine.state.currentRoundIndex];
 
-        round.scores = round.scores || {};
+        this.data.scores = this.data.scores || {};
 
         if (correct) {
             team.score += points;
-            round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
+            this.data.scores[teamIndex] = (this.data.scores[teamIndex] || 0) + points;
 
             engine.state.lastJudgement = correct;
             engine.state.status = "ANSWER_REVEALED";
@@ -29,21 +62,19 @@ class StandardRound extends Round {
                 engine.state.buzzerLocked = true;
                 engine.save();
             } else {
-                // Return to listening state for other players
-                engine.state.buzzerWinner = null;
-                engine.state.buzzerLocked = true; // Lock buzzers while paused
-                // Don't auto-start timer here? Maybe wait for host to resume?
-                // The prompt says "this way the other players have the chance to answer".
-                // Usually host resumes timer manually or it auto-resumes. 
-                // Let's set status to PAUSED so host can resume, OR back to LISTENING if we want to force flow.
-                // Given existing mechanics, setting to PAUSED is safer as it stops the timer until host is ready.
-                // BUT user wants "chance to answer". If we go to PAUSED, host hits resume. 
-                // Let's go to PAUSED.
+                // Pause and wait for host
                 engine.state.status = "PAUSED";
-                engine.state.lastJudgement = false; // Trigger flash on client
+                engine.state.lastJudgement = false;
                 engine.save();
             }
         }
+    }
+
+    getPublicState(engine) {
+        return {
+            roundType: 'standard',
+            maxTime: this.data.time_limit || 30,
+        };
     }
 }
 
