@@ -1,14 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { socket } from './socket';
 import ContestantRoundSummary from './components/ContestantRoundSummary';
-import ContestantConnections from './components/ContestantConnections';
 import ContestantFinalResults from './components/ContestantFinalResults';
+import RoundRenderer from './components/RoundRenderer';
 
 export default function Contestant() {
     const [state, setState] = useState(null);
 
-
-    const mediaRef = useRef(null);
     const tickAudioRef = useRef(null);
     const buzzerAudioRef = useRef(null);
     const correctAudioRef = useRef(null);
@@ -88,15 +86,7 @@ export default function Contestant() {
             tickAudioRef.current.currentTime = 0;
         }
 
-        if (!mediaRef.current) return;
-
-        // Sync question media playback with timer/status
-        // Using mediaPlaying flag from server
-        if (state.mediaPlaying) {
-            mediaRef.current.play().catch(e => console.error("Play error:", e));
-        } else {
-            mediaRef.current.pause();
-        }
+        // Media playback logic moved to RoundRenderer components (StandardRound/FreezeOutRound)
     });
 
     // Track previous question index to determine direction
@@ -169,7 +159,7 @@ export default function Contestant() {
     // Flash Red Effect
     return (
         <div className={`game-show-container ${containerClass} ${(state.status === 'PAUSED' && state.lastJudgement === false) ? 'flash-red' : ''}`}>
-            {/* ... rest of the code ... */}
+
             <div className="stage-lights-container">
                 <div className="light-beam beam-1"></div>
                 <div className="light-beam beam-2"></div>
@@ -195,132 +185,28 @@ export default function Contestant() {
                         <p style={{ marginTop: '40px', fontWeight: 'bold' }}>GET READY!</p>
                     </div>
                 </div>
-            ) : state.roundType === 'connections' ? (
-                <ContestantConnections state={state} />
             ) : (
-                <>
-                    <header className="gs-header">
-                        <div className="gs-round-name">{state.roundName}</div>
-                        {/* Standard Timer for non-freezeout */}
-                        {state.roundType !== 'freezeout' && (
-                            <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`}>
-                                {state.timeLimit}
-                            </div>
-                        )}
-                    </header>
+                <div style={{display: 'contents'}}>
+                    <RoundRenderer state={state} animClass={animClass} />
 
-                    <main className="gs-main" style={state.roundType === 'freezeout' ? { flexDirection: 'row', alignItems: 'center', gap: 40, padding: '0 40px' } : {}}>
-
-                        {/* Large Analog Clock for Freezeout - Left Side */}
-                        {state.roundType === 'freezeout' && (
-                            <div className="analog-clock-large" style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-                                <div style={{ position: 'relative', width: '40vh', height: '40vh' }}>
-                                    <svg width="100%" height="100%" viewBox="0 0 100 100">
-                                        <circle cx="50" cy="50" r="48" fill="#fff" stroke="#ccc" strokeWidth="2" />
-                                        {/* Ticks */}
-                                        {[...Array(12)].map((_, i) => (
-                                            <line
-                                                key={i}
-                                                x1="50" y1="6" x2="50" y2="10"
-                                                stroke="#333" strokeWidth="2"
-                                                transform={`rotate(${i * 30} 50 50)`}
-                                            />
-                                        ))}
-                                        {/* Progress Arc */}
-                                        <circle
-                                            cx="50" cy="50" r="40"
-                                            fill="none"
-                                            stroke={state.timeLimit <= 5 ? "#ff3b3b" : "#333"}
-                                            strokeWidth="6"
-                                            strokeDasharray="251"
-                                            strokeDashoffset={251 - (251 * state.timeLimit / (state.maxTime || 30))}
-                                            transform="rotate(-90 50 50)"
-                                            style={{ transition: 'stroke-dashoffset 1s linear, stroke 0.3s' }}
-                                        />
-                                    </svg>
-                                    <div style={{
-                                        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-                                        display: 'flex', justifyContent: 'center', alignItems: 'center',
-                                        fontSize: '4em', fontWeight: 'bold', color: '#333'
-                                    }}>
-                                        {state.timeLimit}
-                                    </div>
+                    {/* Overlays for buzz, timeout, and judgement */}
+                    {(state.status === 'BUZZED' || state.status === 'TIMEOUT' || state.status === 'ANSWER_REVEALED') && (
+                        <>
+                            {state.status === 'TIMEOUT' && (
+                                <div className="buzzer-overlay state-timeout">
+                                    TIME'S UP!
                                 </div>
-                            </div>
-                        )}
+                            )}
 
-                        {/* Question Card - Right Side (or Center) */}
-                        {state.status !== 'IDLE' && (state.mediaUrl || state.question) && (
-                            <div
-                                key={state.question}
-                                className={`question-card ${animClass} ${state.status === 'LISTENING' ? 'listening-active' : ''}`}
-                                style={state.roundType === 'freezeout' ? { flex: 1, maxWidth: 'none', height: 'auto' } : {}}
-                            >
-
-                                {state.mediaUrl && (
-                                    <div className="media-container" style={{ marginBottom: 20, textAlign: 'center' }}>
-                                        {state.mediaType === 'video' ? (
-                                            <video
-                                                ref={mediaRef}
-                                                src={state.mediaUrl}
-                                                loop
-                                                muted={false}
-                                                controls={false}
-                                                style={{ maxWidth: '100%', maxHeight: '40vh', borderRadius: 8 }}
-                                            />
-                                        ) : state.mediaType === 'audio' ? (
-                                            <div style={{ padding: 20, background: '#333', borderRadius: 8 }}>
-                                                <div style={{ fontSize: '3em' }}>🔊</div>
-                                                <audio
-                                                    ref={mediaRef}
-                                                    src={state.mediaUrl}
-                                                    controls
-                                                />
-                                            </div>
-                                        ) : (
-                                            <img
-                                                src={state.mediaUrl}
-                                                alt="Question Media"
-                                                style={{ maxWidth: '100%', maxHeight: '40vh', borderRadius: 8 }}
-                                            />
-                                        )}
+                            {state.status === 'ANSWER_REVEALED' && state.lastJudgement === true &&
+                                !(state.roundType === 'freezeout' && state.lockedOutTeams && state.teams && state.lockedOutTeams.length === state.teams.length) && (
+                                    <div className={`buzzer-overlay state-correct`}>
+                                        CORRECT!
                                     </div>
                                 )}
-
-                                <div className="question-text">
-                                    {state.question}
-                                </div>
-
-                                {state.currentAnswer && (
-                                    <div className="gs-answer pop-in">
-                                        {state.currentAnswer}
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
-                        {/* Overlays for buzz, timeout, and judgement */}
-                        {(state.status === 'BUZZED' || state.status === 'TIMEOUT' || state.status === 'ANSWER_REVEALED') && (
-                            <>
-                                {state.status === 'TIMEOUT' && (
-                                    <div className="buzzer-overlay state-timeout">
-                                        TIME'S UP!
-                                    </div>
-                                )}
-
-                                {state.status === 'ANSWER_REVEALED' && state.lastJudgement === true &&
-                                    !(state.roundType === 'freezeout' && state.lockedOutTeams && state.teams && state.lockedOutTeams.length === state.teams.length) && (
-                                        <div className={`buzzer-overlay state-correct`}>
-                                            CORRECT!
-                                        </div>
-                                    )}
-                            </>
-                        )}
-
-
-                    </main>
-
-                </>
+                        </>
+                    )}
+                </div>
             )}
 
             <div style={{ flex: 1 }}></div>

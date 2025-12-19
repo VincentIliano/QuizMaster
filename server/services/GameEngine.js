@@ -1,6 +1,5 @@
 
-const StandardRound = require('../models/StandardRound');
-const FreezeOutRound = require('../models/FreezeOutRound');
+const RoundFactory = require('./RoundFactory');
 const ConnectionsRound = require('../models/ConnectionsRound');
 
 class GameEngine {
@@ -79,14 +78,8 @@ class GameEngine {
 
     _initRoundStrategy(index) {
         const round = this.state.rounds[index];
-        if (round.type === 'countdown') {
-            this.currentRoundInstance = new FreezeOutRound(round);
-        } else if (round.type === 'connections') {
-            this.currentRoundInstance = new ConnectionsRound(round);
-            this.currentRoundInstance.init(this); // Initialize grid
-        } else {
-            this.currentRoundInstance = new StandardRound(round);
-        }
+        this.currentRoundInstance = RoundFactory.createRound(round);
+        this.currentRoundInstance.init(this);
     }
 
     save() {
@@ -108,6 +101,7 @@ class GameEngine {
 
     getPublicState() {
         const s = this.state;
+        const roundState = this.currentRoundInstance ? this.currentRoundInstance.getPublicState(this) : {};
 
         let upcomingQ = null;
         if (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) {
@@ -139,7 +133,6 @@ class GameEngine {
             roundName: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].name : "",
             roundDescription: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].description : "",
             roundPoints: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].points : 0,
-            maxTime: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? (s.rounds[s.currentRoundIndex].time_limit || 30) : 30,
             timeLimit: s.timerValue,
             status: s.status,
             teams: s.teams,
@@ -151,14 +144,11 @@ class GameEngine {
             upcomingQuestion: upcomingQ ? (upcomingQ.text || ((s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].type === 'connections' && upcomingQ.groups) ? upcomingQ.groups.map(g => g.name).join(', ') : null)) : null,
             upcomingAnswer: upcomingQ ? upcomingQ.answer : null,
             lastJudgement: s.lastJudgement,
-            lastJudgement: s.lastJudgement,
             mediaPlaying: s.mediaPlaying || false,
             roundStartScores: s.roundStartScores || [],
-            gridItems: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].gridItems : [],
-            solvedGroups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].solvedGroups : [],
-            groups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].groups : [],
             finalStandings: s.finalStandings || [],
-            finalistRevealCount: s.finalistRevealCount || 0
+            finalistRevealCount: s.finalistRevealCount || 0,
+            ...roundState // Spread round specific state
         };
     }
 
@@ -200,74 +190,29 @@ class GameEngine {
         this.state.lastJudgement = null;
         this.state.lockedOutTeams = [];
 
-        if (this.state.status === 'ROUND_READY') {
-            this.state.status = "IDLE";
-            this.state.currentQuestionData = null;
-            const currentRound = this.state.rounds[this.state.currentRoundIndex];
+        if (this.state.currentRoundIndex === -1) {
+             // Edge case: start first round if -1?
+             // Or maybe just Dashboard.
+             // Original logic handled init round 0.
+             if (this.state.rounds.length > 0) {
+                 this.setRound(0); // This calls initRoundStrategy
+                 return;
+             }
+        }
 
-            // For Connections, initialize timer immediately and fall through to load logic
-            if (currentRound.type === 'connections') {
-                // Initialize for first question (index 0)
-                this.state.currentQuestionIndex = currentRound.questionsAnswered || 0;
-                // Fall through to allow setupQuestion to run below
-            } else {
-                this.state.currentQuestionIndex = (currentRound.questionsAnswered || 0) - 1;
-                this.save();
-                return;
+        if (this.currentRoundInstance) {
+            this.currentRoundInstance.nextQuestion(this);
+            // Handling autoStart inside round might be needed or generic here
+            // Current round impls sets status.
+            // If autoStart passed, we might override?
+            // Original logic: "if (autoStart) startTimer()"
+            // But ConnectionRound handles it internally.
+            // Standard/Freeze don't handle autoStart param in nextQuestion signature.
+            // Let's keep it simple: if autostart is requested, we do it after delegating.
+
+            if (autoStart && this.state.status === 'READING') {
+                this.startTimer(onTick);
             }
-        } else {
-            if (this.state.currentRoundIndex === -1) {
-                this.state.currentRoundIndex = 0;
-                this.state.currentQuestionIndex = 0;
-                this._initRoundStrategy(0);
-            } else {
-                this.state.currentQuestionIndex++;
-                const currentRound = this.state.rounds[this.state.currentRoundIndex];
-
-                if (this.state.currentQuestionIndex >= currentRound.questions.length) {
-                    currentRound.questionsAnswered = currentRound.questions.length;
-                    // Stay on this round index for summary
-                    this.state.status = "ROUND_SUMMARY";
-                    this.save();
-                    return;
-                } else {
-                    currentRound.questionsAnswered = this.state.currentQuestionIndex;
-                }
-            }
-        }
-
-        if (this.state.currentRoundIndex >= this.state.rounds.length || this.state.currentRoundIndex === -1) {
-            this.state.status = "DASHBOARD";
-            this.state.currentQuestionData = null;
-            this.save();
-            return;
-        }
-
-        const currentRound = this.state.rounds[this.state.currentRoundIndex];
-        this.state.currentQuestionData = currentRound.questions[this.state.currentQuestionIndex];
-        this.state.timerValue = currentRound.time_limit || 30;
-        this.state.buzzerLocked = false;
-
-        // Setup Grid for Connections
-        if (this.currentRoundInstance instanceof ConnectionsRound) {
-            this.currentRoundInstance.setupQuestion(this, this.state.currentQuestionIndex);
-            // Override timer 
-            this.state.timerValue = currentRound.time_limit || 60;
-
-            // Auto-start timer when grid is revealed (per user request)
-            this.startTimer(onTick);
-            this.state.status = "LISTENING";
-            this.save();
-            return;
-        }
-
-        this.state.status = autoStart ? "LISTENING" : "READING";
-        this.state.mediaPlaying = false;
-
-        if (autoStart) {
-            this.startTimer(onTick);
-        } else {
-            this.save();
         }
     }
 
@@ -313,15 +258,19 @@ class GameEngine {
 
             this.stopTimer();
             this.timerInterval = setInterval(() => {
-                this.state.timerValue--;
-                if (tickHandler) tickHandler(this.state.timerValue);
-
-                if (this.state.timerValue <= 0) {
-                    this.stopTimer();
-                    this.state.buzzerLocked = true;
-                    this.state.status = "TIMEOUT";
-                    this.state.mediaPlaying = false;
-                    this.save();
+                if (this.currentRoundInstance) {
+                    this.currentRoundInstance.tick(this); // Use strategy tick
+                    if (tickHandler) tickHandler(this.state.timerValue);
+                } else {
+                    // Fallback
+                    this.state.timerValue--;
+                    if (this.state.timerValue <= 0) {
+                        this.stopTimer();
+                        this.state.buzzerLocked = true;
+                        this.state.status = "TIMEOUT";
+                        this.state.mediaPlaying = false;
+                        this.save();
+                    }
                 }
             }, 1000);
         }
@@ -450,16 +399,6 @@ class GameEngine {
         if (!newRounds || !Array.isArray(newRounds)) return;
 
         // 1. Update Runtime State
-        // Preserve runtime properties (scores, questionsAnswered) if round index/name matches?
-        // Actually, user might reorder rounds. 
-        // Simplest strategy: Overwrite rounds but try to preserve scores if name matches?
-        // Or just reset? If editing LIVE game, changing a round might be destructive.
-        // Let's assume editing implies a form of reset or manual management.
-        // But we should try to keep `questionsAnswered` if possible.
-
-        // For now, let's just replace. If the Host edits the current round, things might get weird.
-        // Ideally edits happen before the game or between rounds.
-
         this.state.rounds = newRounds;
 
         // Ensure defaults
@@ -495,9 +434,11 @@ class GameEngine {
 
     resetRound(roundIndex) {
         if (roundIndex >= 0 && roundIndex < this.state.rounds.length) {
+
+            // Delegate to round logic if possible, or keep this global cleanup
             const round = this.state.rounds[roundIndex];
 
-            // Deduct scores earned in this round from global team scores
+             // Deduct scores earned in this round from global team scores
             if (round.scores) {
                 Object.entries(round.scores).forEach(([teamIndex, score]) => {
                     const idx = parseInt(teamIndex);
@@ -507,20 +448,23 @@ class GameEngine {
                 });
             }
 
-            round.questionsAnswered = 0;
-            round.scores = {};
-
-            // Clear connections formatting if needed
-            if (round.type === 'connections' && round.questions) {
-                // Clear gridItems so they are regenerated fresh
-                round.questions.forEach(q => {
-                    q.gridItems = null;
-                    q.solvedGroups = [];
-                });
-            } else if (round.type === 'connections' && round.gridItems) {
-                // Legacy single-question format
-                round.gridItems = null;
-                round.solvedGroups = [];
+            // Ideally delegate this:
+            if (this.currentRoundInstance && this.state.currentRoundIndex === roundIndex) {
+                this.currentRoundInstance.reset(this);
+            } else {
+                 // Manual reset if not active instance
+                 // But wait, reset is usually for the *current* round if we are re-playing it?
+                 // Or Host resets a round in the list.
+                 // Let's create a temporary instance to reset it properly if needed?
+                 // Or just do basic cleanup:
+                 round.questionsAnswered = 0;
+                 round.scores = {};
+                  if (round.type === 'connections' && round.questions) {
+                        round.questions.forEach(q => {
+                            q.gridItems = null;
+                            q.solvedGroups = [];
+                        });
+                  }
             }
 
             this.save();
