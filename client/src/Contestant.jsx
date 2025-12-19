@@ -9,59 +9,81 @@ export default function Contestant() {
 
 
     const mediaRef = useRef(null);
-    const tickAudioRef = useRef(new Audio('/assets/clock_ticking_60s.mp3'));
-    const buzzerAudioRef = useRef(new Audio('/assets/Buzzer.mp3'));
-    const correctAudioRef = useRef(new Audio('/assets/Correct.mp3'));
-    const wrongAudioRef = useRef(new Audio('/assets/Wrong.mp3'));
+    const tickAudioRef = useRef(null);
+    const buzzerAudioRef = useRef(null);
+    const correctAudioRef = useRef(null);
+    const wrongAudioRef = useRef(null);
 
     useEffect(() => {
+        // Initialize Audio objects once
+        tickAudioRef.current = new Audio('/assets/clock_ticking_60s.mp3');
+        buzzerAudioRef.current = new Audio('/assets/Buzzer.mp3');
+        correctAudioRef.current = new Audio('/assets/Correct.mp3');
+        wrongAudioRef.current = new Audio('/assets/Wrong.mp3');
+
         // Configure tick audio
         tickAudioRef.current.loop = true;
         tickAudioRef.current.volume = 0.5; // Adjust volume as needed
     }, []);
+
+    // Track solved groups count to trigger sound
+    const prevSolvedCount = useRef(0);
 
     // Effect to play specific sounds based on exact state changes
     useEffect(() => {
         if (!state) return;
 
         // Buzzer Sound
-        if (state.status === 'BUZZED') {
+        if (state.status === 'BUZZED' && buzzerAudioRef.current) {
             buzzerAudioRef.current.currentTime = 0;
             buzzerAudioRef.current.play().catch(() => { });
         }
 
         // Answer Revealed Sound (Correct or Wrong)
         if (state.status === 'ANSWER_REVEALED') {
-            if (state.lastJudgement === true) {
+            if (state.lastJudgement === true && correctAudioRef.current) {
                 correctAudioRef.current.currentTime = 0;
                 correctAudioRef.current.play().catch(() => { });
-            } else if (state.lastJudgement === false) {
+            } else if (state.lastJudgement === false && wrongAudioRef.current) {
                 wrongAudioRef.current.currentTime = 0;
                 wrongAudioRef.current.play().catch(() => { });
             }
         }
 
         // Wrong Answer (but game continues) -> Status is PAUSED, lastJudgement is false
-        if (state.status === 'PAUSED' && state.lastJudgement === false) {
+        if (state.status === 'PAUSED' && state.lastJudgement === false && wrongAudioRef.current) {
             wrongAudioRef.current.currentTime = 0;
             wrongAudioRef.current.play().catch(() => { });
         }
 
-        // All Locked -> Treat as Wrong (everyone failed)
-        if (state.status === 'ALL_LOCKED') {
+        // Solved a Connection Group (Correct Sound)
+        if (state.currentQuestionData && state.currentQuestionData.solvedGroups) {
+            const currentCount = state.currentQuestionData.solvedGroups.length;
+            // If count increased, play correct sound
+            if (currentCount > prevSolvedCount.current && correctAudioRef.current) {
+                correctAudioRef.current.currentTime = 0;
+                correctAudioRef.current.play().catch(() => { });
+            }
+            prevSolvedCount.current = currentCount;
+        } else {
+            prevSolvedCount.current = 0;
+        }
+
+        // All Locked OR Timeout -> Wrong Sound
+        if ((state.status === 'ALL_LOCKED' || state.status === 'TIMEOUT') && wrongAudioRef.current) {
             wrongAudioRef.current.currentTime = 0;
             wrongAudioRef.current.play().catch(() => { });
         }
 
-    }, [state?.status, state?.lastJudgement, state?.lockedOutTeams?.length]); // Dependencies to re-run
+    }, [state?.status, state?.lastJudgement, state?.lockedOutTeams?.length, state?.solvedGroups?.length]); // Dependencies to re-run
 
     useEffect(() => {
         if (!state) return;
 
         // Play ticking sound when status is LISTENING (timer running)
-        if (state.status === 'LISTENING') {
+        if (state.status === 'LISTENING' && tickAudioRef.current) {
             tickAudioRef.current.play().catch(e => console.log('Tick play failed (interaction needed?):', e));
-        } else {
+        } else if (tickAudioRef.current) {
             tickAudioRef.current.pause();
             tickAudioRef.current.currentTime = 0;
         }
@@ -91,9 +113,19 @@ export default function Contestant() {
         socket.on('timer_tick', onTimer);
         socket.emit('get_state');
 
+        const handleKeyDown = (e) => {
+            // Support for physical buzzers mapped to number keys 1-5
+            if (e.key >= '1' && e.key <= '5') {
+                const teamIndex = parseInt(e.key) - 1;
+                socket.emit('host_buzz', teamIndex);
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+
         return () => {
             socket.off('state_update', onState);
             socket.off('timer_tick', onTimer);
+            window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
 
@@ -270,8 +302,6 @@ export default function Contestant() {
                         {/* Overlays for buzz, timeout, and judgement */}
                         {(state.status === 'BUZZED' || state.status === 'TIMEOUT' || state.status === 'ANSWER_REVEALED') && (
                             <>
-
-
                                 {state.status === 'TIMEOUT' && (
                                     <div className="buzzer-overlay state-timeout">
                                         TIME'S UP!
@@ -286,6 +316,8 @@ export default function Contestant() {
                                     )}
                             </>
                         )}
+
+
                     </main>
 
                 </>

@@ -1,11 +1,17 @@
 .connections-container {
-    width: 100vw;
-    height: 100vh;
-    padding: 20px;
+    width: 100%;
+    /* Remove fixed 100vh to avoid pushing main footer off screen */
+    /* height: 100vh; */
+    flex: 1;
+    /* Take up available space in the parent flex container */
+    padding: 20px 40px;
+    /* Match standard padding */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    min-height: 0;
+    /* Allow shrinking */
 }
 
 .solved-section {
@@ -16,8 +22,9 @@
 
 .group-banner {
     width: 100%;
-    padding: 20px;
-    border-radius: 15px;
+    padding: 15px;
+    /* Slightly reduced */
+    border-radius: 12px;
     color: white;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -26,13 +33,14 @@
 
 .group-banner h2 {
     margin: 0;
-    font-size: 2.5em;
+    font-size: 2em;
+    /* Slightly smaller */
     text-transform: uppercase;
 }
 
 .group-items {
-    font-size: 1.5em;
-    margin-top: 10px;
+    font-size: 1.2em;
+    margin-top: 5px;
     opacity: 0.9;
 }
 
@@ -71,7 +79,8 @@
 .grid-section {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 1.5vh;
+    /* Responsive gap */
     flex-grow: 1;
     /* Fill remaining space */
     align-content: start;
@@ -83,15 +92,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.8em;
+    /* Slightly smaller to fit text */
     font-weight: bold;
     color: #2d3436;
     text-transform: uppercase;
     aspect-ratio: 16/9;
-    /* Or standard card ratio */
+    /* Maintain ratio */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s, background-color 0.2s;
-    height: 150px;
+    height: auto;
+    /* Let aspect ratio drive height */
+    max-height: 12vh;
+    /* Limit height to prevent overflow on 16:9 */
 }
 
 @keyframes slideDown {

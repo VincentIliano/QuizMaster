@@ -112,8 +112,12 @@ class GameEngine {
         let upcomingQ = null;
         if (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) {
             const r = s.rounds[s.currentRoundIndex];
-            if (r.questions && r.questionsAnswered < r.questions.length) {
-                upcomingQ = r.questions[r.questionsAnswered];
+            // Use currentQuestionIndex + 1 to force "next" question preview
+            // Fallback to 0 if index is -1 (ROUND_READY)
+            const nextIndex = (s.currentQuestionIndex >= 0) ? s.currentQuestionIndex + 1 : 0;
+
+            if (r.questions && nextIndex < r.questions.length) {
+                upcomingQ = r.questions[nextIndex];
             }
         }
 

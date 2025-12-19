@@ -63,7 +63,7 @@ export default function HostControlPanel({ state }) {
 
             <div className="status-bar">Status: {state.status}</div>
 
-            {state.status === 'IDLE' && state.upcomingQuestion && (
+            {state.upcomingQuestion && (
                 <div style={{ margin: '10px 0', padding: 10, border: '1px dashed #666', background: 'rgba(0,0,0,0.2)' }}>
                     <strong>Next Question:</strong> {state.upcomingQuestion}
                     <div style={{ color: '#aaa', fontSize: '0.9em' }}>Answer: {state.upcomingAnswer}</div>

@@ -7,84 +7,44 @@
       "description": "Test your broad knowledge of the world!",
       "questions": [
         {
-          "text": "What is the capital of France?",
-          "answer": "Paris"
+          "text": "Op welke datum vieren we Kerstavond?",
+          "answer": "24 december"
         },
         {
-          "text": "Which planet is known as the Red Planet?",
-          "answer": "Mars"
+          "text": "Welk gerecht, waarbij iedereen zijn eigen pannetje op tafel heeft, is in Vlaanderen super populair met Kerst?",
+          "answer": "Gourmet"
         },
         {
-          "text": "What is the chemical symbol for Gold?",
-          "answer": "Au"
+          "text": "Hoe heet het traditionele kerstgebak dat eruitziet als een stuk hout uit het bos?",
+          "answer": "Kerststronk (of Bûche de Noël)"
         },
         {
-          "text": "What is the chemical formula for water?",
-          "answer": "H2O"
+          "text": "Onder welke plant moet je elkaar kussen als je er samen onder staat?",
+          "answer": "De maretak (Mistletoe)"
         },
         {
-          "text": "What is the largest ocean on Earth?",
-          "answer": "Pacific Ocean"
+          "text": "Wie waren de eerste bezoekers bij het kindje Jezus in de stal: de herders of de Drie Koningen?",
+          "answer": "De herders"
         },
         {
-          "text": "What is the hardest natural substance?",
-          "answer": "Diamond"
+          "text": "Welke warme wijn wordt er traditioneel gedronken op een kerstmarkt?",
+          "answer": "Glühwein"
         },
         {
-          "text": "Who was the first person to walk on the moon?",
-          "answer": "Neil Armstrong"
+          "text": "Hoeveel kaarsen staan er traditioneel op een adventskrans?",
+          "answer": "4"
         },
         {
-          "text": "Who painted the Mona Lisa?",
-          "answer": "Leonardo da Vinci"
+          "text": "Wat leggen we in België meestal onder de kerstboom?",
+          "answer": "De cadeautjes"
         },
         {
-          "text": "What is the capital of Japan?",
-          "answer": "Tokyo"
+          "text": "In welke stad werd Jezus geboren?",
+          "answer": "Bethlehem"
         },
         {
-          "text": "What is the symbol for Oxygen?",
-          "answer": "O"
-        },
-        {
-          "text": "What is the largest mammal in the world?",
-          "answer": "Blue Whale"
-        },
-        {
-          "text": "How many continents are there?",
-          "answer": "7"
-        },
-        {
-          "text": "What is the opposite of nocturnal?",
-          "answer": "Diurnal"
-        },
-        {
-          "text": "At what temperature (Celsius) does water freeze?",
-          "answer": "0"
-        },
-        {
-          "text": "How many colors are in a rainbow?",
-          "answer": "7"
-        },
-        {
-          "text": "What year is it currently?",
-          "answer": "2025"
-        },
-        {
-          "text": "What is the capital of the United States?",
-          "answer": "Washington D.C."
-        },
-        {
-          "text": "Who is the alter ego of Batman?",
-          "answer": "Bruce Wayne"
-        },
-        {
-          "text": "What is the fastest land animal?",
-          "answer": "Cheetah"
-        },
-        {
-          "text": "Which country invented pizza?",
-          "answer": "Italy"
+          "text": "Welke kleur heeft het pak van de Kerstman?",
+          "answer": "Rood met wit"
         },
         {
           "text": "What film is this scene from?",
@@ -107,90 +67,98 @@
       ]
     },
     {
-      "name": "Math Whiz",
+      "name": "Kerstavond 1",
       "time_limit": 20,
       "points": 20,
-      "description": "Calculate fast or get left behind!",
+      "description": "behind!",
       "questions": [
         {
-          "text": "What is 15 * 4?",
-          "answer": "60"
+          "text": "Hoe heet het beroemde rendier met de rode neus?",
+          "answer": "Rudolph"
         },
         {
-          "text": "What is the square root of 144?",
-          "answer": "12"
+          "text": "Maak de zin af: 'Jingle bells, jingle bells, jingle all the...'",
+          "answer": "Way"
         },
         {
-          "text": "What is 7 * 8?",
-          "answer": "56"
+          "text": "Hoe heet de jongen die 'alleen thuis' wordt achtergelaten in de beroemdste kerstfilm aller tijden (Home Alone)?",
+          "answer": "Kevin"
         },
         {
-          "text": "What is 100 divided by 4?",
-          "answer": "25"
+          "text": "Welk groen monster haat Kerstmis en probeert het te stelen?",
+          "answer": "De Grinch"
         },
         {
-          "text": "What is 50 minus 18?",
-          "answer": "32"
+          "text": "Wie zingt de hit 'All I Want for Christmas Is You'?",
+          "answer": "Mariah Carey"
         },
         {
-          "text": "What is 12 squared?",
-          "answer": "144"
+          "text": "Hoe heten de hulpjes van de Kerstman die het speelgoed maken?",
+          "answer": "Elfen (of elfjes)"
         },
         {
-          "text": "What is 9 plus 10?",
-          "answer": "19"
+          "text": "Uit welk land komt het liedje 'Stille Nacht' oorspronkelijk?",
+          "answer": "Oostenrijk"
         },
         {
-          "text": "What is 33 divided by 3?",
-          "answer": "11"
+          "text": "Hoe heet de sneeuwpop uit de film Frozen?",
+          "answer": "Olaf"
         },
         {
-          "text": "What is 5 * 5 * 5?",
-          "answer": "125"
+          "text": "Wat roept de Kerstman altijd als hij lacht?",
+          "answer": "Ho Ho Ho"
         },
         {
-          "text": "What is the square root of 64?",
-          "answer": "8"
+          "text": "Welk duo zong de hit 'Last Christmas'?",
+          "answer": "Wham!"
+        }
+      ]
+    },
+    {
+      "name": "Kerstavond 2",
+      "time_limit": 20,
+      "points": 20,
+      "description": "behind!",
+      "questions": [
+        {
+          "text": "Hoe heet het beroemde rendier met de rode neus?",
+          "answer": "Rudolph"
         },
         {
-          "text": "What is 20% of 100?",
-          "answer": "20"
+          "text": "Maak de zin af: 'Jingle bells, jingle bells, jingle all the...'",
+          "answer": "Way"
         },
         {
-          "text": "What is 1000 minus 1?",
-          "answer": "999"
+          "text": "Hoe heet de jongen die 'alleen thuis' wordt achtergelaten in de beroemdste kerstfilm aller tijden (Home Alone)?",
+          "answer": "Kevin"
         },
         {
-          "text": "What is 45 plus 55?",
-          "answer": "100"
+          "text": "Welk groen monster haat Kerstmis en probeert het te stelen?",
+          "answer": "De Grinch"
         },
         {
-          "text": "What is 8 * 9?",
-          "answer": "72"
+          "text": "Wie zingt de hit 'All I Want for Christmas Is You'?",
+          "answer": "Mariah Carey"
         },
         {
-          "text": "How many degrees in a right angle?",
-          "answer": "90"
+          "text": "Hoe heten de hulpjes van de Kerstman die het speelgoed maken?",
+          "answer": "Elfen (of elfjes)"
         },
         {
-          "text": "How many sides does a hexagon have?",
-          "answer": "6"
+          "text": "Uit welk land komt het liedje 'Stille Nacht' oorspronkelijk?",
+          "answer": "Oostenrijk"
         },
         {
-          "text": "What is 2 to the power of 3?",
-          "answer": "8"
+          "text": "Hoe heet de sneeuwpop uit de film Frozen?",
+          "answer": "Olaf"
         },
         {
-          "text": "What is 0 multiplied by 100?",
-          "answer": "0"
+          "text": "Wat roept de Kerstman altijd als hij lacht?",
+          "answer": "Ho Ho Ho"
         },
         {
-          "text": "What is 1 + 2 + 3?",
-          "answer": "6"
-        },
-        {
-          "text": "What number does the Roman numeral V represent?",
-          "answer": "5"
+          "text": "Welk duo zong de hit 'Last Christmas'?",
+          "answer": "Wham!"
         }
       ]
     },
