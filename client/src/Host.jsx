@@ -7,9 +7,11 @@ import HostControlPanel from './components/HostControlPanel';
 import HostRoundSummary from './components/HostRoundSummary';
 import HostConnections from './components/HostConnections';
 import HostFinalResults from './components/HostFinalResults';
+import HostSettings from './components/HostSettings';
 
 export default function Host() {
     const [state, setState] = useState(null);
+    const [viewMode, setViewMode] = useState('game'); // 'game' or 'settings'
 
     useEffect(() => {
         const onState = (s) => setState(s);
@@ -29,8 +31,12 @@ export default function Host() {
 
     if (!state) return <div>Connecting to Host Console...</div>;
 
+    if (viewMode === 'settings') {
+        return <HostSettings state={state} onBack={() => setViewMode('game')} />;
+    }
+
     if (state.status === 'DASHBOARD') {
-        return <HostDashboard state={state} />;
+        return <HostDashboard state={state} onSettings={() => setViewMode('settings')} />;
     }
 
     if (state.status === 'ROUND_READY') {

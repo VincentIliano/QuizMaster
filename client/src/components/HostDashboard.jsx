@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { socket } from '../socket';
 
-export default function HostDashboard({ state }) {
+export default function HostDashboard({ state, onSettings }) {
     const [teamInputs, setTeamInputs] = useState(['', '', '', '', '']);
 
     // Sync inputs with current state teams
@@ -127,6 +127,14 @@ export default function HostDashboard({ state }) {
                     }}
                 >
                     GO TO FINAL RESULTS
+                </button>
+
+                <button
+                    className="btn"
+                    style={{ background: '#555', color: '#fff', padding: '15px 30px', fontSize: '1.2em', fontWeight: 'bold', marginLeft: '20px' }}
+                    onClick={onSettings}
+                >
+                    SETTINGS
                 </button>
             </div>
         </div>

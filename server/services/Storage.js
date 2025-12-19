@@ -43,6 +43,16 @@ class Storage {
             console.error("Error saving game state:", e);
         }
     }
+
+    saveQuizData(data) {
+        try {
+            const tempPath = this.quizDataPath + '.tmp';
+            fs.writeFileSync(tempPath, JSON.stringify(data, null, 2));
+            fs.renameSync(tempPath, this.quizDataPath);
+        } catch (e) {
+            console.error("Error saving quiz data:", e);
+        }
+    }
 }
 
 module.exports = Storage;

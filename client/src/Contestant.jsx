@@ -9,11 +9,67 @@ export default function Contestant() {
 
 
     const mediaRef = useRef(null);
+    const tickAudioRef = useRef(new Audio('/assets/clock_ticking_60s.mp3'));
+    const buzzerAudioRef = useRef(new Audio('/assets/Buzzer.mp3'));
+    const correctAudioRef = useRef(new Audio('/assets/Correct.mp3'));
+    const wrongAudioRef = useRef(new Audio('/assets/Wrong.mp3'));
 
     useEffect(() => {
-        if (!mediaRef.current || !state) return;
+        // Configure tick audio
+        tickAudioRef.current.loop = true;
+        tickAudioRef.current.volume = 0.5; // Adjust volume as needed
+    }, []);
 
-        // Sync playback with timer for Countdown (FreezeOut)
+    // Effect to play specific sounds based on exact state changes
+    useEffect(() => {
+        if (!state) return;
+
+        // Buzzer Sound
+        if (state.status === 'BUZZED') {
+            buzzerAudioRef.current.currentTime = 0;
+            buzzerAudioRef.current.play().catch(() => { });
+        }
+
+        // Answer Revealed Sound (Correct or Wrong)
+        if (state.status === 'ANSWER_REVEALED') {
+            if (state.lastJudgement === true) {
+                correctAudioRef.current.currentTime = 0;
+                correctAudioRef.current.play().catch(() => { });
+            } else if (state.lastJudgement === false) {
+                wrongAudioRef.current.currentTime = 0;
+                wrongAudioRef.current.play().catch(() => { });
+            }
+        }
+
+        // Wrong Answer (but game continues) -> Status is PAUSED, lastJudgement is false
+        if (state.status === 'PAUSED' && state.lastJudgement === false) {
+            wrongAudioRef.current.currentTime = 0;
+            wrongAudioRef.current.play().catch(() => { });
+        }
+
+        // All Locked -> Treat as Wrong (everyone failed)
+        if (state.status === 'ALL_LOCKED') {
+            wrongAudioRef.current.currentTime = 0;
+            wrongAudioRef.current.play().catch(() => { });
+        }
+
+    }, [state?.status, state?.lastJudgement, state?.lockedOutTeams?.length]); // Dependencies to re-run
+
+    useEffect(() => {
+        if (!state) return;
+
+        // Play ticking sound when status is LISTENING (timer running)
+        if (state.status === 'LISTENING') {
+            tickAudioRef.current.play().catch(e => console.log('Tick play failed (interaction needed?):', e));
+        } else {
+            tickAudioRef.current.pause();
+            tickAudioRef.current.currentTime = 0;
+        }
+
+        if (!mediaRef.current) return;
+
+        // Sync question media playback with timer/status
+        // Using mediaPlaying flag from server
         if (state.mediaPlaying) {
             mediaRef.current.play().catch(e => console.error("Play error:", e));
         } else {

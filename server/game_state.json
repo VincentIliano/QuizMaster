@@ -1,16 +1,16 @@
 {
   "teams": [
     {
-      "name": "ewq",
-      "score": 35
+      "name": "jos",
+      "score": 30
     },
     {
-      "name": "fdsa",
-      "score": 68
+      "name": "piet",
+      "score": 40
     },
     {
-      "name": "gfds",
-      "score": 23
+      "name": "sint",
+      "score": 10
     }
   ],
   "rounds": [
@@ -119,8 +119,10 @@
           "mediaType": "video"
         }
       ],
-      "scores": {},
-      "questionsAnswered": 0
+      "scores": {
+        "1": 40
+      },
+      "questionsAnswered": 4
     },
     {
       "name": "Math Whiz",
@@ -214,7 +216,7 @@
     },
     {
       "name": "Countdown",
-      "type": "freezeout",
+      "type": "countdown",
       "time_limit": 20,
       "points": 0,
       "description": "Push your luck! Points = Seconds Remaining. Wrong answers freeze you out!",
@@ -316,26 +318,34 @@
           ]
         }
       ],
-      "scores": {},
-      "questionsAnswered": 0
+      "scores": {
+        "0": 30,
+        "2": 10
+      },
+      "questionsAnswered": 1
     }
   ],
-  "currentRoundIndex": -1,
-  "currentQuestionIndex": -1,
-  "currentQuestionData": null,
-  "timerValue": 0,
+  "currentRoundIndex": 0,
+  "currentQuestionIndex": 4,
+  "currentQuestionData": {
+    "text": "What is the largest ocean on Earth?",
+    "answer": "Pacific Ocean"
+  },
+  "timerValue": 15,
   "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "DASHBOARD",
-  "lastJudgement": null,
+  "status": "PAUSED",
+  "lastJudgement": false,
   "roundsSummary": [
     {
       "index": 0,
       "name": "General Knowledge",
       "points": 10,
-      "questionsAnswered": 0,
+      "questionsAnswered": 4,
       "totalQuestions": 23,
-      "scores": {}
+      "scores": {
+        "1": 40
+      }
     },
     {
       "index": 1,
@@ -357,31 +367,22 @@
       "index": 3,
       "name": "Connections",
       "points": 10,
-      "questionsAnswered": 0,
+      "questionsAnswered": 1,
       "totalQuestions": 2,
-      "scores": {}
+      "scores": {
+        "0": 30,
+        "2": 10
+      }
     }
   ],
-  "lockedOutTeams": [],
+  "lockedOutTeams": [
+    1
+  ],
   "mediaPlaying": false,
-  "roundStartScores": [],
-  "finalStandings": [
-    {
-      "name": "gfds",
-      "score": 23,
-      "originalIndex": 2
-    },
-    {
-      "name": "ewq",
-      "score": 35,
-      "originalIndex": 0
-    },
-    {
-      "name": "fdsa",
-      "score": 68,
-      "originalIndex": 1
-    }
+  "roundStartScores": [
+    30,
+    20,
+    10
   ],
-  "finalistRevealIndex": 0,
-  "finalistRevealCount": 3
+  "connectionStreak": 0
 }

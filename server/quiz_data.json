@@ -196,7 +196,7 @@
     },
     {
       "name": "Countdown",
-      "type": "freezeout",
+      "type": "countdown",
       "time_limit": 20,
       "points": 0,
       "description": "Push your luck! Points = Seconds Remaining. Wrong answers freeze you out!",

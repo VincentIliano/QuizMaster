@@ -63,6 +63,12 @@ module.exports = (io, gameEngine) => {
         socket.on('go_to_final_results', () => gameEngine.goToFinalResults());
         socket.on('reveal_next_finalist', () => gameEngine.revealNextFinalist());
 
+        socket.on('update_quiz_data', (data) => gameEngine.updateQuizData(data));
+
+        socket.on('get_rounds', (callback) => {
+            if (callback) callback(gameEngine.getRounds());
+        });
+
         socket.on('return_to_dashboard', () => gameEngine.returnToDashboard());
     });
 };

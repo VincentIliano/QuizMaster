@@ -79,7 +79,7 @@ class GameEngine {
 
     _initRoundStrategy(index) {
         const round = this.state.rounds[index];
-        if (round.type === 'freezeout') {
+        if (round.type === 'countdown') {
             this.currentRoundInstance = new FreezeOutRound(round);
         } else if (round.type === 'connections') {
             this.currentRoundInstance = new ConnectionsRound(round);
@@ -156,6 +156,10 @@ class GameEngine {
             finalStandings: s.finalStandings || [],
             finalistRevealCount: s.finalistRevealCount || 0
         };
+    }
+
+    getRounds() {
+        return this.state.rounds;
     }
 
     // --- Actions ---
@@ -436,6 +440,53 @@ class GameEngine {
                 this.save();
             }
         }
+    }
+
+    updateQuizData(newRounds) {
+        if (!newRounds || !Array.isArray(newRounds)) return;
+
+        // 1. Update Runtime State
+        // Preserve runtime properties (scores, questionsAnswered) if round index/name matches?
+        // Actually, user might reorder rounds. 
+        // Simplest strategy: Overwrite rounds but try to preserve scores if name matches?
+        // Or just reset? If editing LIVE game, changing a round might be destructive.
+        // Let's assume editing implies a form of reset or manual management.
+        // But we should try to keep `questionsAnswered` if possible.
+
+        // For now, let's just replace. If the Host edits the current round, things might get weird.
+        // Ideally edits happen before the game or between rounds.
+
+        this.state.rounds = newRounds;
+
+        // Ensure defaults
+        this.state.rounds.forEach(r => {
+            r.scores = r.scores || {};
+            r.questionsAnswered = r.questionsAnswered || 0;
+        });
+
+        // 2. Persist to quiz_data.json (clean format)
+        const cleanRounds = newRounds.map(r => {
+            const clean = { ...r };
+            // Remove runtime fields
+            delete clean.scores;
+            delete clean.questionsAnswered;
+            delete clean.gridItems; // Connections specific
+            // clean.questions need sanitization too?
+            if (clean.questions) {
+                clean.questions = clean.questions.map(q => {
+                    const cleanQ = { ...q };
+                    delete cleanQ.solvedGroups;
+                    delete cleanQ.gridItems;
+                    return cleanQ;
+                });
+            }
+            return clean;
+        });
+
+        this.storage.saveQuizData({ rounds: cleanRounds });
+
+        // 3. Persist Game State and Broadcast
+        this.save();
     }
 
     resetRound(roundIndex) {
