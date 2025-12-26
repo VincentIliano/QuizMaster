@@ -303,19 +303,37 @@ export default function Contestant() {
                                         {state.choices.map((choice, i) => {
                                             const key = Object.keys(choice)[0];
                                             const val = choice[key];
+                                            const isRevealed = state.status === 'ANSWER_REVEALED' || state.status === 'GAME_OVER';
+                                            const isCorrect = state.currentAnswer === key;
+
+                                            let style = {
+                                                background: 'rgba(255,255,255,0.1)',
+                                                padding: '20px 30px',
+                                                borderRadius: '15px',
+                                                fontSize: '1.5em',
+                                                fontWeight: 'bold',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                border: '2px solid rgba(255,255,255,0.2)',
+                                                transition: 'all 0.5s ease'
+                                            };
+
+                                            if (isRevealed) {
+                                                if (isCorrect) {
+                                                    style.background = 'rgba(40, 167, 69, 0.3)';
+                                                    style.borderColor = '#28a745';
+                                                    style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.5)';
+                                                    style.transform = 'scale(1.05)';
+                                                } else {
+                                                    style.opacity = 0.3;
+                                                    style.filter = 'grayscale(1)';
+                                                }
+                                            }
+
                                             return (
-                                                <div key={i} className="choice-item" style={{
-                                                    background: 'rgba(255,255,255,0.1)',
-                                                    padding: '20px 30px',
-                                                    borderRadius: '15px',
-                                                    fontSize: '1.5em',
-                                                    fontWeight: 'bold',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    border: '2px solid rgba(255,255,255,0.2)'
-                                                }}>
+                                                <div key={i} className="choice-item" style={style}>
                                                     <span style={{
-                                                        color: '#ffd700',
+                                                        color: isRevealed && isCorrect ? '#fff' : '#ffd700',
                                                         marginRight: '20px',
                                                         fontSize: '1.2em',
                                                         textTransform: 'uppercase'
@@ -327,7 +345,7 @@ export default function Contestant() {
                                     </div>
                                 )}
 
-                                {state.currentAnswer && (
+                                {state.currentAnswer && !state.choices && (
                                     <div className="gs-answer pop-in">
                                         {state.currentAnswer}
                                     </div>
