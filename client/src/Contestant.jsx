@@ -291,6 +291,42 @@ export default function Contestant() {
                                     {state.question}
                                 </div>
 
+                                {state.choices && (
+                                    <div className="choices-grid" style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: '1fr',
+                                        gap: '20px',
+                                        marginTop: '40px',
+                                        textAlign: 'left',
+                                        width: '100%'
+                                    }}>
+                                        {state.choices.map((choice, i) => {
+                                            const key = Object.keys(choice)[0];
+                                            const val = choice[key];
+                                            return (
+                                                <div key={i} className="choice-item" style={{
+                                                    background: 'rgba(255,255,255,0.1)',
+                                                    padding: '20px 30px',
+                                                    borderRadius: '15px',
+                                                    fontSize: '1.5em',
+                                                    fontWeight: 'bold',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    border: '2px solid rgba(255,255,255,0.2)'
+                                                }}>
+                                                    <span style={{
+                                                        color: '#ffd700',
+                                                        marginRight: '20px',
+                                                        fontSize: '1.2em',
+                                                        textTransform: 'uppercase'
+                                                    }}>{key}.</span>
+                                                    <span>{val}</span>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+
                                 {state.currentAnswer && (
                                     <div className="gs-answer pop-in">
                                         {state.currentAnswer}

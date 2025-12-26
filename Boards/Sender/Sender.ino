@@ -1,7 +1,6 @@
 /* --- SENDER CODE (BUTTON) ---
    Board: LOLIN(WEMOS) D1 R2 & mini
 */
-11111111111111
 #include <ESP8266WiFi.h>
 #include <espnow.h>
 
@@ -10,7 +9,7 @@
 uint8_t receiverMac[] = {0x80, 0x65, 0x99, 0xEF, 0xC6, 0xD2}; 
 
 // 2. CHANGE THIS NUMBER FOR EACH BUTTON (1, 2, 3, or 4)
-#define PLAYER_ID 1 
+#define PLAYER_ID 5
 // ==========================================
 
 // Pin Definitions

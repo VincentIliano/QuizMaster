@@ -79,6 +79,24 @@ export default function HostControlPanel({ state }) {
                 Q: {state.question}
             </div>
 
+            {state.choices && (
+                <div style={{ margin: '10px 0', padding: '10px', background: '#333', borderRadius: 4 }}>
+                    <div style={{ fontSize: '0.9em', color: '#aaa', marginBottom: 5 }}>Choices:</div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 10 }}>
+                        {state.choices.map((c, i) => {
+                            const k = Object.keys(c)[0];
+                            const v = c[k];
+                            return (
+                                <div key={i} style={{ background: '#444', padding: '5px 10px', borderRadius: 4, border: state.answer === k ? '1px solid #28a745' : '1px solid #555' }}>
+                                    <span style={{ fontWeight: 'bold', color: '#ffd700', marginRight: 5 }}>{k.toUpperCase()}.</span>
+                                    <span>{v}</span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
+
             {state.mediaUrl && (
                 <div style={{ margin: '10px 0', padding: 10, background: '#222', borderRadius: 4, display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ fontWeight: 'bold', color: '#aaa' }}>MEDIA:</div>

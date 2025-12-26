@@ -147,6 +147,7 @@ class GameEngine {
             lockedOutTeams: s.lockedOutTeams,
             currentAnswer: (s.currentQuestionData && (s.status === 'ANSWER_REVEALED' || s.status === 'GAME_OVER')) ? s.currentQuestionData.answer : null,
             answer: s.currentQuestionData ? s.currentQuestionData.answer : null,
+            choices: s.currentQuestionData ? s.currentQuestionData.choices : null,
             roundsSummary: s.roundsSummary,
             upcomingQuestion: upcomingQ ? (upcomingQ.text || ((s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].type === 'connections' && upcomingQ.groups) ? upcomingQ.groups.map(g => g.name).join(', ') : null)) : null,
             upcomingAnswer: upcomingQ ? upcomingQ.answer : null,
