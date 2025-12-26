@@ -29,18 +29,21 @@ export default function Contestant() {
     // Track solved groups count to trigger sound
     const prevSolvedCount = useRef(0);
 
+    // Track previous state to prevent re-triggering sounds
+    const prevStatus = useRef(null);
+
     // Effect to play specific sounds based on exact state changes
     useEffect(() => {
         if (!state) return;
 
-        // Buzzer Sound
-        if (state.status === 'BUZZED' && buzzerAudioRef.current) {
+        // Buzzer Sound (only on transition)
+        if (state.status === 'BUZZED' && prevStatus.current !== 'BUZZED' && buzzerAudioRef.current) {
             buzzerAudioRef.current.currentTime = 0;
             buzzerAudioRef.current.play().catch(() => { });
         }
 
-        // Answer Revealed Sound (Correct or Wrong)
-        if (state.status === 'ANSWER_REVEALED') {
+        // Answer Revealed Sound (Correct or Wrong) - only on transition or judgement change
+        if (state.status === 'ANSWER_REVEALED' && (prevStatus.current !== 'ANSWER_REVEALED' || state.lastJudgement !== prevStatus.currentJudgement)) {
             if (state.lastJudgement === true && correctAudioRef.current) {
                 correctAudioRef.current.currentTime = 0;
                 correctAudioRef.current.play().catch(() => { });
@@ -51,14 +54,14 @@ export default function Contestant() {
         }
 
         // Wrong Answer (but game continues) -> Status is PAUSED, lastJudgement is false
-        if (state.status === 'PAUSED' && state.lastJudgement === false && wrongAudioRef.current) {
+        if (state.status === 'PAUSED' && state.lastJudgement === false && prevStatus.current !== 'PAUSED' && wrongAudioRef.current) {
             wrongAudioRef.current.currentTime = 0;
             wrongAudioRef.current.play().catch(() => { });
         }
 
         // Solved a Connection Group (Correct Sound)
-        if (state.currentQuestionData && state.currentQuestionData.solvedGroups) {
-            const currentCount = state.currentQuestionData.solvedGroups.length;
+        if (state.solvedGroups) {
+            const currentCount = state.solvedGroups.length;
             // If count increased, play correct sound
             if (currentCount > prevSolvedCount.current && correctAudioRef.current) {
                 correctAudioRef.current.currentTime = 0;
@@ -70,10 +73,13 @@ export default function Contestant() {
         }
 
         // All Locked OR Timeout -> Wrong Sound
-        if ((state.status === 'ALL_LOCKED' || state.status === 'TIMEOUT') && wrongAudioRef.current) {
+        if ((state.status === 'ALL_LOCKED' || state.status === 'TIMEOUT') && state.status !== prevStatus.current && wrongAudioRef.current) {
             wrongAudioRef.current.currentTime = 0;
             wrongAudioRef.current.play().catch(() => { });
         }
+
+        prevStatus.current = state.status;
+        prevStatus.currentJudgement = state.lastJudgement; // Track judgement too if needed
 
     }, [state?.status, state?.lastJudgement, state?.lockedOutTeams?.length, state?.solvedGroups?.length]); // Dependencies to re-run
 
@@ -111,6 +117,17 @@ export default function Contestant() {
 
         socket.on('state_update', onState);
         socket.on('timer_tick', onTimer);
+
+        socket.on('play_sfx', (type) => {
+            if (type === 'correct' && correctAudioRef.current) {
+                correctAudioRef.current.currentTime = 0;
+                correctAudioRef.current.play().catch(e => console.log('SFX play failed', e));
+            } else if (type === 'wrong' && wrongAudioRef.current) {
+                wrongAudioRef.current.currentTime = 0;
+                wrongAudioRef.current.play().catch(e => console.log('SFX play failed', e));
+            }
+        });
+
         socket.emit('get_state');
 
         const handleKeyDown = (e) => {

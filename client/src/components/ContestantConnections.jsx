@@ -21,10 +21,28 @@ export default function ContestantConnections({ state }) {
     return (
         <div className="connections-container">
             {/* Header / Timer / Buzzer Overlay */}
-            <div className="connections-header" style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '20px' }}>
-                <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`} style={{ fontSize: '3em', fontWeight: 'bold', color: '#fff', background: '#333', padding: '10px 30px', borderRadius: '50px' }}>
+            <div className="connections-header" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginBottom: '20px' }}>
+                <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`} style={{ fontSize: '3em', fontWeight: 'bold', color: '#fff', background: '#333', padding: '10px 30px', borderRadius: '50px', marginBottom: 20 }}>
                     {state.timeLimit}
                 </div>
+
+                {state.topic && (
+                    <div className="topic-display" style={{
+                        fontSize: '2.5em',
+                        fontWeight: '900',
+                        color: state.topicRevealed ? '#ffd700' : '#555',
+                        textTransform: 'uppercase',
+                        letterSpacing: '5px',
+                        background: 'rgba(0,0,0,0.5)',
+                        padding: '10px 40px',
+                        borderRadius: '10px',
+                        border: state.topicRevealed ? '2px solid #ffd700' : '2px dashed #555',
+                        boxShadow: state.topicRevealed ? '0 0 30px rgba(255, 215, 0, 0.3)' : 'none',
+                        transition: 'all 0.5s ease'
+                    }}>
+                        {state.topicRevealed ? state.topic : "?????????"}
+                    </div>
+                )}
             </div>
 
 

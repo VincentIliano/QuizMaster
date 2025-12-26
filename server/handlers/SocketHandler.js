@@ -19,6 +19,14 @@ module.exports = (io, gameEngine) => {
             socket.emit('state_update', gameEngine.getPublicState());
         });
 
+        socket.on('reveal_topic', () => {
+            const pointsAwarded = gameEngine.revealTopic();
+            if (pointsAwarded) {
+                io.emit('play_sfx', 'correct');
+            }
+            io.emit('state_update', gameEngine.getPublicState());
+        });
+
         // Host Actions
         socket.on('set_teams', (names) => gameEngine.setTeams(names));
 
@@ -37,6 +45,14 @@ module.exports = (io, gameEngine) => {
 
         socket.on('toggle_media', () => {
             gameEngine.toggleMedia();
+        });
+
+
+        socket.on('buzz', (teamIndex) => {
+            const buzzedName = gameEngine.handleBuzz(teamIndex);
+            if (buzzedName) {
+                io.emit('buzzed', buzzedName);
+            }
         });
 
         socket.on('host_buzz', (teamIndex) => {

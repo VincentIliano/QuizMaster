@@ -149,6 +149,16 @@ export default function HostControlPanel({ state }) {
                     onClick={reveal}
                     disabled={state.status !== 'TIMEOUT' && state.status !== 'ALL_LOCKED'}
                 >Reveal</button>
+
+                {state.topic && (
+                    <button
+                        onClick={() => socket.emit('reveal_topic')}
+                        disabled={state.topicRevealed}
+                        style={{ backgroundColor: state.topicRevealed ? '#555' : '#8e44ad', color: 'white' }}
+                    >
+                        {state.topicRevealed ? `Topic: ${state.topic}` : "Reveal Topic"}
+                    </button>
+                )}
             </div>
 
             <hr style={{ margin: '20px 0', borderColor: '#444' }} />
@@ -196,6 +206,7 @@ export default function HostControlPanel({ state }) {
                     })}
                 </div>
             </div>
+
         </div>
     );
 }

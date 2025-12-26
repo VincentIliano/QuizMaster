@@ -43,7 +43,50 @@ class ConnectionsRound extends Round {
 
             question.gridItems = allItems;
             question.solvedGroups = [];
+            question.topicRevealed = false; // Initialize topicRevealed to false
         }
+    }
+
+    revealTopic(engine) {
+        const round = engine.state.rounds[engine.state.currentRoundIndex];
+        const question = round.questions[engine.state.currentQuestionIndex];
+
+        let teamIndex = engine.state.buzzerWinner;
+        console.log('ConnectionsRound: revealTopic scoring check. BuzzerWinner:', teamIndex, 'Type:', typeof teamIndex);
+
+        if (teamIndex !== null && teamIndex !== undefined) {
+            // valid buzzer, award points
+            const currentStreak = engine.state.connectionStreak || 0;
+            const points = 10 * (currentStreak + 1);
+            console.log('ConnectionsRound: Awarding points:', points, 'Current Streak:', currentStreak);
+
+            // Increment streak
+            engine.state.connectionStreak = currentStreak + 1;
+
+            round.scores = round.scores || {};
+            const oldScore = engine.state.teams[teamIndex].score;
+            engine.state.teams[teamIndex].score += points;
+            round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
+
+            console.log('ConnectionsRound: Score updated for team', teamIndex, 'Old:', oldScore, 'New:', engine.state.teams[teamIndex].score);
+        } else {
+            console.log('ConnectionsRound: No buzzer winner, no points awarded.');
+        }
+
+        if (question) question.topicRevealed = true;
+
+        if (engine.state.currentQuestionData) {
+            engine.state.currentQuestionData.topicRevealed = true;
+        }
+
+        // Reset buzzer state after successful reveal/score
+        engine.state.buzzerWinner = null;
+        engine.state.buzzerLocked = false;
+        engine.state.status = 'IDLE';
+
+        engine.save();
+
+        return (teamIndex !== null && teamIndex !== undefined);
     }
 
     handleAnswer(engine, teamIndex, correct) {

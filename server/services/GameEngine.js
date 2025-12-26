@@ -158,6 +158,8 @@ class GameEngine {
             gridItems: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].gridItems : [],
             solvedGroups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].solvedGroups : [],
             groups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].groups : [],
+            topic: s.currentQuestionData ? s.currentQuestionData.topic : null,
+            topicRevealed: s.currentQuestionData ? s.currentQuestionData.topicRevealed : false,
             finalStandings: s.finalStandings || [],
             finalistRevealCount: s.finalistRevealCount || 0
         };
@@ -418,6 +420,13 @@ class GameEngine {
         if (this.currentRoundInstance instanceof ConnectionsRound) {
             this.currentRoundInstance.revealGroup(this, groupIndex);
         }
+    }
+
+    revealTopic() {
+        if (this.currentRoundInstance instanceof ConnectionsRound) {
+            return this.currentRoundInstance.revealTopic(this);
+        }
+        return false;
     }
 
     goToFinalResults() {

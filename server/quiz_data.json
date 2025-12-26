@@ -294,63 +294,33 @@
       "points": 10,
       "questions": [
         {
+          "topic": "K-pop",
           "groups": [
             {
-              "name": "Fruits",
+              "name": "APT",
               "items": [
-                "Apple",
-                "Banana",
-                "Orange",
-                "Grape"
+                "Bruno Mars",
+                "Rosé",
+                "Drankspelletje",
+                "Appartement"
               ]
             },
             {
-              "name": "Gen Z Slang",
+              "name": "Golden",
               "items": [
-                "Rizz",
-                "Simp",
-                "Bet",
-                "Cap"
-              ]
-            },
-            {
-              "name": "Planets",
-              "items": [
-                "Mars",
-                "Venus",
-                "Jupiter",
-                "Saturn"
-              ]
-            }
-          ]
-        },
-        {
-          "groups": [
-            {
-              "name": "Social Apps",
-              "items": [
-                "Insta",
-                "TikTok",
-                "Snap",
-                "X"
-              ]
-            },
-            {
-              "name": "Streaming",
-              "items": [
+                "🎵We're going up, up, up,....🎵",
                 "Netflix",
-                "Hulu",
-                "Prime",
-                "Max"
+                "Anime",
+                "Kpop Demon Hunters"
               ]
             },
             {
-              "name": "Crypto",
+              "name": "Gangnam Style",
               "items": [
-                "Bitcoin",
-                "Ether",
-                "Doge",
-                "Solana"
+                "Psy",
+                "Paardrijdansje",
+                "🎵 op, op, op, op,.... 🎵",
+                "🎵 eh, Sexy Lady 🎵"
               ]
             }
           ]

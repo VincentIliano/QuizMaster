@@ -60,8 +60,16 @@ export default function HostConnections({ state }) {
                     <button onClick={() => socket.emit('previous_question')}>&lt; Prev (A)</button>
                     <button onClick={() => socket.emit('start_timer')} disabled={state.status !== 'READING' && state.status !== 'PAUSED' && state.status !== 'IDLE' && state.status !== 'BUZZED'}>Start Timer (Space)</button>
                     <button onClick={() => socket.emit('pause_timer')} disabled={state.status !== 'READING' && state.status !== 'LISTENING'}>Pause Timer</button>
+                    {state.topic && (
+                        <button
+                            onClick={() => socket.emit('reveal_topic')}
+                            disabled={state.topicRevealed}
+                            style={{ backgroundColor: state.topicRevealed ? '#555' : '#8e44ad', color: 'white' }}
+                        >
+                            {state.topicRevealed ? `Topic: ${state.topic}` : "Reveal Topic"}
+                        </button>
+                    )}
                     <button onClick={() => socket.emit('next_question')}>Next &gt; (D)</button>
-                    {/* Reuse generic control panel logic if possible, but custom view requested */}
                 </div>
             </div>
 
