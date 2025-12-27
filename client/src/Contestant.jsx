@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo, useLayoutEffect } from 'react';
 import { socket } from './socket';
 import ContestantRoundSummary from './components/ContestantRoundSummary';
 import ContestantConnections from './components/ContestantConnections';
@@ -111,6 +111,87 @@ export default function Contestant() {
     const prevRoundIndex = useRef(-1);
     const [animClass, setAnimClass] = useState('');
 
+    // --- FLIP Animation Logic for Order Round ---
+    const choiceRefs = useRef({});
+    const prevRects = useRef({});
+
+    const displayChoices = useMemo(() => {
+        if (!state || !state.choices) return [];
+        let choices = [...state.choices];
+
+        if (state.roundType === 'order' && (state.status === 'ANSWER_REVEALED' || state.status === 'GAME_OVER')) {
+            // Sort choices based on the answer key sequence (e.g. "B, A, C")
+            if (state.answer) {
+                const order = state.answer.split(',').map(s => s.trim().toUpperCase());
+                choices.sort((a, b) => {
+                    const keyA = Object.keys(a)[0].toUpperCase();
+                    const keyB = Object.keys(b)[0].toUpperCase();
+                    return order.indexOf(keyA) - order.indexOf(keyB);
+                });
+            }
+        }
+        return choices;
+    }, [state?.choices, state?.roundType, state?.status, state?.answer]);
+
+    const prevOrder = useRef("");
+
+    useLayoutEffect(() => {
+        // FLIP: Invert and Play
+        if (!state || state.roundType !== 'order') return;
+
+        // Check if order changed
+        const currentOrderKeys = displayChoices.map(c => Object.keys(c)[0]).join(',');
+        const orderChanged = prevOrder.current !== currentOrderKeys;
+
+        const currentRects = {};
+        // 1. Measure New Positions (Last)
+        displayChoices.forEach(c => {
+            const key = Object.keys(c)[0];
+            const el = choiceRefs.current[key];
+            if (el) {
+                currentRects[key] = el.getBoundingClientRect();
+            }
+        });
+
+        // 2. Calculate Delta and Invert (Only if order changed)
+        if (orderChanged) {
+            displayChoices.forEach(c => {
+                const key = Object.keys(c)[0];
+                const el = choiceRefs.current[key];
+                const prev = prevRects.current[key];
+                const current = currentRects[key];
+
+                if (el && prev && current) {
+                    const dy = prev.top - current.top;
+                    const dx = prev.left - current.left;
+
+                    if (dx !== 0 || dy !== 0) {
+                        // Invert: translate back to old position
+                        el.style.transform = `translate(${dx}px, ${dy}px)`;
+                        el.style.transition = 'none';
+
+                        // Force Reflow
+                        void el.offsetWidth;
+
+                        // Play: Remove transform to animate to new position
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                el.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+                                el.style.transform = '';
+                            });
+                        });
+                    }
+                }
+            });
+        }
+
+        // Save current as previous for next render
+        prevRects.current = currentRects;
+        prevOrder.current = currentOrderKeys;
+
+
+    }, [displayChoices, state?.roundType]);
+
     useEffect(() => {
         const onState = (s) => setState(s);
         const onTimer = (val) => setState(prev => ({ ...prev, timeLimit: val }));
@@ -158,11 +239,7 @@ export default function Contestant() {
         }
 
         if (state.questionIndex !== prevQIndex.current) {
-            if (state.questionIndex > prevQIndex.current) {
-                setAnimClass('slide-right');
-            } else {
-                setAnimClass('slide-left');
-            }
+            setAnimClass('pop-in');
             prevQIndex.current = state.questionIndex;
         }
     }, [state?.questionIndex, state?.roundIndex]); // Trigger on index changes
@@ -269,9 +346,15 @@ export default function Contestant() {
                         {/* Question Card - Right Side (or Center) */}
                         {state.status !== 'IDLE' && (state.mediaUrl || state.question) && (
                             <div
-                                key={state.question}
+                                // Removed key={state.question} to prevent remounting on unrelated updates. 
+                                // Relies on animClass triggering for visual entrance.
                                 className={`question-card ${animClass} ${state.status === 'LISTENING' ? 'listening-active' : ''}`}
                                 style={state.roundType === 'freezeout' ? { flex: 1, maxWidth: 'none', height: 'auto' } : {}}
+                                onAnimationEnd={() => {
+                                    if (animClass === 'pop-in' || animClass === 'slide-right' || animClass === 'slide-left') {
+                                        setAnimClass('');
+                                    }
+                                }}
                             >
 
                                 {state.mediaUrl && (
@@ -317,7 +400,7 @@ export default function Contestant() {
                                         textAlign: 'left',
                                         width: '100%'
                                     }}>
-                                        {state.choices.map((choice, i) => {
+                                        {displayChoices.map((choice, i) => {
                                             const key = Object.keys(choice)[0];
                                             const val = choice[key];
                                             const isRevealed = state.status === 'ANSWER_REVEALED' || state.status === 'GAME_OVER';
@@ -332,25 +415,41 @@ export default function Contestant() {
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 border: '2px solid rgba(255,255,255,0.2)',
-                                                transition: 'all 0.5s ease'
+                                                transition: 'all 0.5s ease', // Fallback transition
+                                                position: 'relative' // Needed for z-index
                                             };
 
+                                            // Highlight logic for non-Order rounds or general revealed state
                                             if (isRevealed) {
-                                                if (isCorrect) {
+                                                // For Order rounds, we highlight everything as correct once they are ordered?
+                                                // Or maybe we don't need special color highlighting if the order proves it?
+                                                // Let's keep the green glow for visual confirm.
+                                                if (state.roundType === 'order') {
                                                     style.background = 'rgba(40, 167, 69, 0.3)';
                                                     style.borderColor = '#28a745';
                                                     style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.5)';
-                                                    style.transform = 'scale(1.05)';
                                                 } else {
-                                                    style.opacity = 0.3;
-                                                    style.filter = 'grayscale(1)';
+                                                    if (isCorrect) {
+                                                        style.background = 'rgba(40, 167, 69, 0.3)';
+                                                        style.borderColor = '#28a745';
+                                                        style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.5)';
+                                                        style.transform = 'scale(1.05)';
+                                                    } else {
+                                                        style.opacity = 0.3;
+                                                        style.filter = 'grayscale(1)';
+                                                    }
                                                 }
                                             }
 
                                             return (
-                                                <div key={i} className="choice-item" style={style}>
+                                                <div
+                                                    key={key} // Use key as react key to preserve identity for FLIP
+                                                    ref={el => choiceRefs.current[key] = el}
+                                                    className="choice-item"
+                                                    style={style}
+                                                >
                                                     <span style={{
-                                                        color: isRevealed && isCorrect ? '#fff' : '#ffd700',
+                                                        color: isRevealed && (isCorrect || state.roundType === 'order') ? '#fff' : '#ffd700',
                                                         marginRight: '20px',
                                                         fontSize: '1.2em',
                                                         textTransform: 'uppercase'

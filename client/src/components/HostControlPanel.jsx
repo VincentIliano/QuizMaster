@@ -106,7 +106,11 @@ export default function HostControlPanel({ state }) {
             )}
 
             <div style={{ marginBottom: 20, color: '#64d2ff' }}>
-                Answer: {state.answer}
+                {state.roundType === 'order' ? (
+                    <strong>Correct Order: {state.answer}</strong>
+                ) : (
+                    <>Answer: {state.answer}</>
+                )}
             </div>
 
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -117,7 +121,7 @@ export default function HostControlPanel({ state }) {
 
                 <button
                     onClick={startTimer}
-                    disabled={state.status !== 'READING'}
+                    disabled={state.status !== 'READING' && state.status !== 'PAUSED'}
                 >Start Timer</button>
 
                 {state.mediaUrl && (state.mediaType === 'video' || state.mediaType === 'audio') && (
@@ -147,7 +151,7 @@ export default function HostControlPanel({ state }) {
 
                 <button
                     onClick={reveal}
-                    disabled={state.status !== 'TIMEOUT' && state.status !== 'ALL_LOCKED'}
+                    disabled={state.status !== 'TIMEOUT' && state.status !== 'ALL_LOCKED' && state.status !== 'PAUSED' && state.status !== 'LISTENING'}
                 >Reveal</button>
 
                 {state.topic && (

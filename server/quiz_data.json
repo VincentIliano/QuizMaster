@@ -326,6 +326,44 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Order Round",
+      "type": "order",
+      "points": 20,
+      "description": "Put the items in the correct order!",
+      "questions": [
+        {
+          "text": "Put these Star Wars movies in chronological release order.",
+          "choices": [
+            {
+              "A": "Revenge of the Sith"
+            },
+            {
+              "B": "A New Hope"
+            },
+            {
+              "C": "The Force Awakens"
+            }
+          ],
+          "answer": "B, A, C"
+        },
+        {
+          "text": "Rank these planets by size (Smallest to Largest).",
+          "choices": [
+            {
+              "A": "Earth"
+            },
+            {
+              "B": "Mars"
+            },
+            {
+              "C": "Jupiter"
+            }
+          ],
+          "answer": "B, A, C"
+        }
+      ]
     }
   ]
 }
