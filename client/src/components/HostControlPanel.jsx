@@ -215,8 +215,20 @@ export default function HostControlPanel({ state }) {
                         const isLocked = state.lockedOutTeams && state.lockedOutTeams.includes(i);
                         return (
                             <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: isLocked ? '#2a1a1a' : '#333', padding: '10px 15px', borderRadius: 6, border: isLocked ? '1px solid #d00' : 'none' }}>
-                                <span style={{ fontSize: '1.1em', fontWeight: '500', color: isLocked ? '#aaa' : '#eee' }}>
-                                    {t.name} {isLocked && <span style={{ color: '#ff4d4d', fontSize: '0.8em' }}>(FROZEN)</span>}
+                                <span style={{ fontSize: '1.1em', fontWeight: '500', color: isLocked ? '#aaa' : '#eee', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    {t.name}
+                                    {isLocked && (
+                                        <>
+                                            <span style={{ color: '#ff4d4d', fontSize: '0.8em' }}>(FROZEN)</span>
+                                            <button
+                                                onClick={() => socket.emit('unfreeze_team', i)}
+                                                style={{ padding: '2px 8px', fontSize: '0.8em', background: '#17a2b8', color: 'white', border: 'none', borderRadius: 4, cursor: 'pointer' }}
+                                                title="Unfreeze Team"
+                                            >
+                                                Unfreeze
+                                            </button>
+                                        </>
+                                    )}
                                 </span>
                                 <input
                                     type="number"

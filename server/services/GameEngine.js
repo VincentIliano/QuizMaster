@@ -7,7 +7,11 @@ class GameEngine {
     constructor(storage) {
         this.storage = storage;
         this.timerInterval = null;
+        this.timerInterval = null;
         this.onTick = null; // Callback for timer ticks
+        this.onPlaySfx = null; // Callback for sound effects
+
+        // Initial State
 
         // Initial State
         this.state = {
@@ -143,7 +147,7 @@ class GameEngine {
             roundsSummary: s.roundsSummary,
 
             // Restored Properties
-            roundType: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].type.toLowerCase() : null,
+            roundType: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? (s.rounds[s.currentRoundIndex].type ? s.rounds[s.currentRoundIndex].type.toLowerCase() : 'standard') : null,
             roundName: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].name : "",
             roundDescription: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].description : "",
             roundPoints: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].points : 0,
@@ -210,6 +214,9 @@ class GameEngine {
 
             // Snapshot scores for summary calculation
             this.state.roundStartScores = this.state.teams.map(t => t.score);
+
+            // Initialize timer for display (ROUND_READY screen)
+            this.state.timerValue = r.time_limit || 30;
 
             this.save();
         }
@@ -412,6 +419,20 @@ class GameEngine {
         this.save();
     }
 
+    unfreezeTeam(teamIndex) {
+        if (this.state.lockedOutTeams.includes(teamIndex)) {
+            this.state.lockedOutTeams = this.state.lockedOutTeams.filter(i => i !== teamIndex);
+
+            // If we were in ALL_LOCKED, switch to PAUSED so host can resume
+            if (this.state.status === 'ALL_LOCKED') {
+                this.state.status = 'PAUSED';
+                this.state.buzzerLocked = true;
+            }
+
+            this.save();
+        }
+    }
+
     endRoundEarly() {
         if (this.state.currentRoundIndex !== -1) {
             this.stopTimer();
@@ -446,6 +467,12 @@ class GameEngine {
             return this.currentRoundInstance.revealTopic(this);
         }
         return false;
+    }
+
+    playSfx(type) {
+        if (this.onPlaySfx) {
+            this.onPlaySfx(type);
+        }
     }
 
     goToFinalResults() {

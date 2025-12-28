@@ -22,11 +22,19 @@ class ListRound extends Round {
             engine.state.buzzerLocked = false;
             // Resume the timer if there is time left
             if (engine.state.timerValue > 0) {
+                engine.playSfx('wrong');
                 engine.startTimer();
             } else {
                 engine.state.status = 'TIMEOUT';
             }
             engine.save();
+            return;
+            return;
+        }
+
+        // If generic "Correct" (true) is sent, ignore it in List Round 
+        // because we need a specific string answer to mark off.
+        if (answer === true) {
             return;
         }
 
@@ -42,6 +50,7 @@ class ListRound extends Round {
             round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
             round.foundAnswers.push(originalAnswer); // Store exact string for UI matching
             engine.state.lastJudgement = true;
+            engine.playSfx('correct');
 
             // Keep game going. KEEP BUZZED for chaining answers.
             // Do NOT clear buzzerWinner.
@@ -69,6 +78,7 @@ class ListRound extends Round {
             engine.state.buzzerWinner = null;
             engine.state.buzzerLocked = false;
             if (engine.state.timerValue > 0) {
+                engine.playSfx('wrong');
                 engine.startTimer();
             } else {
                 engine.state.status = 'TIMEOUT';
@@ -83,6 +93,7 @@ class ListRound extends Round {
             engine.state.buzzerWinner = null;
             engine.state.buzzerLocked = false;
             if (engine.state.timerValue > 0) {
+                engine.playSfx('wrong');
                 engine.startTimer();
             } else {
                 engine.state.status = 'TIMEOUT';

@@ -9,6 +9,11 @@ module.exports = (io, gameEngine) => {
         io.emit('timer_tick', val);
     };
 
+    // Setup SFX listener
+    gameEngine.onPlaySfx = (type) => {
+        io.emit('play_sfx', type);
+    };
+
     io.on('connection', (socket) => {
         console.log('Client connected');
 
@@ -71,6 +76,10 @@ module.exports = (io, gameEngine) => {
         socket.on('reveal_answer', () => gameEngine.revealAnswer());
 
         socket.on('end_round_early', () => gameEngine.endRoundEarly());
+
+        socket.on('unfreeze_team', (teamIndex) => {
+            gameEngine.unfreezeTeam(parseInt(teamIndex));
+        });
 
         socket.on('finish_round', () => gameEngine.finishRound());
 

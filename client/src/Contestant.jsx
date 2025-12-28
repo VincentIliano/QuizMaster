@@ -349,7 +349,10 @@ export default function Contestant() {
                                 // Removed key={state.question} to prevent remounting on unrelated updates. 
                                 // Relies on animClass triggering for visual entrance.
                                 className={`question-card ${animClass} ${state.status === 'LISTENING' ? 'listening-active' : ''}`}
-                                style={state.roundType === 'freezeout' ? { flex: 1, maxWidth: 'none', height: 'auto' } : {}}
+                                style={{
+                                    ...(state.roundType === 'freezeout' ? { flex: 1, maxWidth: 'none', height: 'auto' } : {}),
+                                    ...(state.roundType === 'list' ? { maxWidth: '95%', width: '100%' } : {}),
+                                }}
                                 onAnimationEnd={() => {
                                     if (animClass === 'pop-in' || animClass === 'slide-right' || animClass === 'slide-left') {
                                         setAnimClass('');
@@ -443,7 +446,7 @@ export default function Contestant() {
 
                                             return (
                                                 <div
-                                                    key={key} // Use key as react key to preserve identity for FLIP
+                                                    key={`${state.questionIndex}-${key}`} // Unique key per question to reset state/styles
                                                     ref={el => choiceRefs.current[key] = el}
                                                     className="choice-item"
                                                     style={style}
@@ -493,9 +496,9 @@ export default function Contestant() {
 
                                 {state.status === 'ANSWER_REVEALED' && state.lastJudgement === true &&
                                     !(state.roundType === 'freezeout' && state.lockedOutTeams && state.teams && state.lockedOutTeams.length === state.teams.length) && (
-                                        <div className={`buzzer-overlay state-correct`}>
-                                            CORRECT!
-                                        </div>
+                                        // User requested to remove the "CORRECT!" overlay tile.
+                                        // Leaving empty fragment or null to keep logic structure if needed later, or cleaner just null.
+                                        null
                                     )}
                             </>
                         )}

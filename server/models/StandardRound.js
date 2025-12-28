@@ -31,16 +31,18 @@ class StandardRound extends Round {
             } else {
                 // Return to listening state for other players
                 engine.state.buzzerWinner = null;
-                engine.state.buzzerLocked = true; // Lock buzzers while paused
-                // Don't auto-start timer here? Maybe wait for host to resume?
-                // The prompt says "this way the other players have the chance to answer".
-                // Usually host resumes timer manually or it auto-resumes. 
-                // Let's set status to PAUSED so host can resume, OR back to LISTENING if we want to force flow.
-                // Given existing mechanics, setting to PAUSED is safer as it stops the timer until host is ready.
-                // BUT user wants "chance to answer". If we go to PAUSED, host hits resume. 
-                // Let's go to PAUSED.
-                engine.state.status = "PAUSED";
+                engine.state.buzzerLocked = false;
                 engine.state.lastJudgement = false; // Trigger flash on client
+
+                // Auto-resume timer
+                if (engine.state.timerValue > 0) {
+                    engine.playSfx('wrong'); // Explicitly play wrong sound as we are bypassing the PAUSED state
+                    engine.startTimer();
+                } else {
+                    engine.state.status = "TIMEOUT";
+                    engine.state.buzzerLocked = true;
+                }
+
                 engine.save();
             }
         }

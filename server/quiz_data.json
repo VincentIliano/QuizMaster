@@ -42,7 +42,7 @@
     },
     {
       "name": "Minieme Quiz",
-      "time_limit": 5,
+      "time_limit": 15,
       "points": 10,
       "description": "Beantwoord snel deze kleine vragen",
       "questions": [
@@ -195,102 +195,6 @@
             }
           ],
           "answer": "c"
-        }
-      ]
-    },
-    {
-      "name": "Kerstavond 1",
-      "time_limit": 20,
-      "points": 20,
-      "description": "behind!",
-      "questions": [
-        {
-          "text": "Hoe heet het beroemde rendier met de rode neus?",
-          "answer": "Rudolph"
-        },
-        {
-          "text": "Maak de zin af: 'Jingle bells, jingle bells, jingle all the...'",
-          "answer": "Way"
-        },
-        {
-          "text": "Hoe heet de jongen die 'alleen thuis' wordt achtergelaten in de beroemdste kerstfilm aller tijden (Home Alone)?",
-          "answer": "Kevin"
-        },
-        {
-          "text": "Welk groen monster haat Kerstmis en probeert het te stelen?",
-          "answer": "De Grinch"
-        },
-        {
-          "text": "Wie zingt de hit 'All I Want for Christmas Is You'?",
-          "answer": "Mariah Carey"
-        },
-        {
-          "text": "Hoe heten de hulpjes van de Kerstman die het speelgoed maken?",
-          "answer": "Elfen (of elfjes)"
-        },
-        {
-          "text": "Uit welk land komt het liedje 'Stille Nacht' oorspronkelijk?",
-          "answer": "Oostenrijk"
-        },
-        {
-          "text": "Hoe heet de sneeuwpop uit de film Frozen?",
-          "answer": "Olaf"
-        },
-        {
-          "text": "Wat roept de Kerstman altijd als hij lacht?",
-          "answer": "Ho Ho Ho"
-        },
-        {
-          "text": "Welk duo zong de hit 'Last Christmas'?",
-          "answer": "Wham!"
-        }
-      ]
-    },
-    {
-      "name": "Kerstavond 2",
-      "time_limit": 20,
-      "points": 20,
-      "description": "behind!",
-      "questions": [
-        {
-          "text": "Hoe heet het beroemde rendier met de rode neus?",
-          "answer": "Rudolph"
-        },
-        {
-          "text": "Maak de zin af: 'Jingle bells, jingle bells, jingle all the...'",
-          "answer": "Way"
-        },
-        {
-          "text": "Hoe heet de jongen die 'alleen thuis' wordt achtergelaten in de beroemdste kerstfilm aller tijden (Home Alone)?",
-          "answer": "Kevin"
-        },
-        {
-          "text": "Welk groen monster haat Kerstmis en probeert het te stelen?",
-          "answer": "De Grinch"
-        },
-        {
-          "text": "Wie zingt de hit 'All I Want for Christmas Is You'?",
-          "answer": "Mariah Carey"
-        },
-        {
-          "text": "Hoe heten de hulpjes van de Kerstman die het speelgoed maken?",
-          "answer": "Elfen (of elfjes)"
-        },
-        {
-          "text": "Uit welk land komt het liedje 'Stille Nacht' oorspronkelijk?",
-          "answer": "Oostenrijk"
-        },
-        {
-          "text": "Hoe heet de sneeuwpop uit de film Frozen?",
-          "answer": "Olaf"
-        },
-        {
-          "text": "Wat roept de Kerstman altijd als hij lacht?",
-          "answer": "Ho Ho Ho"
-        },
-        {
-          "text": "Welk duo zong de hit 'Last Christmas'?",
-          "answer": "Wham!"
         }
       ]
     },

@@ -72,7 +72,7 @@ export default function ContestantConnections({ state }) {
             </div>
 
             {/* Footer: Revealed Categories */}
-            <div className="connections-footer" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginTop: 'auto', minHeight: '100px' }}>
+            <div className="connections-footer">
                 {solvedGroups.map(groupIndex => {
                     const group = groups[groupIndex];
                     if (!group) return null;
@@ -80,16 +80,6 @@ export default function ContestantConnections({ state }) {
                         <div
                             key={groupIndex}
                             className={`group-banner group-color-${groupIndex} slide-in`}
-                            style={{
-                                animation: 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                                fontSize: '1.2em',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                padding: '10px',
-                                textTransform: 'uppercase',
-                                fontWeight: 'bold'
-                            }}
                         >
                             {group.name}
                         </div>

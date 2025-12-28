@@ -1,0 +1,858 @@
+{
+  "teams": [
+    {
+      "name": "rfga",
+      "score": 68
+    },
+    {
+      "name": "gsra",
+      "score": 30
+    },
+    {
+      "name": "gtra",
+      "score": 0
+    }
+  ],
+  "rounds": [
+    {
+      "name": "Lijst",
+      "type": "List",
+      "time_limit": 15,
+      "points": 10,
+      "description": "Geef zoveel mogelijk juiste antwoorden.",
+      "questions": [
+        {
+          "text": "Deelgemeenten van Aalst",
+          "answers": [
+            "Aalst",
+            "Erembodegem",
+            "Nieuwerkerken",
+            "Meldert",
+            "Gijzegem",
+            "Moorsel",
+            "Baardegem",
+            "Hofstade",
+            "Herdersem"
+          ]
+        },
+        {
+          "text": "Sterrebeelden",
+          "answers": [
+            "Ram",
+            "Stier",
+            "Tweelingen",
+            "Kreeft",
+            "Leeuw",
+            "Maagd",
+            "Weegschaal",
+            "Schorpioen",
+            "Boogschutter",
+            "Steenbok",
+            "Waterman",
+            "Vissen"
+          ]
+        }
+      ],
+      "scores": {
+        "0": 20
+      },
+      "questionsAnswered": 1
+    },
+    {
+      "name": "Minieme Quiz",
+      "time_limit": 15,
+      "points": 10,
+      "description": "Beantwoord snel deze kleine vragen",
+      "questions": [
+        {
+          "text": "Welke van de volgende is geen bestaande plaatsnaam?",
+          "choices": [
+            {
+              "a": "A"
+            },
+            {
+              "b": "B"
+            },
+            {
+              "c": "C"
+            }
+          ],
+          "answer": "c"
+        },
+        {
+          "text": "Welk lichamelijk kenmerk is typisch voor de Habsburgers?",
+          "choices": [
+            {
+              "a": "Flaporen "
+            },
+            {
+              "b": "Vooruitstekende kin"
+            },
+            {
+              "c": "Scheel kijken"
+            }
+          ],
+          "answer": "b"
+        },
+        {
+          "text": "Wie of wat stoot de meeste broeikasgassen uit?",
+          "choices": [
+            {
+              "a": "Koeien"
+            },
+            {
+              "b": "De mens"
+            },
+            {
+              "c": "Auto's"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "text": "Wat is de hoogste berg van Afrika?",
+          "choices": [
+            {
+              "a": "Mount Everest"
+            },
+            {
+              "b": "Elbroes"
+            },
+            {
+              "c": "Kilimanjaro"
+            }
+          ],
+          "answer": "c"
+        },
+        {
+          "text": "Welke plant is het symbool van Schotland?",
+          "choices": [
+            {
+              "a": "Distel"
+            },
+            {
+              "b": "Rose"
+            },
+            {
+              "c": "Klavertje"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "text": "Wie knippert het vaakst met de ogen?",
+          "choices": [
+            {
+              "a": "Vrouwen"
+            },
+            {
+              "b": "Mannen"
+            },
+            {
+              "c": "Allebei evenveel"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "text": "Hoeveel ogen staan er op een gewone dobbelsteen?",
+          "choices": [
+            {
+              "a": "20"
+            },
+            {
+              "b": "21"
+            },
+            {
+              "c": "22"
+            }
+          ],
+          "answer": "b"
+        },
+        {
+          "text": "Waarom hebben playmobil-mannetjes geen neus?",
+          "choices": [
+            {
+              "a": "Omdat de uitvinder vond dat hij een lelijke neus had."
+            },
+            {
+              "b": "Omdat er op kindertekeningen vaak geen neus staat."
+            },
+            {
+              "c": "Om verf uit te sparen."
+            }
+          ],
+          "answer": "b"
+        },
+        {
+          "text": "Welke nagel groeit het snelst?",
+          "choices": [
+            {
+              "a": "Teennagel"
+            },
+            {
+              "b": "Pinknagel"
+            },
+            {
+              "c": "Wijsvingernagel"
+            }
+          ],
+          "answer": "c"
+        },
+        {
+          "text": "En hoeveel ogen hebben de meeste spinnen?",
+          "choices": [
+            {
+              "a": "8"
+            },
+            {
+              "b": "2"
+            },
+            {
+              "c": "37"
+            }
+          ],
+          "answer": "c"
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    },
+    {
+      "name": "Countdown",
+      "type": "countdown",
+      "time_limit": 20,
+      "points": 0,
+      "description": "Push your luck! Points = Seconds Remaining. Wrong answers freeze you out!",
+      "questions": [
+        {
+          "text": "What film is this scene from?",
+          "answer": "The Matrix",
+          "mediaUrl": "https://media.giphy.com/media/emGXB2eE3GhoXMNFHH/giphy.gif",
+          "mediaType": "image"
+        },
+        {
+          "text": "Identify this sound.",
+          "answer": "R2-D2",
+          "mediaUrl": "https://www.myinstants.com/media/sounds/r2d2.mp3",
+          "mediaType": "audio"
+        },
+        {
+          "text": "Who is this historical figure?",
+          "answer": "Albert Einstein",
+          "mediaUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Albert_Einstein_Head.jpg",
+          "mediaType": "image"
+        },
+        {
+          "text": "What art piece is this video referencing?",
+          "answer": "Ophelia",
+          "mediaUrl": "/assets/Ophelia.mp4",
+          "mediaType": "video"
+        }
+      ],
+      "scores": {
+        "0": 18
+      },
+      "questionsAnswered": 4
+    },
+    {
+      "name": "Connections",
+      "type": "connections",
+      "description": "Find the connecting groups.",
+      "points": 10,
+      "questions": [
+        {
+          "topic": "K-pop",
+          "groups": [
+            {
+              "name": "APT",
+              "items": [
+                "Bruno Mars",
+                "Rosé",
+                "Drankspelletje",
+                "Appartement"
+              ]
+            },
+            {
+              "name": "Golden",
+              "items": [
+                "🎵We're going up, up, up,....🎵",
+                "Netflix",
+                "Anime",
+                "Kpop Demon Hunters"
+              ]
+            },
+            {
+              "name": "Gangnam Style",
+              "items": [
+                "Psy",
+                "Paardrijdansje",
+                "🎵 op, op, op, op,.... 🎵",
+                "🎵 eh, Sexy Lady 🎵"
+              ]
+            }
+          ],
+          "gridItems": [
+            {
+              "text": "Anime",
+              "groupIndex": 1,
+              "id": "6f3ypgd5q",
+              "solved": true
+            },
+            {
+              "text": "🎵 op, op, op, op,.... 🎵",
+              "groupIndex": 2,
+              "id": "phcpj0zne",
+              "solved": true
+            },
+            {
+              "text": "Drankspelletje",
+              "groupIndex": 0,
+              "id": "62uwm4pbd",
+              "solved": true
+            },
+            {
+              "text": "Kpop Demon Hunters",
+              "groupIndex": 1,
+              "id": "nz32qz89b",
+              "solved": true
+            },
+            {
+              "text": "🎵We're going up, up, up,....🎵",
+              "groupIndex": 1,
+              "id": "0yvjzy8yd",
+              "solved": true
+            },
+            {
+              "text": "Appartement",
+              "groupIndex": 0,
+              "id": "85vm7qesz",
+              "solved": true
+            },
+            {
+              "text": "Paardrijdansje",
+              "groupIndex": 2,
+              "id": "4bq0fwtaw",
+              "solved": true
+            },
+            {
+              "text": "Psy",
+              "groupIndex": 2,
+              "id": "mtwatiiby",
+              "solved": true
+            },
+            {
+              "text": "Netflix",
+              "groupIndex": 1,
+              "id": "9mb23n5gf",
+              "solved": true
+            },
+            {
+              "text": "Bruno Mars",
+              "groupIndex": 0,
+              "id": "i3y5553ea",
+              "solved": true
+            },
+            {
+              "text": "🎵 eh, Sexy Lady 🎵",
+              "groupIndex": 2,
+              "id": "bmjdzfxo5",
+              "solved": true
+            },
+            {
+              "text": "Rosé",
+              "groupIndex": 0,
+              "id": "5mx1jc0ks",
+              "solved": true
+            }
+          ],
+          "solvedGroups": [
+            0,
+            1,
+            2
+          ],
+          "topicRevealed": true
+        },
+        {
+          "topic": "AI",
+          "groups": [
+            {
+              "name": "NVidia",
+              "items": [
+                "Jensen Huang",
+                "GPU's",
+                "Meest waardevolle bedrijf in de wereld",
+                "Monopolie"
+              ]
+            },
+            {
+              "name": "Meta",
+              "items": [
+                "Mark Zuckerberg",
+                "Facebook",
+                "Instagram",
+                "VR"
+              ]
+            },
+            {
+              "name": "ChatGpt",
+              "items": [
+                "OpenAI",
+                "Sam Altman",
+                "DALL-E",
+                "SORA"
+              ]
+            }
+          ],
+          "gridItems": [
+            {
+              "text": "OpenAI",
+              "groupIndex": 2,
+              "id": "r09z72cl2",
+              "solved": true
+            },
+            {
+              "text": "Mark Zuckerberg",
+              "groupIndex": 1,
+              "id": "n3rl2xyhy",
+              "solved": true
+            },
+            {
+              "text": "Instagram",
+              "groupIndex": 1,
+              "id": "cmswp7jay",
+              "solved": true
+            },
+            {
+              "text": "Sam Altman",
+              "groupIndex": 2,
+              "id": "3jc1o3p2a",
+              "solved": true
+            },
+            {
+              "text": "SORA",
+              "groupIndex": 2,
+              "id": "o6o4gkd1d",
+              "solved": true
+            },
+            {
+              "text": "Facebook",
+              "groupIndex": 1,
+              "id": "hz4nin2ro",
+              "solved": true
+            },
+            {
+              "text": "VR",
+              "groupIndex": 1,
+              "id": "fe9yv069l",
+              "solved": true
+            },
+            {
+              "text": "DALL-E",
+              "groupIndex": 2,
+              "id": "bcanbp74y",
+              "solved": true
+            },
+            {
+              "text": "Jensen Huang",
+              "groupIndex": 0,
+              "id": "csj812zol",
+              "solved": true
+            },
+            {
+              "text": "Meest waardevolle bedrijf in de wereld",
+              "groupIndex": 0,
+              "id": "vfxt4ucxk",
+              "solved": true
+            },
+            {
+              "text": "GPU's",
+              "groupIndex": 0,
+              "id": "82ylt4se8",
+              "solved": true
+            },
+            {
+              "text": "Monopolie",
+              "groupIndex": 0,
+              "id": "5okueeskm",
+              "solved": true
+            }
+          ],
+          "solvedGroups": [
+            0,
+            2,
+            1
+          ],
+          "topicRevealed": true
+        },
+        {
+          "topic": "Extreem Rechts",
+          "groups": [
+            {
+              "name": "Trump",
+              "items": [
+                "MAGA",
+                "Mar-a-Lago",
+                "Importtarieven",
+                "Oranje"
+              ]
+            },
+            {
+              "name": "Dries Van Langenhove",
+              "items": [
+                "Pano",
+                "Schild & Vrienden",
+                "Memes",
+                "Vlaams Belang"
+              ]
+            },
+            {
+              "name": "Putin",
+              "items": [
+                "KGB",
+                "Oekraïne",
+                "Kremlin",
+                "Judo"
+              ]
+            }
+          ]
+        }
+      ],
+      "scores": {
+        "0": 30,
+        "1": 30
+      },
+      "questionsAnswered": 1
+    },
+    {
+      "name": "1, 2, 3",
+      "type": "order",
+      "points": 20,
+      "description": "Plaats deze gebeurtenissen in de juiste volgorde!",
+      "questions": [
+        {
+          "text": "In welke volgorde werden deze zaken uitgevonden?",
+          "choices": [
+            {
+              "A": "Aansteker",
+              "index": "1823"
+            },
+            {
+              "B": "Fax",
+              "index": "1843"
+            },
+            {
+              "C": "lucifers",
+              "index": "1826"
+            }
+          ],
+          "answer": "A, C, B"
+        },
+        {
+          "text": "In welke volgorde vonden deze zaken plaats?",
+          "choices": [
+            {
+              "A": "De maanlanding",
+              "index": "1969"
+            },
+            {
+              "B": "Wieltjes op een reiskoffer",
+              "index": "1970"
+            },
+            {
+              "C": "Picasso steft",
+              "index": "1973"
+            }
+          ],
+          "answer": "A, B, C"
+        },
+        {
+          "text": "In welke volgorde vonden deze zaken hun oorsprong?",
+          "choices": [
+            {
+              "A": "De universiteit van Oxford",
+              "index": "1096"
+            },
+            {
+              "B": "Het Azteekse rijk",
+              "index": "1428"
+            },
+            {
+              "C": "De drukpers",
+              "index": "1440"
+            }
+          ],
+          "answer": "B, A, C"
+        },
+        {
+          "text": "In welke volgorde vonden deze zaken hun oorsprong?",
+          "choices": [
+            {
+              "A": "De universiteit van Oxford",
+              "index": "1096"
+            },
+            {
+              "B": "Het Azteekse rijk",
+              "index": "1428"
+            },
+            {
+              "C": "De drukpers",
+              "index": "1440"
+            }
+          ],
+          "answer": "A, B, C"
+        },
+        {
+          "text": "Forensische wetenschap",
+          "choices": [
+            {
+              "A": "Vingerafdrukken",
+              "index": "1890"
+            },
+            {
+              "B": "DNA",
+              "index": "1984"
+            },
+            {
+              "C": "Bloedgroepen",
+              "index": "1901"
+            }
+          ],
+          "answer": "A, C, B"
+        },
+        {
+          "text": "Ranschik ons op leeftijd",
+          "choices": [
+            {
+              "A": "Astrid",
+              "index": "36"
+            },
+            {
+              "B": "Vincent",
+              "index": "35"
+            },
+            {
+              "C": "Emma",
+              "index": "2"
+            }
+          ],
+          "answer": "C, B, A"
+        },
+        {
+          "text": "",
+          "choices": [
+            {
+              "A": "",
+              "index": ""
+            },
+            {
+              "B": "",
+              "index": ""
+            },
+            {
+              "C": "",
+              "index": ""
+            }
+          ],
+          "answer": ""
+        },
+        {
+          "text": "",
+          "choices": [
+            {
+              "A": "",
+              "index": ""
+            },
+            {
+              "B": "",
+              "index": ""
+            },
+            {
+              "C": "",
+              "index": ""
+            }
+          ],
+          "answer": ""
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    }
+  ],
+  "currentRoundIndex": 3,
+  "currentQuestionIndex": 1,
+  "currentQuestionData": {
+    "topic": "AI",
+    "groups": [
+      {
+        "name": "NVidia",
+        "items": [
+          "Jensen Huang",
+          "GPU's",
+          "Meest waardevolle bedrijf in de wereld",
+          "Monopolie"
+        ]
+      },
+      {
+        "name": "Meta",
+        "items": [
+          "Mark Zuckerberg",
+          "Facebook",
+          "Instagram",
+          "VR"
+        ]
+      },
+      {
+        "name": "ChatGpt",
+        "items": [
+          "OpenAI",
+          "Sam Altman",
+          "DALL-E",
+          "SORA"
+        ]
+      }
+    ],
+    "gridItems": [
+      {
+        "text": "OpenAI",
+        "groupIndex": 2,
+        "id": "r09z72cl2",
+        "solved": true
+      },
+      {
+        "text": "Mark Zuckerberg",
+        "groupIndex": 1,
+        "id": "n3rl2xyhy",
+        "solved": true
+      },
+      {
+        "text": "Instagram",
+        "groupIndex": 1,
+        "id": "cmswp7jay",
+        "solved": true
+      },
+      {
+        "text": "Sam Altman",
+        "groupIndex": 2,
+        "id": "3jc1o3p2a",
+        "solved": true
+      },
+      {
+        "text": "SORA",
+        "groupIndex": 2,
+        "id": "o6o4gkd1d",
+        "solved": true
+      },
+      {
+        "text": "Facebook",
+        "groupIndex": 1,
+        "id": "hz4nin2ro",
+        "solved": true
+      },
+      {
+        "text": "VR",
+        "groupIndex": 1,
+        "id": "fe9yv069l",
+        "solved": true
+      },
+      {
+        "text": "DALL-E",
+        "groupIndex": 2,
+        "id": "bcanbp74y",
+        "solved": true
+      },
+      {
+        "text": "Jensen Huang",
+        "groupIndex": 0,
+        "id": "csj812zol",
+        "solved": true
+      },
+      {
+        "text": "Meest waardevolle bedrijf in de wereld",
+        "groupIndex": 0,
+        "id": "vfxt4ucxk",
+        "solved": true
+      },
+      {
+        "text": "GPU's",
+        "groupIndex": 0,
+        "id": "82ylt4se8",
+        "solved": true
+      },
+      {
+        "text": "Monopolie",
+        "groupIndex": 0,
+        "id": "5okueeskm",
+        "solved": true
+      }
+    ],
+    "solvedGroups": [
+      0,
+      2,
+      1
+    ],
+    "topicRevealed": true
+  },
+  "timerValue": 53,
+  "buzzerLocked": false,
+  "buzzerWinner": null,
+  "status": "DASHBOARD",
+  "lastJudgement": null,
+  "roundsSummary": [
+    {
+      "index": 0,
+      "name": "Lijst",
+      "points": 10,
+      "questionsAnswered": 1,
+      "totalQuestions": 2,
+      "scores": {
+        "0": 20
+      }
+    },
+    {
+      "index": 1,
+      "name": "Minieme Quiz",
+      "points": 10,
+      "questionsAnswered": 0,
+      "totalQuestions": 10,
+      "scores": {}
+    },
+    {
+      "index": 2,
+      "name": "Countdown",
+      "points": 0,
+      "questionsAnswered": 4,
+      "totalQuestions": 4,
+      "scores": {
+        "0": 18
+      }
+    },
+    {
+      "index": 3,
+      "name": "Connections",
+      "points": 10,
+      "questionsAnswered": 1,
+      "totalQuestions": 3,
+      "scores": {
+        "0": 30,
+        "1": 30
+      }
+    },
+    {
+      "index": 4,
+      "name": "1, 2, 3",
+      "points": 20,
+      "questionsAnswered": 0,
+      "totalQuestions": 8,
+      "scores": {}
+    }
+  ],
+  "lockedOutTeams": [],
+  "mediaPlaying": false,
+  "roundStartScores": [
+    38,
+    0,
+    0
+  ],
+  "connectionStreak": 2
+}

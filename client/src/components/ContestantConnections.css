@@ -20,28 +20,50 @@
     gap: 10px;
 }
 
-.group-banner {
+.connections-footer {
+    display: flex;
+    justify-content: center;
+    /* Center banners */
+    gap: 40px;
+    /* Horizontal spacing */
+    flex-wrap: wrap;
+    margin-top: auto;
+    min-height: 100px;
     width: 100%;
+}
+
+.group-banner {
+    flex: 0 1 250px;
+    /* Flexible width, base 250px */
     padding: 15px;
     /* Slightly reduced */
     border-radius: 12px;
     color: white;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    animation: slideDown 0.5s ease-out;
-}
-
-.group-banner h2 {
-    margin: 0;
-    font-size: 2em;
-    /* Slightly smaller */
-    text-transform: uppercase;
-}
-
-.group-items {
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.2em;
-    margin-top: 5px;
-    opacity: 0.9;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /* Specific Group Colors - Use specific selectors to override default card bg */
@@ -83,7 +105,15 @@
     /* Responsive gap */
     flex-grow: 1;
     /* Fill remaining space */
-    align-content: start;
+    align-content: center;
+    /* Center vertically if space allows */
+    justify-content: center;
+    /* Center grid items horizontally */
+    width: 100%;
+    max-width: 1200px;
+    /* Constrain width */
+    margin: 0 auto;
+    /* Center container */
 }
 
 .grid-card {
@@ -92,7 +122,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.8em;
+    text-align: center;
+    /* Center multi-line text */
+    padding: 10px;
+    /* Add padding */
+    font-size: 1.5em;
+    /* Adjusted font size */
     /* Slightly smaller to fit text */
     font-weight: bold;
     color: #2d3436;
@@ -103,8 +138,10 @@
     transition: transform 0.2s, background-color 0.2s;
     height: auto;
     /* Let aspect ratio drive height */
-    max-height: 12vh;
+    max-height: 15vh;
     /* Limit height to prevent overflow on 16:9 */
+    word-break: break-word;
+    /* Prevent overflow */
 }
 
 @keyframes slideDown {
