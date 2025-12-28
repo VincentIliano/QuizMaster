@@ -454,7 +454,7 @@ export default function Contestant() {
                                                         fontSize: '1.2em',
                                                         textTransform: 'uppercase'
                                                     }}>{key}.</span>
-                                                    <span>{val}</span>
+                                                    <span>{val}{state.roundType === 'order' && isRevealed && choice.index ? ` (${choice.index})` : ''}</span>
                                                 </div>
                                             );
                                         })}

@@ -324,44 +324,222 @@
               ]
             }
           ]
+        },
+        {
+          "topic": "AI",
+          "groups": [
+            {
+              "name": "NVidia",
+              "items": [
+                "Jensen Huang",
+                "GPU's",
+                "Meest waardevolle bedrijf in de wereld",
+                "Monopolie"
+              ]
+            },
+            {
+              "name": "Meta",
+              "items": [
+                "Mark Zuckerberg",
+                "Facebook",
+                "Instagram",
+                "VR"
+              ]
+            },
+            {
+              "name": "ChatGpt",
+              "items": [
+                "OpenAI",
+                "Sam Altman",
+                "DALL-E",
+                "SORA"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Extreem Rechts",
+          "groups": [
+            {
+              "name": "Trump",
+              "items": [
+                "MAGA",
+                "Mar-a-Lago",
+                "Importtarieven",
+                "Oranje"
+              ]
+            },
+            {
+              "name": "Dries Van Langenhove",
+              "items": [
+                "Pano",
+                "Schild & Vrienden",
+                "Memes",
+                "Vlaams Belang"
+              ]
+            },
+            {
+              "name": "Putin",
+              "items": [
+                "KGB",
+                "Oekraïne",
+                "Kremlin",
+                "Judo"
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "name": "Order Round",
+      "name": "1, 2, 3",
       "type": "order",
       "points": 20,
-      "description": "Put the items in the correct order!",
+      "description": "Plaats deze gebeurtenissen in de juiste volgorde!",
       "questions": [
         {
-          "text": "Put these Star Wars movies in chronological release order.",
+          "text": "In welke volgorde werden deze zaken uitgevonden?",
           "choices": [
             {
-              "A": "Revenge of the Sith"
+              "A": "Aansteker",
+              "index": "1823"
             },
             {
-              "B": "A New Hope"
+              "B": "Fax",
+              "index": "1843"
             },
             {
-              "C": "The Force Awakens"
+              "C": "lucifers",
+              "index": "1826"
+            }
+          ],
+          "answer": "A, C, B"
+        },
+        {
+          "text": "In welke volgorde vonden deze zaken plaats?",
+          "choices": [
+            {
+              "A": "De maanlanding",
+              "index": "1969"
+            },
+            {
+              "B": "Wieltjes op een reiskoffer",
+              "index": "1970"
+            },
+            {
+              "C": "Picasso steft",
+              "index": "1973"
+            }
+          ],
+          "answer": "A, B, C"
+        },
+        {
+          "text": "In welke volgorde vonden deze zaken hun oorsprong?",
+          "choices": [
+            {
+              "A": "De universiteit van Oxford",
+              "index": "1096"
+            },
+            {
+              "B": "Het Azteekse rijk",
+              "index": "1428"
+            },
+            {
+              "C": "De drukpers",
+              "index": "1440"
             }
           ],
           "answer": "B, A, C"
         },
         {
-          "text": "Rank these planets by size (Smallest to Largest).",
+          "text": "In welke volgorde vonden deze zaken hun oorsprong?",
           "choices": [
             {
-              "A": "Earth"
+              "A": "De universiteit van Oxford",
+              "index": "1096"
             },
             {
-              "B": "Mars"
+              "B": "Het Azteekse rijk",
+              "index": "1428"
             },
             {
-              "C": "Jupiter"
+              "C": "De drukpers",
+              "index": "1440"
             }
           ],
-          "answer": "B, A, C"
+          "answer": "A, B, C"
+        },
+        {
+          "text": "Forensische wetenschap",
+          "choices": [
+            {
+              "A": "Vingerafdrukken",
+              "index": "1890"
+            },
+            {
+              "B": "DNA",
+              "index": "1984"
+            },
+            {
+              "C": "Bloedgroepen",
+              "index": "1901"
+            }
+          ],
+          "answer": "A, C, B"
+        },
+        {
+          "text": "Ranschik ons op leeftijd",
+          "choices": [
+            {
+              "A": "Astrid",
+              "index": "36"
+            },
+            {
+              "B": "Vincent",
+              "index": "35"
+            },
+            {
+              "C": "Emma",
+              "index": "2"
+            }
+          ],
+          "answer": "C, B, A"
+        },
+        {
+          "text": "",
+          "choices": [
+            {
+              "A": "",
+              "index": ""
+            },
+            {
+              "B": "",
+              "index": ""
+            },
+            {
+              "C": "",
+              "index": ""
+            }
+          ],
+          "answer": ""
+        },
+        {
+          "text": "",
+          "choices": [
+            {
+              "A": "",
+              "index": ""
+            },
+            {
+              "B": "",
+              "index": ""
+            },
+            {
+              "C": "",
+              "index": ""
+            }
+          ],
+          "answer": ""
         }
       ]
     }
