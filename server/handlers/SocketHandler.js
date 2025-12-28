@@ -62,6 +62,8 @@ module.exports = (io, gameEngine) => {
             }
         });
 
+        socket.on('host_submit_answer', (answer) => gameEngine.hostSubmitAnswer(answer));
+
         socket.on('update_score', (index, score) => gameEngine.setTeamScore(index, score));
 
         socket.on('judge_answer', (correct) => gameEngine.handleAnswer(correct));

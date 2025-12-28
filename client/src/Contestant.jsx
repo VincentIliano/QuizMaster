@@ -461,6 +461,19 @@ export default function Contestant() {
                                     </div>
                                 )}
 
+                                {state.roundType === 'list' && state.answers && (
+                                    <div className="list-answers-grid">
+                                        {state.answers.map((ans, idx) => {
+                                            const isRevealed = (state.revealedAnswers && state.revealedAnswers.includes(ans)) || state.status === 'ANSWER_REVEALED';
+                                            return (
+                                                <div key={idx} className={`list-answer-item ${isRevealed ? 'revealed' : ''} pop-in`}>
+                                                    {isRevealed ? ans : <span className="hidden-placeholder">?</span>}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+
                                 {state.currentAnswer && !state.choices && (
                                     <div className="gs-answer pop-in">
                                         {state.currentAnswer}

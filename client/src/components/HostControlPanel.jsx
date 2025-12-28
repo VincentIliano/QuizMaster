@@ -97,6 +97,35 @@ export default function HostControlPanel({ state }) {
                 </div>
             )}
 
+            {state.roundType === 'list' && state.answers && (
+                <div style={{ margin: '10px 0', padding: '10px', background: '#333', borderRadius: 4 }}>
+                    <div style={{ fontSize: '0.9em', color: '#aaa', marginBottom: 5 }}>List Answers (Click to award):</div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 10 }}>
+                        {state.answers.map((ans, i) => {
+                            const isRevealed = state.revealedAnswers && state.revealedAnswers.includes(ans);
+                            return (
+                                <button
+                                    key={i}
+                                    onClick={() => socket.emit('host_submit_answer', ans)}
+                                    disabled={state.status !== 'BUZZED' || isRevealed}
+                                    style={{
+                                        background: isRevealed ? '#28a745' : '#444',
+                                        color: isRevealed ? 'white' : '#eee',
+                                        padding: '8px',
+                                        borderRadius: 4,
+                                        border: '1px solid #555',
+                                        cursor: (state.status === 'BUZZED' && !isRevealed) ? 'pointer' : 'default',
+                                        textAlign: 'left'
+                                    }}
+                                >
+                                    {ans}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
+
             {state.mediaUrl && (
                 <div style={{ margin: '10px 0', padding: 10, background: '#222', borderRadius: 4, display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div style={{ fontWeight: 'bold', color: '#aaa' }}>MEDIA:</div>

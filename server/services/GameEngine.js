@@ -36,13 +36,14 @@ class GameEngine {
         this.state.rounds = quizData.rounds || [];
 
         // Ensure rounds initialized with defaults
+        console.log("GameEngine init: Initial rounds count:", this.state.rounds.length);
         this.state.rounds.forEach(r => {
             r.scores = r.scores || {};
             r.questionsAnswered = r.questionsAnswered || 0;
         });
 
         const savedState = this.storage.loadGameState();
-        if (savedState) {
+        if (savedState && Object.keys(savedState).length > 0) {
             // Restore global state
             if (savedState.teams) this.state.teams = savedState.teams;
             if (savedState.buzzerWinner !== undefined) this.state.buzzerWinner = savedState.buzzerWinner;
@@ -79,7 +80,10 @@ class GameEngine {
 
     _initRoundStrategy(index) {
         const round = this.state.rounds[index];
-        if (round.type === 'countdown') {
+        const ListRound = require('../models/ListRound');
+        if (round.type && round.type.toLowerCase() === 'list') {
+            this.currentRoundInstance = new ListRound(round);
+        } else if (round.type === 'countdown') {
             this.currentRoundInstance = new FreezeOutRound(round);
         } else if (round.type === 'connections') {
             this.currentRoundInstance = new ConnectionsRound(round);
@@ -108,6 +112,7 @@ class GameEngine {
 
     getPublicState() {
         const s = this.state;
+        // console.log("getPublicState: roundsSummary length:", s.roundsSummary ? s.roundsSummary.length : 'null');
 
         let upcomingQ = null;
         if (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) {
@@ -135,7 +140,10 @@ class GameEngine {
             question: s.currentQuestionData ? (s.currentQuestionData.text || ((s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].type === 'connections' && s.currentQuestionData.groups) ? s.currentQuestionData.groups.map(g => g.name).join(', ') : "")) : "",
             mediaUrl: s.currentQuestionData ? s.currentQuestionData.mediaUrl : null,
             mediaType: s.currentQuestionData ? s.currentQuestionData.mediaType : null,
-            roundType: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].type : null,
+            roundsSummary: s.roundsSummary,
+
+            // Restored Properties
+            roundType: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].type.toLowerCase() : null,
             roundName: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].name : "",
             roundDescription: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].description : "",
             roundPoints: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].points : 0,
@@ -148,10 +156,12 @@ class GameEngine {
             currentAnswer: (s.currentQuestionData && (s.status === 'ANSWER_REVEALED' || s.status === 'GAME_OVER')) ? s.currentQuestionData.answer : null,
             answer: s.currentQuestionData ? s.currentQuestionData.answer : null,
             choices: s.currentQuestionData ? s.currentQuestionData.choices : null,
-            roundsSummary: s.roundsSummary,
+            answers: s.currentQuestionData ? s.currentQuestionData.answers : null,
+            // Exposed for List Round
+            revealedAnswers: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].foundAnswers) ? s.rounds[s.currentRoundIndex].foundAnswers : [],
+
             upcomingQuestion: upcomingQ ? (upcomingQ.text || ((s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].type === 'connections' && upcomingQ.groups) ? upcomingQ.groups.map(g => g.name).join(', ') : null)) : null,
             upcomingAnswer: upcomingQ ? upcomingQ.answer : null,
-            lastJudgement: s.lastJudgement,
             lastJudgement: s.lastJudgement,
             mediaPlaying: s.mediaPlaying || false,
             roundStartScores: s.roundStartScores || [],
@@ -170,6 +180,15 @@ class GameEngine {
     }
 
     // --- Actions ---
+
+    hostSubmitAnswer(answer) {
+        if (this.currentRoundInstance && typeof this.currentRoundInstance.handleAnswer === 'function') {
+            const teamIndex = this.state.buzzerWinner;
+            if (teamIndex !== null && teamIndex >= 0) {
+                this.currentRoundInstance.handleAnswer(this, teamIndex, answer);
+            }
+        }
+    }
 
     setTeams(teamNames) {
         this.state.teams = teamNames.map(name => ({ name, score: 0 }));

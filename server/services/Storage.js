@@ -10,9 +10,14 @@ class Storage {
 
     loadQuizData() {
         try {
+            console.log("Loading quiz data from:", this.quizDataPath);
             if (fs.existsSync(this.quizDataPath)) {
                 const raw = fs.readFileSync(this.quizDataPath);
-                return JSON.parse(raw);
+                const data = JSON.parse(raw);
+                console.log("Quiz data loaded, rounds:", data.rounds ? data.rounds.length : 0);
+                return data;
+            } else {
+                console.warn("Quiz data file not found at:", this.quizDataPath);
             }
         } catch (e) {
             console.error("Error loading quiz data:", e);
@@ -23,7 +28,10 @@ class Storage {
     loadGameState() {
         try {
             if (fs.existsSync(this.gameStatePath)) {
-                const raw = fs.readFileSync(this.gameStatePath);
+                const raw = fs.readFileSync(this.gameStatePath, 'utf8');
+                if (!raw || raw.trim().length === 0) {
+                    return {};
+                }
                 return JSON.parse(raw);
             }
         } catch (e) {
