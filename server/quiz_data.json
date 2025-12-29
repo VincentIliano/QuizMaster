@@ -22,7 +22,7 @@
           ]
         },
         {
-          "text": "Sterrebeelden",
+          "text": "Sterrenbeelden",
           "answers": [
             "Ram",
             "Stier",
@@ -302,7 +302,7 @@
           ]
         },
         {
-          "topic": "Extreem Rechts",
+          "topic": "Nationalisme",
           "groups": [
             {
               "name": "Trump",
@@ -376,24 +376,6 @@
             }
           ],
           "answer": "A, B, C"
-        },
-        {
-          "text": "In welke volgorde vonden deze zaken hun oorsprong?",
-          "choices": [
-            {
-              "A": "De universiteit van Oxford",
-              "index": "1096"
-            },
-            {
-              "B": "Het Azteekse rijk",
-              "index": "1428"
-            },
-            {
-              "C": "De drukpers",
-              "index": "1440"
-            }
-          ],
-          "answer": "B, A, C"
         },
         {
           "text": "In welke volgorde vonden deze zaken hun oorsprong?",

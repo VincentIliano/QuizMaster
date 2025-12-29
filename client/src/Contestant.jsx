@@ -134,6 +134,7 @@ export default function Contestant() {
     }, [state?.choices, state?.roundType, state?.status, state?.answer]);
 
     const prevOrder = useRef("");
+    const layoutQIndex = useRef(-1);
 
     useLayoutEffect(() => {
         // FLIP: Invert and Play
@@ -142,6 +143,7 @@ export default function Contestant() {
         // Check if order changed
         const currentOrderKeys = displayChoices.map(c => Object.keys(c)[0]).join(',');
         const orderChanged = prevOrder.current !== currentOrderKeys;
+        const isSameQuestion = layoutQIndex.current === state.questionIndex;
 
         const currentRects = {};
         // 1. Measure New Positions (Last)
@@ -153,8 +155,8 @@ export default function Contestant() {
             }
         });
 
-        // 2. Calculate Delta and Invert (Only if order changed)
-        if (orderChanged) {
+        // 2. Calculate Delta and Invert (Only if order changed AND same question)
+        if (orderChanged && isSameQuestion) {
             displayChoices.forEach(c => {
                 const key = Object.keys(c)[0];
                 const el = choiceRefs.current[key];
@@ -188,9 +190,10 @@ export default function Contestant() {
         // Save current as previous for next render
         prevRects.current = currentRects;
         prevOrder.current = currentOrderKeys;
+        layoutQIndex.current = state.questionIndex;
 
 
-    }, [displayChoices, state?.roundType]);
+    }, [displayChoices, state?.roundType, state?.questionIndex]);
 
     useEffect(() => {
         const onState = (s) => setState(s);

@@ -1,15 +1,19 @@
 {
   "teams": [
     {
-      "name": "rfga",
-      "score": 68
+      "name": "Astrid",
+      "score": 240
     },
     {
-      "name": "gsra",
-      "score": 30
+      "name": "Koen",
+      "score": 160
     },
     {
-      "name": "gtra",
+      "name": "Sara",
+      "score": 10
+    },
+    {
+      "name": "Michiel",
       "score": 0
     }
   ],
@@ -54,9 +58,28 @@
         }
       ],
       "scores": {
-        "0": 20
+        "0": 170
       },
-      "questionsAnswered": 1
+      "questionsAnswered": 1,
+      "foundAnswers": [
+        "Hofstade",
+        "Gijzegem",
+        "Moorsel",
+        "Meldert",
+        "Baardegem",
+        "Aalst",
+        "Nieuwerkerken",
+        "Erembodegem",
+        "Herdersem",
+        "Waterman",
+        "Vissen",
+        "Boogschutter",
+        "Steenbok",
+        "Stier",
+        "Tweelingen",
+        "Kreeft",
+        "Leeuw"
+      ]
     },
     {
       "name": "Minieme Quiz",
@@ -215,8 +238,11 @@
           "answer": "c"
         }
       ],
-      "scores": {},
-      "questionsAnswered": 0
+      "scores": {
+        "0": 10,
+        "2": 10
+      },
+      "questionsAnswered": 10
     },
     {
       "name": "Countdown",
@@ -250,10 +276,8 @@
           "mediaType": "video"
         }
       ],
-      "scores": {
-        "0": 18
-      },
-      "questionsAnswered": 4
+      "scores": {},
+      "questionsAnswered": 0
     },
     {
       "name": "Connections",
@@ -294,82 +318,82 @@
           ],
           "gridItems": [
             {
-              "text": "Anime",
-              "groupIndex": 1,
-              "id": "6f3ypgd5q",
+              "text": "🎵 eh, Sexy Lady 🎵",
+              "groupIndex": 2,
+              "id": "16zsvm511",
               "solved": true
             },
             {
               "text": "🎵 op, op, op, op,.... 🎵",
               "groupIndex": 2,
-              "id": "phcpj0zne",
+              "id": "askfpq9uy",
               "solved": true
             },
             {
-              "text": "Drankspelletje",
-              "groupIndex": 0,
-              "id": "62uwm4pbd",
+              "text": "Anime",
+              "groupIndex": 1,
+              "id": "xhh52apid",
               "solved": true
             },
             {
               "text": "Kpop Demon Hunters",
               "groupIndex": 1,
-              "id": "nz32qz89b",
+              "id": "qw36jvm1n",
               "solved": true
             },
             {
-              "text": "🎵We're going up, up, up,....🎵",
-              "groupIndex": 1,
-              "id": "0yvjzy8yd",
+              "text": "Drankspelletje",
+              "groupIndex": 0,
+              "id": "8s7rw2rzp",
               "solved": true
             },
             {
               "text": "Appartement",
               "groupIndex": 0,
-              "id": "85vm7qesz",
+              "id": "m08g42ccd",
               "solved": true
             },
             {
-              "text": "Paardrijdansje",
-              "groupIndex": 2,
-              "id": "4bq0fwtaw",
-              "solved": true
-            },
-            {
-              "text": "Psy",
-              "groupIndex": 2,
-              "id": "mtwatiiby",
-              "solved": true
-            },
-            {
-              "text": "Netflix",
+              "text": "🎵We're going up, up, up,....🎵",
               "groupIndex": 1,
-              "id": "9mb23n5gf",
+              "id": "1iegnhgx0",
               "solved": true
             },
             {
               "text": "Bruno Mars",
               "groupIndex": 0,
-              "id": "i3y5553ea",
+              "id": "myhb9uykc",
               "solved": true
             },
             {
-              "text": "🎵 eh, Sexy Lady 🎵",
+              "text": "Netflix",
+              "groupIndex": 1,
+              "id": "1680n42rh",
+              "solved": true
+            },
+            {
+              "text": "Psy",
               "groupIndex": 2,
-              "id": "bmjdzfxo5",
+              "id": "jkyn8ffrw",
               "solved": true
             },
             {
               "text": "Rosé",
               "groupIndex": 0,
-              "id": "5mx1jc0ks",
+              "id": "rt1splp2u",
+              "solved": true
+            },
+            {
+              "text": "Paardrijdansje",
+              "groupIndex": 2,
+              "id": "f8ue4ohyl",
               "solved": true
             }
           ],
           "solvedGroups": [
-            0,
             1,
-            2
+            2,
+            0
           ],
           "topicRevealed": true
         },
@@ -406,82 +430,82 @@
           ],
           "gridItems": [
             {
-              "text": "OpenAI",
-              "groupIndex": 2,
-              "id": "r09z72cl2",
-              "solved": true
-            },
-            {
-              "text": "Mark Zuckerberg",
-              "groupIndex": 1,
-              "id": "n3rl2xyhy",
-              "solved": true
-            },
-            {
               "text": "Instagram",
               "groupIndex": 1,
-              "id": "cmswp7jay",
+              "id": "5nk0wozzk",
               "solved": true
             },
             {
               "text": "Sam Altman",
               "groupIndex": 2,
-              "id": "3jc1o3p2a",
+              "id": "iw65m6l3d",
               "solved": true
             },
             {
-              "text": "SORA",
+              "text": "OpenAI",
               "groupIndex": 2,
-              "id": "o6o4gkd1d",
+              "id": "c7rxpbn35",
               "solved": true
             },
             {
-              "text": "Facebook",
+              "text": "Mark Zuckerberg",
               "groupIndex": 1,
-              "id": "hz4nin2ro",
+              "id": "ru4oh2jhw",
               "solved": true
             },
             {
               "text": "VR",
               "groupIndex": 1,
-              "id": "fe9yv069l",
-              "solved": true
-            },
-            {
-              "text": "DALL-E",
-              "groupIndex": 2,
-              "id": "bcanbp74y",
-              "solved": true
-            },
-            {
-              "text": "Jensen Huang",
-              "groupIndex": 0,
-              "id": "csj812zol",
+              "id": "56thbgr4n",
               "solved": true
             },
             {
               "text": "Meest waardevolle bedrijf in de wereld",
               "groupIndex": 0,
-              "id": "vfxt4ucxk",
+              "id": "8kdzk61ya",
+              "solved": true
+            },
+            {
+              "text": "SORA",
+              "groupIndex": 2,
+              "id": "nht1cgjiw",
               "solved": true
             },
             {
               "text": "GPU's",
               "groupIndex": 0,
-              "id": "82ylt4se8",
+              "id": "8tqk594az",
               "solved": true
             },
             {
               "text": "Monopolie",
               "groupIndex": 0,
-              "id": "5okueeskm",
+              "id": "tad6k7j9l",
+              "solved": true
+            },
+            {
+              "text": "Facebook",
+              "groupIndex": 1,
+              "id": "8zsq4yf3q",
+              "solved": true
+            },
+            {
+              "text": "Jensen Huang",
+              "groupIndex": 0,
+              "id": "w4afz0itf",
+              "solved": true
+            },
+            {
+              "text": "DALL-E",
+              "groupIndex": 2,
+              "id": "5saiv0xwe",
               "solved": true
             }
           ],
           "solvedGroups": [
-            0,
+            1,
             2,
-            1
+            0
           ],
           "topicRevealed": true
         },
@@ -515,14 +539,93 @@
                 "Judo"
               ]
             }
-          ]
+          ],
+          "gridItems": [
+            {
+              "text": "KGB",
+              "groupIndex": 2,
+              "id": "gzuykoiuz",
+              "solved": true
+            },
+            {
+              "text": "Memes",
+              "groupIndex": 1,
+              "id": "waixl2kgg",
+              "solved": true
+            },
+            {
+              "text": "Kremlin",
+              "groupIndex": 2,
+              "id": "hbcyrdn4c",
+              "solved": true
+            },
+            {
+              "text": "Pano",
+              "groupIndex": 1,
+              "id": "jmmmakofl",
+              "solved": true
+            },
+            {
+              "text": "Oekraïne",
+              "groupIndex": 2,
+              "id": "vng5d99zl",
+              "solved": true
+            },
+            {
+              "text": "Oranje",
+              "groupIndex": 0,
+              "id": "lsx7sf71n",
+              "solved": true
+            },
+            {
+              "text": "Vlaams Belang",
+              "groupIndex": 1,
+              "id": "m1sp732fy",
+              "solved": true
+            },
+            {
+              "text": "Importtarieven",
+              "groupIndex": 0,
+              "id": "wsj7dqcou",
+              "solved": true
+            },
+            {
+              "text": "MAGA",
+              "groupIndex": 0,
+              "id": "fh3ex8c1b",
+              "solved": true
+            },
+            {
+              "text": "Judo",
+              "groupIndex": 2,
+              "id": "43xfc4h6i",
+              "solved": true
+            },
+            {
+              "text": "Schild & Vrienden",
+              "groupIndex": 1,
+              "id": "4cjfmoi7i",
+              "solved": true
+            },
+            {
+              "text": "Mar-a-Lago",
+              "groupIndex": 0,
+              "id": "a80kwv499",
+              "solved": true
+            }
+          ],
+          "solvedGroups": [
+            1,
+            2,
+            0
+          ],
+          "topicRevealed": true
         }
       ],
       "scores": {
-        "0": 30,
-        "1": 30
+        "0": 40
       },
-      "questionsAnswered": 1
+      "questionsAnswered": 2
     },
     {
       "name": "1, 2, 3",
@@ -675,128 +778,37 @@
           "answer": ""
         }
       ],
-      "scores": {},
-      "questionsAnswered": 0
+      "scores": {
+        "0": 20,
+        "1": 160
+      },
+      "questionsAnswered": 3
     }
   ],
-  "currentRoundIndex": 3,
-  "currentQuestionIndex": 1,
+  "currentRoundIndex": 4,
+  "currentQuestionIndex": 3,
   "currentQuestionData": {
-    "topic": "AI",
-    "groups": [
+    "text": "In welke volgorde vonden deze zaken hun oorsprong?",
+    "choices": [
       {
-        "name": "NVidia",
-        "items": [
-          "Jensen Huang",
-          "GPU's",
-          "Meest waardevolle bedrijf in de wereld",
-          "Monopolie"
-        ]
+        "A": "De universiteit van Oxford",
+        "index": "1096"
       },
       {
-        "name": "Meta",
-        "items": [
-          "Mark Zuckerberg",
-          "Facebook",
-          "Instagram",
-          "VR"
-        ]
+        "B": "Het Azteekse rijk",
+        "index": "1428"
       },
       {
-        "name": "ChatGpt",
-        "items": [
-          "OpenAI",
-          "Sam Altman",
-          "DALL-E",
-          "SORA"
-        ]
+        "C": "De drukpers",
+        "index": "1440"
       }
     ],
-    "gridItems": [
-      {
-        "text": "OpenAI",
-        "groupIndex": 2,
-        "id": "r09z72cl2",
-        "solved": true
-      },
-      {
-        "text": "Mark Zuckerberg",
-        "groupIndex": 1,
-        "id": "n3rl2xyhy",
-        "solved": true
-      },
-      {
-        "text": "Instagram",
-        "groupIndex": 1,
-        "id": "cmswp7jay",
-        "solved": true
-      },
-      {
-        "text": "Sam Altman",
-        "groupIndex": 2,
-        "id": "3jc1o3p2a",
-        "solved": true
-      },
-      {
-        "text": "SORA",
-        "groupIndex": 2,
-        "id": "o6o4gkd1d",
-        "solved": true
-      },
-      {
-        "text": "Facebook",
-        "groupIndex": 1,
-        "id": "hz4nin2ro",
-        "solved": true
-      },
-      {
-        "text": "VR",
-        "groupIndex": 1,
-        "id": "fe9yv069l",
-        "solved": true
-      },
-      {
-        "text": "DALL-E",
-        "groupIndex": 2,
-        "id": "bcanbp74y",
-        "solved": true
-      },
-      {
-        "text": "Jensen Huang",
-        "groupIndex": 0,
-        "id": "csj812zol",
-        "solved": true
-      },
-      {
-        "text": "Meest waardevolle bedrijf in de wereld",
-        "groupIndex": 0,
-        "id": "vfxt4ucxk",
-        "solved": true
-      },
-      {
-        "text": "GPU's",
-        "groupIndex": 0,
-        "id": "82ylt4se8",
-        "solved": true
-      },
-      {
-        "text": "Monopolie",
-        "groupIndex": 0,
-        "id": "5okueeskm",
-        "solved": true
-      }
-    ],
-    "solvedGroups": [
-      0,
-      2,
-      1
-    ],
-    "topicRevealed": true
+    "answer": "A, B, C"
   },
-  "timerValue": 53,
+  "timerValue": 30,
   "buzzerLocked": false,
   "buzzerWinner": null,
-  "status": "DASHBOARD",
+  "status": "READING",
   "lastJudgement": null,
   "roundsSummary": [
     {
@@ -806,53 +818,81 @@
       "questionsAnswered": 1,
       "totalQuestions": 2,
       "scores": {
-        "0": 20
+        "0": 170
       }
     },
     {
       "index": 1,
       "name": "Minieme Quiz",
       "points": 10,
-      "questionsAnswered": 0,
+      "questionsAnswered": 10,
       "totalQuestions": 10,
-      "scores": {}
+      "scores": {
+        "0": 10,
+        "2": 10
+      }
     },
     {
       "index": 2,
       "name": "Countdown",
       "points": 0,
-      "questionsAnswered": 4,
+      "questionsAnswered": 0,
       "totalQuestions": 4,
-      "scores": {
-        "0": 18
-      }
+      "scores": {}
     },
     {
       "index": 3,
       "name": "Connections",
       "points": 10,
-      "questionsAnswered": 1,
+      "questionsAnswered": 2,
       "totalQuestions": 3,
       "scores": {
-        "0": 30,
-        "1": 30
+        "0": 40
       }
     },
     {
       "index": 4,
       "name": "1, 2, 3",
       "points": 20,
-      "questionsAnswered": 0,
+      "questionsAnswered": 3,
       "totalQuestions": 8,
-      "scores": {}
+      "scores": {
+        "0": 20,
+        "1": 160
+      }
     }
   ],
   "lockedOutTeams": [],
   "mediaPlaying": false,
   "roundStartScores": [
-    38,
+    220,
     0,
+    10,
     0
   ],
-  "connectionStreak": 2
+  "connectionStreak": 0,
+  "finalStandings": [
+    {
+      "name": "Michiel",
+      "score": 0,
+      "originalIndex": 3
+    },
+    {
+      "name": "Sara",
+      "score": 10,
+      "originalIndex": 2
+    },
+    {
+      "name": "Koen",
+      "score": 200,
+      "originalIndex": 1
+    },
+    {
+      "name": "Astrid",
+      "score": 280,
+      "originalIndex": 0
+    }
+  ],
+  "finalistRevealIndex": 0,
+  "finalistRevealCount": 4
 }
