@@ -579,7 +579,7 @@ export default function Contestant() {
                 </>
             )}
 
-            {state.roundType === 'countdown' && (
+            {state.roundType === 'countdown' && ['READING', 'LISTENING', 'BUZZED', 'PAUSED', 'TIMEOUT', 'ALL_LOCKED', 'ANSWER_REVEALED'].includes(state.status) && (
                 <div style={{
                     position: 'absolute',
                     top: '100px',

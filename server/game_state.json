@@ -1,11 +1,19 @@
 {
   "teams": [
     {
-      "name": "gwra",
+      "name": "gaer",
       "score": 0
     },
     {
-      "name": "egh",
+      "name": "fadegh",
+      "score": 0
+    },
+    {
+      "name": "hat",
+      "score": 8
+    },
+    {
+      "name": "htr",
       "score": 0
     }
   ],
@@ -322,11 +330,10 @@
       "questionsAnswered": 0
     },
     {
-      "name": "Muziek van de voorbije 100 jaar",
+      "name": "100 jaar muziek",
       "type": "countdown",
-      "time_limit": 30,
-      "points": 0,
-      "description": "Hoe sneller je artiest + titel weet, hoe meer punten",
+      "points": 20,
+      "description": "Hoe sneller je antwoordt, hoe meer punten",
       "questions": [
         {
           "text": "1930",
@@ -399,7 +406,9 @@
           "time_limit": 40
         }
       ],
-      "scores": {},
+      "scores": {
+        "2": 8
+      },
       "questionsAnswered": 0
     },
     {
@@ -906,11 +915,11 @@
     "mediaType": "audio",
     "time_limit": 45
   },
-  "timerValue": 45,
-  "buzzerLocked": false,
-  "buzzerWinner": null,
-  "status": "READING",
-  "lastJudgement": null,
+  "timerValue": 9,
+  "buzzerLocked": true,
+  "buzzerWinner": 2,
+  "status": "ANSWER_REVEALED",
+  "lastJudgement": true,
   "roundsSummary": [
     {
       "index": 0,
@@ -930,11 +939,13 @@
     },
     {
       "index": 2,
-      "name": "Muziek van de voorbije 100 jaar",
-      "points": 0,
+      "name": "100 jaar muziek",
+      "points": 20,
       "questionsAnswered": 0,
       "totalQuestions": 10,
-      "scores": {}
+      "scores": {
+        "2": 8
+      }
     },
     {
       "index": 3,
@@ -960,10 +971,16 @@
       "scores": {}
     }
   ],
-  "lockedOutTeams": [],
+  "lockedOutTeams": [
+    1,
+    0
+  ],
   "mediaPlaying": false,
   "roundStartScores": [
     0,
+    0,
+    0,
     0
-  ]
+  ],
+  "connectionStreak": 0
 }

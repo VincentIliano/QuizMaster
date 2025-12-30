@@ -156,7 +156,7 @@ class GameEngine {
             roundName: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].name : "",
             roundDescription: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].description : "",
             roundPoints: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? s.rounds[s.currentRoundIndex].points : 0,
-            maxTime: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? (s.rounds[s.currentRoundIndex].time_limit || 30) : 30,
+            maxTime: (s.currentQuestionData && s.currentQuestionData.time_limit) ? s.currentQuestionData.time_limit : ((s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length) ? (s.rounds[s.currentRoundIndex].time_limit || 30) : 30),
             timeLimit: s.timerValue,
             status: s.status,
             teams: s.teams,
@@ -337,6 +337,10 @@ class GameEngine {
             this.state.timerValue = currentRound.time_limit || 30;
             this.state.status = "READING";
             this.state.buzzerLocked = false;
+
+            if (this.currentRoundInstance && typeof this.currentRoundInstance.setupQuestion === 'function') {
+                this.currentRoundInstance.setupQuestion(this, this.state.currentQuestionIndex);
+            }
         }
         this.save();
     }

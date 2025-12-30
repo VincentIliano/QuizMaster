@@ -308,11 +308,10 @@
       ]
     },
     {
-      "name": "Muziek van de voorbije 100 jaar",
+      "name": "100 jaar muziek",
       "type": "countdown",
-      "time_limit": 30,
-      "points": 0,
-      "description": "Hoe sneller je artiest + titel weet, hoe meer punten",
+      "points": 20,
+      "description": "Hoe sneller je antwoordt, hoe meer punten",
       "questions": [
         {
           "text": "1930",
