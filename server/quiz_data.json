@@ -332,6 +332,70 @@
               ]
             }
           ]
+        },
+        {
+          "topic": "Oost-Vlaanderen",
+          "groups": [
+            {
+              "name": "Gent",
+              "items": [
+                "-se Feesten",
+                "Stroppendragers",
+                "Sint-Bavo",
+                "Gravensteen"
+              ]
+            },
+            {
+              "name": "Aalst",
+              "items": [
+                "Carnaval",
+                "Dirk Martens",
+                "Chipka",
+                "Industrie"
+              ]
+            },
+            {
+              "name": "Sint-Niklaas",
+              "items": [
+                "Grootste marktplein van België",
+                "Waasland shoppingcenter",
+                "Nicolaas van Myra",
+                "9100"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Nieuwjaar",
+          "groups": [
+            {
+              "name": "Vuurwerk",
+              "items": [
+                "Uitgevonden in China",
+                "Mensen zijn er meer fan van dan dieren",
+                "in 2024, 139 mensen door gewond",
+                "Kleurrijk"
+              ]
+            },
+            {
+              "name": "Voornemens",
+              "items": [
+                "Fitness",
+                "Dieet",
+                "Meer sparen",
+                "Stoppen met roken"
+              ]
+            },
+            {
+              "name": "Aftellen",
+              "items": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -418,11 +482,11 @@
           "choices": [
             {
               "A": "Astrid",
-              "index": "36"
+              "index": "37"
             },
             {
               "B": "Vincent",
-              "index": "35"
+              "index": "36"
             },
             {
               "C": "Emma",
@@ -430,6 +494,60 @@
             }
           ],
           "answer": "C, B, A"
+        },
+        {
+          "text": "De eerste 3 fases van de rouw",
+          "choices": [
+            {
+              "A": "Onderhandelen",
+              "index": "Fase 3"
+            },
+            {
+              "B": "Ontekenning",
+              "index": "Fase 1"
+            },
+            {
+              "C": "Woede",
+              "index": "Fase 2"
+            }
+          ],
+          "answer": "B, C, A"
+        },
+        {
+          "text": "",
+          "choices": [
+            {
+              "A": "",
+              "index": ""
+            },
+            {
+              "B": "",
+              "index": ""
+            },
+            {
+              "C": "",
+              "index": ""
+            }
+          ],
+          "answer": ""
+        }
+        {
+          "text": "",
+          "choices": [
+            {
+              "A": "",
+              "index": ""
+            },
+            {
+              "B": "",
+              "index": ""
+            },
+            {
+              "C": "",
+              "index": ""
+            }
+          ],
+          "answer": ""
         },
         {
           "text": "",
@@ -476,28 +594,124 @@
       "reduction_amount": 3,
       "questions": [
         {
-          "topic": "Paris",
-          "question": "Location",
+          "topic": "Vuilbak",
+          "question": "Voorwerp",
           "clues": [
-            "I am a city in Europe.",
-            "I have a famous iron tower.",
-            "I am known as the City of Light.",
-            "The Louvre museum is here.",
-            "I am the capital of France."
+            "Ik besta in allerlei vormen en maten.",
+            "Je vindt mij zowel binnen als buiten.",
+            "Ik kan soms stinken.",
+            "Holle Bolle Gijs is een populaire jongen onder ons.",
+            "Ik ben de plek waar al onze goede voornemens voor 2026 belanden."
           ],
-          "answer": "Paris"
+          "answer": "Vuilbak"
         },
         {
-          "topic": "The Beatles",
-          "question": "Famous Band",
+          "topic": "Contactlens",
+          "question": "Wat?",
           "clues": [
-            "We are a famous band from Liverpool.",
-            "Our drummer was Ringo Starr.",
-            "We sang 'Yellow Submarine'.",
-            "John Lennon was one of us.",
-            "We are the Fab Four."
+            "Je kijkt dwars door me heen.",
+            "Je hebt er twee van mij nodig.",
+            "Ik kan hard of zacht zijn.",
+            "Mij verliezen is best onhandig",
+            "Door mij kunt je beter zien."
           ],
-          "answer": "The Beatles"
+          "answer": "Contactlens"
+        },
+        {
+          "topic": "De Elfstedentocht",
+          "question": "Wat?",
+          "clues": [
+            "De opwarming van de aarde is mijn aartsvijand.",
+            "Ik neem je mee langs pittoreske steden in Friesland.",
+            "Mijn laatste editie was in 1997.",
+            "Men hoopt elk jaar dat ik nog een keer kan worden georganiseerd.",
+            "Ik sta synoniem voor de Toch der tochten."
+          ],
+          "answer": "De Elfstedentocht"
+        },
+        {
+          "topic": "Vrijheidsbeeld",
+          "question": "Wat?",
+          "clues": [
+            "Ik ben een vrouw van steen.",
+            "Ik verwelkom iedereen die aan land komt.",
+            "Ik ben 46 meter hoog.",
+            "Ik draag een kroon op mijn hoofd.",
+            "Ik ben een symbool van de Verenigde Staten."
+          ],
+          "answer": "Vrijheidsbeeld"
+        },
+        {
+          "topic": "Neus",
+          "question": "Wat?",
+          "clues": [
+            "Ik heb 2 vleugels.",
+            "Je hebt mij in verschillende maten en vormen.",
+            "Ik kan me ergens insteken.",
+            "Soms loop ik.",
+            "Door mij kun je ruiken."
+          ],
+          "answer": "Neus"
+        },
+        {
+          "topic": "Het weer",
+          "question": "wat?",
+          "clues": [
+            "Ik ben onvoorspelbaar.",
+            "Ik kan je humeur maken of juist breken.",
+            "Ik ben het dagelijkse onderwerp aan de koffiemachine.",
+            "Ik word elke dag in het nieuws vermeld.",
+            "Frank Debosere kon altijd veel over mij vertellen."
+          ],
+          "answer": "Het weer"
+        },
+        {
+          "topic": "Mona Lisa",
+          "question": "Wat?",
+          "clues": [
+            "Ik hang aan de muur.",
+            "Mijn italiaanse naam is 'La Gioconda'.",
+            "Elke dag kijken er zo'n 20.000 mensen naar mij.",
+            "Ik glimlach altijd.",
+            "Leonardo Da Vinci Heeft mij geschilderd."
+          ],
+          "answer": "Mona Lisa"
+        },
+        {
+          "topic": "De Nacht",
+          "question": "Wat?",
+          "clues": [
+            "Ik ben er elke dag.",
+            "Het is meestal stil als ik er ben.",
+            "Bepaalde dieren worden wakker als ik er ben.",
+            "Sommige mensen hebben dienst als ik er ben.",
+            "volgens de wet rond geluidshinder ben ik er tussen 23:00 en 7:00 uur."
+          ],
+          "answer": "De Nacht"
+        },
+        {
+          "topic": "Sint-Martinus Kerk Aalst",
+          "question": "Wat?",
+          "clues": [
+            "Ik ben een geliefd doelwit voor wildplassers.",
+            "Er is aan mij meer dan 180 jaar gewerkt.",
+            "Ik sta in Aalst.",
+            "Daens deed hier zijn eerste communie.",
+            "Ik ben thuis voor een portret van Peter Paul Rubens."
+          ],
+          "answer": "Sint-Martinus Kerk Aalst"
+        },
+        {
+          "topic": "Samson",
+          "question": "Wie?",
+          "clues": [
+            "Ik ken de burgemeester van Affligem.",
+            "Ik woon op nummer 101",
+            "Mijn baasje heel rijk.",
+            "Ik kan moeilijke woorden niet goed uitspreken.",
+            "De bel doet het niet."
+          ],
+          "answer": "Samson"
         }
       ]
     }
