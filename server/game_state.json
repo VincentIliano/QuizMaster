@@ -2,11 +2,11 @@
   "teams": [
     {
       "name": "gaer",
-      "score": 0
+      "score": 18
     },
     {
       "name": "fadegh",
-      "score": 0
+      "score": 39
     },
     {
       "name": "hat",
@@ -407,9 +407,11 @@
         }
       ],
       "scores": {
+        "0": 18,
+        "1": 39,
         "2": 8
       },
-      "questionsAnswered": 0
+      "questionsAnswered": 10
     },
     {
       "name": "Connections",
@@ -907,19 +909,19 @@
     }
   ],
   "currentRoundIndex": 2,
-  "currentQuestionIndex": 0,
+  "currentQuestionIndex": 10,
   "currentQuestionData": {
-    "text": "1930",
-    "answer": "Judy Garland - Over The Rainbow",
-    "mediaUrl": "assets/Judy Garland - Over the Rainbow (split).mp3",
+    "text": "2020",
+    "answer": "Taylor Swift - The fate of Ophelia",
+    "mediaUrl": "assets/Taylor Swift - The fate of Ophelia (split).mp3",
     "mediaType": "audio",
-    "time_limit": 45
+    "time_limit": 40
   },
-  "timerValue": 9,
+  "timerValue": 40,
   "buzzerLocked": true,
-  "buzzerWinner": 2,
-  "status": "ANSWER_REVEALED",
-  "lastJudgement": true,
+  "buzzerWinner": null,
+  "status": "ROUND_SUMMARY",
+  "lastJudgement": null,
   "roundsSummary": [
     {
       "index": 0,
@@ -941,9 +943,11 @@
       "index": 2,
       "name": "100 jaar muziek",
       "points": 20,
-      "questionsAnswered": 0,
+      "questionsAnswered": 10,
       "totalQuestions": 10,
       "scores": {
+        "0": 18,
+        "1": 39,
         "2": 8
       }
     },
@@ -971,15 +975,12 @@
       "scores": {}
     }
   ],
-  "lockedOutTeams": [
-    1,
-    0
-  ],
+  "lockedOutTeams": [],
   "mediaPlaying": false,
   "roundStartScores": [
     0,
-    0,
-    0,
+    19,
+    8,
     0
   ],
   "connectionStreak": 0

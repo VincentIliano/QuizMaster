@@ -328,7 +328,9 @@ export default function Contestant() {
                     </header>
 
 
-                    <main className="gs-main">
+                    <main className="gs-main" style={{
+                        ...(state.roundType === 'countdown' ? { justifyContent: 'flex-start', paddingTop: '150px' } : {})
+                    }}>
 
                         {/* Question Card */}
                         {state.status !== 'IDLE' && (state.mediaUrl || state.question || (state.roundType === 'clues' && (state.cluesRevealedCount > 0 || state.status === 'ANSWER_REVEALED'))) && (
@@ -338,7 +340,6 @@ export default function Contestant() {
                                 className={`question-card ${animClass} ${state.status === 'LISTENING' ? 'listening-active' : ''}`}
                                 style={{
                                     ...(state.roundType === 'list' ? { maxWidth: '95%', width: '100%' } : {}),
-                                    ...(state.roundType === 'countdown' ? { marginTop: '100px' } : {}),
                                 }}
                                 onAnimationEnd={() => {
                                     if (animClass === 'pop-in' || animClass === 'slide-right' || animClass === 'slide-left') {
@@ -347,7 +348,7 @@ export default function Contestant() {
                                 }}
                             >
 
-                                {state.mediaUrl && (
+                                {state.mediaUrl && !(state.roundType === 'countdown' && state.status === 'ANSWER_REVEALED') && (
                                     <div className="media-container" style={{ marginBottom: 20, textAlign: 'center' }}>
                                         {state.mediaType === 'video' ? (
                                             <video
