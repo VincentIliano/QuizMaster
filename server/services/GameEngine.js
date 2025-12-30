@@ -313,6 +313,11 @@ class GameEngine {
             return;
         }
 
+        // Auto-start timer for Standard rounds (no type) as requested
+        if (!currentRound.type || currentRound.type === 'standard') {
+            autoStart = true;
+        }
+
         this.state.status = autoStart ? "LISTENING" : "READING";
         this.state.mediaPlaying = false;
 

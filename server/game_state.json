@@ -323,7 +323,7 @@
         }
       ],
       "scores": {},
-      "questionsAnswered": 0
+      "questionsAnswered": 3
     },
     {
       "name": "100 jaar muziek",
@@ -907,26 +907,26 @@
     }
   ],
   "currentRoundIndex": 1,
-  "currentQuestionIndex": 0,
+  "currentQuestionIndex": 3,
   "currentQuestionData": {
-    "text": "Welke van de volgende is geen bestaande plaatsnaam?",
+    "text": "Wat is de hoogste berg van Afrika?",
     "choices": [
       {
-        "a": "A"
+        "a": "Mount Everest"
       },
       {
-        "b": "B"
+        "b": "Elbroes"
       },
       {
-        "c": "C"
+        "c": "Kilimanjaro"
       }
     ],
     "answer": "c"
   },
-  "timerValue": 15,
+  "timerValue": 14,
   "buzzerLocked": false,
   "buzzerWinner": null,
-  "status": "READING",
+  "status": "DASHBOARD",
   "lastJudgement": null,
   "roundsSummary": [
     {
@@ -941,7 +941,7 @@
       "index": 1,
       "name": "Miniemen Quiz",
       "points": 10,
-      "questionsAnswered": 0,
+      "questionsAnswered": 3,
       "totalQuestions": 10,
       "scores": {}
     },
@@ -980,12 +980,11 @@
     }
   ],
   "lockedOutTeams": [],
-  "mediaPlaying": false,
+  "mediaPlaying": true,
   "roundStartScores": [
     0,
     46,
     0
   ],
-  "connectionStreak": 0,
-  "cluesRevealed": 0
+  "connectionStreak": 0
 }
