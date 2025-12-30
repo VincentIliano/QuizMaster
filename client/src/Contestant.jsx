@@ -89,12 +89,13 @@ export default function Contestant() {
         if (!state) return;
 
         // Play ticking sound when status is LISTENING (timer running)
-        if (state.status === 'LISTENING' && tickAudioRef.current) {
-            tickAudioRef.current.play().catch(e => console.log('Tick play failed (interaction needed?):', e));
-        } else if (tickAudioRef.current) {
-            tickAudioRef.current.pause();
-            tickAudioRef.current.currentTime = 0;
-        }
+        // Play ticking sound when status is LISTENING (timer running)
+        // if (state.status === 'LISTENING' && tickAudioRef.current) {
+        //     tickAudioRef.current.play().catch(e => console.log('Tick play failed (interaction needed?):', e));
+        // } else if (tickAudioRef.current) {
+        //     tickAudioRef.current.pause();
+        //     tickAudioRef.current.currentTime = 0;
+        // }
 
         if (!mediaRef.current) return;
 

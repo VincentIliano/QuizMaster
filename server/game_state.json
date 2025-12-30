@@ -1,11 +1,11 @@
 {
   "teams": [
     {
-      "name": "eg",
+      "name": "grte",
       "score": 0
     },
     {
-      "name": "arg",
+      "name": "hgztr",
       "score": 0
     }
   ],
@@ -125,7 +125,7 @@
               "a": "Distel"
             },
             {
-              "b": "Rose"
+              "b": "Roos"
             },
             {
               "c": "Klavertje"
@@ -213,17 +213,17 @@
       "questionsAnswered": 0
     },
     {
-      "name": "Countdown",
+      "name": "Muziek van de voorbije 100 jaar",
       "type": "countdown",
       "time_limit": 20,
       "points": 0,
-      "description": "Push your luck! Points = Seconds Remaining. Wrong answers freeze you out!",
+      "description": "Hoe sneller je artiest + titel weet, hoe meer punten",
       "questions": [
         {
-          "text": "What film is this scene from?",
-          "answer": "The Matrix",
-          "mediaUrl": "https://media.giphy.com/media/emGXB2eE3GhoXMNFHH/giphy.gif",
-          "mediaType": "image"
+          "text": "1930",
+          "answer": "Judy Garland - Over The Rainbow",
+          "mediaUrl": "assets/Judy Garland - Over the Rainbow (split).mp3",
+          "mediaType": "audio"
         },
         {
           "text": "Identify this sound.",
@@ -348,6 +348,70 @@
               ]
             }
           ]
+        },
+        {
+          "topic": "Oost-Vlaanderen",
+          "groups": [
+            {
+              "name": "Gent",
+              "items": [
+                "-se Feesten",
+                "Stroppendragers",
+                "Sint-Bavo",
+                "Gravensteen"
+              ]
+            },
+            {
+              "name": "Aalst",
+              "items": [
+                "Carnaval",
+                "Dirk Martens",
+                "Chipka",
+                "Industrie"
+              ]
+            },
+            {
+              "name": "Sint-Niklaas",
+              "items": [
+                "Grootste marktplein van België",
+                "Waasland shoppingcenter",
+                "Nicolaas van Myra",
+                "9100"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Nieuwjaar",
+          "groups": [
+            {
+              "name": "Vuurwerk",
+              "items": [
+                "Uitgevonden in China",
+                "Mensen zijn er meer fan van dan dieren",
+                "in 2024, 139 mensen door gewond",
+                "Kleurrijk"
+              ]
+            },
+            {
+              "name": "Voornemens",
+              "items": [
+                "Fitness",
+                "Dieet",
+                "Meer sparen",
+                "Stoppen met roken"
+              ]
+            },
+            {
+              "name": "Aftellen",
+              "items": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          ]
         }
       ],
       "scores": {},
@@ -389,7 +453,7 @@
               "index": "1970"
             },
             {
-              "C": "Picasso steft",
+              "C": "Picasso sterft",
               "index": "1973"
             }
           ],
@@ -432,15 +496,15 @@
           "answer": "A, C, B"
         },
         {
-          "text": "Ranschik ons op leeftijd",
+          "text": "Rangschik ons op leeftijd",
           "choices": [
             {
               "A": "Astrid",
-              "index": "36"
+              "index": "37"
             },
             {
               "B": "Vincent",
-              "index": "35"
+              "index": "36"
             },
             {
               "C": "Emma",
@@ -450,40 +514,98 @@
           "answer": "C, B, A"
         },
         {
-          "text": "",
+          "text": "De eerste 3 fases van de rouw",
           "choices": [
             {
-              "A": "",
-              "index": ""
+              "A": "Onderhandelen",
+              "index": "Fase 3"
             },
             {
-              "B": "",
-              "index": ""
+              "B": "Ontkenning",
+              "index": "Fase 1"
             },
             {
-              "C": "",
-              "index": ""
+              "C": "Woede",
+              "index": "Fase 2"
             }
           ],
-          "answer": ""
+          "answer": "B, C, A"
         },
         {
-          "text": "",
+          "text": "De slagen van de viertaktmotor",
           "choices": [
             {
-              "A": "",
-              "index": ""
+              "C": "Inlaatslag",
+              "index": "1"
             },
             {
-              "B": "",
-              "index": ""
+              "D": "Compressieslag",
+              "index": "2"
             },
             {
-              "C": "",
-              "index": ""
+              "A": "Arbeidsslag",
+              "index": "3"
+            },
+            {
+              "B": "Uitlaatslag",
+              "index": "4"
             }
           ],
-          "answer": ""
+          "answer": "C, D, A, B"
+        },
+        {
+          "text": "TCP/IP handshake",
+          "choices": [
+            {
+              "C": "SYN",
+              "index": "1"
+            },
+            {
+              "B": "SYN-ACK",
+              "index": "2"
+            },
+            {
+              "A": "ACK",
+              "index": "3"
+            }
+          ],
+          "answer": "C, B, A"
+        },
+        {
+          "text": "Triatlon",
+          "choices": [
+            {
+              "B": "Zwemmen",
+              "index": "1"
+            },
+            {
+              "A": "Fietsen",
+              "index": "2"
+            },
+            {
+              "C": "Lopen",
+              "index": "3"
+            }
+          ],
+          "answer": "B, A, C"
+        },
+        {
+          "text": "Paneren",
+          "choices": [
+            {
+              "C": "Bloem",
+              "index": "1"
+            },
+            {
+              "B": "Ei",
+              "index": "2"
+            },
+            {
+              "A": "Broodkruim",
+              "index": "3"
+            }
+          ],
+          "answer": "C, B, A"
         }
       ],
       "scores": {},
@@ -496,52 +618,142 @@
       "reduction_amount": 3,
       "questions": [
         {
-          "topic": "Paris",
-          "question": "Location",
+          "topic": "Vuilbak",
+          "question": "Voorwerp",
           "clues": [
-            "I am a city in Europe.",
-            "I have a famous iron tower.",
-            "I am known as the City of Light.",
-            "The Louvre museum is here.",
-            "I am the capital of France."
+            "Ik besta in allerlei vormen en maten.",
+            "Je vindt mij zowel binnen als buiten.",
+            "Ik kan soms stinken.",
+            "Holle Bolle Gijs is een populaire jongen onder ons.",
+            "Ik ben de plek waar al onze goede voornemens voor 2026 belanden."
           ],
-          "answer": "Paris"
+          "answer": "Vuilbak"
         },
         {
-          "topic": "The Beatles",
-          "question": "Famous Band",
+          "topic": "Contactlens",
+          "question": "Wat?",
           "clues": [
-            "We are a famous band from Liverpool.",
-            "Our drummer was Ringo Starr.",
-            "We sang 'Yellow Submarine'.",
-            "John Lennon was one of us.",
-            "We are the Fab Four."
+            "Je kijkt dwars door me heen.",
+            "Je hebt er twee van mij nodig.",
+            "Ik kan hard of zacht zijn.",
+            "Mij verliezen is best onhandig.",
+            "Door mij kun je beter zien."
           ],
-          "answer": "The Beatles"
+          "answer": "Contactlens"
+        },
+        {
+          "topic": "De Elfstedentocht",
+          "question": "Wat?",
+          "clues": [
+            "De opwarming van de aarde is mijn aartsvijand.",
+            "Ik neem je mee langs pittoreske steden in Friesland.",
+            "Mijn laatste editie was in 1997.",
+            "Men hoopt elk jaar dat ik nog een keer kan worden georganiseerd.",
+            "Ik sta synoniem voor de Tocht der tochten."
+          ],
+          "answer": "De Elfstedentocht"
+        },
+        {
+          "topic": "Vrijheidsbeeld",
+          "question": "Wat?",
+          "clues": [
+            "Ik ben een vrouw van steen.",
+            "Ik verwelkom iedereen die aan land komt.",
+            "Ik ben 46 meter hoog.",
+            "Ik draag een kroon op mijn hoofd.",
+            "Ik ben een symbool van de Verenigde Staten."
+          ],
+          "answer": "Vrijheidsbeeld"
+        },
+        {
+          "topic": "Neus",
+          "question": "Wat?",
+          "clues": [
+            "Ik heb 2 vleugels.",
+            "Je hebt mij in verschillende maten en vormen.",
+            "Ik kan me ergens insteken.",
+            "Soms loop ik.",
+            "Door mij kun je ruiken."
+          ],
+          "answer": "Neus"
+        },
+        {
+          "topic": "Het weer",
+          "question": "Wat?",
+          "clues": [
+            "Ik ben onvoorspelbaar.",
+            "Ik kan je humeur maken of juist breken.",
+            "Ik ben het dagelijkse onderwerp aan de koffiemachine.",
+            "Ik word elke dag in het nieuws vermeld.",
+            "Frank Debosere kon altijd veel over mij vertellen."
+          ],
+          "answer": "Het weer"
+        },
+        {
+          "topic": "Mona Lisa",
+          "question": "Wat?",
+          "clues": [
+            "Ik hang aan de muur.",
+            "Mijn italiaanse naam is 'La Gioconda'.",
+            "Elke dag kijken er zo'n 20.000 mensen naar mij.",
+            "Ik glimlach altijd.",
+            "Leonardo Da Vinci heeft mij geschilderd."
+          ],
+          "answer": "Mona Lisa"
+        },
+        {
+          "topic": "De Nacht",
+          "question": "Wat?",
+          "clues": [
+            "Ik ben er elke dag.",
+            "Het is meestal stil als ik er ben.",
+            "Bepaalde dieren worden wakker als ik er ben.",
+            "Sommige mensen hebben dienst als ik er ben.",
+            "Volgens de wet rond geluidshinder ben ik er tussen 23:00 en 7:00 uur."
+          ],
+          "answer": "De Nacht"
+        },
+        {
+          "topic": "Sint-Martinus Kerk Aalst",
+          "question": "Wat?",
+          "clues": [
+            "Ik ben een geliefd doelwit voor wildplassers.",
+            "Er is aan mij meer dan 180 jaar gewerkt.",
+            "Ik sta in Aalst.",
+            "Daens deed hier zijn eerste communie.",
+            "Ik ben thuis voor een portret van Peter Paul Rubens."
+          ],
+          "answer": "Sint-Martinus Kerk Aalst"
+        },
+        {
+          "topic": "Samson",
+          "question": "Wie?",
+          "clues": [
+            "Ik ken de burgemeester van Affligem.",
+            "Ik woon op nummer 101",
+            "Mijn baasje is heel rijk.",
+            "Ik kan moeilijke woorden niet goed uitspreken.",
+            "De bel doet het niet."
+          ],
+          "answer": "Samson"
         }
       ],
       "scores": {},
       "questionsAnswered": 0
     }
   ],
-  "currentRoundIndex": 5,
+  "currentRoundIndex": 2,
   "currentQuestionIndex": 0,
   "currentQuestionData": {
-    "topic": "Paris",
-    "question": "Location",
-    "clues": [
-      "I am a city in Europe.",
-      "I have a famous iron tower.",
-      "I am known as the City of Light.",
-      "The Louvre museum is here.",
-      "I am the capital of France."
-    ],
-    "answer": "Paris"
+    "text": "1930",
+    "answer": "Judy Garland - Over The Rainbow",
+    "mediaUrl": "assets/Judy Garland - Over the Rainbow (split).mp3",
+    "mediaType": "audio"
   },
-  "timerValue": 30,
-  "buzzerLocked": false,
+  "timerValue": 0,
+  "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "READING",
+  "status": "TIMEOUT",
   "lastJudgement": null,
   "roundsSummary": [
     {
@@ -562,7 +774,7 @@
     },
     {
       "index": 2,
-      "name": "Countdown",
+      "name": "Muziek van de voorbije 100 jaar",
       "points": 0,
       "questionsAnswered": 0,
       "totalQuestions": 4,
@@ -573,7 +785,7 @@
       "name": "Connections",
       "points": 10,
       "questionsAnswered": 0,
-      "totalQuestions": 3,
+      "totalQuestions": 5,
       "scores": {}
     },
     {
@@ -581,14 +793,14 @@
       "name": "1, 2, 3",
       "points": 20,
       "questionsAnswered": 0,
-      "totalQuestions": 7,
+      "totalQuestions": 10,
       "scores": {}
     },
     {
       "index": 5,
       "name": "Mystery Topic",
       "questionsAnswered": 0,
-      "totalQuestions": 2,
+      "totalQuestions": 10,
       "scores": {}
     }
   ],
@@ -598,5 +810,5 @@
     0,
     0
   ],
-  "cluesRevealed": 0
+  "connectionStreak": 0
 }

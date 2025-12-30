@@ -199,17 +199,17 @@
       ]
     },
     {
-      "name": "Countdown",
+      "name": "Muziek van de voorbije 100 jaar",
       "type": "countdown",
       "time_limit": 20,
       "points": 0,
-      "description": "Push your luck! Points = Seconds Remaining. Wrong answers freeze you out!",
+      "description": "Hoe sneller je artiest + titel weet, hoe meer punten",
       "questions": [
         {
-          "text": "What film is this scene from?",
-          "answer": "The Matrix",
-          "mediaUrl": "https://media.giphy.com/media/emGXB2eE3GhoXMNFHH/giphy.gif",
-          "mediaType": "image"
+          "text": "1930",
+          "answer": "Judy Garland - Over The Rainbow",
+          "mediaUrl": "assets/Judy Garland - Over the Rainbow (split).mp3",
+          "mediaType": "audio"
         },
         {
           "text": "Identify this sound.",
@@ -514,76 +514,80 @@
           "answer": "B, C, A"
         },
         {
-          "text": "",
+          "text": "De slagen van de viertaktmotor",
           "choices": [
             {
-              "A": "",
-              "index": ""
+              "C": "Inlaatslag",
+              "index": "1"
             },
             {
-              "B": "",
-              "index": ""
+              "D": "Compressieslag",
+              "index": "2"
             },
             {
-              "C": "",
-              "index": ""
+              "A": "Arbeidsslag",
+              "index": "3"
+            },
+            {
+              "B": "Uitlaatslag",
+              "index": "4"
             }
           ],
-          "answer": ""
-        }
-        {
-          "text": "",
-          "choices": [
-            {
-              "A": "",
-              "index": ""
-            },
-            {
-              "B": "",
-              "index": ""
-            },
-            {
-              "C": "",
-              "index": ""
-            }
-          ],
-          "answer": ""
+          "answer": "C, D, A, B"
         },
         {
-          "text": "",
+          "text": "TCP/IP handshake",
           "choices": [
             {
-              "A": "",
-              "index": ""
+              "C": "SYN",
+              "index": "1"
             },
             {
-              "B": "",
-              "index": ""
+              "B": "SYN-ACK",
+              "index": "2"
             },
             {
-              "C": "",
-              "index": ""
+              "A": "ACK",
+              "index": "3"
             }
           ],
-          "answer": ""
+          "answer": "C, B, A"
         },
         {
-          "text": "",
+          "text": "Triatlon",
           "choices": [
             {
-              "A": "",
-              "index": ""
+              "B": "Zwemmen",
+              "index": "1"
             },
             {
-              "B": "",
-              "index": ""
+              "A": "Fietsen",
+              "index": "2"
             },
             {
-              "C": "",
-              "index": ""
+              "C": "Lopen",
+              "index": "3"
             }
           ],
-          "answer": ""
+          "answer": "B, A, C"
+        },
+        {
+          "text": "Paneren",
+          "choices": [
+            {
+              "C": "Bloem",
+              "index": "1"
+            },
+            {
+              "B": "Ei",
+              "index": "2"
+            },
+            {
+              "A": "Broodkruim",
+              "index": "3"
+            }
+          ],
+          "answer": "C, B, A"
         }
       ]
     },
