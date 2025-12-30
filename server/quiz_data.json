@@ -113,7 +113,7 @@
               "a": "Distel"
             },
             {
-              "b": "Rose"
+              "b": "Roos"
             },
             {
               "c": "Klavertje"
@@ -435,7 +435,7 @@
               "index": "1970"
             },
             {
-              "C": "Picasso steft",
+              "C": "Picasso sterft",
               "index": "1973"
             }
           ],
@@ -478,7 +478,7 @@
           "answer": "A, C, B"
         },
         {
-          "text": "Ranschik ons op leeftijd",
+          "text": "Rangschik ons op leeftijd",
           "choices": [
             {
               "A": "Astrid",
@@ -503,7 +503,7 @@
               "index": "Fase 3"
             },
             {
-              "B": "Ontekenning",
+              "B": "Ontkenning",
               "index": "Fase 1"
             },
             {
@@ -612,8 +612,8 @@
             "Je kijkt dwars door me heen.",
             "Je hebt er twee van mij nodig.",
             "Ik kan hard of zacht zijn.",
-            "Mij verliezen is best onhandig",
-            "Door mij kunt je beter zien."
+            "Mij verliezen is best onhandig.",
+            "Door mij kun je beter zien."
           ],
           "answer": "Contactlens"
         },
@@ -625,7 +625,7 @@
             "Ik neem je mee langs pittoreske steden in Friesland.",
             "Mijn laatste editie was in 1997.",
             "Men hoopt elk jaar dat ik nog een keer kan worden georganiseerd.",
-            "Ik sta synoniem voor de Toch der tochten."
+            "Ik sta synoniem voor de Tocht der tochten."
           ],
           "answer": "De Elfstedentocht"
         },
@@ -655,7 +655,7 @@
         },
         {
           "topic": "Het weer",
-          "question": "wat?",
+          "question": "Wat?",
           "clues": [
             "Ik ben onvoorspelbaar.",
             "Ik kan je humeur maken of juist breken.",
@@ -673,7 +673,7 @@
             "Mijn italiaanse naam is 'La Gioconda'.",
             "Elke dag kijken er zo'n 20.000 mensen naar mij.",
             "Ik glimlach altijd.",
-            "Leonardo Da Vinci Heeft mij geschilderd."
+            "Leonardo Da Vinci heeft mij geschilderd."
           ],
           "answer": "Mona Lisa"
         },
@@ -685,7 +685,7 @@
             "Het is meestal stil als ik er ben.",
             "Bepaalde dieren worden wakker als ik er ben.",
             "Sommige mensen hebben dienst als ik er ben.",
-            "volgens de wet rond geluidshinder ben ik er tussen 23:00 en 7:00 uur."
+            "Volgens de wet rond geluidshinder ben ik er tussen 23:00 en 7:00 uur."
           ],
           "answer": "De Nacht"
         },
@@ -707,7 +707,7 @@
           "clues": [
             "Ik ken de burgemeester van Affligem.",
             "Ik woon op nummer 101",
-            "Mijn baasje heel rijk.",
+            "Mijn baasje is heel rijk.",
             "Ik kan moeilijke woorden niet goed uitspreken.",
             "De bel doet het niet."
           ],
