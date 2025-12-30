@@ -256,7 +256,7 @@ export default function Contestant() {
     let containerClass = '';
     if (state.status === 'LISTENING') containerClass = 'container-listening';
     else if (state.status === 'BUZZED') containerClass = 'container-buzzed';
-    else if (state.status === 'TIMEOUT') containerClass = 'container-timeout';
+    else if (state.status === 'TIMEOUT') containerClass = 'container-wrong'; // Red background for Timeout
     else if (state.status === 'ALL_LOCKED') containerClass = 'container-wrong'; // Red background for All Locked
     else if (state.status === 'ANSWER_REVEALED') {
         if (state.lastJudgement === true) containerClass = 'container-correct';
@@ -491,12 +491,6 @@ export default function Contestant() {
                         {/* Overlays for buzz, timeout, and judgement */}
                         {(state.status === 'BUZZED' || state.status === 'TIMEOUT' || state.status === 'ANSWER_REVEALED') && (
                             <>
-                                {state.status === 'TIMEOUT' && (
-                                    <div className="buzzer-overlay state-timeout">
-                                        TIME'S UP!
-                                    </div>
-                                )}
-
                                 {state.status === 'ANSWER_REVEALED' && state.lastJudgement === true &&
                                     !(state.roundType === 'freezeout' && state.lockedOutTeams && state.teams && state.lockedOutTeams.length === state.teams.length) && (
                                         // User requested to remove the "CORRECT!" overlay tile.
