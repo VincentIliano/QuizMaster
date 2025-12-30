@@ -474,9 +474,9 @@ export default function Contestant() {
                                 {state.choices && (
                                     <div className="choices-grid" style={{
                                         display: 'grid',
-                                        gridTemplateColumns: '1fr',
-                                        gap: '20px',
-                                        marginTop: '40px',
+                                        gridTemplateColumns: 'repeat(3, 1fr)',
+                                        gap: '15px',
+                                        marginTop: '20px',
                                         textAlign: 'left',
                                         width: '100%'
                                     }}>
@@ -488,9 +488,9 @@ export default function Contestant() {
 
                                             let style = {
                                                 background: 'rgba(255,255,255,0.1)',
-                                                padding: '20px 30px',
+                                                padding: '10px 20px',
                                                 borderRadius: '15px',
-                                                fontSize: '1.5em',
+                                                fontSize: '1.3em',
                                                 fontWeight: 'bold',
                                                 display: 'flex',
                                                 alignItems: 'center',

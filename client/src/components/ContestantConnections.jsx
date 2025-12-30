@@ -22,9 +22,7 @@ export default function ContestantConnections({ state }) {
         <div className="connections-container">
             {/* Header / Timer / Buzzer Overlay */}
             <div className="connections-header" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginBottom: '20px' }}>
-                <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`} style={{ fontSize: '3em', fontWeight: 'bold', color: '#fff', background: '#333', padding: '10px 30px', borderRadius: '50px', marginBottom: 20 }}>
-                    {state.timeLimit}
-                </div>
+                {/* Timer removed as per request */}
 
                 {state.topic && (
                     <div className="topic-display" style={{

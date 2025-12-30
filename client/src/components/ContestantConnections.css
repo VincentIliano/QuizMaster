@@ -110,7 +110,7 @@
     justify-content: center;
     /* Center grid items horizontally */
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     /* Constrain width */
     margin: 0 auto;
     /* Center container */
@@ -124,24 +124,21 @@
     align-items: center;
     text-align: center;
     /* Center multi-line text */
-    padding: 10px;
+    padding: 5px;
     /* Add padding */
-    font-size: 1.5em;
+    font-size: 1.1em;
     /* Adjusted font size */
     /* Slightly smaller to fit text */
     font-weight: bold;
     color: #2d3436;
     text-transform: uppercase;
-    aspect-ratio: 16/9;
-    /* Maintain ratio */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Removing aspect-ratio to let content determine height */
+    /* aspect-ratio: 16/9; */
+    min-height: 80px;
     transition: transform 0.2s, background-color 0.2s;
     height: auto;
-    /* Let aspect ratio drive height */
-    max-height: 15vh;
-    /* Limit height to prevent overflow on 16:9 */
-    word-break: break-word;
-    /* Prevent overflow */
+    /* word-break: normal; already set */
+    overflow-wrap: normal;
 }
 
 @keyframes slideDown {
