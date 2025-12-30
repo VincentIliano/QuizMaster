@@ -1,19 +1,19 @@
 {
   "teams": [
     {
-      "name": "gaer",
-      "score": 18
+      "name": "arge",
+      "score": 60
     },
     {
-      "name": "fadegh",
-      "score": 39
+      "name": "haerg",
+      "score": 79
     },
     {
-      "name": "hat",
-      "score": 8
+      "name": "hea",
+      "score": 20
     },
     {
-      "name": "htr",
+      "name": "hta",
       "score": 0
     }
   ],
@@ -166,8 +166,28 @@
           ]
         }
       ],
-      "scores": {},
-      "questionsAnswered": 0
+      "scores": {
+        "0": 60,
+        "1": 60,
+        "2": 20
+      },
+      "questionsAnswered": 10,
+      "foundAnswers": [
+        "Moorsel",
+        "Erembodegem",
+        "Nieuwerkerken",
+        "Baardegem",
+        "Hofstade",
+        "Meldert",
+        "Steenbok",
+        "Maagd",
+        "Stier",
+        "Tweelingen",
+        "Weegschaal",
+        "Waterman",
+        "Vissen",
+        "Schorpioen"
+      ]
     },
     {
       "name": "Minieme Quiz",
@@ -327,7 +347,7 @@
         }
       ],
       "scores": {},
-      "questionsAnswered": 0
+      "questionsAnswered": 1
     },
     {
       "name": "100 jaar muziek",
@@ -407,11 +427,9 @@
         }
       ],
       "scores": {
-        "0": 18,
-        "1": 39,
-        "2": 8
+        "1": 19
       },
-      "questionsAnswered": 10
+      "questionsAnswered": 6
     },
     {
       "name": "Connections",
@@ -908,34 +926,32 @@
       "questionsAnswered": 0
     }
   ],
-  "currentRoundIndex": 2,
-  "currentQuestionIndex": 10,
-  "currentQuestionData": {
-    "text": "2020",
-    "answer": "Taylor Swift - The fate of Ophelia",
-    "mediaUrl": "assets/Taylor Swift - The fate of Ophelia (split).mp3",
-    "mediaType": "audio",
-    "time_limit": 40
-  },
-  "timerValue": 40,
+  "currentRoundIndex": 1,
+  "currentQuestionIndex": 0,
+  "currentQuestionData": null,
+  "timerValue": 15,
   "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "ROUND_SUMMARY",
+  "status": "IDLE",
   "lastJudgement": null,
   "roundsSummary": [
     {
       "index": 0,
       "name": "Lijst",
       "points": 10,
-      "questionsAnswered": 0,
+      "questionsAnswered": 10,
       "totalQuestions": 10,
-      "scores": {}
+      "scores": {
+        "0": 60,
+        "1": 60,
+        "2": 20
+      }
     },
     {
       "index": 1,
       "name": "Minieme Quiz",
       "points": 10,
-      "questionsAnswered": 0,
+      "questionsAnswered": 1,
       "totalQuestions": 10,
       "scores": {}
     },
@@ -943,12 +959,10 @@
       "index": 2,
       "name": "100 jaar muziek",
       "points": 20,
-      "questionsAnswered": 10,
+      "questionsAnswered": 6,
       "totalQuestions": 10,
       "scores": {
-        "0": 18,
-        "1": 39,
-        "2": 8
+        "1": 19
       }
     },
     {
@@ -978,9 +992,9 @@
   "lockedOutTeams": [],
   "mediaPlaying": false,
   "roundStartScores": [
-    0,
-    19,
-    8,
+    60,
+    79,
+    20,
     0
   ],
   "connectionStreak": 0
