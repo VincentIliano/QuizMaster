@@ -464,11 +464,13 @@ class GameEngine {
     }
 
     finishRound() {
+        this.stopTimer();
         this.state.currentRoundIndex = -1;
         this.returnToDashboard();
     }
 
     returnToDashboard() {
+        this.stopTimer();
         this.state.status = "DASHBOARD";
         this.save();
     }
@@ -505,6 +507,7 @@ class GameEngine {
     }
 
     goToFinalResults() {
+        this.stopTimer();
         // Sort teams by score ascending (lowest first) for the "reveal default"
         // But actually typical podium is 3rd, 2nd, 1st?
         // User said: "last player first... until all players are on screen" based on REVEAL ORDER.
