@@ -62,7 +62,7 @@ export default function ContestantRoundSummary({ state }) {
             zIndex: 10
         }}>
             <h1 className="slide-up" style={{ fontSize: '4em', marginBottom: '50px', textShadow: '0 0 20px rgba(255,255,255,0.5)' }}>
-                ROUND SUMMARY
+                TUSSENSCORE
             </h1>
 
             <div style={{ display: 'flex', gap: '40px', alignItems: 'flex-start', minHeight: '50vh' }}>

@@ -317,15 +317,17 @@ export default function Contestant() {
                 <ContestantConnections state={state} />
             ) : (
                 <>
-                    <header className="gs-header">
-                        <div className="gs-round-name">{state.roundName}</div>
-                        {/* Standard Timer for non-freezeout */}
-                        {state.roundType !== 'freezeout' && state.roundType !== 'countdown' && (
-                            <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`}>
-                                {state.timeLimit}
-                            </div>
-                        )}
-                    </header>
+                    {state.roundType !== 'clues' && (
+                        <header className="gs-header">
+                            <div className="gs-round-name">{state.roundName}</div>
+                            {/* Standard Timer for non-freezeout */}
+                            {state.roundType !== 'freezeout' && state.roundType !== 'countdown' && (
+                                <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`}>
+                                    {state.timeLimit}
+                                </div>
+                            )}
+                        </header>
+                    )}
 
 
                     <main className="gs-main" style={{
@@ -442,7 +444,14 @@ export default function Contestant() {
                                         if (visibleClues.length === 0) return null;
 
                                         return (
-                                            <div className="clues-container" style={{ width: '100%', textAlign: 'left', marginTop: '20px' }}>
+                                            <div className="clues-container" style={{
+                                                width: '100%',
+                                                marginTop: '20px',
+                                                display: 'grid',
+                                                gridTemplateColumns: '1fr 1fr', // 2 Columns
+                                                gap: '15px',
+                                                alignContent: 'start'
+                                            }}>
                                                 {state.clues.map((clue, i) => {
                                                     const isRevealed = i < (state.cluesRevealedCount || 0) || state.status === 'ANSWER_REVEALED';
                                                     if (!isRevealed) return null;
@@ -453,13 +462,16 @@ export default function Contestant() {
                                                             className="clue-item pop-in"
                                                             style={{
                                                                 background: 'rgba(255, 255, 255, 0.1)',
-                                                                padding: '15px 25px',
-                                                                marginBottom: '10px',
+                                                                padding: '15px 20px',
                                                                 borderRadius: '10px',
-                                                                fontSize: '1.4em',
+                                                                fontSize: '1.2em', // Slightly smaller font
                                                                 borderLeft: '5px solid #ffd700',
                                                                 color: '#fff',
-                                                                animationDelay: `${i * 0.1}s`
+                                                                animationDelay: `${i * 0.1}s`,
+                                                                animationFillMode: 'both',
+                                                                textAlign: 'left',
+                                                                display: 'flex',
+                                                                alignItems: 'center'
                                                             }}
                                                         >
                                                             {clue}

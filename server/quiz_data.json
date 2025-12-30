@@ -90,47 +90,47 @@
             "Mexicano",
             "Kippets",
             "nen Oilsjteneer",
-            "bitterballen",
-            "viandel"
+            "Bitterballen",
+            "Viandel"
           ]
         },
         {
           "text": " 8 meest voorkomende tuinvogels België volgens Natuurpunt",
           "answers": [
-            "huismus",
-            "koolmees",
-            "merel",
-            "roodborst",
-            "pimpelmees",
-            "houtduif",
-            "ekster",
-            "vink"
+            "Huismus",
+            "Koolmees",
+            "Merel",
+            "Roodborst",
+            "Pimpelmees",
+            "Houtduif",
+            "Ekster",
+            "Vink"
           ]
         },
         {
           "text": " 10 keer favoriet speelgoed Emma ",
           "answers": [
-            "boekjes",
+            "Boekjes",
             "Elektro",
             "Rare Rookworst",
             "Memory",
             "Kwartet",
             "Domino",
-            "keukentje",
-            "lieveheersbeestje",
-            "turnmat",
-            "trommel"
+            "Keukentje",
+            "Lieveheersbeestje",
+            "Turnmat",
+            "Trommel"
           ]
         },
         {
           "text": " Onze gerechten Chinees oudejaar 2025",
           "answers": [
-            "bamboesoep",
-            "gepaneerde kippenblokjes in zoetzure saus",
-            "runderlapjes in currysaus",
-            "babipangang in pikante saus",
-            "varkensribbetjes in honingsaus",
-            "geroosterde eend met groenten"
+            "Bamboesoep",
+            "Gepaneerde kippenblokjes in zoetzure saus",
+            "Runderlapjes in currysaus",
+            "Babipangang in pikante saus",
+            "Varkensribbetjes in honingsaus",
+            "Geroosterde eend met groenten"
           ]
         },
         {
@@ -261,6 +261,21 @@
           "answer": "b"
         },
         {
+          "text": "En hoeveel ogen hebben de meeste spinnen?",
+          "choices": [
+            {
+              "a": "8"
+            },
+            {
+              "b": "2"
+            },
+            {
+              "c": "37"
+            }
+          ],
+          "answer": "a"
+        },
+        {
           "text": "Waarom hebben playmobil-mannetjes geen neus?",
           "choices": [
             {
@@ -286,21 +301,6 @@
             },
             {
               "c": "Wijsvingernagel"
-            }
-          ],
-          "answer": "c"
-        },
-        {
-          "text": "En hoeveel ogen hebben de meeste spinnen?",
-          "choices": [
-            {
-              "a": "8"
-            },
-            {
-              "b": "2"
-            },
-            {
-              "c": "37"
             }
           ],
           "answer": "c"
@@ -386,9 +386,9 @@
       ]
     },
     {
-      "name": "Connections",
+      "name": "Kaders",
       "type": "connections",
-      "description": "Find the connecting groups.",
+      "description": "Zoek de linken.",
       "points": 10,
       "questions": [
         {
@@ -650,7 +650,7 @@
           "answer": "C, B, A"
         },
         {
-          "text": "De eerste 3 fases van de rouw",
+          "text": "De eerste 3 fasen van rouwen",
           "choices": [
             {
               "A": "Onderhandelen",
@@ -671,52 +671,56 @@
           "text": "De slagen van de viertaktmotor",
           "choices": [
             {
-              "C": "Inlaatslag",
-              "index": "1"
-            },
-            {
-              "D": "Compressieslag",
-              "index": "2"
-            },
-            {
               "A": "Arbeidsslag",
               "index": "3"
             },
             {
               "B": "Uitlaatslag",
               "index": "4"
+            },
+            {
+              "C": "Inlaatslag",
+              "index": "1"
+            },
+            {
+              "D": "Compressieslag",
+              "index": "2"
             }
           ],
           "answer": "C, D, A, B"
         },
         {
-          "text": "TCP/IP handshake",
+          "text": "Ontwikkelingsfasen volgens Freud",
           "choices": [
             {
-              "C": "SYN",
-              "index": "1"
+              "A": "Fallisch",
+              "index": "3"
             },
             {
-              "B": "SYN-ACK",
+              "B": "Anaal",
               "index": "2"
             },
             {
-              "A": "ACK",
-              "index": "3"
+              "C": "Oraal",
+              "index": "1"
+            },
+            {
+              "D": "Latentie",
+              "index": "4"
             }
           ],
-          "answer": "C, B, A"
+          "answer": "C, B, A, D"
         },
         {
           "text": "Triatlon",
           "choices": [
             {
-              "B": "Zwemmen",
-              "index": "1"
-            },
-            {
               "A": "Fietsen",
               "index": "2"
+            },
+            {
+              "B": "Zwemmen",
+              "index": "1"
             },
             {
               "C": "Lopen",
@@ -729,16 +733,16 @@
           "text": "Paneren",
           "choices": [
             {
-              "C": "Bloem",
-              "index": "1"
+              "A": "Broodkruim",
+              "index": "3"
             },
             {
               "B": "Ei",
               "index": "2"
             },
             {
-              "A": "Broodkruim",
-              "index": "3"
+              "C": "Bloem",
+              "index": "1"
             }
           ],
           "answer": "C, B, A"
@@ -805,7 +809,7 @@
           "clues": [
             "Ik heb 2 vleugels.",
             "Je hebt mij in verschillende maten en vormen.",
-            "Ik kan me ergens insteken.",
+            "Je kan me ergens insteken.",
             "Soms loop ik.",
             "Door mij kun je ruiken."
           ],
@@ -819,7 +823,7 @@
             "Ik kan je humeur maken of juist breken.",
             "Ik ben het dagelijkse onderwerp aan de koffiemachine.",
             "Ik word elke dag in het nieuws vermeld.",
-            "Frank Debosere kon altijd veel over mij vertellen."
+            "Frank Deboosere kon altijd veel over mij vertellen."
           ],
           "answer": "Het weer"
         },
@@ -828,7 +832,7 @@
           "question": "Wat?",
           "clues": [
             "Ik hang aan de muur.",
-            "Mijn italiaanse naam is 'La Gioconda'.",
+            "Mijn Italiaanse naam is 'La Gioconda'.",
             "Elke dag kijken er zo'n 20.000 mensen naar mij.",
             "Ik glimlach altijd.",
             "Leonardo Da Vinci heeft mij geschilderd."
@@ -839,11 +843,11 @@
           "topic": "De Nacht",
           "question": "Wat?",
           "clues": [
-            "Ik ben er elke dag.",
+            "Ik kom dagelijks terug.",
             "Het is meestal stil als ik er ben.",
             "Bepaalde dieren worden wakker als ik er ben.",
             "Sommige mensen hebben dienst als ik er ben.",
-            "Volgens de wet rond geluidshinder ben ik er tussen 23:00 en 7:00 uur."
+            "Volgens de wet rond geluidshinder ben ik er tussen 22:00 en 7:00 uur."
           ],
           "answer": "De Nacht"
         },
@@ -854,8 +858,8 @@
             "Ik ben een geliefd doelwit voor wildplassers.",
             "Er is aan mij meer dan 180 jaar gewerkt.",
             "Ik sta in Aalst.",
-            "Daens deed hier zijn eerste communie.",
-            "Ik ben thuis voor een portret van Peter Paul Rubens."
+            "Daens deed hier zijn eerste Communie.",
+            "Ik ben de thuis van een schilderij van Peter Paul Rubens."
           ],
           "answer": "Sint-Martinus Kerk Aalst"
         },
@@ -864,7 +868,7 @@
           "question": "Wie?",
           "clues": [
             "Ik ken de burgemeester van Affligem.",
-            "Ik woon op nummer 101",
+            "Ik woon op nummer 101.",
             "Mijn baasje is heel rijk.",
             "Ik kan moeilijke woorden niet goed uitspreken.",
             "De bel doet het niet."

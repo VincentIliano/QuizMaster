@@ -136,7 +136,17 @@ export default function HostControlPanel({ state }) {
 
             <div style={{ marginBottom: 20, color: '#64d2ff' }}>
                 {state.roundType === 'order' ? (
-                    <strong>Correct Order: {state.answer}</strong>
+                    <strong>Correct Order: {(() => {
+                        if (!state.answer) return "N/A";
+                        const parts = state.answer.split(',').map(s => s.trim());
+                        return parts.map(key => {
+                            const choice = state.choices ? state.choices.find(c => c[key] !== undefined) : null;
+                            if (choice) {
+                                return `${key}: ${choice[key]}${choice.index ? `(${choice.index})` : ''}`;
+                            }
+                            return key;
+                        }).join(', ');
+                    })()}</strong>
                 ) : (
                     <>Answer: {state.answer}</>
                 )}
@@ -177,6 +187,7 @@ export default function HostControlPanel({ state }) {
                 <button
                     onClick={startTimer}
                     disabled={state.status !== 'READING' && state.status !== 'PAUSED'}
+                    style={{ display: state.roundType === 'clues' ? 'none' : 'inline-block' }}
                 >Start Timer</button>
 
                 {state.mediaUrl && (state.mediaType === 'video' || state.mediaType === 'audio') && (

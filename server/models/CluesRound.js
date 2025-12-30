@@ -69,15 +69,10 @@ class CluesRound {
                 gameEngine.state.buzzerWinner = null;
                 gameEngine.state.buzzerLocked = false; // Re-open for others
 
-                // Auto-resume timer logic
-                if (gameEngine.state.timerValue > 0) {
-                    gameEngine.playSfx('wrong');
-                    gameEngine.startTimer(); // This sets status to LISTENING
-                } else {
-                    gameEngine.state.status = "READING"; // Fallback if no timer
-                    gameEngine.playSfx('wrong');
-                    gameEngine.save();
-                }
+                // No timer restart for Clues round (as per request to remove timer)
+                gameEngine.state.status = "READING";
+                gameEngine.playSfx('wrong');
+                gameEngine.save();
             }
         }
     }

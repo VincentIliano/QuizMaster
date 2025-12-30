@@ -291,6 +291,11 @@ class GameEngine {
         this.state.timerValue = currentRound.time_limit || 30;
         this.state.buzzerLocked = false;
 
+        // Force timerValue to 0 for Clues round
+        if (currentRound.type === 'clues') {
+            this.state.timerValue = 0;
+        }
+
         // Setup Round Specifics (Generalized)
         if (this.currentRoundInstance && typeof this.currentRoundInstance.setupQuestion === 'function') {
             this.currentRoundInstance.setupQuestion(this, this.state.currentQuestionIndex);
@@ -349,6 +354,9 @@ class GameEngine {
         const tickHandler = onTick || this.onTick;
 
         if (this.state.status === 'ALL_LOCKED') return;
+
+        // Disable timer for Clues round (per request)
+        if (this.currentRoundInstance && this.currentRoundInstance.type === 'clues') return;
 
         if (this.state.status === 'ANSWER_REVEALED' || this.state.status === 'BUZZED' || this.state.status === 'PAUSED') {
             this.state.buzzerWinner = null;
