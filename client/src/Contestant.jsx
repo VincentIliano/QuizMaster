@@ -26,6 +26,14 @@ export default function Contestant() {
         // Configure tick audio
         tickAudioRef.current.loop = true;
         tickAudioRef.current.volume = 0.5; // Adjust volume as needed
+
+        return () => {
+            if (tickAudioRef.current) tickAudioRef.current.pause();
+            if (buzzerAudioRef.current) buzzerAudioRef.current.pause();
+            if (correctAudioRef.current) correctAudioRef.current.pause();
+            if (wrongAudioRef.current) wrongAudioRef.current.pause();
+            if (revealAudioRef.current) revealAudioRef.current.pause();
+        };
     }, []);
 
     // Track solved groups count to trigger sound
@@ -55,11 +63,15 @@ export default function Contestant() {
             }
         }
 
+
         // Wrong Answer (but game continues) -> Status is PAUSED, lastJudgement is false
         if (state.status === 'PAUSED' && state.lastJudgement === false && prevStatus.current !== 'PAUSED' && wrongAudioRef.current) {
             wrongAudioRef.current.currentTime = 0;
             wrongAudioRef.current.play().catch(() => { });
         }
+
+
+
 
         // Solved a Connection Group (Correct Sound)
         if (state.solvedGroups) {
@@ -106,7 +118,7 @@ export default function Contestant() {
         } else {
             mediaRef.current.pause();
         }
-    });
+    }, [state?.mediaPlaying, state?.mediaUrl]);
 
     // Track previous question index to determine direction
     // Initialize with -1, will update when state is available
@@ -289,7 +301,7 @@ export default function Contestant() {
             ) : state.status === 'DASHBOARD' ? (
                 <div className="screensaver-overlay" style={{ background: 'transparent', backdropFilter: 'none' }}>
                     <div className="screensaver-content">
-                        <h1>QUIZ MASTER</h1>
+                        <h1>OUDEJAAR 2025</h1>
                         <p>Get Ready!</p>
                     </div>
                 </div>
@@ -308,62 +320,25 @@ export default function Contestant() {
                     <header className="gs-header">
                         <div className="gs-round-name">{state.roundName}</div>
                         {/* Standard Timer for non-freezeout */}
-                        {state.roundType !== 'freezeout' && (
+                        {state.roundType !== 'freezeout' && state.roundType !== 'countdown' && (
                             <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`}>
                                 {state.timeLimit}
                             </div>
                         )}
                     </header>
 
-                    <main className="gs-main" style={state.roundType === 'freezeout' ? { flexDirection: 'row', alignItems: 'center', gap: 40, padding: '0 40px' } : {}}>
 
-                        {/* Large Analog Clock for Freezeout - Left Side */}
-                        {state.roundType === 'freezeout' && (
-                            <div className="analog-clock-large" style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-                                <div style={{ position: 'relative', width: '40vh', height: '40vh' }}>
-                                    <svg width="100%" height="100%" viewBox="0 0 100 100">
-                                        <circle cx="50" cy="50" r="48" fill="#fff" stroke="#ccc" strokeWidth="2" />
-                                        {/* Ticks */}
-                                        {[...Array(12)].map((_, i) => (
-                                            <line
-                                                key={i}
-                                                x1="50" y1="6" x2="50" y2="10"
-                                                stroke="#333" strokeWidth="2"
-                                                transform={`rotate(${i * 30} 50 50)`}
-                                            />
-                                        ))}
-                                        {/* Progress Arc */}
-                                        <circle
-                                            cx="50" cy="50" r="40"
-                                            fill="none"
-                                            stroke={state.timeLimit <= 5 ? "#ff3b3b" : "#333"}
-                                            strokeWidth="6"
-                                            strokeDasharray="251"
-                                            strokeDashoffset={251 - (251 * state.timeLimit / (state.maxTime || 30))}
-                                            transform="rotate(-90 50 50)"
-                                            style={{ transition: 'stroke-dashoffset 1s linear, stroke 0.3s' }}
-                                        />
-                                    </svg>
-                                    <div style={{
-                                        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-                                        display: 'flex', justifyContent: 'center', alignItems: 'center',
-                                        fontSize: '4em', fontWeight: 'bold', color: '#333'
-                                    }}>
-                                        {state.timeLimit}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                    <main className="gs-main">
 
-                        {/* Question Card - Right Side (or Center) */}
+                        {/* Question Card */}
                         {state.status !== 'IDLE' && (state.mediaUrl || state.question || (state.roundType === 'clues' && (state.cluesRevealedCount > 0 || state.status === 'ANSWER_REVEALED'))) && (
                             <div
                                 // Removed key={state.question} to prevent remounting on unrelated updates. 
                                 // Relies on animClass triggering for visual entrance.
                                 className={`question-card ${animClass} ${state.status === 'LISTENING' ? 'listening-active' : ''}`}
                                 style={{
-                                    ...(state.roundType === 'freezeout' ? { flex: 1, maxWidth: 'none', height: 'auto' } : {}),
                                     ...(state.roundType === 'list' ? { maxWidth: '95%', width: '100%' } : {}),
+                                    ...(state.roundType === 'countdown' ? { marginTop: '100px' } : {}),
                                 }}
                                 onAnimationEnd={() => {
                                     if (animClass === 'pop-in' || animClass === 'slide-right' || animClass === 'slide-left') {
@@ -384,13 +359,66 @@ export default function Contestant() {
                                                 style={{ maxWidth: '100%', maxHeight: '40vh', borderRadius: 8 }}
                                             />
                                         ) : state.mediaType === 'audio' ? (
-                                            <div style={{ padding: 20, background: '#333', borderRadius: 8 }}>
-                                                <div style={{ fontSize: '3em' }}>🔊</div>
+                                            <div style={{
+                                                padding: '10px 20px',
+                                                background: 'rgba(255,255,255,0.05)',
+                                                borderRadius: '15px',
+                                                border: '1px solid rgba(255,255,255,0.1)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '20px',
+                                                width: 'auto',
+                                                maxWidth: '400px',
+                                                margin: '0 auto'
+                                            }}>
+                                                {/* Hidden audio element for logic */}
                                                 <audio
                                                     ref={mediaRef}
                                                     src={state.mediaUrl}
-                                                    controls
+                                                    style={{ display: 'none' }}
                                                 />
+
+                                                {/* Visualizer / Icon Area (Smaller) */}
+                                                <div style={{
+                                                    width: '50px',
+                                                    height: '50px',
+                                                    borderRadius: '50%',
+                                                    background: 'rgba(255,255,255,0.1)',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    position: 'relative',
+                                                    animation: state.mediaPlaying ? 'pulse-audio 2s infinite ease-in-out' : 'none'
+                                                }}>
+                                                    <span style={{ fontSize: '1.5em' }}>
+                                                        {state.mediaPlaying ? '🔊' : '🔇'}
+                                                    </span>
+                                                </div>
+
+                                                {/* Text Label & Progress Line */}
+                                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                                                    <div style={{
+                                                        color: '#fff',
+                                                        fontSize: '1em',
+                                                        fontWeight: '300',
+                                                        letterSpacing: '1px',
+                                                        opacity: 0.8
+                                                    }}>
+                                                        {state.mediaPlaying ? "NOW PLAYING..." : "AUDIO READY"}
+                                                    </div>
+
+                                                    {/* Very subtle progress line */}
+                                                    <div style={{ width: '100%', height: '2px', background: 'rgba(255,255,255,0.1)', borderRadius: '1px', overflow: 'hidden' }}>
+                                                        <div style={{
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            background: 'rgba(255,255,255,0.5)',
+                                                            transform: state.mediaPlaying ? 'translateX(0)' : 'translateX(-100%)',
+                                                            animation: state.mediaPlaying ? 'progress-indeterminate 2s infinite linear' : 'none',
+                                                            opacity: 0.5
+                                                        }}></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         ) : (
                                             <img
@@ -549,6 +577,31 @@ export default function Contestant() {
                     </main>
 
                 </>
+            )}
+
+            {state.roundType === 'countdown' && (
+                <div style={{
+                    position: 'absolute',
+                    top: '100px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    backdropFilter: 'blur(5px)',
+                    padding: '10px 30px',
+                    borderRadius: '12px',
+                    color: '#fff',
+                    fontSize: '2em',
+                    fontWeight: 'bold',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    zIndex: 2000,
+                    textShadow: '1px 1px 2px black',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px'
+                }}>
+                    <span style={{ fontSize: '0.6em', textTransform: 'uppercase', opacity: 0.7, letterSpacing: '1px' }}>Punten</span>
+                    <span>{5 + Math.floor((state.timeLimit / (state.maxTime || 20)) * ((state.roundPoints || 20) - 5))}</span>
+                </div>
             )}
 
             <div style={{ flex: 1 }}></div>

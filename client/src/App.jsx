@@ -6,7 +6,7 @@ import './index.css';
 function Home() {
   return (
     <div className="home-menu">
-      <h1>Quiz Master</h1>
+      <h1>OUDEJAARSQUIZ 2025</h1>
       <div className="links">
         <Link to="/host" className="btn">Host Dashboard</Link>
         <Link to="/contestant" className="btn">Contestant View</Link>

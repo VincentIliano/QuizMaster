@@ -30,6 +30,7 @@ class GameEngine {
             roundsSummary: [],
             lockedOutTeams: [], // Added for FreezeOut
             mediaPlaying: false, // Added for manual media control
+
             roundStartScores: [] // Snapshot of scores at round start
         };
         this.currentRoundInstance = null;
@@ -172,6 +173,7 @@ class GameEngine {
             upcomingAnswer: upcomingQ ? upcomingQ.answer : null,
             lastJudgement: s.lastJudgement,
             mediaPlaying: s.mediaPlaying || false,
+
             roundStartScores: s.roundStartScores || [],
             gridItems: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].gridItems : [],
             solvedGroups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].solvedGroups : [],
@@ -289,22 +291,21 @@ class GameEngine {
         this.state.timerValue = currentRound.time_limit || 30;
         this.state.buzzerLocked = false;
 
-        // Setup Grid for Connections
-        if (this.currentRoundInstance instanceof ConnectionsRound) {
+        // Setup Round Specifics (Generalized)
+        if (this.currentRoundInstance && typeof this.currentRoundInstance.setupQuestion === 'function') {
             this.currentRoundInstance.setupQuestion(this, this.state.currentQuestionIndex);
-            // Override timer 
-            this.state.timerValue = currentRound.time_limit || 60;
+        }
 
-            // Auto-start timer when grid is revealed (per user request)
+        if (this.currentRoundInstance instanceof ConnectionsRound) {
+            // Additional timer overrides for connections?
+            // Logic moved to ConnectionsRound.setupQuestion hopefully, but preserving explicit check if needed for legacy behavior?
+            // Actually, ConnectionsRound.setupQuestion handles grid setup.
+            // The override timer logic was here:
+            this.state.timerValue = currentRound.time_limit || 60;
             this.startTimer(onTick);
             this.state.status = "LISTENING";
             this.save();
             return;
-        }
-
-        // Setup for Clues Round
-        if (this.currentRoundInstance instanceof CluesRound) {
-            this.currentRoundInstance.setupQuestion(this, this.state.currentQuestionIndex);
         }
 
         this.state.status = autoStart ? "LISTENING" : "READING";
@@ -363,11 +364,15 @@ class GameEngine {
                 if (tickHandler) tickHandler(this.state.timerValue);
 
                 if (this.state.timerValue <= 0) {
-                    this.stopTimer();
-                    this.state.buzzerLocked = true;
-                    this.state.status = "TIMEOUT";
-                    this.state.mediaPlaying = false;
-                    this.save();
+                    if (this.currentRoundInstance && typeof this.currentRoundInstance.handleTimeout === 'function') {
+                        this.currentRoundInstance.handleTimeout(this);
+                    } else {
+                        this.stopTimer();
+                        this.state.buzzerLocked = true;
+                        this.state.status = "TIMEOUT";
+                        this.state.mediaPlaying = false;
+                        this.save();
+                    }
                 }
             }, 1000);
         }
@@ -435,6 +440,8 @@ class GameEngine {
         this.state.mediaPlaying = !this.state.mediaPlaying;
         this.save();
     }
+
+
 
     unfreezeTeam(teamIndex) {
         if (this.state.lockedOutTeams.includes(teamIndex)) {

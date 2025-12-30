@@ -50,7 +50,7 @@ export default function ContestantRoundSummary({ state }) {
     }, []);
 
     return (
-        <div className="game-show-container" style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <div className="game-show-container" style={{ justifyContent: 'center', alignItems: 'center', overflow: 'hidden', maxHeight: '100vh' }}>
             <h1 className="slide-up" style={{ fontSize: '4em', marginBottom: '50px', textShadow: '0 0 20px rgba(255,255,255,0.5)' }}>
                 ROUND SUMMARY
             </h1>
