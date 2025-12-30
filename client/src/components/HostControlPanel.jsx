@@ -142,6 +142,32 @@ export default function HostControlPanel({ state }) {
                 )}
             </div>
 
+            {state.roundType === 'clues' && state.clues && (
+                <div style={{ margin: '10px 0', padding: '10px', background: '#333', borderRadius: 4 }}>
+                    <div style={{ fontSize: '0.9em', color: '#aaa', marginBottom: 5 }}>Clues (Click 'Reveal Clue' to show next):</div>
+                    <ul style={{ listStyleType: 'none', padding: 0 }}>
+                        {state.clues.map((clue, i) => {
+                            const isRevealed = i < (state.cluesRevealedCount || 0);
+                            return (
+                                <li key={i} style={{
+                                    padding: '5px 10px',
+                                    marginBottom: 5,
+                                    background: isRevealed ? '#444' : '#222',
+                                    color: isRevealed ? '#fff' : '#666',
+                                    borderLeft: isRevealed ? '3px solid #ffd700' : '3px solid #444'
+                                }}>
+                                    <strong>{i + 1}.</strong> {clue}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                    <div style={{ marginTop: 10, color: '#aaa' }}>
+                        Potential Points: {state.clueConfig ? (state.clueConfig.initial - (Math.max(0, (state.cluesRevealedCount || 0) - 1) * state.clueConfig.reduction)) : 'N/A'}
+                    </div>
+                </div>
+            )}
+
+
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
                 <button
                     onClick={nextQuestion}
@@ -181,9 +207,20 @@ export default function HostControlPanel({ state }) {
                 <button
                     onClick={reveal}
                     disabled={state.status !== 'TIMEOUT' && state.status !== 'ALL_LOCKED' && state.status !== 'PAUSED' && state.status !== 'LISTENING'}
-                >Reveal</button>
+                >Reveal Answer</button>
 
-                {state.topic && (
+                {state.roundType === 'clues' && (
+                    <button
+                        onClick={() => socket.emit('reveal_clue')}
+                        disabled={!state.clues || (state.cluesRevealedCount || 0) >= state.clues.length}
+                        style={{ backgroundColor: '#ff9800', color: 'white' }}
+                    >
+                        Reveal Clue
+                    </button>
+                )}
+
+
+                {state.topic && state.roundType !== 'clues' && (
                     <button
                         onClick={() => socket.emit('reveal_topic')}
                         disabled={state.topicRevealed}

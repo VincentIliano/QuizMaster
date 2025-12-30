@@ -468,6 +468,38 @@
           "answer": ""
         }
       ]
+    },
+    {
+      "name": "Mystery Topic",
+      "type": "clues",
+      "initial_points": 15,
+      "reduction_amount": 3,
+      "questions": [
+        {
+          "topic": "Paris",
+          "question": "Location",
+          "clues": [
+            "I am a city in Europe.",
+            "I have a famous iron tower.",
+            "I am known as the City of Light.",
+            "The Louvre museum is here.",
+            "I am the capital of France."
+          ],
+          "answer": "Paris"
+        },
+        {
+          "topic": "The Beatles",
+          "question": "Famous Band",
+          "clues": [
+            "We are a famous band from Liverpool.",
+            "Our drummer was Ringo Starr.",
+            "We sang 'Yellow Submarine'.",
+            "John Lennon was one of us.",
+            "We are the Fab Four."
+          ],
+          "answer": "The Beatles"
+        }
+      ]
     }
   ]
 }

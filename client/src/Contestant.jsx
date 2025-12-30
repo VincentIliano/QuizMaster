@@ -13,6 +13,7 @@ export default function Contestant() {
     const buzzerAudioRef = useRef(null);
     const correctAudioRef = useRef(null);
     const wrongAudioRef = useRef(null);
+    const revealAudioRef = useRef(null); // New Ref
 
     useEffect(() => {
         // Initialize Audio objects once
@@ -20,6 +21,7 @@ export default function Contestant() {
         buzzerAudioRef.current = new Audio('/assets/Buzzer.mp3');
         correctAudioRef.current = new Audio('/assets/Correct.mp3');
         wrongAudioRef.current = new Audio('/assets/Wrong.mp3');
+        revealAudioRef.current = new Audio('/assets/Reveal.mp3'); // Initialize
 
         // Configure tick audio
         tickAudioRef.current.loop = true;
@@ -209,6 +211,12 @@ export default function Contestant() {
             } else if (type === 'wrong' && wrongAudioRef.current) {
                 wrongAudioRef.current.currentTime = 0;
                 wrongAudioRef.current.play().catch(e => console.log('SFX play failed', e));
+            } else if (type === 'clue_reveal' && revealAudioRef.current) {
+                revealAudioRef.current.currentTime = 0;
+                revealAudioRef.current.play().catch(e => console.log('SFX play failed', e));
+            } else if (type === 'topic_reveal' && revealAudioRef.current) {
+                revealAudioRef.current.currentTime = 0;
+                revealAudioRef.current.play().catch(e => console.log('SFX play failed', e));
             }
         });
 
@@ -347,7 +355,7 @@ export default function Contestant() {
                         )}
 
                         {/* Question Card - Right Side (or Center) */}
-                        {state.status !== 'IDLE' && (state.mediaUrl || state.question) && (
+                        {state.status !== 'IDLE' && (state.mediaUrl || state.question || (state.roundType === 'clues' && (state.cluesRevealedCount > 0 || state.status === 'ANSWER_REVEALED'))) && (
                             <div
                                 // Removed key={state.question} to prevent remounting on unrelated updates. 
                                 // Relies on animClass triggering for visual entrance.
@@ -396,6 +404,42 @@ export default function Contestant() {
                                 <div className="question-text">
                                     {state.question}
                                 </div>
+
+
+                                {state.roundType === 'clues' && state.clues && (
+                                    (() => {
+                                        const visibleClues = state.clues.filter((_, i) => i < (state.cluesRevealedCount || 0) || state.status === 'ANSWER_REVEALED');
+                                        if (visibleClues.length === 0) return null;
+
+                                        return (
+                                            <div className="clues-container" style={{ width: '100%', textAlign: 'left', marginTop: '20px' }}>
+                                                {state.clues.map((clue, i) => {
+                                                    const isRevealed = i < (state.cluesRevealedCount || 0) || state.status === 'ANSWER_REVEALED';
+                                                    if (!isRevealed) return null;
+
+                                                    return (
+                                                        <div
+                                                            key={i}
+                                                            className="clue-item pop-in"
+                                                            style={{
+                                                                background: 'rgba(255, 255, 255, 0.1)',
+                                                                padding: '15px 25px',
+                                                                marginBottom: '10px',
+                                                                borderRadius: '10px',
+                                                                fontSize: '1.4em',
+                                                                borderLeft: '5px solid #ffd700',
+                                                                color: '#fff',
+                                                                animationDelay: `${i * 0.1}s`
+                                                            }}
+                                                        >
+                                                            {clue}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        );
+                                    })()
+                                )}
 
                                 {state.choices && (
                                     <div className="choices-grid" style={{

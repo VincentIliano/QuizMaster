@@ -26,9 +26,7 @@ module.exports = (io, gameEngine) => {
 
         socket.on('reveal_topic', () => {
             const pointsAwarded = gameEngine.revealTopic();
-            if (pointsAwarded) {
-                io.emit('play_sfx', 'correct');
-            }
+            io.emit('play_sfx', 'topic_reveal');
             io.emit('state_update', gameEngine.getPublicState());
         });
 
@@ -84,6 +82,13 @@ module.exports = (io, gameEngine) => {
         socket.on('finish_round', () => gameEngine.finishRound());
 
         socket.on('reveal_connection', (groupIndex) => gameEngine.revealConnectionGroup(groupIndex));
+
+        socket.on('reveal_clue', () => {
+            if (gameEngine.revealClue()) {
+                io.emit('state_update', gameEngine.getPublicState());
+            }
+        });
+
 
         socket.on('reset_round', (index) => gameEngine.resetRound(index));
 

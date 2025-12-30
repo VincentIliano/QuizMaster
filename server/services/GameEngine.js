@@ -2,6 +2,8 @@
 const StandardRound = require('../models/StandardRound');
 const FreezeOutRound = require('../models/FreezeOutRound');
 const ConnectionsRound = require('../models/ConnectionsRound');
+const CluesRound = require('../models/CluesRound');
+
 
 class GameEngine {
     constructor(storage) {
@@ -92,6 +94,8 @@ class GameEngine {
         } else if (round.type === 'connections') {
             this.currentRoundInstance = new ConnectionsRound(round);
             this.currentRoundInstance.init(this); // Initialize grid
+        } else if (round.type === 'clues') {
+            this.currentRoundInstance = new CluesRound(round);
         } else {
             this.currentRoundInstance = new StandardRound(round);
         }
@@ -141,7 +145,7 @@ class GameEngine {
             roundIndex: s.currentRoundIndex,
             questionIndex: s.currentQuestionIndex,
             totalQuestions: totalQuestions,
-            question: s.currentQuestionData ? (s.currentQuestionData.text || ((s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].type === 'connections' && s.currentQuestionData.groups) ? s.currentQuestionData.groups.map(g => g.name).join(', ') : "")) : "",
+            question: s.currentQuestionData ? (s.currentQuestionData.question || s.currentQuestionData.text || ((s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].type === 'connections' && s.currentQuestionData.groups) ? s.currentQuestionData.groups.map(g => g.name).join(', ') : "")) : "",
             mediaUrl: s.currentQuestionData ? s.currentQuestionData.mediaUrl : null,
             mediaType: s.currentQuestionData ? s.currentQuestionData.mediaType : null,
             roundsSummary: s.roundsSummary,
@@ -174,6 +178,14 @@ class GameEngine {
             groups: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].questions && s.currentQuestionIndex >= 0 && s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex]) ? s.rounds[s.currentRoundIndex].questions[s.currentQuestionIndex].groups : [],
             topic: s.currentQuestionData ? s.currentQuestionData.topic : null,
             topicRevealed: s.currentQuestionData ? s.currentQuestionData.topicRevealed : false,
+            // Clues Round
+            clues: s.currentQuestionData ? s.currentQuestionData.clues : null,
+            cluesRevealedCount: s.cluesRevealed || 0,
+            clueConfig: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].type === 'clues') ? {
+                initial: s.rounds[s.currentRoundIndex].initial_points || 15,
+                reduction: s.rounds[s.currentRoundIndex].reduction_amount || 3
+            } : null,
+
             finalStandings: s.finalStandings || [],
             finalistRevealCount: s.finalistRevealCount || 0
         };
@@ -290,6 +302,11 @@ class GameEngine {
             return;
         }
 
+        // Setup for Clues Round
+        if (this.currentRoundInstance instanceof CluesRound) {
+            this.currentRoundInstance.setupQuestion(this, this.state.currentQuestionIndex);
+        }
+
         this.state.status = autoStart ? "LISTENING" : "READING";
         this.state.mediaPlaying = false;
 
@@ -401,8 +418,8 @@ class GameEngine {
         }
     }
 
-    revealAnswer() {
-        this.state.lastJudgement = false;
+    revealAnswer(judgement = false) {
+        this.state.lastJudgement = judgement;
         this.state.status = "ANSWER_REVEALED";
         this.save();
     }
@@ -468,6 +485,18 @@ class GameEngine {
         }
         return false;
     }
+
+    revealClue() {
+        if (this.currentRoundInstance && typeof this.currentRoundInstance.revealClue === 'function') {
+            const revealed = this.currentRoundInstance.revealClue(this);
+            if (revealed) {
+                this.playSfx('clue_reveal'); // Optional sfx
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     playSfx(type) {
         if (this.onPlaySfx) {
