@@ -1,16 +1,20 @@
 {
   "teams": [
     {
-      "name": "gae",
-      "score": 0
+      "name": "Koen",
+      "score": 411
     },
     {
-      "name": "era",
-      "score": 46
+      "name": "Paulien",
+      "score": 264
     },
     {
-      "name": "hate",
-      "score": 0
+      "name": "Michiel",
+      "score": 404
+    },
+    {
+      "name": "Sara",
+      "score": 456
     }
   ],
   "rounds": [
@@ -162,8 +166,80 @@
           ]
         }
       ],
-      "scores": {},
-      "questionsAnswered": 4
+      "scores": {
+        "0": 220,
+        "1": 100,
+        "2": 90,
+        "3": 240
+      },
+      "questionsAnswered": 10,
+      "foundAnswers": [
+        "Hofstade",
+        "Meldert",
+        "Nieuwerkerken",
+        "Baardegem",
+        "Moorsel",
+        "Erembodegem",
+        "Aalst",
+        "Gijzegem",
+        "Herdersem",
+        "Leeuw",
+        "Tweelingen",
+        "Boogschutter",
+        "Maagd",
+        "Vissen",
+        "Schorpioen",
+        "Ram",
+        "Kreeft",
+        "Stier",
+        "Steenbok",
+        "New York",
+        "New Hampshire",
+        "Vermont",
+        "Maine",
+        "Massachussets",
+        "Rhode Island",
+        "Emma",
+        "Olivia",
+        "Nora",
+        "Noor",
+        "Julia",
+        "Mila",
+        "Liv",
+        "September",
+        "Oktober",
+        "November",
+        "December",
+        "Juli",
+        "April",
+        "März",
+        "Januar",
+        "Februar",
+        "Mai",
+        "Juni",
+        "August",
+        "Boulette",
+        "Curryworst",
+        "Viandel",
+        "Kippets",
+        "Bitterballen",
+        "Pimpelmees",
+        "Koolmees",
+        "Houtduif",
+        "Ekster",
+        "Merel",
+        "Roodborst",
+        "Vink",
+        "Huismus",
+        "Boekjes",
+        "Lieveheersbeestje",
+        "Keukentje",
+        "Gepaneerde kippenblokjes in zoetzure saus",
+        "Runderlapjes in currysaus",
+        "Bamboesoep",
+        "Varkensribbetjes in honingsaus",
+        "Pommelien Thijs"
+      ]
     },
     {
       "name": "Miniemen Quiz",
@@ -322,8 +398,12 @@
           "answer": "c"
         }
       ],
-      "scores": {},
-      "questionsAnswered": 3
+      "scores": {
+        "0": 30,
+        "2": 50,
+        "3": 20
+      },
+      "questionsAnswered": 10
     },
     {
       "name": "100 jaar muziek",
@@ -402,8 +482,13 @@
           "time_limit": 40
         }
       ],
-      "scores": {},
-      "questionsAnswered": 0
+      "scores": {
+        "0": 5,
+        "1": 6,
+        "2": 8,
+        "3": 29
+      },
+      "questionsAnswered": 10
     },
     {
       "name": "Kaders",
@@ -441,7 +526,87 @@
                 "🎵 eh, Sexy Lady 🎵"
               ]
             }
-          ]
+          ],
+          "gridItems": [
+            {
+              "text": "Netflix",
+              "groupIndex": 1,
+              "id": "u44huf2oo",
+              "solved": true
+            },
+            {
+              "text": "Appartement",
+              "groupIndex": 0,
+              "id": "5ldhibgz5",
+              "solved": true
+            },
+            {
+              "text": "Paardrijdansje",
+              "groupIndex": 2,
+              "id": "9552ll936",
+              "solved": true
+            },
+            {
+              "text": "Kpop Demon Hunters",
+              "groupIndex": 1,
+              "id": "cyqkbs9lz",
+              "solved": true
+            },
+            {
+              "text": "Psy",
+              "groupIndex": 2,
+              "id": "g010r9kz2",
+              "solved": true
+            },
+            {
+              "text": "🎵 eh, Sexy Lady 🎵",
+              "groupIndex": 2,
+              "id": "mgxw5my6z",
+              "solved": true
+            },
+            {
+              "text": "Rosé",
+              "groupIndex": 0,
+              "id": "k0f9ixsv4",
+              "solved": true
+            },
+            {
+              "text": "🎵 op, op, op, op,.... 🎵",
+              "groupIndex": 2,
+              "id": "cosczea46",
+              "solved": true
+            },
+            {
+              "text": "Drankspelletje",
+              "groupIndex": 0,
+              "id": "fdsydbt4n",
+              "solved": true
+            },
+            {
+              "text": "🎵We're going up, up, up,....🎵",
+              "groupIndex": 1,
+              "id": "b5zmejkcj",
+              "solved": true
+            },
+            {
+              "text": "Anime",
+              "groupIndex": 1,
+              "id": "vlhr790ey",
+              "solved": true
+            },
+            {
+              "text": "Bruno Mars",
+              "groupIndex": 0,
+              "id": "nn3dp6shq",
+              "solved": true
+            }
+          ],
+          "solvedGroups": [
+            1,
+            0,
+            2
+          ],
+          "topicRevealed": true
         },
         {
           "topic": "AI",
@@ -473,7 +638,87 @@
                 "SORA"
               ]
             }
-          ]
+          ],
+          "gridItems": [
+            {
+              "text": "Instagram",
+              "groupIndex": 1,
+              "id": "g39mab9a4",
+              "solved": true
+            },
+            {
+              "text": "Facebook",
+              "groupIndex": 1,
+              "id": "q4t4kidkv",
+              "solved": true
+            },
+            {
+              "text": "Meest waardevolle bedrijf in de wereld",
+              "groupIndex": 0,
+              "id": "37sonty1s",
+              "solved": true
+            },
+            {
+              "text": "DALL-E",
+              "groupIndex": 2,
+              "id": "nkkb2z6fv",
+              "solved": true
+            },
+            {
+              "text": "OpenAI",
+              "groupIndex": 2,
+              "id": "b676oqyvo",
+              "solved": true
+            },
+            {
+              "text": "SORA",
+              "groupIndex": 2,
+              "id": "eukc4cile",
+              "solved": true
+            },
+            {
+              "text": "Sam Altman",
+              "groupIndex": 2,
+              "id": "ehhyh9azz",
+              "solved": true
+            },
+            {
+              "text": "Jensen Huang",
+              "groupIndex": 0,
+              "id": "903lyzdkr",
+              "solved": true
+            },
+            {
+              "text": "VR",
+              "groupIndex": 1,
+              "id": "uqksq9fvh",
+              "solved": true
+            },
+            {
+              "text": "Mark Zuckerberg",
+              "groupIndex": 1,
+              "id": "1uijpau6j",
+              "solved": true
+            },
+            {
+              "text": "GPU's",
+              "groupIndex": 0,
+              "id": "nqdfho5gz",
+              "solved": true
+            },
+            {
+              "text": "Monopolie",
+              "groupIndex": 0,
+              "id": "hbmt4xjoe",
+              "solved": true
+            }
+          ],
+          "solvedGroups": [
+            1,
+            2,
+            0
+          ],
+          "topicRevealed": true
         },
         {
           "topic": "Nationalisme",
@@ -505,7 +750,87 @@
                 "Judo"
               ]
             }
-          ]
+          ],
+          "gridItems": [
+            {
+              "text": "Oekraïne",
+              "groupIndex": 2,
+              "id": "9znav10li",
+              "solved": true
+            },
+            {
+              "text": "Schild & Vrienden",
+              "groupIndex": 1,
+              "id": "cac4zpueq",
+              "solved": true
+            },
+            {
+              "text": "Memes",
+              "groupIndex": 1,
+              "id": "9uldk6euy",
+              "solved": true
+            },
+            {
+              "text": "Mar-a-Lago",
+              "groupIndex": 0,
+              "id": "wwcfs0ikz",
+              "solved": true
+            },
+            {
+              "text": "Kremlin",
+              "groupIndex": 2,
+              "id": "m7vrm7eja",
+              "solved": true
+            },
+            {
+              "text": "Pano",
+              "groupIndex": 1,
+              "id": "59q2c6yuo",
+              "solved": true
+            },
+            {
+              "text": "KGB",
+              "groupIndex": 2,
+              "id": "vba04onp5",
+              "solved": true
+            },
+            {
+              "text": "Oranje",
+              "groupIndex": 0,
+              "id": "dqro6ucay",
+              "solved": true
+            },
+            {
+              "text": "Vlaams Belang",
+              "groupIndex": 1,
+              "id": "ddfbz3vc8",
+              "solved": true
+            },
+            {
+              "text": "Judo",
+              "groupIndex": 2,
+              "id": "17xdkn1t4",
+              "solved": true
+            },
+            {
+              "text": "Importtarieven",
+              "groupIndex": 0,
+              "id": "bzw4pmrk7",
+              "solved": true
+            },
+            {
+              "text": "MAGA",
+              "groupIndex": 0,
+              "id": "qy2ojwe28",
+              "solved": true
+            }
+          ],
+          "solvedGroups": [
+            1,
+            2,
+            0
+          ],
+          "topicRevealed": true
         },
         {
           "topic": "Oost-Vlaanderen",
@@ -537,7 +862,87 @@
                 "9100"
               ]
             }
-          ]
+          ],
+          "gridItems": [
+            {
+              "text": "Carnaval",
+              "groupIndex": 1,
+              "id": "ve5lnccg6",
+              "solved": true
+            },
+            {
+              "text": "9100",
+              "groupIndex": 2,
+              "id": "emcw4v8sc",
+              "solved": true
+            },
+            {
+              "text": "Nicolaas van Myra",
+              "groupIndex": 2,
+              "id": "kw3ldy8hm",
+              "solved": true
+            },
+            {
+              "text": "Gravensteen",
+              "groupIndex": 0,
+              "id": "tc6conaer",
+              "solved": true
+            },
+            {
+              "text": "Dirk Martens",
+              "groupIndex": 1,
+              "id": "t4gpbipaz",
+              "solved": true
+            },
+            {
+              "text": "-se Feesten",
+              "groupIndex": 0,
+              "id": "1dyt5h21k",
+              "solved": true
+            },
+            {
+              "text": "Grootste marktplein van België",
+              "groupIndex": 2,
+              "id": "shcn46v0r",
+              "solved": true
+            },
+            {
+              "text": "Industrie",
+              "groupIndex": 1,
+              "id": "4kffhhlyw",
+              "solved": true
+            },
+            {
+              "text": "Stroppendragers",
+              "groupIndex": 0,
+              "id": "qkqwdnnfo",
+              "solved": true
+            },
+            {
+              "text": "Sint-Bavo",
+              "groupIndex": 0,
+              "id": "ckz440oqm",
+              "solved": true
+            },
+            {
+              "text": "Chipka",
+              "groupIndex": 1,
+              "id": "9dvrk1llc",
+              "solved": true
+            },
+            {
+              "text": "Waasland shoppingcenter",
+              "groupIndex": 2,
+              "id": "9u0b78vo6",
+              "solved": true
+            }
+          ],
+          "solvedGroups": [
+            2,
+            0,
+            1
+          ],
+          "topicRevealed": true
         },
         {
           "topic": "Nieuwjaar",
@@ -569,11 +974,96 @@
                 "4"
               ]
             }
-          ]
+          ],
+          "gridItems": [
+            {
+              "text": "3",
+              "groupIndex": 2,
+              "id": "xfv5r1v3e",
+              "solved": true
+            },
+            {
+              "text": "Kleurrijk",
+              "groupIndex": 0,
+              "id": "8bn6oy7d9",
+              "solved": true
+            },
+            {
+              "text": "Fitness",
+              "groupIndex": 1,
+              "id": "uhfg0rw9a",
+              "solved": true
+            },
+            {
+              "text": "Stoppen met roken",
+              "groupIndex": 1,
+              "id": "p3hz6gjco",
+              "solved": true
+            },
+            {
+              "text": "Mensen zijn er meer fan van dan dieren",
+              "groupIndex": 0,
+              "id": "rtwox6dri",
+              "solved": true
+            },
+            {
+              "text": "Dieet",
+              "groupIndex": 1,
+              "id": "tgse82xyi",
+              "solved": true
+            },
+            {
+              "text": "in 2024, 139 mensen door gewond",
+              "groupIndex": 0,
+              "id": "j35zwehoa",
+              "solved": true
+            },
+            {
+              "text": "Meer sparen",
+              "groupIndex": 1,
+              "id": "wqda14pz7",
+              "solved": true
+            },
+            {
+              "text": "2",
+              "groupIndex": 2,
+              "id": "85t9dejte",
+              "solved": true
+            },
+            {
+              "text": "4",
+              "groupIndex": 2,
+              "id": "bh8vyjrnn",
+              "solved": true
+            },
+            {
+              "text": "1",
+              "groupIndex": 2,
+              "id": "yhtxyhuin",
+              "solved": true
+            },
+            {
+              "text": "Uitgevonden in China",
+              "groupIndex": 0,
+              "id": "hjijmwxik",
+              "solved": true
+            }
+          ],
+          "solvedGroups": [
+            1,
+            2,
+            0
+          ],
+          "topicRevealed": true
         }
       ],
-      "scores": {},
-      "questionsAnswered": 0
+      "scores": {
+        "0": 110,
+        "1": 40,
+        "2": 120,
+        "3": 90
+      },
+      "questionsAnswered": 5
     },
     {
       "name": "1, 2, 3",
@@ -771,9 +1261,12 @@
         }
       ],
       "scores": {
-        "1": 40
+        "0": 20,
+        "1": 60,
+        "2": 40,
+        "3": 40
       },
-      "questionsAnswered": 6
+      "questionsAnswered": 10
     },
     {
       "name": "Mystery Topic",
@@ -903,88 +1396,136 @@
         }
       ],
       "scores": {},
-      "questionsAnswered": 4
+      "questionsAnswered": 10
     }
   ],
-  "currentRoundIndex": 1,
-  "currentQuestionIndex": 3,
+  "currentRoundIndex": -1,
+  "currentQuestionIndex": 10,
   "currentQuestionData": {
-    "text": "Wat is de hoogste berg van Afrika?",
+    "text": "Welke nagel groeit het snelst?",
     "choices": [
       {
-        "a": "Mount Everest"
+        "a": "Teennagel"
       },
       {
-        "b": "Elbroes"
+        "b": "Pinknagel"
       },
       {
-        "c": "Kilimanjaro"
+        "c": "Wijsvingernagel"
       }
     ],
     "answer": "c"
   },
-  "timerValue": 14,
-  "buzzerLocked": false,
+  "timerValue": 15,
+  "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "DASHBOARD",
+  "status": "FINAL_RESULTS",
   "lastJudgement": null,
   "roundsSummary": [
     {
       "index": 0,
       "name": "Lijst",
       "points": 10,
-      "questionsAnswered": 4,
+      "questionsAnswered": 10,
       "totalQuestions": 10,
-      "scores": {}
+      "scores": {
+        "0": 220,
+        "1": 100,
+        "2": 90,
+        "3": 240
+      }
     },
     {
       "index": 1,
       "name": "Miniemen Quiz",
       "points": 10,
-      "questionsAnswered": 3,
+      "questionsAnswered": 10,
       "totalQuestions": 10,
-      "scores": {}
+      "scores": {
+        "0": 30,
+        "2": 50,
+        "3": 20
+      }
     },
     {
       "index": 2,
       "name": "100 jaar muziek",
       "points": 20,
-      "questionsAnswered": 0,
+      "questionsAnswered": 10,
       "totalQuestions": 10,
-      "scores": {}
+      "scores": {
+        "0": 5,
+        "1": 6,
+        "2": 8,
+        "3": 29
+      }
     },
     {
       "index": 3,
       "name": "Kaders",
       "points": 10,
-      "questionsAnswered": 0,
+      "questionsAnswered": 5,
       "totalQuestions": 5,
-      "scores": {}
+      "scores": {
+        "0": 110,
+        "1": 40,
+        "2": 120,
+        "3": 90
+      }
     },
     {
       "index": 4,
       "name": "1, 2, 3",
       "points": 20,
-      "questionsAnswered": 6,
+      "questionsAnswered": 10,
       "totalQuestions": 10,
       "scores": {
-        "1": 40
+        "0": 20,
+        "1": 60,
+        "2": 40,
+        "3": 40
       }
     },
     {
       "index": 5,
       "name": "Mystery Topic",
-      "questionsAnswered": 4,
+      "questionsAnswered": 10,
       "totalQuestions": 10,
       "scores": {}
     }
   ],
   "lockedOutTeams": [],
-  "mediaPlaying": true,
+  "mediaPlaying": false,
   "roundStartScores": [
-    0,
-    46,
-    0
+    381,
+    264,
+    354,
+    436
   ],
-  "connectionStreak": 0
+  "connectionStreak": 0,
+  "cluesRevealed": 2,
+  "finalStandings": [
+    {
+      "name": "Paulien",
+      "score": 264,
+      "originalIndex": 1
+    },
+    {
+      "name": "Michiel",
+      "score": 404,
+      "originalIndex": 2
+    },
+    {
+      "name": "Koen",
+      "score": 411,
+      "originalIndex": 0
+    },
+    {
+      "name": "Sara",
+      "score": 456,
+      "originalIndex": 3
+    }
+  ],
+  "finalistRevealIndex": 0,
+  "finalistRevealCount": 4
 }
