@@ -899,7 +899,6 @@
       "reduction_amount": 3,
       "questions": [
         {
-          "topic": "Vuilbak",
           "question": "Voorwerp",
           "clues": [
             "Ik besta in allerlei vormen en maten.",
@@ -911,7 +910,6 @@
           "answer": "Vuilbak"
         },
         {
-          "topic": "Contactlens",
           "question": "Wat?",
           "clues": [
             "Je kijkt dwars door me heen.",
@@ -923,7 +921,6 @@
           "answer": "Contactlens"
         },
         {
-          "topic": "De Elfstedentocht",
           "question": "Wat?",
           "clues": [
             "De opwarming van de aarde is mijn aartsvijand.",
@@ -935,7 +932,6 @@
           "answer": "De Elfstedentocht"
         },
         {
-          "topic": "Vrijheidsbeeld",
           "question": "Wat?",
           "clues": [
             "Ik ben een vrouw van steen.",
@@ -947,7 +943,6 @@
           "answer": "Vrijheidsbeeld"
         },
         {
-          "topic": "Neus",
           "question": "Wat?",
           "clues": [
             "Ik heb 2 vleugels.",
@@ -959,7 +954,6 @@
           "answer": "Neus"
         },
         {
-          "topic": "Het weer",
           "question": "Wat?",
           "clues": [
             "Ik ben onvoorspelbaar.",
@@ -971,7 +965,6 @@
           "answer": "Het weer"
         },
         {
-          "topic": "Mona Lisa",
           "question": "Wat?",
           "clues": [
             "Ik hang aan de muur.",
@@ -983,7 +976,6 @@
           "answer": "Mona Lisa"
         },
         {
-          "topic": "De Nacht",
           "question": "Wat?",
           "clues": [
             "Ik kom dagelijks terug.",
@@ -995,7 +987,6 @@
           "answer": "De Nacht"
         },
         {
-          "topic": "Sint-Martinus Kerk Aalst",
           "question": "Wat?",
           "clues": [
             "Ik ben een geliefd doelwit voor wildplassers.",
@@ -1007,7 +998,6 @@
           "answer": "Sint-Martinus Kerk Aalst"
         },
         {
-          "topic": "Samson",
           "question": "Wie?",
           "clues": [
             "Ik ken de burgemeester van Affligem.",
