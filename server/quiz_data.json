@@ -86,7 +86,7 @@
           ]
         },
         {
-          "text": "Who are the 7 main bridge crew members of the original Starship Enterprise?",
+          "text": "Wie zijn de 7 belangrijkste brugbemanningsleden van de originele Starship Enterprise?",
           "answers": [
             "James T. Kirk",
             "Spock",
@@ -115,7 +115,7 @@
           ]
         },
         {
-          "text": "Hobbit meals",
+          "text": "Hobbit maaltijden",
           "answers": [
             "Breakfast",
             "Second Breakfast",
@@ -135,23 +135,23 @@
       "description": "",
       "questions": [
         {
-          "text": "What is the fifth element?",
+          "text": "Wat is het vijfde element?",
           "answer": "Leeloo"
         },
         {
-          "text": "What should you never do with a gremlin?",
-          "answer": "Expose it to sunlight, get them wet 😏, Feed it after midnight"
+          "text": "Wat mag je nooit doen met een gremlin?",
+          "answer": "Aan zonlicht blootstellen, nat maken 😏, voeden na middernacht"
         },
         {
-          "text": "What is 'light as a feather, and as hard as dragon scales'",
+          "text": "Wat is 'light as a feather, and as hard as dragon scales'",
           "answer": "Mithril"
         },
         {
-          "text": "What is the name of the company that owns the ill-fated colony on LV-426 in the Alien franchise?",
+          "text": "Hoe heet het bedrijf dat de onfortuinlijke kolonie op LV-426 bezit in de Alien franchise?",
           "answer": "Weyland-Yutani"
         },
         {
-          "text": "What is the name of Geralt of Rivia’s horse?",
+          "text": "Hoe heet het paard van Geralt of Rivia?",
           "answer": "Roach"
         },
         {
@@ -266,7 +266,7 @@
           "answer": "b"
         },
         {
-          "text": "Welk personage, in 'The Matrix', verraad Morpheus en zijn team aan de agents?",
+          "text": "Welk personage, in 'The Matrix', verraadt Morpheus en zijn team aan de agents?",
           "choices": [
             {
               "a": "Tank"
@@ -284,7 +284,7 @@
           "answer": "c"
         },
         {
-          "text": "In welk koninkrijk vind 'The Legend of Zelda' hoofdzakelijk plaats?",
+          "text": "In welk koninkrijk vindt 'The Legend of Zelda' hoofdzakelijk plaats?",
           "choices": [
             {
               "a": "Hyrule"
