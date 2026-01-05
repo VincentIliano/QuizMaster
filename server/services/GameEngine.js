@@ -12,6 +12,7 @@ class GameEngine {
         this.timerInterval = null;
         this.onTick = null; // Callback for timer ticks
         this.onPlaySfx = null; // Callback for sound effects
+        this.onPenalty = null; // Callback for penalty events
 
         // Initial State
 
@@ -41,6 +42,7 @@ class GameEngine {
         const quizData = this.storage.loadQuizData();
         // Always use fresh round definitions
         this.state.rounds = quizData.rounds || [];
+        this.state.falseStartPenalty = quizData.falseStartPenalty || 0;
 
         // Ensure rounds initialized with defaults
         console.log("GameEngine init: Initial rounds count:", this.state.rounds.length);
@@ -289,7 +291,9 @@ class GameEngine {
         const currentRound = this.state.rounds[this.state.currentRoundIndex];
         this.state.currentQuestionData = currentRound.questions[this.state.currentQuestionIndex];
         this.state.timerValue = currentRound.time_limit || 30;
-        this.state.buzzerLocked = false;
+
+        // Start Locked (until startTimer is called, unless auto-start)
+        this.state.buzzerLocked = true;
 
         // Force timerValue to 0 for Clues round
         if (currentRound.type === 'clues') {
@@ -314,9 +318,9 @@ class GameEngine {
         }
 
         // Auto-start timer for Standard rounds (no type) as requested
-        if (!currentRound.type || currentRound.type === 'standard') {
-            autoStart = true;
-        }
+        // if (!currentRound.type || currentRound.type === 'standard') {
+        //     autoStart = true;
+        // }
 
         this.state.status = autoStart ? "LISTENING" : "READING";
         this.state.mediaPlaying = false;
@@ -324,6 +328,8 @@ class GameEngine {
         if (autoStart) {
             this.startTimer(onTick);
         } else {
+            // Keep locked if Reading
+            this.state.buzzerLocked = true;
             this.save();
         }
     }
@@ -413,20 +419,53 @@ class GameEngine {
     }
 
     handleBuzz(teamIndex) {
-        if (this.state.buzzerLocked) return null;
+        console.log(`[GameEngine] handleBuzz team=${teamIndex} status=${this.state.status} locked=${this.state.buzzerLocked}`);
+
+        // 1. Safety / Start-of-Game Checks
+        // Ignore inputs during pure setup/idle screens to prevent accidents
+        if (this.state.status === 'DASHBOARD' || this.state.status === 'IDLE' || this.state.status === 'ROUND_SUMMARY') {
+            return null;
+        }
+
+        // 2. Frozen Team Check
         if (this.state.lockedOutTeams.includes(teamIndex)) return null;
 
-        if (teamIndex >= 0 && teamIndex < this.state.teams.length) {
+        // 3. Spam Protection
+        // If this team is ALREADY the buzzer winner, ignore subsequent presses
+        if (this.state.status === 'BUZZED' && this.state.buzzerWinner === teamIndex) {
+            return null;
+        }
+
+        // 4. Valid Buzz Condition: Status MUST be LISTENING
+        // We also check locked just in case, but LISTENING implies unlocked usually.
+        if (this.state.status === 'LISTENING') {
+            // Valid Logic
             this.state.buzzerLocked = true;
             this.stopTimer();
             this.state.buzzerWinner = teamIndex;
             this.state.status = "BUZZED";
             this.state.mediaPlaying = false;
-            // Initialize connection streak for new buzzer winner
             this.state.connectionStreak = 0;
             this.save();
             return this.state.teams[teamIndex].name;
         }
+
+        // 5. Penalty Condition
+        // Any buzzer press when NOT in LISTENING (and not earlier excluded) is a penalty
+        if (this.state.teams[teamIndex]) {
+            const penalty = this.state.falseStartPenalty || 0;
+            console.log(`[GameEngine] Illegal buzz detected in status '${this.state.status}'. Penalty: ${penalty}`);
+
+            if (penalty > 0) {
+                this.state.teams[teamIndex].score -= penalty;
+                this.save();
+                this.playSfx('wrong');
+                if (this.onPenalty) this.onPenalty(teamIndex, penalty);
+                // Do NOT return name, do NOT change status to BUZZED
+                return null;
+            }
+        }
+
         return null;
     }
 
@@ -443,6 +482,7 @@ class GameEngine {
     revealAnswer(judgement = false) {
         this.state.lastJudgement = judgement;
         this.state.status = "ANSWER_REVEALED";
+        this.state.buzzerLocked = true; // Ensure locked
         this.save();
     }
 

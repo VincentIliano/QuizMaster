@@ -1,4 +1,5 @@
 {
+  "falseStartPenalty": 5,
   "rounds": [
     {
       "name": "Lijst",
@@ -8,215 +9,157 @@
       "description": "Geef zoveel mogelijk juiste antwoorden.",
       "questions": [
         {
-          "text": "Deelgemeenten van Aalst",
+          "text": "The Fellowship of the Ring",
           "answers": [
-            "Aalst",
-            "Erembodegem",
-            "Nieuwerkerken",
-            "Meldert",
-            "Gijzegem",
-            "Moorsel",
-            "Baardegem",
-            "Hofstade",
-            "Herdersem"
+            "Frodo",
+            "Gandalf",
+            "Aragorn",
+            "Legolas",
+            "Gimli",
+            "Boromir",
+            "Pippin",
+            "Merry",
+            "Sam"
           ]
         },
         {
-          "text": "Sterrenbeelden",
+          "text": "Verdeling van de 'Rings of Power'",
           "answers": [
-            "Ram",
-            "Stier",
-            "Tweelingen",
-            "Kreeft",
-            "Leeuw",
-            "Maagd",
-            "Weegschaal",
-            "Schorpioen",
-            "Boogschutter",
-            "Steenbok",
-            "Waterman",
-            "Vissen"
+            "Elves (3)",
+            "Men (9)",
+            "Dwarves (7)",
+            "Sauron (1)"
           ]
         },
         {
-          "text": " 9 meest noordelijke Amerikaanse staten volgens Wikipedia ",
+          "text": "Teenage mutant ninja turtles",
           "answers": [
-            "Maine",
-            "New Hampshire",
-            "Vermont",
-            "Massachussets",
-            "Rhode Island",
-            "Connecticut",
-            "New York",
-            "New Jersey",
-            "Pennsylvania"
+            "Donatello",
+            "Leonardo",
+            "Raphael",
+            "Michelangelo"
           ]
         },
         {
-          "text": "7 populairste meisjesnamen 2025 volgens Kind en Gezin",
+          "text": "De 9 star wars films",
           "answers": [
-            "Emma",
-            "Olivia",
-            "Noor",
-            "Nora",
-            "Mila",
-            "Julia",
-            "Liv"
+            "Episode I: The Phantom Menace",
+            "Episode II: Attack of the Clones",
+            "Episode III: Revenge of the Sith",
+            "Episode IV: A New Hope",
+            "Episode V: The Empire Strikes Back",
+            "Episode VI: Return of the Jedi",
+            "Episode VII: The Force Awakens",
+            "Episode VIII: The Last Jedi",
+            "Episode IX: The Rise of Skywalker"
           ]
         },
         {
-          "text": " Maanden in het Duits",
+          "text": "De 5 Wizards van Middle-Earth",
           "answers": [
-            "Januar",
-            "Februar",
-            "März",
-            "April",
-            "Mai",
-            "Juni",
-            "Juli",
-            "August",
-            "September",
-            "Oktober",
-            "November",
-            "December"
+            "Gandalf",
+            "Saruman",
+            "Radagast",
+            "Alatar",
+            "Pallando"
           ]
         },
         {
-          "text": " 8 Populairste frituursnacks volgens ADR + VI",
+          "text": "De 3 Zwaarden die in The Hobbit gevonden worden in de trollen grot",
           "answers": [
-            "Curryworst",
-            "Boulette",
-            "Garnaalkroket",
-            "Mexicano",
-            "Kippets",
-            "nen Oilsjteneer",
-            "Bitterballen",
-            "Viandel"
+            "Glamdring",
+            "Sting",
+            "Orcrist"
           ]
         },
         {
-          "text": " 8 meest voorkomende tuinvogels België volgens Natuurpunt",
+          "text": "D&D 5e Schools of magic",
           "answers": [
-            "Huismus",
-            "Koolmees",
-            "Merel",
-            "Roodborst",
-            "Pimpelmees",
-            "Houtduif",
-            "Ekster",
-            "Vink"
+            "Abjuration",
+            "Conjuration",
+            "Divination",
+            "Enchantment",
+            "Evocation",
+            "Illusion",
+            "Necromancy",
+            "Transmutation"
           ]
         },
         {
-          "text": " 10 keer favoriet speelgoed Emma ",
+          "text": "Who are the 7 main bridge crew members of the original Starship Enterprise?",
           "answers": [
-            "Boekjes",
-            "Elektro",
-            "Rare Rookworst",
-            "Memory",
-            "Kwartet",
-            "Domino",
-            "Keukentje",
-            "Lieveheersbeestje",
-            "Turnmat",
-            "Trommel"
+            "James T. Kirk",
+            "Spock",
+            "Uhura",
+            "Sulu",
+            "Chekov",
+            "Scotty",
+            "McCoy (Bones)"
           ]
         },
         {
-          "text": " Onze gerechten Chinees oudejaar 2025",
+          "text": "Damage types in D&D 5e",
           "answers": [
-            "Bamboesoep",
-            "Gepaneerde kippenblokjes in zoetzure saus",
-            "Runderlapjes in currysaus",
-            "Babipangang in pikante saus",
-            "Varkensribbetjes in honingsaus",
-            "Geroosterde eend met groenten"
+            "Acid",
+            "Bludgeoning",
+            "Cold",
+            "Fire",
+            "Force",
+            "Lightning",
+            "Necrotic",
+            "Poison",
+            "Psychic",
+            "Radiant",
+            "Slashing",
+            "Thunder"
           ]
         },
         {
-          "text": "9 beste artiesten singles Ultratop 2025",
+          "text": "Hobbit meals",
           "answers": [
-            "Pommelien Thijs",
-            "Alex Warren",
-            "Lola Young",
-            "Gracie Adams",
-            "Ed Sheeran",
-            "Lady Gaga en Bruno Mars",
-            "Caron Whitcomb",
-            "Teddy Swims",
-            "Myles Smith"
+            "Breakfast",
+            "Second Breakfast",
+            "Elevenses",
+            "Luncheon",
+            "AfternoonTea",
+            "Dinner",
+            "Supper"
           ]
         }
       ]
     },
     {
-      "name": "Miniemen Quiz",
+      "name": "Algemene kennis",
       "time_limit": 15,
       "points": 10,
-      "description": "Beantwoord snel deze kleine vragen",
+      "description": "",
       "questions": [
         {
-          "text": "Welke van de volgende is geen bestaande plaatsnaam?",
-          "choices": [
-            {
-              "a": "A"
-            },
-            {
-              "b": "B"
-            },
-            {
-              "c": "C"
-            }
-          ],
-          "answer": "c"
+          "text": "What is the fifth element?",
+          "answer": "Leeloo"
         },
         {
-          "text": "Welk lichamelijk kenmerk is typisch voor de Habsburgers?",
-          "choices": [
-            {
-              "a": "Flaporen "
-            },
-            {
-              "b": "Vooruitstekende kin"
-            },
-            {
-              "c": "Scheel kijken"
-            }
-          ],
-          "answer": "b"
+          "text": "What should you never do with a gremlin?",
+          "answer": "Expose it to sunlight, get them wet 😏, Feed it after midnight"
         },
         {
-          "text": "Wie of wat stoot de meeste broeikasgassen uit?",
-          "choices": [
-            {
-              "a": "Koeien"
-            },
-            {
-              "b": "De mens"
-            },
-            {
-              "c": "Auto's"
-            }
-          ],
-          "answer": "a"
+          "text": "What is 'light as a feather, and as hard as dragon scales'",
+          "answer": "Mithril"
         },
         {
-          "text": "Wat is de hoogste berg van Afrika?",
-          "choices": [
-            {
-              "a": "Mount Everest"
-            },
-            {
-              "b": "Elbroes"
-            },
-            {
-              "c": "Kilimanjaro"
-            }
-          ],
-          "answer": "c"
+          "text": "What is the name of the company that owns the ill-fated colony on LV-426 in the Alien franchise?",
+          "answer": "Weyland-Yutani"
         },
         {
-          "text": "Welke plant is het symbool van Schotland?",
+          "text": "What is the name of Geralt of Rivia’s horse?",
+          "answer": "Roach"
+        },
+        {
+          "text": "What is the name of the plant that is the symbol of Scotland?",
+          "answer": "Distel"
+        },
+        {
+          "text": "wat is 'A white tree standing beneath seven stars and a high crown, all set against a black background'",
           "choices": [
             {
               "a": "Distel"
@@ -308,6 +251,206 @@
       ]
     },
     {
+      "name": "Meerkeuze",
+      "time_limit": 15,
+      "points": 10,
+      "description": "",
+      "questions": [
+        {
+          "text": "wat is 'A white tree standing beneath seven stars and a high crown, all set against a black background'",
+          "choices": [
+            {
+              "a": "Het logo van Starbucks"
+            },
+            {
+              "b": "Het schild van Gondor"
+            },
+            {
+              "c": "De deur van de mines of Moria"
+            },
+            {
+              "d": "Het logo van World of Warcraft"
+            }
+          ],
+          "answer": "b"
+        },
+        {
+          "text": "Welke van deze is in het boek 'The Fellowship of the Ring' GEEN geschenk, gegeven door Galadriel aan the fellowship",
+          "choices": [
+            {
+              "a": "Een doos grond"
+            },
+            {
+              "b": "Een boog, gespannen met haar"
+            },
+            {
+              "c": "Tweede-hands kleren"
+            },
+            {
+              "d": "Nog wat haar"
+            }
+          ],
+          "answer": "c"
+        },
+        {
+          "text": "Hoelang duurt een short rest in D&D 5e?",
+          "choices": [
+            {
+              "a": "Een kwartier"
+            },
+            {
+              "b": "Een half uur"
+            },
+            {
+              "c": "1 uur"
+            }
+          ],
+          "answer": "c"
+        },
+        {
+          "text": "Welke van deze is GEEN standaard kleur van draak?",
+          "choices": [
+            {
+              "a": "Koper"
+            },
+            {
+              "b": "Zilver"
+            },
+            {
+              "c": "Messing"
+            },
+            {
+              "d": "Ijzer"
+            }
+          ],
+          "answer": "d"
+        },
+        {
+          "text": "Hoe noemt (of hoe heet men) het schip in de film Alien(1979)?",
+          "choices": [
+            {
+              "a": "The Sulaco"
+            },
+            {
+              "b": "The Nostromo"
+            },
+            {
+              "c": "The Prometheus"
+            },
+            {
+              "d": "The Covenant"
+            }
+          ],
+          "answer": "b"
+        },
+        {
+          "text": "Welk personage, in 'The Matrix', verraad Morpheus en zijn team aan de agents?",
+          "choices": [
+            {
+              "a": "Tank"
+            },
+            {
+              "b": "Switch"
+            },
+            {
+              "c": "Cypher"
+            },
+            {
+              "d": "Apoc"
+            }
+          ],
+          "answer": "c"
+        },
+        {
+          "text": "In welk koninkrijk vind 'The Legend of Zelda' hoofdzakelijk plaats?",
+          "choices": [
+            {
+              "a": "Hyrule"
+            },
+            {
+              "b": "Tamriel"
+            },
+            {
+              "c": "Azeroth"
+            },
+            {
+              "d": "Lordran"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "text": "Hoe heet het paard van Samwise Gamgee in 'The Lord of the Rings'?",
+          "choices": [
+            {
+              "a": "Brego"
+            },
+            {
+              "b": "Shadowfax"
+            },
+            {
+              "c": "Boromir"
+            },
+            {
+              "d": "Bill"
+            }
+          ],
+          "answer": "d"
+        },
+        {
+          "text": "In de standaard D&D lore, wat is de naam van de vampier die heerst over Barovia",
+          "choices": [
+            {
+              "a": "Strahd von Zarovich"
+            },
+            {
+              "b": "Strahd von Strahdovich"
+            },
+            {
+              "c": "Tzar von Strahdovich"
+            },
+            {
+              "d": "Gewoon 'Strahd' zonder de achternaam"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "text": "Wat gebeurt er wanneer je een 'Portable hole' in een 'Bag of holding' steekt?",
+          "choices": [
+            {
+              "a": "Niets, de Portable hole blijft in de bag of holding"
+            },
+            {
+              "b": "Er ontstaat een portal naar de Astral plane"
+            },
+            {
+              "c": "De bag of holding ontploft"
+            }
+          ],
+          "answer": "b"
+        },
+        {
+          "text": "Wat is een gezegde van de Mandalorians?",
+          "choices": [
+            {
+              "a": "It is known"
+            },
+            {
+              "b": "This is the way"
+            },
+            {
+              "c": "I did it my way"
+            },
+            {
+              "d": "So say we all"
+            }
+          ],
+          "answer": "b"
+        }
+      ]
+    },
+    {
       "name": "100 jaar muziek",
       "type": "countdown",
       "points": 20,
@@ -392,161 +535,161 @@
       "points": 10,
       "questions": [
         {
-          "topic": "K-pop",
+          "topic": "Zwaarden",
           "groups": [
             {
-              "name": "APT",
+              "name": "Lord of the rings",
               "items": [
-                "Bruno Mars",
-                "Rosé",
-                "Drankspelletje",
-                "Appartement"
+                "Sting",
+                "Glamdring",
+                "Orcrist",
+                "Anduril"
               ]
             },
             {
-              "name": "Golden",
+              "name": "Game of Thrones",
               "items": [
-                "🎵We're going up, up, up,....🎵",
-                "Netflix",
-                "Anime",
-                "Kpop Demon Hunters"
+                "Longclaw",
+                "Needle",
+                "Ice",
+                "Oathkeeper"
               ]
             },
             {
-              "name": "Gangnam Style",
+              "name": "King Arthur",
               "items": [
-                "Psy",
-                "Paardrijdansje",
-                "🎵 op, op, op, op,.... 🎵",
-                "🎵 eh, Sexy Lady 🎵"
+                "Excalibur",
+                "Caliburn",
+                "Clarent",
+                "Arondight"
               ]
             }
           ]
         },
         {
-          "topic": "AI",
+          "topic": "D&D Character sheet content",
           "groups": [
             {
-              "name": "NVidia",
+              "name": "Abilities",
               "items": [
-                "Jensen Huang",
-                "GPU's",
-                "Meest waardevolle bedrijf in de wereld",
-                "Monopolie"
+                "Strength",
+                "Dexterity",
+                "Intelligence",
+                "Wisdom"
               ]
             },
             {
-              "name": "Meta",
+              "name": "Skills",
               "items": [
-                "Mark Zuckerberg",
-                "Facebook",
-                "Instagram",
-                "VR"
+                "Acrobatics",
+                "Stealth",
+                "Perception",
+                "History"
               ]
             },
             {
-              "name": "ChatGpt",
+              "name": "Cantrips",
               "items": [
-                "OpenAI",
-                "Sam Altman",
-                "DALL-E",
-                "SORA"
+                "Eldritch Blast",
+                "Guidance",
+                "Mage Hand",
+                "Shillelagh"
               ]
             }
           ]
         },
         {
-          "topic": "Nationalisme",
+          "topic": "D&D Ability Scores",
           "groups": [
             {
-              "name": "Trump",
+              "name": "Strength",
               "items": [
-                "MAGA",
-                "Mar-a-Lago",
-                "Importtarieven",
-                "Oranje"
+                "Athletics",
+                "Carrying Capacity",
+                "Barbarian's Stat",
+                "Lifting"
               ]
             },
             {
-              "name": "Dries Van Langenhove",
+              "name": "Constitution",
               "items": [
-                "Pano",
-                "Schild & Vrienden",
-                "Memes",
-                "Vlaams Belang"
+                "Hit Points",
+                "Concentration Checks",
+                "Stamina",
+                "Resilience"
               ]
             },
             {
-              "name": "Putin",
+              "name": "Charisma",
               "items": [
-                "KGB",
-                "Oekraïne",
-                "Kremlin",
-                "Judo"
+                "Persuasion",
+                "Deception",
+                "Intimidation",
+                "Bard's Stat"
               ]
             }
           ]
         },
         {
-          "topic": "Oost-Vlaanderen",
+          "topic": "Hogwarts Houses",
           "groups": [
             {
-              "name": "Gent",
+              "name": "Gryffindor",
               "items": [
-                "-se Feesten",
-                "Stroppendragers",
-                "Sint-Bavo",
-                "Gravensteen"
+                "Lion",
+                "Godric",
+                "Sword",
+                "Bravery"
               ]
             },
             {
-              "name": "Aalst",
+              "name": "Slytherin",
               "items": [
-                "Carnaval",
-                "Dirk Martens",
-                "Chipka",
-                "Industrie"
+                "Snake",
+                "Salazar",
+                "Locket",
+                "Ambition"
               ]
             },
             {
-              "name": "Sint-Niklaas",
+              "name": "Ravenclaw",
               "items": [
-                "Grootste marktplein van België",
-                "Waasland shoppingcenter",
-                "Nicolaas van Myra",
-                "9100"
+                "Eagle",
+                "Rowena",
+                "Diadem",
+                "Wit"
               ]
             }
           ]
         },
         {
-          "topic": "Nieuwjaar",
+          "topic": "Polyhedral Dice",
           "groups": [
             {
-              "name": "Vuurwerk",
+              "name": "d4",
               "items": [
-                "Uitgevonden in China",
-                "Mensen zijn er meer fan van dan dieren",
-                "in 2024, 139 mensen door gewond",
-                "Kleurrijk"
+                "Pyramid Shape",
+                "Caltrop",
+                "Magic Missile Damage",
+                "Healing Potion Roll"
               ]
             },
             {
-              "name": "Voornemens",
+              "name": "d12",
               "items": [
-                "Fitness",
-                "Dieet",
-                "Meer sparen",
-                "Stoppen met roken"
+                "Dodecahedron",
+                "Greataxe Damage",
+                "Barbarian Hit Die",
+                "Pentagon Faces"
               ]
             },
             {
-              "name": "Aftellen",
+              "name": "d20",
               "items": [
-                "1",
-                "2",
-                "3",
-                "4"
+                "Icosahedron",
+                "Attack Roll",
+                "Skill Check",
+                "Critical Hit"
               ]
             }
           ]

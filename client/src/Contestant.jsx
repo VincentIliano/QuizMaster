@@ -266,7 +266,35 @@ export default function Contestant() {
             setAnimClass('pop-in');
             prevQIndex.current = state.questionIndex;
         }
+        if (state.questionIndex !== prevQIndex.current) {
+            setAnimClass('pop-in');
+            prevQIndex.current = state.questionIndex;
+        }
     }, [state?.questionIndex, state?.roundIndex]); // Trigger on index changes
+
+    // Penalty Animation State (Top Level)
+    const [penaltyAnims, setPenaltyAnims] = useState({});
+
+    useEffect(() => {
+        const handlePenalty = (data) => {
+            const { teamIndex, amount } = data;
+            setPenaltyAnims(prev => ({
+                ...prev,
+                [teamIndex]: { amount, id: Date.now() }
+            }));
+
+            // Clear animation after 2 seconds
+            setTimeout(() => {
+                setPenaltyAnims(prev => {
+                    const next = { ...prev };
+                    delete next[teamIndex];
+                    return next;
+                });
+            }, 2000);
+        };
+        socket.on('penalty', handlePenalty);
+        return () => socket.off('penalty', handlePenalty);
+    }, []);
 
     if (!state) return <div>Waiting for server...</div>;
 
@@ -284,10 +312,27 @@ export default function Contestant() {
         else if (state.lastJudgement === false) containerClass = 'container-wrong';
     }
 
+    // Traffic Light Logic
+    let lightStatus = 'yellow'; // Default (DASHBOARD, IDLE, ROUND_SUMMARY)
+    if (state.status === 'LISTENING') {
+        lightStatus = 'green';
+    } else if (['READING', 'ROUND_READY', 'ANSWER_REVEALED', 'TIMEOUT', 'PAUSED', 'BUZZED', 'ALL_LOCKED'].includes(state.status)) {
+        lightStatus = 'red';
+    }
+
     // Flash Red Effect
     return (
         <div className={`game-show-container ${containerClass} ${(state.status === 'PAUSED' && state.lastJudgement === false) ? 'flash-red' : ''}`}>
-            {/* ... rest of the code ... */}
+
+            {/* Traffic Light Indicator */}
+            {state.status !== 'DASHBOARD' && (
+                <div className="traffic-light">
+                    <div className={`light red ${lightStatus === 'red' ? 'active' : ''}`}></div>
+                    <div className={`light yellow ${lightStatus === 'yellow' ? 'active' : ''}`}></div>
+                    <div className={`light green ${lightStatus === 'green' ? 'active' : ''}`}></div>
+                </div>
+            )}
+
             <div className="stage-lights-container">
                 <div className="light-beam beam-1"></div>
                 <div className="light-beam beam-2"></div>
@@ -623,15 +668,39 @@ export default function Contestant() {
                 {state.teams.map((t, i) => {
                     const isLocked = state.lockedOutTeams && state.lockedOutTeams.includes(i);
                     const isBuzzed = state.status === 'BUZZED' && state.buzzerWinner === i;
+                    const penaltyAnim = penaltyAnims[i];
+
                     return (
                         <div
                             key={t.name}
                             className={`score-pod ${t.score === maxScore && t.score > 0 ? 'leader' : ''} ${isLocked ? 'locked-out' : ''} ${isBuzzed ? 'active-buzzer' : ''}`}
-                            style={isLocked ? { filter: 'grayscale(1)', opacity: 0.5, transform: 'scale(0.9)' } : {}}
+                            style={{
+                                ...(isLocked ? { filter: 'grayscale(1)', opacity: 0.5, transform: 'scale(0.9)' } : {}),
+                                ...(penaltyAnim ? { animation: 'shake-red 0.5s cubic-bezier(.36,.07,.19,.97) both', borderColor: '#ff4d4d', boxShadow: '0 0 30px #ff4d4d' } : {})
+                            }}
                         >
                             <div className="team-name">{t.name}</div>
                             {isLocked && <div style={{ color: '#ff4d4d', fontWeight: 'bold', fontSize: '0.8em', marginBottom: 5 }}>FROZEN</div>}
-                            <div className="team-score">{t.score}</div>
+                            <div className="team-score" style={{ position: 'relative' }}>
+                                {t.score}
+                                {penaltyAnim && (
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '50%',
+                                        transform: 'translate(-50%, -50%)',
+                                        color: '#ff4d4d',
+                                        fontSize: '2em',
+                                        fontWeight: 'bold',
+                                        textShadow: '0 0 10px black',
+                                        animation: 'float-up-red 1.5s ease-out forwards',
+                                        pointerEvents: 'none',
+                                        zIndex: 10
+                                    }}>
+                                        -{penaltyAnim.amount}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     );
                 })}

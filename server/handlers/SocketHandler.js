@@ -14,6 +14,10 @@ module.exports = (io, gameEngine) => {
         io.emit('play_sfx', type);
     };
 
+    gameEngine.onPenalty = (teamIndex, amount) => {
+        io.emit('penalty', { teamIndex, amount });
+    };
+
     io.on('connection', (socket) => {
         console.log('Client connected');
 
