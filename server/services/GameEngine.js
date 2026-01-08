@@ -217,7 +217,7 @@ class GameEngine {
     hostSubmitAnswer(answer) {
         if (this.currentRoundInstance && typeof this.currentRoundInstance.handleAnswer === 'function') {
             const teamIndex = this.state.buzzerWinner;
-            if (teamIndex !== null && teamIndex >= 0) {
+            if (teamIndex !== null && teamIndex >= 0 && this.state.teams[teamIndex]) {
                 this.currentRoundInstance.handleAnswer(this, teamIndex, answer);
             }
         }
@@ -336,9 +336,10 @@ class GameEngine {
         }
 
         // Auto-start timer for Standard rounds (no type) as requested
-        // if (!currentRound.type || currentRound.type === 'standard') {
-        //     autoStart = true;
-        // }
+        const type = (currentRound.type || 'standard').toLowerCase();
+        if (type === 'standard' || type === 'list') {
+            autoStart = true;
+        }
 
         this.state.status = autoStart ? "LISTENING" : "READING";
         this.state.mediaPlaying = false;
@@ -445,6 +446,12 @@ class GameEngine {
             return null;
         }
 
+        // 1.5. Validate Team Exists
+        if (!this.state.teams[teamIndex]) {
+            console.warn(`[GameEngine] Received buzz from invalid team index: ${teamIndex}`);
+            return null;
+        }
+
         // 2. Frozen Team Check
         if (this.state.lockedOutTeams.includes(teamIndex)) return null;
 
@@ -465,7 +472,7 @@ class GameEngine {
             this.state.mediaPlaying = false;
             this.state.connectionStreak = 0;
             this.save();
-            return this.state.teams[teamIndex].name;
+            return this.state.teams[teamIndex] ? this.state.teams[teamIndex].name : "Unknown Team";
         }
 
         // 5. Check Instance Strategy for overrides (e.g. SequenceRound)
@@ -594,8 +601,11 @@ class GameEngine {
 
 
     playSfx(type) {
+        console.log(`[GameEngine] playSfx requested: ${type}`);
         if (this.onPlaySfx) {
             this.onPlaySfx(type);
+        } else {
+            console.warn('[GameEngine] No onPlaySfx listener configured');
         }
     }
 

@@ -214,24 +214,26 @@ export default function Contestant() {
         const onState = (s) => setState(s);
         const onTimer = (val) => setState(prev => ({ ...prev, timeLimit: val }));
 
-        socket.on('state_update', onState);
-        socket.on('timer_tick', onTimer);
-
-        socket.on('play_sfx', (type) => {
+        const onPlaySfx = (type) => {
+            console.log('[Contestant] SFX Request:', type);
             if (type === 'correct' && correctAudioRef.current) {
                 correctAudioRef.current.currentTime = 0;
-                correctAudioRef.current.play().catch(e => console.log('SFX play failed', e));
+                correctAudioRef.current.play().catch(e => console.error('SFX play failed (correct):', e));
             } else if (type === 'wrong' && wrongAudioRef.current) {
                 wrongAudioRef.current.currentTime = 0;
-                wrongAudioRef.current.play().catch(e => console.log('SFX play failed', e));
+                wrongAudioRef.current.play().catch(e => console.error('SFX play failed (wrong):', e));
             } else if (type === 'clue_reveal' && revealAudioRef.current) {
                 revealAudioRef.current.currentTime = 0;
-                revealAudioRef.current.play().catch(e => console.log('SFX play failed', e));
+                revealAudioRef.current.play().catch(e => console.error('SFX play failed (reveal):', e));
             } else if (type === 'topic_reveal' && revealAudioRef.current) {
                 revealAudioRef.current.currentTime = 0;
-                revealAudioRef.current.play().catch(e => console.log('SFX play failed', e));
+                revealAudioRef.current.play().catch(e => console.error('SFX play failed (topic):', e));
             }
-        });
+        };
+
+        socket.on('state_update', onState);
+        socket.on('timer_tick', onTimer);
+        socket.on('play_sfx', onPlaySfx);
 
         socket.emit('get_state');
 
@@ -247,6 +249,7 @@ export default function Contestant() {
         return () => {
             socket.off('state_update', onState);
             socket.off('timer_tick', onTimer);
+            socket.off('play_sfx', onPlaySfx);
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
@@ -324,14 +327,7 @@ export default function Contestant() {
     return (
         <div className={`game-show-container ${containerClass} ${(state.status === 'PAUSED' && state.lastJudgement === false) ? 'flash-red' : ''}`}>
 
-            {/* Traffic Light Indicator */}
-            {state.status !== 'DASHBOARD' && (
-                <div className="traffic-light">
-                    <div className={`light red ${lightStatus === 'red' ? 'active' : ''}`}></div>
-                    <div className={`light yellow ${lightStatus === 'yellow' ? 'active' : ''}`}></div>
-                    <div className={`light green ${lightStatus === 'green' ? 'active' : ''}`}></div>
-                </div>
-            )}
+
 
             <div className="stage-lights-container">
                 <div className="light-beam beam-1"></div>
@@ -365,12 +361,18 @@ export default function Contestant() {
                     {state.roundType !== 'clues' && (
                         <header className="gs-header">
                             <div className="gs-round-name">{state.roundName}</div>
-                            {/* Standard Timer for non-freezeout */}
-                            {state.roundType !== 'freezeout' && state.roundType !== 'countdown' && (
-                                <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`}>
-                                    {state.timeLimit}
-                                </div>
-                            )}
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                                {/* Traffic Light Indicator (Moved to Header) */}
+                                <div className={`traffic-light-indicator ${lightStatus === 'green' ? 'green' : 'red'}`}></div>
+
+                                {/* Standard Timer for non-freezeout */}
+                                {state.roundType !== 'freezeout' && state.roundType !== 'countdown' && (
+                                    <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`}>
+                                        {state.timeLimit}
+                                    </div>
+                                )}
+                            </div>
                         </header>
                     )}
 
