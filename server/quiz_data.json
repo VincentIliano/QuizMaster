@@ -2,11 +2,11 @@
   "falseStartPenalty": 1,
   "rounds": [
     {
-      "name": "Lijst",
+      "name": "Deurlijsten",
       "type": "List",
       "time_limit": 15,
       "points": 2,
-      "description": "Geef zoveel mogelijk juiste antwoorden.",
+      "description": "Geef zoveel mogelijk juiste antwoorden. 2 punten per juist antwoord.",
       "questions": [
         {
           "text": "The Fellowship of the Ring",
@@ -180,10 +180,10 @@
       ]
     },
     {
-      "name": "Algemene kennis",
+      "name": "Specifieke algemene kennis",
       "time_limit": 15,
       "points": 10,
-      "description": "",
+      "description": "Zo snel mogelijk antwoorden (liefst juist)! 10 punten per juist antwoord.",
       "questions": [
         {
           "text": "Wat is het vijfde element?",
@@ -220,14 +220,18 @@
         {
           "text": "Hoe heette het zwaard van Elendil voordat het brak en later opnieuw werd gesmeed tot Andúril voor Aragorn?",
           "answer": "Narsil"
+        },
+        {
+          "text": "Hoelang duurt een short rest in D&D 5e?",
+          "answer": "1 uur"
         }
       ]
     },
     {
-      "name": "Meerkeuze",
+      "name": "Minderkeuze",
       "time_limit": 15,
       "points": 10,
-      "description": "",
+      "description": "Zo snel mogelijk antwoorden (liefst juist)! 10 punten per juist antwoord.",
       "questions": [
         {
           "text": "wat is 'A white tree standing beneath seven stars and a high crown, all set against a black background'",
@@ -261,21 +265,6 @@
             },
             {
               "d": "Nog wat haar"
-            }
-          ],
-          "answer": "c"
-        },
-        {
-          "text": "Hoelang duurt een short rest in D&D 5e?",
-          "choices": [
-            {
-              "a": "Een kwartier"
-            },
-            {
-              "b": "Een half uur"
-            },
-            {
-              "c": "1 uur"
             }
           ],
           "answer": "c"
@@ -424,10 +413,10 @@
       ]
     },
     {
-      "name": "100 jaar muziek",
+      "name": "Eirekes",
       "type": "countdown",
       "points": 20,
-      "description": "Hoe sneller je antwoordt, hoe meer punten",
+      "description": "Kekt, oe rapper da ge't just dingeske zegt, ale ja, oe miejr puntjn hein, snaptet?",
       "questions": [
         {
           "text": "Film",
@@ -502,10 +491,10 @@
       ]
     },
     {
-      "name": "Kaders",
+      "name": "Dingskes in Kottekes in't English",
       "type": "connections",
-      "description": "Zoek de linken.",
-      "points": 10,
+      "description": "4 kottekes = 1 ding. alle kottekes samen OF de 3 dingen samen = 1 onderwerp. 5 punten of meer per juiste antwoord",
+      "points": 5,
       "questions": [
         {
           "topic": "Zwaarden",
@@ -579,8 +568,8 @@
               "items": [
                 "Athletics",
                 "Carrying Capacity",
-                "Barbarian's Stat",
-                "Lifting"
+                "Throwing Weapons",
+                "Melee Attacks"
               ]
             },
             {
@@ -588,8 +577,8 @@
               "items": [
                 "Hit Points",
                 "Concentration Checks",
-                "Stamina",
-                "Resilience"
+                "Poison & Disease Resistance",
+                "No Skills"
               ]
             },
             {
@@ -598,7 +587,7 @@
                 "Persuasion",
                 "Deception",
                 "Intimidation",
-                "Bard's Stat"
+                "Bardic Inspiration"
               ]
             }
           ]
@@ -630,7 +619,7 @@
                 "Eagle",
                 "Rowena",
                 "Diadem",
-                "Wit"
+                "Intelligence"
               ]
             }
           ]
@@ -670,7 +659,7 @@
       ]
     },
     {
-      "name": "Mystery Topic",
+      "name": "Just the tip",
       "type": "clues",
       "initial_points": 15,
       "reduction_amount": 3,

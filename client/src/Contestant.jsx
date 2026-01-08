@@ -342,8 +342,8 @@ export default function Contestant() {
             ) : state.status === 'DASHBOARD' ? (
                 <div className="screensaver-overlay" style={{ background: 'transparent', backdropFilter: 'none' }}>
                     <div className="screensaver-content">
-                        <h1>OUDEJAAR 2025</h1>
-                        <p>Get Ready!</p>
+                        <h1>Winterweekend Quiz</h1>
+                        <p>Zeept u maar in!</p>
                     </div>
                 </div>
             ) : state.status === 'ROUND_READY' ? (
@@ -358,7 +358,7 @@ export default function Contestant() {
                 <ContestantConnections state={state} />
             ) : (
                 <>
-                    {state.roundType !== 'clues' && (
+                    {true && (
                         <header className="gs-header">
                             <div className="gs-round-name">{state.roundName}</div>
 
@@ -366,8 +366,8 @@ export default function Contestant() {
                                 {/* Traffic Light Indicator (Moved to Header) */}
                                 <div className={`traffic-light-indicator ${lightStatus === 'green' ? 'green' : 'red'}`}></div>
 
-                                {/* Standard Timer for non-freezeout */}
-                                {state.roundType !== 'freezeout' && state.roundType !== 'countdown' && (
+                                {/* Standard Timer for non-freezeout and non-list */}
+                                {state.roundType !== 'freezeout' && state.roundType !== 'countdown' && state.roundType !== 'list' && (
                                     <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`}>
                                         {state.timeLimit}
                                     </div>
@@ -651,6 +651,44 @@ export default function Contestant() {
                                                 </div>
                                             </div>
                                         )}
+                                    </div>
+                                )}
+
+                                {state.roundType === 'list' && state.buzzerQueue && state.buzzerQueue.length > 0 && (
+                                    <div className="buzzer-queue-display pop-in" style={{
+                                        display: 'flex',
+                                        gap: '10px',
+                                        justifyContent: 'center',
+                                        flexWrap: 'wrap',
+                                        marginBottom: '20px',
+                                        padding: '10px',
+                                        background: 'rgba(0,0,0,0.3)',
+                                        borderRadius: '10px'
+                                    }}>
+                                        {state.buzzerQueue.map((teamIdx, idx) => {
+                                            const isCurrent = state.status === 'ANSWERING' && idx === state.listRoundActiveIndex;
+                                            const isLocked = state.lockedOutTeams.includes(teamIdx);
+                                            const team = state.teams[teamIdx];
+
+                                            return (
+                                                <div key={idx} style={{
+                                                    padding: '8px 16px',
+                                                    borderRadius: '20px',
+                                                    background: isCurrent ? '#ffd700' : (isLocked ? 'rgba(255, 77, 77, 0.2)' : 'rgba(255,255,255,0.1)'),
+                                                    color: isCurrent ? '#000' : (isLocked ? '#ff9999' : '#fff'),
+                                                    border: isCurrent ? '2px solid #fff' : (isLocked ? '1px solid #ff4d4d' : '1px solid rgba(255,255,255,0.1)'),
+                                                    fontWeight: isCurrent ? 'bold' : 'normal',
+                                                    textDecoration: isLocked ? 'line-through' : 'none',
+                                                    opacity: isLocked ? 0.7 : 1,
+                                                    transition: 'all 0.3s ease',
+                                                    transform: isCurrent ? 'scale(1.1)' : 'scale(1)',
+                                                    boxShadow: isCurrent ? '0 0 15px #ffd700' : 'none'
+                                                }}>
+                                                    <span style={{ marginRight: 5, opacity: 0.7, fontSize: '0.8em' }}>{idx + 1}.</span>
+                                                    {team ? team.name : 'Unknown'}
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 )}
 

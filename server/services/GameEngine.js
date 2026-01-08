@@ -34,7 +34,9 @@ class GameEngine {
 
             roundStartScores: [], // Snapshot of scores at round start
             sequenceOptionIndex: -1,
-            sequenceVotes: {} // teamIndex -> optionIndex
+            sequenceVotes: {}, // teamIndex -> optionIndex
+            buzzerQueue: [], // Array of teamIndices
+            listRoundActiveIndex: 0 // Index pointer for buzzerQueue
         };
         this.currentRoundInstance = null;
         this.init();
@@ -73,6 +75,8 @@ class GameEngine {
             if (savedState.roundStartScores) this.state.roundStartScores = savedState.roundStartScores;
             if (savedState.sequenceOptionIndex !== undefined) this.state.sequenceOptionIndex = savedState.sequenceOptionIndex;
             if (savedState.sequenceVotes) this.state.sequenceVotes = savedState.sequenceVotes;
+            if (savedState.buzzerQueue) this.state.buzzerQueue = savedState.buzzerQueue;
+            if (savedState.listRoundActiveIndex !== undefined) this.state.listRoundActiveIndex = savedState.listRoundActiveIndex;
 
             // Restore Round Progress (Scores, Answered Count)
             if (savedState.rounds) {
@@ -210,7 +214,11 @@ class GameEngine {
 
             // Sequence Round
             sequenceOptionIndex: s.sequenceOptionIndex !== undefined ? s.sequenceOptionIndex : -1,
-            sequenceVotes: s.sequenceVotes || {}
+            sequenceVotes: s.sequenceVotes || {},
+
+            // List Round
+            buzzerQueue: s.buzzerQueue || [],
+            listRoundActiveIndex: s.listRoundActiveIndex || 0
         };
     }
 
@@ -268,6 +276,8 @@ class GameEngine {
         this.state.lockedOutTeams = [];
         this.state.sequenceOptionIndex = -1;
         this.state.sequenceVotes = {};
+        this.state.buzzerQueue = [];
+        this.state.listRoundActiveIndex = 0;
 
         if (this.state.status === 'ROUND_READY') {
             this.state.status = "IDLE";
@@ -391,15 +401,6 @@ class GameEngine {
 
         if (this.state.status === 'ALL_LOCKED') return;
 
-        // Disable timer for Clues round (per request)
-        if (this.currentRoundInstance && this.currentRoundInstance.type === 'clues') return;
-
-        if (this.state.status === 'ANSWER_REVEALED' || this.state.status === 'BUZZED' || this.state.status === 'PAUSED') {
-            this.state.buzzerWinner = null;
-            this.state.lastJudgement = null;
-            this.state.connectionStreak = 0;
-        }
-
         if (this.state.timerValue > 0 && this.state.buzzerWinner === null && this.state.status !== 'TIMEOUT') {
             this.state.buzzerLocked = false;
             this.state.status = "LISTENING";
@@ -407,6 +408,17 @@ class GameEngine {
             this.save();
 
             this.stopTimer();
+
+            // Fix: Check type on data object or state rounds (Case Insensitive)
+            const roundData = (this.currentRoundInstance && this.currentRoundInstance.data) ||
+                (this.state.rounds[this.state.currentRoundIndex]);
+
+            const roundType = roundData && roundData.type ? roundData.type.toLowerCase() : '';
+            const isUntimedRound = roundType === 'list' || roundType === 'clues';
+
+            // For untimed rounds, we set status to LISTENING (above) but do NOT start the countdown interval
+            if (isUntimedRound) return;
+
             this.timerInterval = setInterval(() => {
                 this.state.timerValue--;
                 if (tickHandler) tickHandler(this.state.timerValue);
@@ -467,7 +479,14 @@ class GameEngine {
             return null;
         }
 
-        // 4. Valid Buzz Condition: Status MUST be LISTENING
+        // 4. Check Instance Strategy for overrides (e.g. SequenceRound, ListRound)
+        // MUST happen before standard LISTENING check to allow overriding behavior (e.g. queuing)
+        if (this.currentRoundInstance && typeof this.currentRoundInstance.handleBuzz === 'function') {
+            const result = this.currentRoundInstance.handleBuzz(this, teamIndex);
+            if (result) return result; // Logic handled by strategy
+        }
+
+        // 5. Valid Buzz Condition: Status MUST be LISTENING
         // We also check locked just in case, but LISTENING implies unlocked usually.
         if (this.state.status === 'LISTENING') {
             // Valid Logic
@@ -479,12 +498,6 @@ class GameEngine {
             this.state.connectionStreak = 0;
             this.save();
             return this.state.teams[teamIndex] ? this.state.teams[teamIndex].name : "Unknown Team";
-        }
-
-        // 5. Check Instance Strategy for overrides (e.g. SequenceRound)
-        if (this.currentRoundInstance && typeof this.currentRoundInstance.handleBuzz === 'function') {
-            const result = this.currentRoundInstance.handleBuzz(this, teamIndex);
-            if (result) return result; // Logic handled by strategy
         }
 
         // 5. Penalty Condition

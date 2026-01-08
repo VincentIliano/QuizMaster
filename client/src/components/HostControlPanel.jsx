@@ -13,6 +13,7 @@ export default function HostControlPanel({ state }) {
     const reveal = () => socket.emit('reveal_answer');
     const returnDashboard = () => socket.emit('return_to_dashboard');
     const updateScore = (index, val) => socket.emit('update_score', index, parseInt(val) || 0);
+    const hostSubmitAnswer = (answer) => socket.emit('host_submit_answer', answer);
 
     const stateRef = useRef(state);
     useEffect(() => { stateRef.current = state; }, [state]);
@@ -111,14 +112,14 @@ export default function HostControlPanel({ state }) {
                                 <button
                                     key={i}
                                     onClick={() => socket.emit('host_submit_answer', ans)}
-                                    disabled={state.status !== 'BUZZED' || isRevealed}
+                                    disabled={(state.status !== 'BUZZED' && state.status !== 'ANSWERING') || isRevealed}
                                     style={{
                                         background: isRevealed ? '#28a745' : '#444',
                                         color: isRevealed ? 'white' : '#eee',
                                         padding: '8px',
                                         borderRadius: 4,
                                         border: '1px solid #555',
-                                        cursor: (state.status === 'BUZZED' && !isRevealed) ? 'pointer' : 'default',
+                                        cursor: ((state.status === 'BUZZED' || state.status === 'ANSWERING') && !isRevealed) ? 'pointer' : 'default',
                                         textAlign: 'left'
                                     }}
                                 >
@@ -194,9 +195,47 @@ export default function HostControlPanel({ state }) {
                     </button>
                 )}
 
+                {/* List Round Queue Display */}
+                {state.roundType === 'list' && state.buzzerQueue && state.buzzerQueue.length > 0 && (
+                    <div style={{ width: '100%', marginBottom: 10, padding: 5, background: '#222', borderRadius: 4 }}>
+                        <div style={{ fontSize: '0.9em', color: '#aaa' }}>Buzzer Queue:</div>
+                        <div style={{ display: 'flex', gap: 5, marginTop: 5 }}>
+                            {state.buzzerQueue.map((teamIdx, idx) => {
+                                const isCurrent = state.status === 'ANSWERING' && idx === state.listRoundActiveIndex;
+                                const isLocked = state.lockedOutTeams.includes(teamIdx);
+                                const team = state.teams[teamIdx];
+                                return (
+                                    <div key={idx} style={{
+                                        padding: '5px 10px',
+                                        borderRadius: 4,
+                                        background: isCurrent ? '#ffeb3b' : (isLocked ? '#444' : '#333'),
+                                        color: isCurrent ? '#000' : (isLocked ? '#888' : '#fff'),
+                                        border: isCurrent ? '2px solid #fff' : '1px solid #555',
+                                        textDecoration: isLocked ? 'line-through' : 'none'
+                                    }}>
+                                        {idx + 1}. {team ? team.name : 'Unknown'}
+                                        {isLocked && ' (Frozen)'}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+
+                {/* List Round Specific Controls */}
+                {state.roundType === 'list' && (
+                    <button
+                        onClick={() => socket.emit('start_answering_phase')}
+                        disabled={state.status !== 'LISTENING' || !state.buzzerQueue || state.buzzerQueue.length === 0}
+                        style={{ backgroundColor: '#9c27b0', color: 'white' }}
+                    >
+                        Start Answering
+                    </button>
+                )}
+
                 <button
                     onClick={nextQuestion}
-                    disabled={state.status === 'READING' || state.status === 'LISTENING'}
+                    disabled={state.status === 'READING' || state.status === 'LISTENING' || state.status === 'ANSWERING'}
                 >Next Question</button>
 
                 <button
@@ -217,17 +256,18 @@ export default function HostControlPanel({ state }) {
                 <button
                     id="btn-correct"
                     onClick={() => judge(true)}
-                    disabled={state.status !== 'BUZZED'}
+                    disabled={state.status !== 'BUZZED' && state.status !== 'ANSWERING'}
                     style={{ backgroundColor: '#28a745', color: 'white' }}
-                >Correct</button>
+                >Correct
+                </button>
 
                 <button
                     id="btn-wrong"
                     onClick={() => judge(false)}
-                    disabled={state.status !== 'BUZZED'}
+                    disabled={state.status !== 'BUZZED' && state.status !== 'ANSWERING'}
                     style={{ backgroundColor: '#dc3545', color: 'white' }}
                 >
-                    {state.roundDescription && state.roundDescription.includes("Push your luck") ? "Freeze & Resume" : "Wrong"}
+                    {state.roundType === 'list' ? "Pass / Wrong" : (state.roundDescription && state.roundDescription.includes("Push your luck") ? "Freeze & Resume" : "Wrong")}
                 </button>
 
                 <button

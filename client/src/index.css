@@ -16,6 +16,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
+  overflow-y: auto;
+  /* Ensure Host view can scroll */
 }
 
 /* Animations */
@@ -200,7 +202,10 @@ body {
 /* Game Show Layout */
 .game-show-container {
   background: radial-gradient(circle at center, #1e3c72 0%, #2a5298 100%);
-  min-height: 100vh;
+  height: 100vh;
+  /* Fixed height for Contestant view */
+  overflow: hidden;
+  /* Prevent scrolling on Contestant view */
   display: flex;
   flex-direction: column;
   position: relative;

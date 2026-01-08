@@ -100,6 +100,14 @@ module.exports = (io, gameEngine) => {
         socket.on('go_to_final_results', () => gameEngine.goToFinalResults());
         socket.on('reveal_next_finalist', () => gameEngine.revealNextFinalist());
 
+        socket.on('start_answering_phase', () => {
+            if (gameEngine.currentRoundInstance && typeof gameEngine.currentRoundInstance.startAnsweringPhase === 'function') {
+                gameEngine.currentRoundInstance.startAnsweringPhase(gameEngine);
+            }
+        });
+
+        socket.on('next_sequence_option', () => gameEngine.nextSequenceOption());
+
         socket.on('update_quiz_data', (data) => gameEngine.updateQuizData(data));
 
         socket.on('get_rounds', (callback) => {
