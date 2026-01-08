@@ -60,7 +60,7 @@ class SequenceRound extends Round {
             if (voteIndex == correctIndex) {
                 const tid = parseInt(teamIndex);
                 if (engine.state.teams[tid]) {
-                    engine.state.teams[tid].score += points;
+                    engine.addPoints(tid, points, 'Correct Answer (Sequence)');
 
                     // Update round scores for summary
                     const round = engine.state.rounds[engine.state.currentRoundIndex];

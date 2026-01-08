@@ -1,9 +1,13 @@
 
 import { useState, useEffect } from 'react';
 import { socket } from '../socket';
+import ScoreEditModal from './ScoreEditModal';
+import ScoreHistoryModal from './ScoreHistoryModal';
 
 export default function HostDashboard({ state, onSettings }) {
-    const [teamInputs, setTeamInputs] = useState(['', '', '', '', '']);
+    const [teamInputs, setTeamInputs] = useState(Array(5).fill(''));
+    const [historyModalTeam, setHistoryModalTeam] = useState(null);
+    const [editingScoreTeam, setEditingScoreTeam] = useState(null);
 
     // Sync inputs with current state teams
     useEffect(() => {
@@ -33,38 +37,63 @@ export default function HostDashboard({ state, onSettings }) {
 
     return (
         <div className="panel dashboard-grid">
-            <div className="card">
-                <h2>Teams</h2>
-                <div className="team-inputs">
-                    {teamInputs.map((name, i) => (
-                        <input
-                            key={i}
-                            type="text"
-                            placeholder={`Team ${i + 1}`}
-                            value={name}
-                            onChange={e => {
-                                const newInputs = [...teamInputs];
-                                newInputs[i] = e.target.value;
-                                setTeamInputs(newInputs);
-                            }}
-                        />
-                    ))}
-                </div>
-                <button onClick={updateTeams} className="btn-primary" style={{ marginTop: 10 }}>Update Teams</button>
-
-                <h3 style={{ marginTop: 20 }}>Score Adjustments</h3>
-                <div className="team-inputs">
-                    {state.teams.map((t, i) => (
-                        <div key={i} style={{ marginBottom: 5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ marginRight: 10 }}>{t.name || `Team ${i + 1}`}</span>
-                            <input
-                                type="number"
-                                value={t.score}
-                                onChange={e => updateScore(i, e.target.value)}
-                                style={{ width: 80, padding: 5 }}
-                            />
+            <div className="card" style={{ gridColumn: 'span 2' }}>
+                <h2>Teams & Scores</h2>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                    {/* Teams Column */}
+                    <div>
+                        <h3>Team Names</h3>
+                        <div className="team-inputs">
+                            {teamInputs.map((name, i) => (
+                                <input
+                                    key={i}
+                                    type="text"
+                                    placeholder={`Team ${i + 1}`}
+                                    value={name}
+                                    onChange={e => {
+                                        const newInputs = [...teamInputs];
+                                        newInputs[i] = e.target.value;
+                                        setTeamInputs(newInputs);
+                                    }}
+                                />
+                            ))}
                         </div>
-                    ))}
+                        <button onClick={updateTeams} className="btn-primary" style={{ marginTop: 10 }}>Update Teams</button>
+                    </div>
+                    {/* Scores Column */}
+                    <div>
+                        <h3 style={{ marginTop: 20 }}>Score Adjustments</h3>
+                        <div className="team-inputs">
+                            {state.teams.map((t, i) => (
+                                <div key={i} style={{ marginBottom: 5, padding: '5px', background: '#333', borderRadius: '4px' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span style={{ marginRight: 10, fontWeight: 'bold' }}>{t.name || `Team ${i + 1}`}</span>
+                                        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                                            <span style={{ fontWeight: 'bold', fontSize: '1.2em', minWidth: '30px', textAlign: 'center' }}>
+                                                {t.score}
+                                            </span>
+                                            <button
+                                                className="btn-sm"
+                                                style={{ fontSize: '0.8em', padding: '2px 8px', background: '#2196F3' }}
+                                                onClick={() => {
+                                                    setEditingScoreTeam({ index: i, ...t });
+                                                }}
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                className="btn-sm"
+                                                style={{ fontSize: '0.8em', padding: '2px 8px' }}
+                                                onClick={() => setHistoryModalTeam(t)}
+                                            >
+                                                History
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -137,6 +166,24 @@ export default function HostDashboard({ state, onSettings }) {
                     SETTINGS
                 </button>
             </div>
+
+            {/* Score Edit Modal */}
+            <ScoreEditModal
+                team={editingScoreTeam}
+                isOpen={!!editingScoreTeam}
+                onClose={() => setEditingScoreTeam(null)}
+                onSave={(idx, val) => {
+                    updateScore(idx, val);
+                    setEditingScoreTeam(null);
+                }}
+            />
+
+            {/* History Modal */}
+            <ScoreHistoryModal
+                team={historyModalTeam}
+                isOpen={!!historyModalTeam}
+                onClose={() => setHistoryModalTeam(null)}
+            />
         </div>
     );
 }

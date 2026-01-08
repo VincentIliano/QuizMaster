@@ -46,7 +46,7 @@ class Storage {
         try {
             const tempPath = this.gameStatePath + '.tmp';
             fs.writeFileSync(tempPath, JSON.stringify(state, null, 2));
-            fs.renameSync(tempPath, this.gameStatePath);
+            this._safeRename(tempPath, this.gameStatePath);
         } catch (e) {
             console.error("Error saving game state:", e);
         }
@@ -56,9 +56,34 @@ class Storage {
         try {
             const tempPath = this.quizDataPath + '.tmp';
             fs.writeFileSync(tempPath, JSON.stringify(data, null, 2));
-            fs.renameSync(tempPath, this.quizDataPath);
+            this._safeRename(tempPath, this.quizDataPath);
         } catch (e) {
             console.error("Error saving quiz data:", e);
+        }
+    }
+
+    _safeRename(oldPath, newPath, retries = 5, delay = 50) {
+        try {
+            // Check if target exists and try to delete it first if rename fails? 
+            // Standard rename overwrites, but EPERM can happen.
+            // Just try rename.
+            if (fs.existsSync(newPath)) {
+                try {
+                    // Sometimes deleting target first helps on Windows if rename fails, 
+                    // but usually rename is atomic. 
+                    // Let's stick to simple retry first.
+                } catch (e) { }
+            }
+            fs.renameSync(oldPath, newPath);
+        } catch (e) {
+            if (retries > 0 && (e.code === 'EPERM' || e.code === 'EBUSY')) {
+                // Busy wait for synchronous delay
+                const start = Date.now();
+                while (Date.now() - start < delay) { }
+                this._safeRename(oldPath, newPath, retries - 1, delay * 2);
+            } else {
+                throw e;
+            }
         }
     }
 }

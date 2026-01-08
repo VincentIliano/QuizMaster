@@ -1,8 +1,12 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { socket } from '../socket';
+import ScoreEditModal from './ScoreEditModal';
+import ScoreHistoryModal from './ScoreHistoryModal';
 
 export default function HostControlPanel({ state }) {
+    const [editingScoreTeam, setEditingScoreTeam] = useState(null);
+    const [historyModalTeam, setHistoryModalTeam] = useState(null);
     const nextQuestion = () => socket.emit('next_question');
     const startTimer = () => socket.emit('start_timer');
     const judge = (correct) => socket.emit('judge_answer', correct);
@@ -289,28 +293,46 @@ export default function HostControlPanel({ state }) {
                                         </>
                                     )}
                                 </span>
-                                <input
-                                    type="number"
-                                    value={t.score}
-                                    onChange={e => updateScore(i, e.target.value)}
-                                    style={{
-                                        width: '100px',
-                                        padding: '8px',
-                                        background: '#222',
-                                        color: 'white',
-                                        border: '1px solid #555',
-                                        borderRadius: '4px',
-                                        fontSize: '1.2em',
-                                        fontWeight: 'bold',
-                                        textAlign: 'right'
-                                    }}
-                                />
+                                <span style={{ marginRight: 10, fontWeight: 'bold', fontSize: '1.2em', minWidth: '30px', textAlign: 'right' }}>
+                                    {t.score}
+                                </span>
+                                <div style={{ display: 'flex', gap: '5px' }}>
+                                    <button
+                                        onClick={() => setEditingScoreTeam({ index: i, ...t })}
+                                        style={{ padding: '6px 12px', background: '#2196F3', color: 'white', border: 'none', borderRadius: 4, cursor: 'pointer', fontWeight: 'bold' }}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => setHistoryModalTeam(t)}
+                                        style={{ padding: '6px 12px', background: '#555', color: 'white', border: 'none', borderRadius: 4, cursor: 'pointer', fontSize: '0.9em' }}
+                                    >
+                                        History
+                                    </button>
+                                </div>
                             </div>
                         );
                     })}
                 </div>
             </div>
 
+            {/* Score Edit Modal */}
+            <ScoreEditModal
+                team={editingScoreTeam}
+                isOpen={!!editingScoreTeam}
+                onClose={() => setEditingScoreTeam(null)}
+                onSave={(idx, val) => {
+                    updateScore(idx, val);
+                    setEditingScoreTeam(null);
+                }}
+            />
+
+            {/* History Modal */}
+            <ScoreHistoryModal
+                team={historyModalTeam}
+                isOpen={!!historyModalTeam}
+                onClose={() => setHistoryModalTeam(null)}
+            />
         </div>
     );
 }

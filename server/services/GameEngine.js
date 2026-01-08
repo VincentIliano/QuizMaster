@@ -56,7 +56,13 @@ class GameEngine {
         const savedState = this.storage.loadGameState();
         if (savedState && Object.keys(savedState).length > 0) {
             // Restore global state
-            if (savedState.teams) this.state.teams = savedState.teams;
+            if (savedState.teams) {
+                this.state.teams = savedState.teams;
+                // Ensure history exists for legacy saves
+                this.state.teams.forEach(t => {
+                    if (!t.history) t.history = [];
+                });
+            }
             if (savedState.buzzerWinner !== undefined) this.state.buzzerWinner = savedState.buzzerWinner;
             if (savedState.status) this.state.status = savedState.status;
             if (savedState.lockedOutTeams) this.state.lockedOutTeams = savedState.lockedOutTeams;
@@ -224,7 +230,7 @@ class GameEngine {
     }
 
     setTeams(teamNames) {
-        this.state.teams = teamNames.map(name => ({ name, score: 0 }));
+        this.state.teams = teamNames.map(name => ({ name, score: 0, history: [] }));
         this.state.currentRoundIndex = -1;
         this.state.currentQuestionIndex = -1;
         this.state.status = "DASHBOARD";
@@ -524,9 +530,32 @@ class GameEngine {
 
     setTeamScore(index, score) {
         if (this.state.teams[index]) {
-            this.state.teams[index].score = score;
-            this.save();
+            const oldScore = this.state.teams[index].score;
+            const diff = score - oldScore;
+            this.addPoints(index, diff, 'Manual Adjustment');
         }
+    }
+
+    addPoints(teamIndex, amount, reason) {
+        if (!this.state.teams[teamIndex]) return;
+        const team = this.state.teams[teamIndex];
+        team.score += amount;
+
+        if (!team.history) team.history = [];
+
+        let roundName = 'N/A';
+        if (this.state.currentRoundIndex >= 0 && this.state.rounds[this.state.currentRoundIndex]) {
+            roundName = this.state.rounds[this.state.currentRoundIndex].name;
+        }
+
+        team.history.push({
+            timestamp: Date.now(),
+            amount: amount,
+            reason: reason,
+            newScore: team.score,
+            round: roundName
+        });
+        this.save();
     }
 
     toggleMedia() {

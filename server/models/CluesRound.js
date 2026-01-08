@@ -45,7 +45,7 @@ class CluesRound {
             // Ensure connection streak logic doesn't interfere (not relevant here but good practice)
 
             if (gameEngine.state.teams[teamIndex]) {
-                gameEngine.state.teams[teamIndex].score += points;
+                gameEngine.addPoints(teamIndex, points, `Correct Answer (Clues: ${count} revealed)`);
             }
 
             gameEngine.revealAnswer(true);

@@ -65,7 +65,7 @@ class ConnectionsRound extends Round {
 
             round.scores = round.scores || {};
             const oldScore = engine.state.teams[teamIndex].score;
-            engine.state.teams[teamIndex].score += points;
+            engine.addPoints(teamIndex, points, `Topic Reveal (Streak: ${currentStreak + 1})`);
             round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
 
             console.log('ConnectionsRound: Score updated for team', teamIndex, 'Old:', oldScore, 'New:', engine.state.teams[teamIndex].score);
@@ -96,10 +96,10 @@ class ConnectionsRound extends Round {
         round.scores = round.scores || {};
 
         if (correct) {
-            team.score += points;
+            engine.addPoints(teamIndex, points, 'Correct Answer');
             round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
         } else {
-            team.score -= points;
+            engine.addPoints(teamIndex, -points, 'Wrong Answer');
             round.scores[teamIndex] = (round.scores[teamIndex] || 0) - points;
         }
 
@@ -142,7 +142,7 @@ class ConnectionsRound extends Round {
                 engine.state.connectionStreak = currentStreak + 1;
 
                 round.scores = round.scores || {};
-                engine.state.teams[teamIndex].score += points;
+                engine.addPoints(teamIndex, points, `Group Reveal (Streak: ${currentStreak + 1})`);
                 round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
             }
 

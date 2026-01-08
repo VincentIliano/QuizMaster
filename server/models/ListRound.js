@@ -46,7 +46,7 @@ class ListRound extends Round {
         const originalAnswer = originalAnswerIndex !== -1 ? currentQuestion.answers[originalAnswerIndex] : null;
 
         if (originalAnswer && !round.foundAnswers.includes(originalAnswer)) {
-            team.score += points;
+            engine.addPoints(teamIndex, points, 'Correct Answer (List)');
             round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
             round.foundAnswers.push(originalAnswer); // Store exact string for UI matching
             engine.state.lastJudgement = true;

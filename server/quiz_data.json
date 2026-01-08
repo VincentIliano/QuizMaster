@@ -1,5 +1,5 @@
 {
-  "falseStartPenalty": 5,
+  "falseStartPenalty": 1,
   "rounds": [
     {
       "name": "Lijst",
@@ -23,21 +23,62 @@
           ]
         },
         {
-          "text": "Verdeling van de 'Rings of Power'",
+          "text": "Het NAVO alfabet",
           "answers": [
-            "Elves (3)",
-            "Men (9)",
-            "Dwarves (7)",
-            "Sauron (1)"
+            "Alpha",
+            "Bravo",
+            "Charlie",
+            "Delta",
+            "Echo",
+            "Foxtrot",
+            "Golf",
+            "Hotel",
+            "India",
+            "Juliet",
+            "Kilo",
+            "Lima",
+            "Mike",
+            "November",
+            "Oscar",
+            "Papa",
+            "Quebec",
+            "Romeo",
+            "Sierra",
+            "Tango",
+            "Uniform",
+            "Victor",
+            "Whiskey",
+            "X-ray",
+            "Yankee",
+            "Zulu",
+            "Zero",
+            "One",
+            "Two",
+            "Tree",
+            "Fower",
+            "Fife",
+            "Six",
+            "Seven",
+            "Eight",
+            "Niner"
           ]
         },
         {
-          "text": "Teenage mutant ninja turtles",
+          "text": "De dwergen in Thorin's gezelschap",
           "answers": [
-            "Donatello",
-            "Leonardo",
-            "Raphael",
-            "Michelangelo"
+            "Thorin",
+            "Fili",
+            "Kili",
+            "Oin",
+            "Gloin",
+            "Balin",
+            "Dwalin",
+            "Ori",
+            "Dori",
+            "Nori",
+            "Bifur",
+            "Bofur",
+            "Bombur"
           ]
         },
         {
@@ -65,11 +106,21 @@
           ]
         },
         {
-          "text": "De 3 Zwaarden die in The Hobbit gevonden worden in de trollen grot",
+          "text": "De Griekse goden die op Olympus leefden",
           "answers": [
-            "Glamdring",
-            "Sting",
-            "Orcrist"
+            "Aphrodite",
+            "Apollo",
+            "Ares",
+            "Artemis",
+            "Athena",
+            "Demeter",
+            "Dionysus",
+            "Hephaestus",
+            "Hera",
+            "Hermes",
+            "Hestia",
+            "Poseidon",
+            "Zeus"
           ]
         },
         {

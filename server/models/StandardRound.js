@@ -10,7 +10,7 @@ class StandardRound extends Round {
         round.scores = round.scores || {};
 
         if (correct) {
-            team.score += points;
+            engine.addPoints(teamIndex, points, 'Correct Answer');
             round.scores[teamIndex] = (round.scores[teamIndex] || 0) + points;
 
             engine.state.lastJudgement = correct;
