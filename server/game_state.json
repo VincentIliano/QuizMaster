@@ -1,0 +1,869 @@
+{
+  "teams": [
+    {
+      "name": "afg4r",
+      "score": 0
+    },
+    {
+      "name": "gseth",
+      "score": 0
+    },
+    {
+      "name": "srth",
+      "score": 0
+    }
+  ],
+  "rounds": [
+    {
+      "name": "Lijst",
+      "type": "List",
+      "time_limit": 15,
+      "points": 10,
+      "description": "Geef zoveel mogelijk juiste antwoorden.",
+      "questions": [
+        {
+          "text": "The Fellowship of the Ring",
+          "answers": [
+            "Frodo",
+            "Gandalf",
+            "Aragorn",
+            "Legolas",
+            "Gimli",
+            "Boromir",
+            "Pippin",
+            "Merry",
+            "Sam"
+          ]
+        },
+        {
+          "text": "Verdeling van de 'Rings of Power'",
+          "answers": [
+            "Elves (3)",
+            "Men (9)",
+            "Dwarves (7)",
+            "Sauron (1)"
+          ]
+        },
+        {
+          "text": "Teenage mutant ninja turtles",
+          "answers": [
+            "Donatello",
+            "Leonardo",
+            "Raphael",
+            "Michelangelo"
+          ]
+        },
+        {
+          "text": "De 9 star wars films",
+          "answers": [
+            "Episode I: The Phantom Menace",
+            "Episode II: Attack of the Clones",
+            "Episode III: Revenge of the Sith",
+            "Episode IV: A New Hope",
+            "Episode V: The Empire Strikes Back",
+            "Episode VI: Return of the Jedi",
+            "Episode VII: The Force Awakens",
+            "Episode VIII: The Last Jedi",
+            "Episode IX: The Rise of Skywalker"
+          ]
+        },
+        {
+          "text": "De 5 Wizards van Middle-Earth",
+          "answers": [
+            "Gandalf",
+            "Saruman",
+            "Radagast",
+            "Alatar",
+            "Pallando"
+          ]
+        },
+        {
+          "text": "De 3 Zwaarden die in The Hobbit gevonden worden in de trollen grot",
+          "answers": [
+            "Glamdring",
+            "Sting",
+            "Orcrist"
+          ]
+        },
+        {
+          "text": "D&D 5e Schools of magic",
+          "answers": [
+            "Abjuration",
+            "Conjuration",
+            "Divination",
+            "Enchantment",
+            "Evocation",
+            "Illusion",
+            "Necromancy",
+            "Transmutation"
+          ]
+        },
+        {
+          "text": "Wie zijn de 7 belangrijkste brugbemanningsleden van de originele Starship Enterprise?",
+          "answers": [
+            "James T. Kirk",
+            "Spock",
+            "Uhura",
+            "Sulu",
+            "Chekov",
+            "Scotty",
+            "McCoy (Bones)"
+          ]
+        },
+        {
+          "text": "Damage types in D&D 5e",
+          "answers": [
+            "Acid",
+            "Bludgeoning",
+            "Cold",
+            "Fire",
+            "Force",
+            "Lightning",
+            "Necrotic",
+            "Poison",
+            "Psychic",
+            "Radiant",
+            "Slashing",
+            "Thunder"
+          ]
+        },
+        {
+          "text": "Hobbit maaltijden",
+          "answers": [
+            "Breakfast",
+            "Second Breakfast",
+            "Elevenses",
+            "Luncheon",
+            "AfternoonTea",
+            "Dinner",
+            "Supper"
+          ]
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    },
+    {
+      "name": "Algemene kennis",
+      "time_limit": 15,
+      "points": 10,
+      "description": "",
+      "questions": [
+        {
+          "text": "Wat is het vijfde element?",
+          "answer": "Leeloo"
+        },
+        {
+          "text": "Wat mag je nooit doen met een gremlin?",
+          "answer": "Aan zonlicht blootstellen, nat maken 😏, voeden na middernacht"
+        },
+        {
+          "text": "Wat is 'light as a feather, and as hard as dragon scales'",
+          "answer": "Mithril"
+        },
+        {
+          "text": "Hoe heet het bedrijf dat de onfortuinlijke kolonie op LV-426 bezit in de Alien franchise?",
+          "answer": "Weyland-Yutani"
+        },
+        {
+          "text": "Hoe heet het paard van Geralt of Rivia?",
+          "answer": "Roach"
+        },
+        {
+          "text": "Welke snelheid moet de DeLorean halen in Back to the Future om door de tijd te reizen?",
+          "answer": "88 mph"
+        },
+        {
+          "text": "Hoe heet de mythische Wereldboom in de Noordse mythologie?",
+          "answer": "Yggdrasil"
+        },
+        {
+          "text": "Wat is de naam van het schip van Morpheus in The Matrix?",
+          "answer": "The Nebuchadnezzar"
+        },
+        {
+          "text": "Hoe heette het zwaard van Elendil voordat het brak en later opnieuw werd gesmeed tot Andúril voor Aragorn?",
+          "answer": "Narsil"
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    },
+    {
+      "name": "Meerkeuze",
+      "time_limit": 15,
+      "points": 10,
+      "description": "",
+      "questions": [
+        {
+          "text": "wat is 'A white tree standing beneath seven stars and a high crown, all set against a black background'",
+          "choices": [
+            {
+              "a": "Het logo van Starbucks"
+            },
+            {
+              "b": "Het schild van Gondor"
+            },
+            {
+              "c": "De deur van de mines of Moria"
+            },
+            {
+              "d": "Het logo van World of Warcraft"
+            }
+          ],
+          "answer": "b"
+        },
+        {
+          "text": "Welke van deze is in het boek 'The Fellowship of the Ring' GEEN geschenk, gegeven door Galadriel aan the fellowship",
+          "choices": [
+            {
+              "a": "Een doos grond"
+            },
+            {
+              "b": "Een boog, gespannen met haar"
+            },
+            {
+              "c": "Tweede-hands kleren"
+            },
+            {
+              "d": "Nog wat haar"
+            }
+          ],
+          "answer": "c"
+        },
+        {
+          "text": "Hoelang duurt een short rest in D&D 5e?",
+          "choices": [
+            {
+              "a": "Een kwartier"
+            },
+            {
+              "b": "Een half uur"
+            },
+            {
+              "c": "1 uur"
+            }
+          ],
+          "answer": "c"
+        },
+        {
+          "text": "Welke van deze is GEEN standaard kleur van draak?",
+          "choices": [
+            {
+              "a": "Koper"
+            },
+            {
+              "b": "Zilver"
+            },
+            {
+              "c": "Messing"
+            },
+            {
+              "d": "Ijzer"
+            }
+          ],
+          "answer": "d"
+        },
+        {
+          "text": "Hoe noemt (of hoe heet men) het schip in de film Alien(1979)?",
+          "choices": [
+            {
+              "a": "The Sulaco"
+            },
+            {
+              "b": "The Nostromo"
+            },
+            {
+              "c": "The Prometheus"
+            },
+            {
+              "d": "The Covenant"
+            }
+          ],
+          "answer": "b"
+        },
+        {
+          "text": "Welk personage, in 'The Matrix', verraadt Morpheus en zijn team aan de agents?",
+          "choices": [
+            {
+              "a": "Tank"
+            },
+            {
+              "b": "Switch"
+            },
+            {
+              "c": "Cypher"
+            },
+            {
+              "d": "Apoc"
+            }
+          ],
+          "answer": "c"
+        },
+        {
+          "text": "In welk koninkrijk vindt 'The Legend of Zelda' hoofdzakelijk plaats?",
+          "choices": [
+            {
+              "a": "Hyrule"
+            },
+            {
+              "b": "Tamriel"
+            },
+            {
+              "c": "Azeroth"
+            },
+            {
+              "d": "Lordran"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "text": "Hoe heet het paard van Samwise Gamgee in 'The Lord of the Rings'?",
+          "choices": [
+            {
+              "a": "Brego"
+            },
+            {
+              "b": "Shadowfax"
+            },
+            {
+              "c": "Boromir"
+            },
+            {
+              "d": "Bill"
+            }
+          ],
+          "answer": "d"
+        },
+        {
+          "text": "In de standaard D&D lore, wat is de naam van de vampier die heerst over Barovia",
+          "choices": [
+            {
+              "a": "Strahd von Zarovich"
+            },
+            {
+              "b": "Strahd von Strahdovich"
+            },
+            {
+              "c": "Tzar von Strahdovich"
+            },
+            {
+              "d": "Gewoon 'Strahd' zonder de achternaam"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "text": "Wat gebeurt er wanneer je een 'Portable hole' in een 'Bag of holding' steekt?",
+          "choices": [
+            {
+              "a": "Niets, de Portable hole blijft in de bag of holding"
+            },
+            {
+              "b": "Er ontstaat een portal naar de Astral plane"
+            },
+            {
+              "c": "De bag of holding ontploft"
+            }
+          ],
+          "answer": "b"
+        },
+        {
+          "text": "Wat is een gezegde van de Mandalorians?",
+          "choices": [
+            {
+              "a": "It is known"
+            },
+            {
+              "b": "This is the way"
+            },
+            {
+              "c": "I did it my way"
+            },
+            {
+              "d": "So say we all"
+            }
+          ],
+          "answer": "b"
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    },
+    {
+      "name": "100 jaar muziek",
+      "type": "countdown",
+      "points": 20,
+      "description": "Hoe sneller je antwoordt, hoe meer punten",
+      "questions": [
+        {
+          "text": "1930",
+          "answer": "Judy Garland - Over The Rainbow",
+          "mediaUrl": "assets/Judy Garland - Over the Rainbow (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 45
+        },
+        {
+          "text": "1940",
+          "answer": "Bing Crosby - White Christmas",
+          "mediaUrl": "assets/Bing Crosby - White Christmas (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 30
+        },
+        {
+          "text": "1950",
+          "answer": "Elvis Presley - Jailhouse Rock",
+          "mediaUrl": "assets/Elvis Presley - Jailhouse Rock (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 35
+        },
+        {
+          "text": "1960",
+          "answer": "Roco Granata - Marina",
+          "mediaUrl": "assets/Roco Granata - Marina (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 20
+        },
+        {
+          "text": "1970",
+          "answer": "Elo - Mr Blue Sky",
+          "mediaUrl": "assets/Elo - Mr Blue Sky (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 45
+        },
+        {
+          "text": "1980",
+          "answer": "Kool & The Gang - Ladies Night",
+          "mediaUrl": "assets/Kool & The Gang - Ladies Night (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 40
+        },
+        {
+          "text": "1990",
+          "answer": "Sam Gooris - Laat Het Gras Maar Groeien",
+          "mediaUrl": "assets/Sam Gooris - Laat Het Gras Maar Groeien (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 30
+        },
+        {
+          "text": "2000",
+          "answer": "Mika - Relax",
+          "mediaUrl": "assets/Mika - Relax (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 30
+        },
+        {
+          "text": "2010",
+          "answer": "Train - Hey Soul Sister",
+          "mediaUrl": "assets/Train - Hey Soul Sister (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 35
+        },
+        {
+          "text": "2020",
+          "answer": "Taylor Swift - The fate of Ophelia",
+          "mediaUrl": "assets/Taylor Swift - The fate of Ophelia (split).mp3",
+          "mediaType": "audio",
+          "time_limit": 40
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    },
+    {
+      "name": "Kaders",
+      "type": "connections",
+      "description": "Zoek de linken.",
+      "points": 10,
+      "questions": [
+        {
+          "topic": "Zwaarden",
+          "groups": [
+            {
+              "name": "Lord of the rings",
+              "items": [
+                "Sting",
+                "Glamdring",
+                "Orcrist",
+                "Anduril"
+              ]
+            },
+            {
+              "name": "Game of Thrones",
+              "items": [
+                "Longclaw",
+                "Needle",
+                "Ice",
+                "Oathkeeper"
+              ]
+            },
+            {
+              "name": "King Arthur",
+              "items": [
+                "Excalibur",
+                "Caliburn",
+                "Clarent",
+                "Arondight"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "D&D Character sheet content",
+          "groups": [
+            {
+              "name": "Abilities",
+              "items": [
+                "Strength",
+                "Dexterity",
+                "Intelligence",
+                "Wisdom"
+              ]
+            },
+            {
+              "name": "Skills",
+              "items": [
+                "Acrobatics",
+                "Stealth",
+                "Perception",
+                "History"
+              ]
+            },
+            {
+              "name": "Cantrips",
+              "items": [
+                "Eldritch Blast",
+                "Guidance",
+                "Mage Hand",
+                "Shillelagh"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "D&D Ability Scores",
+          "groups": [
+            {
+              "name": "Strength",
+              "items": [
+                "Athletics",
+                "Carrying Capacity",
+                "Barbarian's Stat",
+                "Lifting"
+              ]
+            },
+            {
+              "name": "Constitution",
+              "items": [
+                "Hit Points",
+                "Concentration Checks",
+                "Stamina",
+                "Resilience"
+              ]
+            },
+            {
+              "name": "Charisma",
+              "items": [
+                "Persuasion",
+                "Deception",
+                "Intimidation",
+                "Bard's Stat"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Hogwarts Houses",
+          "groups": [
+            {
+              "name": "Gryffindor",
+              "items": [
+                "Lion",
+                "Godric",
+                "Sword",
+                "Bravery"
+              ]
+            },
+            {
+              "name": "Slytherin",
+              "items": [
+                "Snake",
+                "Salazar",
+                "Locket",
+                "Ambition"
+              ]
+            },
+            {
+              "name": "Ravenclaw",
+              "items": [
+                "Eagle",
+                "Rowena",
+                "Diadem",
+                "Wit"
+              ]
+            }
+          ]
+        },
+        {
+          "topic": "Polyhedral Dice",
+          "groups": [
+            {
+              "name": "d4",
+              "items": [
+                "Pyramid Shape",
+                "Caltrop",
+                "Magic Missile Damage",
+                "Healing Potion Roll"
+              ]
+            },
+            {
+              "name": "d12",
+              "items": [
+                "Dodecahedron",
+                "Greataxe Damage",
+                "Barbarian Hit Die",
+                "Pentagon Faces"
+              ]
+            },
+            {
+              "name": "d20",
+              "items": [
+                "Icosahedron",
+                "Attack Roll",
+                "Skill Check",
+                "Critical Hit"
+              ]
+            }
+          ]
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    },
+    {
+      "name": "Mystery Topic",
+      "type": "clues",
+      "initial_points": 15,
+      "reduction_amount": 3,
+      "questions": [
+        {
+          "question": "Wat?",
+          "clues": [
+            "Ik ben een icosaëder.",
+            "Hoe ik val bepaalt je geluk",
+            "Ik bepaal of je raakt of mist.",
+            "Ik ben vaak gemaakt van plastic of hars.",
+            "Je rolt met mij in D&D"
+          ],
+          "answer": "D20"
+        },
+        {
+          "question": "Wie?",
+          "clues": [
+            "I am a servant",
+            "of the Secret Fire",
+            "wielder of the flame of Anor",
+            "You cannot pass!",
+            "YOU SHALL NOT PASS!"
+          ],
+          "answer": "Gandalf"
+        },
+        {
+          "question": "Wat?",
+          "clues": [
+            "Ik ben plakkerig",
+            "Ik ben een verrassing",
+            "Ik kan van vorm veranderen",
+            "Avonturiers hopen dat ik er niet ben",
+            "Ik vermom me als een voorwerp"
+          ],
+          "answer": "Mimic"
+        },
+        {
+          "question": "Wat?",
+          "clues": [
+            "Ik heb een zwakke plek in mijn uitlaatpoort 😏",
+            "Er zijn verschillende versies van mij",
+            "Ik ben geen maan",
+            "Ik kan een hele planeet vernietigen",
+            "Ik ben het ultieme wapen van het keizerrijk"
+          ],
+          "answer": "Death Start"
+        },
+        {
+          "question": "Wat?",
+          "clues": [
+            "Je kan je vinger in mij steken 😏",
+            "Ik pas mij aan aan de grootte van je vinger 😏",
+            "Iedereen die zijn vinger al in mij stak, wil het nog eens doen 😏",
+            "Er is er maar 1 wiens vinger mijn volledige kracht kan gebruiken",
+            "Ik ben de ring die iedereen wil vernietigen 😏"
+          ],
+          "answer": "The one ring"
+        },
+        {
+          "question": "Wat?",
+          "clues": [
+            "Als je mij pakt, krijgt je team 150 punten.",
+            "Ik ben heel moeilijk te vangen.",
+            "Ik ben een kleine gouden bal.",
+            "Ik heb zilveren vleugels.",
+            "Ik maak een einde aan een potje Zwerkbal."
+          ],
+          "answer": "De Gouden Snaai (Golden Snitch)"
+        },
+        {
+          "question": "Wat?",
+          "clues": [
+            "Ik ben een hamer.",
+            "Ik ben gesmeed in het hart van een stervende ster.",
+            "Alleen wie waardig is, kan mij optillen.",
+            "Ik roep de bliksem op.",
+            "Ik ben het wapen van Thor."
+          ],
+          "answer": "Mjolnir"
+        },
+        {
+          "question": "Wie?",
+          "clues": [
+            "Ik ben een archeoloog.",
+            "Ik haat slangen.",
+            "Ik draag een fedora.",
+            "Ik draag altijd een zweep.",
+            "Ik zocht naar de Ark des Verbonds en de Heilige Graal."
+          ],
+          "answer": "Indiana Jones"
+        },
+        {
+          "question": "Wie",
+          "clues": [
+            "Ik werk met Q",
+            "Ik werk met M",
+            "Ik werk met Walther",
+            "ik ben de 7e",
+            "Ik heb liever dat er mee geschud wordt, dan in geroerd"
+          ],
+          "answer": "James Bond"
+        },
+        {
+          "question": "Wat",
+          "clues": [
+            "Ik ben rood, mijn tegenhanger is blauw",
+            "Je moet slikken",
+            "Als je mij neemt, blijf je in wonderland",
+            "En zie je hoe diep het konijnenhol gaat",
+            "Morpheus biedde mij aan aan Neo"
+          ],
+          "answer": "De Rode Pil (The Matrix)"
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 0
+    },
+    {
+      "name": "Yes / No Round",
+      "type": "yes",
+      "points": 10,
+      "description": "Buzz when you see the correct answer!",
+      "questions": [
+        {
+          "text": "Which of these is the correct color of a Smurf?",
+          "options": [
+            "Green",
+            "Blue",
+            "Red",
+            "Yellow"
+          ],
+          "answer": 1
+        },
+        {
+          "text": "Correct logo for 'Star Wars'?",
+          "options": [
+            "Star Trek Logo",
+            "Star Wars Logo",
+            "Stargate Logo"
+          ],
+          "answer": 1
+        }
+      ],
+      "scores": {},
+      "questionsAnswered": 1
+    }
+  ],
+  "currentRoundIndex": 0,
+  "currentQuestionIndex": -1,
+  "currentQuestionData": null,
+  "timerValue": 15,
+  "buzzerLocked": true,
+  "buzzerWinner": null,
+  "status": "IDLE",
+  "lastJudgement": null,
+  "roundsSummary": [
+    {
+      "index": 0,
+      "name": "Lijst",
+      "points": 10,
+      "questionsAnswered": 0,
+      "totalQuestions": 10,
+      "scores": {}
+    },
+    {
+      "index": 1,
+      "name": "Algemene kennis",
+      "points": 10,
+      "questionsAnswered": 0,
+      "totalQuestions": 9,
+      "scores": {}
+    },
+    {
+      "index": 2,
+      "name": "Meerkeuze",
+      "points": 10,
+      "questionsAnswered": 0,
+      "totalQuestions": 11,
+      "scores": {}
+    },
+    {
+      "index": 3,
+      "name": "100 jaar muziek",
+      "points": 20,
+      "questionsAnswered": 0,
+      "totalQuestions": 10,
+      "scores": {}
+    },
+    {
+      "index": 4,
+      "name": "Kaders",
+      "points": 10,
+      "questionsAnswered": 0,
+      "totalQuestions": 5,
+      "scores": {}
+    },
+    {
+      "index": 5,
+      "name": "Mystery Topic",
+      "questionsAnswered": 0,
+      "totalQuestions": 10,
+      "scores": {}
+    },
+    {
+      "index": 6,
+      "name": "Yes / No Round",
+      "points": 10,
+      "questionsAnswered": 1,
+      "totalQuestions": 2,
+      "scores": {}
+    }
+  ],
+  "lockedOutTeams": [],
+  "mediaPlaying": false,
+  "roundStartScores": [
+    0,
+    0,
+    0
+  ],
+  "sequenceOptionIndex": -1,
+  "sequenceVotes": {},
+  "falseStartPenalty": 5
+}

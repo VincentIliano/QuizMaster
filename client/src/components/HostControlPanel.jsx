@@ -179,6 +179,17 @@ export default function HostControlPanel({ state }) {
 
 
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+                {/* Sequence Round Control */}
+                {(state.roundType === 'yes' || state.roundType === 'sequence') && (
+                    <button
+                        onClick={() => socket.emit('next_sequence_option')}
+                        disabled={state.status === 'SEQUENCE_COMPLETE' || state.status === 'ANSWER_REVEALED'}
+                        style={{ backgroundColor: '#6f42c1', color: 'white' }}
+                    >
+                        {state.sequenceOptionIndex === -1 ? "Start Sequence" : "Next Option"}
+                    </button>
+                )}
+
                 <button
                     onClick={nextQuestion}
                     disabled={state.status === 'READING' || state.status === 'LISTENING'}
@@ -217,7 +228,7 @@ export default function HostControlPanel({ state }) {
 
                 <button
                     onClick={reveal}
-                    disabled={state.status !== 'TIMEOUT' && state.status !== 'ALL_LOCKED' && state.status !== 'PAUSED' && state.status !== 'LISTENING'}
+                    disabled={state.status !== 'TIMEOUT' && state.status !== 'ALL_LOCKED' && state.status !== 'PAUSED' && state.status !== 'LISTENING' && state.status !== 'SEQUENCE_COMPLETE'}
                 >Reveal Answer</button>
 
                 {state.roundType === 'clues' && (

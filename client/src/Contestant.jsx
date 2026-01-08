@@ -598,6 +598,60 @@ export default function Contestant() {
                                     </div>
                                 )}
 
+
+                                {(state.roundType === 'yes' || state.roundType === 'sequence') && state.options && (
+                                    <div className="sequence-round-display" style={{ width: '100%', marginTop: 20 }}>
+                                        {(state.status === 'SEQUENCE_COMPLETE' || state.status === 'ANSWER_REVEALED') ? (
+                                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 15 }}>
+                                                {state.options.map((opt, i) => {
+                                                    const voters = state.teams.filter((_, idx) => state.sequenceVotes && state.sequenceVotes[idx] == i).map(t => t.name);
+                                                    const isCorrect = state.status === 'ANSWER_REVEALED' && state.answer == i;
+
+                                                    return (
+                                                        <div key={i} style={{
+                                                            padding: 15,
+                                                            background: isCorrect ? 'rgba(40, 167, 69, 0.4)' : 'rgba(255,255,255,0.1)',
+                                                            border: isCorrect ? '2px solid #28a745' : '1px solid #444',
+                                                            borderRadius: 8,
+                                                            opacity: (state.status === 'ANSWER_REVEALED' && !isCorrect) ? 0.5 : 1,
+                                                            transition: 'all 0.5s ease'
+                                                        }}>
+                                                            <div style={{ fontSize: '1.2em', fontWeight: 'bold' }}>{opt}</div>
+                                                            <div style={{ marginTop: 10, display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+                                                                {voters.map((v, vi) => (
+                                                                    <span key={vi} style={{ fontSize: '0.8em', background: '#007bff', padding: '2px 6px', borderRadius: 4 }}>{v}</span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        ) : (
+                                            <div style={{ textAlign: 'center' }}>
+                                                {state.sequenceOptionIndex >= 0 ? (
+                                                    <div className="pop-in" key={state.sequenceOptionIndex} style={{ fontSize: '3em', fontWeight: 'bold', padding: 40, background: 'rgba(255,255,255,0.1)', borderRadius: 20 }}>
+                                                        {state.options[state.sequenceOptionIndex]}
+                                                    </div>
+                                                ) : (
+                                                    <div style={{ fontSize: '2em', opacity: 0.7 }}>Watch closely...</div>
+                                                )}
+
+                                                <div style={{ marginTop: 30, display: 'flex', gap: 10, justifyContent: 'center', minHeight: 30 }}>
+                                                    {state.teams.map((t, i) => {
+                                                        const hasVoted = state.sequenceVotes && state.sequenceVotes[i] !== undefined;
+                                                        if (!hasVoted) return null;
+                                                        return (
+                                                            <div key={i} className="pop-in" style={{ background: '#28a745', padding: '5px 15px', borderRadius: 20, fontSize: '0.9em', boxShadow: '0 0 10px #28a745' }}>
+                                                                {t.name} LOCKED IN
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
                                 {state.roundType === 'list' && state.answers && (
                                     <div className="list-answers-grid">
                                         {state.answers.map((ans, idx) => {

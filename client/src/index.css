@@ -90,17 +90,26 @@ body {
 /* Traffic Light */
 .traffic-light {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 60px;
-  background: #2a2a2a;
-  padding: 10px;
-  border-radius: 15px;
+  top: 100px;
+  /* Moved down significantly */
+  right: 30px;
+  /* Bit more spacing from edge */
+  width: 70px;
+  /* Slightly wider */
+  background: rgba(42, 42, 42, 0.4);
+  /* More transparent */
+  backdrop-filter: blur(10px);
+  /* Glassmorphism */
+  padding: 15px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  border: 2px solid #555;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  gap: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Subtle border */
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   z-index: 1000;
 }
 
@@ -108,24 +117,57 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #444;
-  transition: all 0.3s ease;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+  background: #333;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:
+    inset 0 5px 10px rgba(0, 0, 0, 0.5),
+    0 1px 2px rgba(255, 255, 255, 0.05);
+  /* Unlit depth */
+  position: relative;
+  opacity: 0.6;
+  /* Dim by default */
+}
+
+/* Add a gloss reflection */
+.light::after {
+  content: '';
+  position: absolute;
+  top: 5%;
+  left: 20%;
+  width: 60%;
+  height: 40%;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+  opacity: 0.3;
+}
+
+.light.active {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .light.red.active {
-  background: #ff4d4d;
-  box-shadow: 0 0 20px #ff4d4d, inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #c00);
+  box-shadow:
+    0 0 20px rgba(255, 77, 77, 0.6),
+    0 0 50px rgba(255, 77, 77, 0.4),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .light.yellow.active {
-  background: #ffd700;
-  box-shadow: 0 0 20px #ffd700, inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+  background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
+  box-shadow:
+    0 0 20px rgba(255, 215, 0, 0.6),
+    0 0 50px rgba(255, 215, 0, 0.4),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .light.green.active {
-  background: #28a745;
-  box-shadow: 0 0 20px #28a745, inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+  background: radial-gradient(circle at 30% 30%, #4cd137, #008000);
+  box-shadow:
+    0 0 20px rgba(76, 209, 55, 0.6),
+    0 0 50px rgba(76, 209, 55, 0.4),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes slide-up {

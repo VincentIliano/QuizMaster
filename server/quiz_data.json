@@ -5,7 +5,7 @@
       "name": "Lijst",
       "type": "List",
       "time_limit": 15,
-      "points": 10,
+      "points": 2,
       "description": "Geef zoveel mogelijk juiste antwoorden.",
       "questions": [
         {
@@ -284,22 +284,22 @@
           "answer": "c"
         },
         {
-          "text": "In welk koninkrijk vindt 'The Legend of Zelda' hoofdzakelijk plaats?",
+          "text": "Waarvoor staat 'NFC'?",
           "choices": [
             {
-              "a": "Hyrule"
+              "a": "Network Flow Control"
             },
             {
-              "b": "Tamriel"
+              "b": "Native Format Conversion"
             },
             {
-              "c": "Azeroth"
+              "c": "Near Field Communication"
             },
             {
-              "d": "Lordran"
+              "d": "Non-Fecale Chambrang"
             }
           ],
-          "answer": "a"
+          "answer": "c"
         },
         {
           "text": "Hoe heet het paard van Samwise Gamgee in 'The Lord of the Rings'?",
@@ -379,72 +379,72 @@
       "description": "Hoe sneller je antwoordt, hoe meer punten",
       "questions": [
         {
-          "text": "1930",
-          "answer": "Judy Garland - Over The Rainbow",
-          "mediaUrl": "assets/Judy Garland - Over the Rainbow (split).mp3",
+          "text": "Film",
+          "answer": "2001 A Space Odyssey",
+          "mediaUrl": "assets/2001 A Space Odyssey.mp3",
           "mediaType": "audio",
           "time_limit": 45
         },
         {
-          "text": "1940",
-          "answer": "Bing Crosby - White Christmas",
-          "mediaUrl": "assets/Bing Crosby - White Christmas (split).mp3",
+          "text": "Film",
+          "answer": "Jurassic Park",
+          "mediaUrl": "assets/Jurassic Park.mp3",
           "mediaType": "audio",
           "time_limit": 30
         },
         {
-          "text": "1950",
-          "answer": "Elvis Presley - Jailhouse Rock",
-          "mediaUrl": "assets/Elvis Presley - Jailhouse Rock (split).mp3",
+          "text": "Serie",
+          "answer": "Schuif Af",
+          "mediaUrl": "assets/Schuif Af.mp3",
           "mediaType": "audio",
           "time_limit": 35
         },
         {
-          "text": "1960",
-          "answer": "Roco Granata - Marina",
-          "mediaUrl": "assets/Roco Granata - Marina (split).mp3",
+          "text": "Film",
+          "answer": "Pirates of the Caribbean",
+          "mediaUrl": "assets/Pirates of the Caribbean.mp3",
           "mediaType": "audio",
           "time_limit": 20
         },
         {
-          "text": "1970",
-          "answer": "Elo - Mr Blue Sky",
-          "mediaUrl": "assets/Elo - Mr Blue Sky (split).mp3",
+          "text": "Film",
+          "answer": "Star Wars",
+          "mediaUrl": "assets/Star Wars.mp3",
           "mediaType": "audio",
           "time_limit": 45
         },
         {
-          "text": "1980",
-          "answer": "Kool & The Gang - Ladies Night",
-          "mediaUrl": "assets/Kool & The Gang - Ladies Night (split).mp3",
+          "text": "Serie",
+          "answer": "the X Files",
+          "mediaUrl": "assets/X Files.mp3",
           "mediaType": "audio",
           "time_limit": 40
         },
         {
-          "text": "1990",
-          "answer": "Sam Gooris - Laat Het Gras Maar Groeien",
-          "mediaUrl": "assets/Sam Gooris - Laat Het Gras Maar Groeien (split).mp3",
+          "text": "Serie",
+          "answer": "Baantjer",
+          "mediaUrl": "assets/Baantjer.mp3",
           "mediaType": "audio",
           "time_limit": 30
         },
         {
-          "text": "2000",
-          "answer": "Mika - Relax",
-          "mediaUrl": "assets/Mika - Relax (split).mp3",
+          "text": "Film",
+          "answer": "The Lord of the Rings: The Two Towers",
+          "mediaUrl": "assets/The Two Towers.mp3",
           "mediaType": "audio",
           "time_limit": 30
         },
         {
-          "text": "2010",
-          "answer": "Train - Hey Soul Sister",
-          "mediaUrl": "assets/Train - Hey Soul Sister (split).mp3",
+          "text": "Serie",
+          "answer": "Fc De Kampioenen",
+          "mediaUrl": "assets/Fc de kampioenen.mp3",
           "mediaType": "audio",
           "time_limit": 35
         },
         {
-          "text": "2020",
-          "answer": "Taylor Swift - The fate of Ophelia",
-          "mediaUrl": "assets/Taylor Swift - The fate of Ophelia (split).mp3",
+          "text": "Film",
+          "answer": "The Matrix",
+          "mediaUrl": "assets/The Matrix.mp3",
           "mediaType": "audio",
           "time_limit": 40
         }

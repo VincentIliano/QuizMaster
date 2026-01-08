@@ -32,7 +32,9 @@ class GameEngine {
             lockedOutTeams: [], // Added for FreezeOut
             mediaPlaying: false, // Added for manual media control
 
-            roundStartScores: [] // Snapshot of scores at round start
+            roundStartScores: [], // Snapshot of scores at round start
+            sequenceOptionIndex: -1,
+            sequenceVotes: {} // teamIndex -> optionIndex
         };
         this.currentRoundInstance = null;
         this.init();
@@ -63,6 +65,8 @@ class GameEngine {
             if (savedState.currentQuestionIndex !== undefined) this.state.currentQuestionIndex = savedState.currentQuestionIndex;
             if (savedState.currentQuestionData) this.state.currentQuestionData = savedState.currentQuestionData;
             if (savedState.roundStartScores) this.state.roundStartScores = savedState.roundStartScores;
+            if (savedState.sequenceOptionIndex !== undefined) this.state.sequenceOptionIndex = savedState.sequenceOptionIndex;
+            if (savedState.sequenceVotes) this.state.sequenceVotes = savedState.sequenceVotes;
 
             // Restore Round Progress (Scores, Answered Count)
             if (savedState.rounds) {
@@ -99,6 +103,9 @@ class GameEngine {
             this.currentRoundInstance.init(this); // Initialize grid
         } else if (round.type === 'clues') {
             this.currentRoundInstance = new CluesRound(round);
+        } else if (round.type === 'yes' || round.type === 'sequence') {
+            const SequenceRound = require('../models/SequenceRound');
+            this.currentRoundInstance = new SequenceRound(round);
         } else {
             this.currentRoundInstance = new StandardRound(round);
         }
@@ -167,6 +174,7 @@ class GameEngine {
             currentAnswer: (s.currentQuestionData && (s.status === 'ANSWER_REVEALED' || s.status === 'GAME_OVER')) ? s.currentQuestionData.answer : null,
             answer: s.currentQuestionData ? s.currentQuestionData.answer : null,
             choices: s.currentQuestionData ? s.currentQuestionData.choices : null,
+            options: s.currentQuestionData ? s.currentQuestionData.options : null, // Sequence Round Options
             answers: s.currentQuestionData ? s.currentQuestionData.answers : null,
             // Exposed for List Round
             revealedAnswers: (s.currentRoundIndex >= 0 && s.currentRoundIndex < s.rounds.length && s.rounds[s.currentRoundIndex].foundAnswers) ? s.rounds[s.currentRoundIndex].foundAnswers : [],
@@ -191,7 +199,12 @@ class GameEngine {
             } : null,
 
             finalStandings: s.finalStandings || [],
-            finalistRevealCount: s.finalistRevealCount || 0
+            finalStandings: s.finalStandings || [],
+            finalistRevealCount: s.finalistRevealCount || 0,
+
+            // Sequence Round
+            sequenceOptionIndex: s.sequenceOptionIndex !== undefined ? s.sequenceOptionIndex : -1,
+            sequenceVotes: s.sequenceVotes || {}
         };
     }
 
@@ -243,7 +256,12 @@ class GameEngine {
         this.state.buzzerWinner = null;
         this.state.buzzerLocked = true;
         this.state.lastJudgement = null;
+        this.state.buzzerWinner = null;
+        this.state.buzzerLocked = true;
+        this.state.lastJudgement = null;
         this.state.lockedOutTeams = [];
+        this.state.sequenceOptionIndex = -1;
+        this.state.sequenceVotes = {};
 
         if (this.state.status === 'ROUND_READY') {
             this.state.status = "IDLE";
@@ -450,6 +468,12 @@ class GameEngine {
             return this.state.teams[teamIndex].name;
         }
 
+        // 5. Check Instance Strategy for overrides (e.g. SequenceRound)
+        if (this.currentRoundInstance && typeof this.currentRoundInstance.handleBuzz === 'function') {
+            const result = this.currentRoundInstance.handleBuzz(this, teamIndex);
+            if (result) return result; // Logic handled by strategy
+        }
+
         // 5. Penalty Condition
         // Any buzzer press when NOT in LISTENING (and not earlier excluded) is a penalty
         if (this.state.teams[teamIndex]) {
@@ -483,6 +507,11 @@ class GameEngine {
         this.state.lastJudgement = judgement;
         this.state.status = "ANSWER_REVEALED";
         this.state.buzzerLocked = true; // Ensure locked
+
+        if (this.currentRoundInstance && typeof this.currentRoundInstance.onReveal === 'function') {
+            this.currentRoundInstance.onReveal(this);
+        }
+
         this.save();
     }
 
@@ -595,6 +624,12 @@ class GameEngine {
                 this.state.finalistRevealCount++;
                 this.save();
             }
+        }
+    }
+
+    nextSequenceOption() {
+        if (this.currentRoundInstance && typeof this.currentRoundInstance.nextOption === 'function') {
+            this.currentRoundInstance.nextOption(this);
         }
     }
 
