@@ -1,16 +1,12 @@
 {
   "teams": [
     {
-      "name": "afg4r",
-      "score": 0
+      "name": "arg",
+      "score": 92
     },
     {
-      "name": "gseth",
-      "score": 0
-    },
-    {
-      "name": "srth",
-      "score": 0
+      "name": "gare",
+      "score": 65
     }
   ],
   "rounds": [
@@ -18,7 +14,7 @@
       "name": "Lijst",
       "type": "List",
       "time_limit": 15,
-      "points": 10,
+      "points": 2,
       "description": "Geef zoveel mogelijk juiste antwoorden.",
       "questions": [
         {
@@ -301,22 +297,22 @@
           "answer": "c"
         },
         {
-          "text": "In welk koninkrijk vindt 'The Legend of Zelda' hoofdzakelijk plaats?",
+          "text": "Waarvoor staat 'NFC'?",
           "choices": [
             {
-              "a": "Hyrule"
+              "a": "Network Flow Control"
             },
             {
-              "b": "Tamriel"
+              "b": "Native Format Conversion"
             },
             {
-              "c": "Azeroth"
+              "c": "Near Field Communication"
             },
             {
-              "d": "Lordran"
+              "d": "Non-Fecale Chambrang"
             }
           ],
-          "answer": "a"
+          "answer": "c"
         },
         {
           "text": "Hoe heet het paard van Samwise Gamgee in 'The Lord of the Rings'?",
@@ -398,78 +394,81 @@
       "description": "Hoe sneller je antwoordt, hoe meer punten",
       "questions": [
         {
-          "text": "1930",
-          "answer": "Judy Garland - Over The Rainbow",
-          "mediaUrl": "assets/Judy Garland - Over the Rainbow (split).mp3",
+          "text": "Film",
+          "answer": "2001 A Space Odyssey",
+          "mediaUrl": "assets/2001 A Space Odyssey.mp3",
           "mediaType": "audio",
           "time_limit": 45
         },
         {
-          "text": "1940",
-          "answer": "Bing Crosby - White Christmas",
-          "mediaUrl": "assets/Bing Crosby - White Christmas (split).mp3",
+          "text": "Film",
+          "answer": "Jurassic Park",
+          "mediaUrl": "assets/Jurassic Park.mp3",
           "mediaType": "audio",
-          "time_limit": 30
+          "time_limit": 45
         },
         {
-          "text": "1950",
-          "answer": "Elvis Presley - Jailhouse Rock",
-          "mediaUrl": "assets/Elvis Presley - Jailhouse Rock (split).mp3",
+          "text": "Serie",
+          "answer": "Schuif Af",
+          "mediaUrl": "assets/Schuif Af.mp3",
           "mediaType": "audio",
-          "time_limit": 35
+          "time_limit": 10
         },
         {
-          "text": "1960",
-          "answer": "Roco Granata - Marina",
-          "mediaUrl": "assets/Roco Granata - Marina (split).mp3",
+          "text": "Film",
+          "answer": "Pirates of the Caribbean",
+          "mediaUrl": "assets/Pirates of the Caribbean.mp3",
+          "mediaType": "audio",
+          "time_limit": 15
+        },
+        {
+          "text": "Film",
+          "answer": "Star Wars",
+          "mediaUrl": "assets/Star Wars.mp3",
+          "mediaType": "audio",
+          "time_limit": 10
+        },
+        {
+          "text": "Serie",
+          "answer": "the X Files",
+          "mediaUrl": "assets/X Files.mp3",
+          "mediaType": "audio",
+          "time_limit": 15
+        },
+        {
+          "text": "Serie",
+          "answer": "Baantjer",
+          "mediaUrl": "assets/Baantjer.mp3",
           "mediaType": "audio",
           "time_limit": 20
         },
         {
-          "text": "1970",
-          "answer": "Elo - Mr Blue Sky",
-          "mediaUrl": "assets/Elo - Mr Blue Sky (split).mp3",
+          "text": "Film",
+          "answer": "The Lord of the Rings: The Two Towers",
+          "mediaUrl": "assets/The Two Towers.mp3",
           "mediaType": "audio",
           "time_limit": 45
         },
         {
-          "text": "1980",
-          "answer": "Kool & The Gang - Ladies Night",
-          "mediaUrl": "assets/Kool & The Gang - Ladies Night (split).mp3",
+          "text": "Serie",
+          "answer": "Fc De Kampioenen",
+          "mediaUrl": "assets/Fc de kampioenen.mp3",
           "mediaType": "audio",
-          "time_limit": 40
+          "time_limit": 10
         },
         {
-          "text": "1990",
-          "answer": "Sam Gooris - Laat Het Gras Maar Groeien",
-          "mediaUrl": "assets/Sam Gooris - Laat Het Gras Maar Groeien (split).mp3",
+          "text": "Film",
+          "answer": "The Matrix",
+          "mediaUrl": "assets/The Matrix.mp3",
           "mediaType": "audio",
-          "time_limit": 30
-        },
-        {
-          "text": "2000",
-          "answer": "Mika - Relax",
-          "mediaUrl": "assets/Mika - Relax (split).mp3",
-          "mediaType": "audio",
-          "time_limit": 30
-        },
-        {
-          "text": "2010",
-          "answer": "Train - Hey Soul Sister",
-          "mediaUrl": "assets/Train - Hey Soul Sister (split).mp3",
-          "mediaType": "audio",
-          "time_limit": 35
-        },
-        {
-          "text": "2020",
-          "answer": "Taylor Swift - The fate of Ophelia",
-          "mediaUrl": "assets/Taylor Swift - The fate of Ophelia (split).mp3",
-          "mediaType": "audio",
-          "time_limit": 40
+          "time_limit": 20
         }
       ],
-      "scores": {},
-      "questionsAnswered": 0
+      "scores": {
+        "0": 102,
+        "1": 75
+      },
+      "questionsAnswered": 10
     },
     {
       "name": "Kaders",
@@ -760,50 +759,34 @@
       ],
       "scores": {},
       "questionsAnswered": 0
-    },
-    {
-      "name": "Yes / No Round",
-      "type": "yes",
-      "points": 10,
-      "description": "Buzz when you see the correct answer!",
-      "questions": [
-        {
-          "text": "Which of these is the correct color of a Smurf?",
-          "options": [
-            "Green",
-            "Blue",
-            "Red",
-            "Yellow"
-          ],
-          "answer": 1
-        },
-        {
-          "text": "Correct logo for 'Star Wars'?",
-          "options": [
-            "Star Trek Logo",
-            "Star Wars Logo",
-            "Stargate Logo"
-          ],
-          "answer": 1
-        }
-      ],
-      "scores": {},
-      "questionsAnswered": 1
     }
   ],
   "currentRoundIndex": 0,
-  "currentQuestionIndex": -1,
-  "currentQuestionData": null,
-  "timerValue": 15,
+  "currentQuestionIndex": 0,
+  "currentQuestionData": {
+    "text": "The Fellowship of the Ring",
+    "answers": [
+      "Frodo",
+      "Gandalf",
+      "Aragorn",
+      "Legolas",
+      "Gimli",
+      "Boromir",
+      "Pippin",
+      "Merry",
+      "Sam"
+    ]
+  },
+  "timerValue": 8,
   "buzzerLocked": true,
   "buzzerWinner": null,
-  "status": "IDLE",
+  "status": "PAUSED",
   "lastJudgement": null,
   "roundsSummary": [
     {
       "index": 0,
       "name": "Lijst",
-      "points": 10,
+      "points": 2,
       "questionsAnswered": 0,
       "totalQuestions": 10,
       "scores": {}
@@ -828,9 +811,12 @@
       "index": 3,
       "name": "100 jaar muziek",
       "points": 20,
-      "questionsAnswered": 0,
+      "questionsAnswered": 10,
       "totalQuestions": 10,
-      "scores": {}
+      "scores": {
+        "0": 102,
+        "1": 75
+      }
     },
     {
       "index": 4,
@@ -846,24 +832,16 @@
       "questionsAnswered": 0,
       "totalQuestions": 10,
       "scores": {}
-    },
-    {
-      "index": 6,
-      "name": "Yes / No Round",
-      "points": 10,
-      "questionsAnswered": 1,
-      "totalQuestions": 2,
-      "scores": {}
     }
   ],
   "lockedOutTeams": [],
   "mediaPlaying": false,
   "roundStartScores": [
-    0,
-    0,
-    0
+    92,
+    65
   ],
   "sequenceOptionIndex": -1,
   "sequenceVotes": {},
-  "falseStartPenalty": 5
+  "falseStartPenalty": 5,
+  "connectionStreak": 0
 }

@@ -390,63 +390,63 @@
           "answer": "Jurassic Park",
           "mediaUrl": "assets/Jurassic Park.mp3",
           "mediaType": "audio",
-          "time_limit": 30
+          "time_limit": 45
         },
         {
           "text": "Serie",
           "answer": "Schuif Af",
           "mediaUrl": "assets/Schuif Af.mp3",
           "mediaType": "audio",
-          "time_limit": 35
+          "time_limit": 10
         },
         {
           "text": "Film",
           "answer": "Pirates of the Caribbean",
           "mediaUrl": "assets/Pirates of the Caribbean.mp3",
           "mediaType": "audio",
-          "time_limit": 20
+          "time_limit": 10
         },
         {
           "text": "Film",
           "answer": "Star Wars",
           "mediaUrl": "assets/Star Wars.mp3",
           "mediaType": "audio",
-          "time_limit": 45
+          "time_limit": 10
         },
         {
           "text": "Serie",
           "answer": "the X Files",
           "mediaUrl": "assets/X Files.mp3",
           "mediaType": "audio",
-          "time_limit": 40
+          "time_limit": 15
         },
         {
           "text": "Serie",
           "answer": "Baantjer",
           "mediaUrl": "assets/Baantjer.mp3",
           "mediaType": "audio",
-          "time_limit": 30
+          "time_limit": 20
         },
         {
           "text": "Film",
           "answer": "The Lord of the Rings: The Two Towers",
           "mediaUrl": "assets/The Two Towers.mp3",
           "mediaType": "audio",
-          "time_limit": 30
-        },
-        {
-          "text": "Serie",
-          "answer": "Fc De Kampioenen",
-          "mediaUrl": "assets/Fc de kampioenen.mp3",
-          "mediaType": "audio",
-          "time_limit": 35
+          "time_limit": 45
         },
         {
           "text": "Film",
           "answer": "The Matrix",
           "mediaUrl": "assets/The Matrix.mp3",
           "mediaType": "audio",
-          "time_limit": 40
+          "time_limit": 20
+        },
+        {
+          "text": "Serie",
+          "answer": "Fc De Kampioenen",
+          "mediaUrl": "assets/Fc de kampioenen.mp3",
+          "mediaType": "audio",
+          "time_limit": 10
         }
       ]
     },
