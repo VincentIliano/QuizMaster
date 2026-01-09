@@ -8,7 +8,11 @@ class ListRound extends Round {
             const queue = engine.state.buzzerQueue || [];
 
             // Prevent duplicates
-            if (!queue.includes(teamIndex) && !engine.state.lockedOutTeams.includes(teamIndex)) {
+            if (queue.includes(teamIndex)) {
+                return engine.state.teams[teamIndex].name; // Return name to halt GameEngine processing, but do nothing
+            }
+
+            if (!engine.state.lockedOutTeams.includes(teamIndex)) {
                 queue.push(teamIndex);
                 engine.state.buzzerQueue = queue;
                 engine.playSfx('buzz');

@@ -1,13 +1,21 @@
 {
   "teams": [
     {
-      "name": "hwr",
-      "score": 0,
-      "history": []
+      "name": "gqae",
+      "score": 2,
+      "history": [
+        {
+          "timestamp": 1767946482917,
+          "amount": 2,
+          "reason": "Correct Answer (List)",
+          "newScore": 2,
+          "round": "Deurlijsten"
+        }
+      ]
     },
     {
-      "name": "hr6we",
-      "score": -1,
+      "name": "egh5t",
+      "score": -2,
       "history": []
     }
   ],
@@ -189,8 +197,11 @@
           ]
         }
       ],
-      "scores": {},
-      "questionsAnswered": 0
+      "scores": {
+        "0": 2
+      },
+      "questionsAnswered": 1,
+      "foundAnswers": []
     },
     {
       "name": "Specifieke algemene kennis",
@@ -510,7 +521,7 @@
       "questionsAnswered": 0
     },
     {
-      "name": "Dingskes in Kottekes",
+      "name": "Dingskes in Kottekes in't English",
       "type": "connections",
       "description": "4 kottekes = 1 ding. alle kottekes samen OF de 3 dingen samen = 1 onderwerp. 5 punten of meer per juiste antwoord",
       "points": 5,
@@ -587,8 +598,8 @@
               "items": [
                 "Athletics",
                 "Carrying Capacity",
-                "Barbarian's Stat",
-                "Lifting"
+                "Throwing Weapons",
+                "Melee Attacks"
               ]
             },
             {
@@ -596,8 +607,8 @@
               "items": [
                 "Hit Points",
                 "Concentration Checks",
-                "Stamina",
-                "Resilience"
+                "Poison & Disease Resistance",
+                "No Skills"
               ]
             },
             {
@@ -606,7 +617,7 @@
                 "Persuasion",
                 "Deception",
                 "Intimidation",
-                "Bard's Stat"
+                "Bardic Inspiration"
               ]
             }
           ]
@@ -638,7 +649,7 @@
                 "Eagle",
                 "Rowena",
                 "Diadem",
-                "Wit"
+                "Intelligence"
               ]
             }
           ]
@@ -800,32 +811,64 @@
       "questionsAnswered": 0
     }
   ],
-  "currentRoundIndex": 5,
-  "currentQuestionIndex": 0,
+  "currentRoundIndex": 0,
+  "currentQuestionIndex": 1,
   "currentQuestionData": {
-    "question": "Wat?",
-    "clues": [
-      "Ik ben een icosaëder.",
-      "Hoe ik val bepaalt je geluk",
-      "Ik bepaal of je raakt of mist.",
-      "Ik ben vaak gemaakt van plastic of hars.",
-      "Je rolt met mij in D&D"
-    ],
-    "answer": "D20"
+    "text": "Het NAVO alfabet",
+    "answers": [
+      "Alpha",
+      "Bravo",
+      "Charlie",
+      "Delta",
+      "Echo",
+      "Foxtrot",
+      "Golf",
+      "Hotel",
+      "India",
+      "Juliet",
+      "Kilo",
+      "Lima",
+      "Mike",
+      "November",
+      "Oscar",
+      "Papa",
+      "Quebec",
+      "Romeo",
+      "Sierra",
+      "Tango",
+      "Uniform",
+      "Victor",
+      "Whiskey",
+      "X-ray",
+      "Yankee",
+      "Zulu",
+      "Zero",
+      "One",
+      "Two",
+      "Tree",
+      "Fower",
+      "Fife",
+      "Six",
+      "Seven",
+      "Eight",
+      "Niner"
+    ]
   },
-  "timerValue": 0,
+  "timerValue": 15,
   "buzzerLocked": true,
-  "buzzerWinner": null,
-  "status": "READING",
+  "buzzerWinner": 0,
+  "status": "BUZZED",
   "lastJudgement": null,
   "roundsSummary": [
     {
       "index": 0,
       "name": "Deurlijsten",
       "points": 2,
-      "questionsAnswered": 0,
+      "questionsAnswered": 1,
       "totalQuestions": 10,
-      "scores": {}
+      "scores": {
+        "0": 2
+      }
     },
     {
       "index": 1,
@@ -853,7 +896,7 @@
     },
     {
       "index": 4,
-      "name": "Dingskes in Kottekes",
+      "name": "Dingskes in Kottekes in't English",
       "points": 5,
       "questionsAnswered": 0,
       "totalQuestions": 5,
@@ -875,8 +918,12 @@
   ],
   "sequenceOptionIndex": -1,
   "sequenceVotes": {},
-  "buzzerQueue": [],
+  "buzzerQueue": [
+    0,
+    1
+  ],
   "listRoundActiveIndex": 0,
   "falseStartPenalty": 1,
-  "cluesRevealed": 1
+  "cluesRevealed": 2,
+  "connectionStreak": 0
 }

@@ -366,8 +366,8 @@ export default function Contestant() {
                                 {/* Traffic Light Indicator (Moved to Header) */}
                                 <div className={`traffic-light-indicator ${lightStatus === 'green' ? 'green' : 'red'}`}></div>
 
-                                {/* Standard Timer for non-freezeout and non-list */}
-                                {state.roundType !== 'freezeout' && state.roundType !== 'countdown' && state.roundType !== 'list' && (
+                                {/* Standard Timer for non-freezeout and non-list and non-clues */}
+                                {state.roundType !== 'freezeout' && state.roundType !== 'countdown' && state.roundType !== 'list' && state.roundType !== 'clues' && (
                                     <div className={`gs-timer ${state.timeLimit <= 5 ? 'low' : ''}`}>
                                         {state.timeLimit}
                                     </div>

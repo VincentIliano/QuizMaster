@@ -70,7 +70,7 @@ class CluesRound {
                 gameEngine.state.buzzerLocked = false; // Re-open for others
 
                 // No timer restart for Clues round (as per request to remove timer)
-                gameEngine.state.status = "READING";
+                gameEngine.state.status = "LISTENING";
                 gameEngine.playSfx('wrong');
                 gameEngine.save();
             }

@@ -353,7 +353,7 @@ class GameEngine {
 
         // Auto-start timer for Standard rounds (no type) as requested
         const type = (currentRound.type || 'standard').toLowerCase();
-        if (type === 'standard' || type === 'list') {
+        if (type === 'standard' || type === 'list' || type === 'clues') {
             autoStart = true;
         }
 
